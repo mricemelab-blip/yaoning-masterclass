@@ -317,6 +317,8 @@ function submitAll(){
   var age = document.getElementById('q_age').value;
   var weight = document.getElementById('q_weight').value;
   var freq = document.querySelector('input[name="q_freq"]:checked');
+  if(!age || !weight){ alert('请返回填写年龄和体重'); return; }
+  if(!freq){ alert('请返回选择训练频率'); return; }
   // Collect all data
   var profile = {
     age: parseInt(age),

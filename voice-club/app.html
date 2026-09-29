@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arise 发声俱乐部</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0a;--bg2:#111111;--bg3:#1a1a1a;--bg4:#222222;--gold:#C5A55A;--gold-dim:#9a8347;--text:#e8e8e8;--text2:#999999;--text3:#666666;--border:#2a2a2a;--radius:8px}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ===== NAV ===== */
+.nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 1.5rem;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-logo{font-size:1.125rem;font-weight:700;color:var(--gold);letter-spacing:.04em}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.nav-user{font-size:.875rem;color:var(--text2)}
+.nav-logout{background:none;border:1px solid var(--border);color:var(--text2);padding:.25rem .625rem;border-radius:var(--radius);font-size:.75rem;cursor:pointer;transition:border-color .2s,color .2s}
+.nav-logout:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ===== TABS ===== */
+.tab-bar{display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--bg2);position:sticky;top:56px;z-index:99;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex:0 0 auto;padding:.875rem 1.25rem;font-size:.875rem;color:var(--text3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:color .2s,border-color .2s;white-space:nowrap}
+.tab-btn:hover{color:var(--text2)}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* ===== MAIN ===== */
+.main{flex:1;padding:1.5rem;max-width:960px;width:100%;margin:0 auto}
+@media(max-width:480px){.main{padding:1rem .75rem}}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ===== CARDS (Literature) ===== */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1rem;transition:border-color .2s}
+.card:hover{border-color:var(--gold-dim)}
+.card-title{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.375rem;line-height:1.4}
+.card-meta{font-size:.75rem;color:var(--text3);margin-bottom:.625rem}
+.card-summary{font-size:.875rem;color:var(--text2);line-height:1.65;margin-bottom:.75rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card-full{display:none;font-size:.875rem;color:var(--text2);line-height:1.75;margin-bottom:.75rem}
+.card-full.expanded{display:block}
+.card-summary.hidden{display:none}
+.card-btn{background:none;border:1px solid var(--gold-dim);color:var(--gold);padding:.375rem .875rem;border-radius:var(--radius);font-size:.8125rem;cursor:pointer;transition:background .2s,color .2s}
+.card-btn:hover{background:var(--gold);color:var(--bg)}
+
+/* ===== COURSES ===== */
+.course-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1rem}
+.course-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem}
+.course-name{font-size:1rem;font-weight:600;color:var(--text)}
+.course-hours{font-size:.75rem;color:var(--text3)}
+.progress-wrap{background:var(--bg4);border-radius:4px;height:6px;margin:.625rem 0;overflow:hidden}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));border-radius:4px;transition:width .4s ease}
+.course-footer{display:flex;justify-content:space-between;align-items:center}
+.course-pct{font-size:.75rem;color:var(--text3)}
+.course-btn{background:none;border:1px solid var(--gold-dim);color:var(--gold);padding:.375rem .875rem;border-radius:var(--radius);font-size:.8125rem;cursor:pointer;transition:background .2s,color .2s}
+.course-btn:hover{background:var(--gold);color:var(--bg)}
+.course-btn.completed{border-color:var(--text3);color:var(--text3);cursor:default}
+.course-btn.completed:hover{background:none;color:var(--text3)}
+
+/* ===== REPLAYS ===== */
+.replay-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.replay-info{flex:1;min-width:0}
+.replay-title{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.25rem}
+.replay-meta{font-size:.75rem;color:var(--text3)}
+.replay-btn{flex:0 0 auto;background:none;border:1px solid var(--gold-dim);color:var(--gold);padding:.375rem .875rem;border-radius:var(--radius);font-size:.8125rem;cursor:pointer;transition:background .2s,color .2s;white-space:nowrap}
+.replay-btn:hover{background:var(--gold);color:var(--bg)}
+
+/* ===== PLACEHOLDER ===== */
+.placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 1rem;text-align:center}
+.placeholder-icon{font-size:3rem;margin-bottom:1.25rem;opacity:.35}
+.placeholder-text{font-size:1rem;color:var(--text3);line-height:1.7}
+
+/* ===== FOOTER ===== */
+.footer{border-top:1px solid var(--border);padding:1.25rem;text-align:center;font-size:.75rem;color:var(--text3)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:480px){
+  .nav{padding:0 1rem}
+  .nav-logo{font-size:1rem}
+  .replay-card{flex-direction:column;align-items:flex-start;gap:.75rem}
+  .replay-btn{width:100%}
+  .course-footer{flex-direction:column;align-items:flex-start;gap:.5rem}
+  .course-btn{width:100%;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">Arise 发声俱乐部</div>
+  <div class="nav-right">
+    <span class="nav-user" id="navUser"></span>
+    <button class="nav-logout" id="navLogout" onclick="handleLogout()">退出</button>
+  </div>
+</nav>
+
+<!-- TABS -->
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="literature">文献解读</button>
+  <button class="tab-btn" data-tab="courses">在线课程</button>
+  <button class="tab-btn" data-tab="replays">直播回放</button>
+  <button class="tab-btn" data-tab="training">训练计划</button>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- TAB 1: LITERATURE -->
+  <div class="tab-panel active" id="panel-literature">
+    <div class="card">
+      <div class="card-title">呼吸肌训练对歌唱耐力的影响：一项系统综述</div>
+      <div class="card-meta">2026-09-25</div>
+      <div class="card-summary">本综述纳入了12项RCT，系统评估了呼吸肌训练（IMT）对专业歌手歌唱耐力的影响。结果表明，经过6-8周的结构化呼吸肌训练，歌手在高强度歌唱任务中的耐力表现显著提升，呼气肌力量增长约23%-31%。</div>
+      <div class="card-full">本综述纳入了12项RCT，系统评估了呼吸肌训练（IMT）对专业歌手歌唱耐力的影响。结果表明，经过6-8周的结构化呼吸肌训练，歌手在高强度歌唱任务中的耐力表现显著提升，呼气肌力量增长约23%-31%。训练方案主要采用阈值负荷式呼吸训练器，阻力设定为最大吸气压的30%-50%，每次训练15-20分钟，每周5次。值得注意的是，部分研究同时报告了主观疲劳评分的下降和肺活量的改善，但效果量存在异质性。综述认为呼吸肌训练可作为歌手体能训练的有效补充，但现有研究样本量偏小、缺乏长期随访数据。</div>
+      <button class="card-btn" onclick="toggleRead(this)">阅读更多</button>
+    </div>
+    <div class="card">
+      <div class="card-title">声带结节保守治疗的循证进展</div>
+      <div class="card-meta">2026-09-20</div>
+      <div class="card-summary">声带结节是常见嗓音疾病，多见于职业用嗓人群。本文梳理了近年来声带结节保守治疗的循证进展，涵盖嗓音治疗、药物干预和生活方式调整三个维度，为临床决策提供参考依据。</div>
+      <div class="card-full">声带结节是常见嗓音疾病，多见于职业用嗓人群。本文梳理了近年来声带结节保守治疗的循证进展，涵盖嗓音治疗、药物干预和生活方式调整三个维度。嗓音治疗方面，直接嗓音治疗和间接嗓音治疗均显示出改善声带闭合模式和降低发声疲劳的证据，尤其以嗓音卫生教育结合共鸣训练的方案在多项研究中效果显著。药物干预方面，质子泵抑制剂用于伴随反流的病例有一定依据，但单纯药物治疗的循证等级有限。生活方式调整包括充分水化、避免声带过度使用和减少刺激性物质摄入，这些措施在多数指南中被列为一线保守管理策略。</div>
+      <button class="card-btn" onclick="toggleRead(this)">阅读更多</button>
+    </div>
+    <div class="card">
+      <div class="card-title">腹式呼吸与胸式呼吸对发声效率的对比研究</div>
+      <div class="card-meta">2026-09-15</div>
+      <div class="card-summary">通过声学分析和空气动力学测量，本研究对比了腹式呼吸和胸式呼吸两种呼吸模式对发声效率的影响。结果提示腹式呼吸在声门下压稳定性和发声持续时长方面具有优势。</div>
+      <div class="card-full">通过声学分析和空气动力学测量，本研究对比了腹式呼吸和胸式呼吸两种呼吸模式对发声效率的影响。研究招募了40名无嗓音障碍的成年受试者，分别以腹式呼吸和胸式呼吸模式完成标准化发声任务。声学参数方面，腹式呼吸组的基频微扰（jitter）和振幅微扰（shimmer）均显著低于胸式呼吸组，表明声带振动模式更为规则。空气动力学测量显示腹式呼吸组的声门下压波动更小，最大发声持续时长（MPT）延长约18%。研究认为腹式呼吸通过优化膈肌参与度和胸腔压力调控，为发声提供了更稳定的气流支撑，但个体差异仍需关注。</div>
+      <button class="card-btn" onclick="toggleRead(this)">阅读更多</button>
+    </div>
+  </div>
+
+  <!-- TAB 2: COURSES -->
+  <div class="tab-panel" id="panel-courses">
+    <div class="course-card">
+      <div class="course-header">
+        <div class="course-name">科学发声基础</div>
+        <div class="course-hours">8课时</div>
+      </div>
+      <div class="progress-wrap"><div class="progress-bar" id="progress-1" style="width:0%"></div></div>
+      <div class="course-footer">
+        <span class="course-pct" id="pct-1">0%</span>
+        <button class="course-btn" data-course="1" onclick="handleCourseClick(this)">继续学习</button>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-header">
+        <div class="course-name">呼吸控制与支撑</div>
+        <div class="course-hours">6课时</div>
+      </div>
+      <div class="progress-wrap"><div class="progress-bar" id="progress-2" style="width:0%"></div></div>
+      <div class="course-footer">
+        <span class="course-pct" id="pct-2">0%</span>
+        <button class="course-btn" data-course="2" onclick="handleCourseClick(this)">继续学习</button>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-header">
+        <div class="course-name">共鸣腔体训练</div>
+        <div class="course-hours">10课时</div>
+      </div>
+      <div class="progress-wrap"><div class="progress-bar" id="progress-3" style="width:0%"></div></div>
+      <div class="course-footer">
+        <span class="course-pct" id="pct-3">0%</span>
+        <button class="course-btn" data-course="3" onclick="handleCourseClick(this)">继续学习</button>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-header">
+        <div class="course-name">嗓音保护与恢复</div>
+        <div class="course-hours">4课时</div>
+      </div>
+      <div class="progress-wrap"><div class="progress-bar" id="progress-4" style="width:0%"></div></div>
+      <div class="course-footer">
+        <span class="course-pct" id="pct-4">0%</span>
+        <button class="course-btn" data-course="4" onclick="handleCourseClick(this)">继续学习</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: REPLAYS -->
+  <div class="tab-panel" id="panel-replays">
+    <div class="replay-card">
+      <div class="replay-info">
+        <div class="replay-title">Arise 发声俱乐部第1期：认识你的声音</div>
+        <div class="replay-meta">2026-09-01 · 45min</div>
+      </div>
+      <a href="#" class="replay-btn">观看回放</a>
+    </div>
+    <div class="replay-card">
+      <div class="replay-info">
+        <div class="replay-title">第2期：呼吸是声音的发动机</div>
+        <div class="replay-meta">2026-09-08 · 52min</div>
+      </div>
+      <a href="#" class="replay-btn">观看回放</a>
+    </div>
+    <div class="replay-card">
+      <div class="replay-info">
+        <div class="replay-title">第3期：共鸣的奥秘</div>
+        <div class="replay-meta">2026-09-15 · 48min</div>
+      </div>
+      <a href="#" class="replay-btn">观看回放</a>
+    </div>
+    <div class="replay-card">
+      <div class="replay-info">
+        <div class="replay-title">第4期：如何保护嗓音</div>
+        <div class="replay-meta">2026-09-22 · 40min</div>
+      </div>
+      <a href="#" class="replay-btn">观看回放</a>
+    </div>
+  </div>
+
+  <!-- TAB 4: TRAINING -->
+  <div class="tab-panel" id="panel-training">
+    <div class="placeholder">
+      <div class="placeholder-icon">&#9881;</div>
+      <div class="placeholder-text">训练计划正在制作中<br>敬请期待</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  &copy; 2026 Arise 发声俱乐部 · Arise Voice Club
+</footer>
+
+<script>
+(function(){
+  /* Auth check */
+  var role = localStorage.getItem('vc_role');
+  if(!role){
+    window.location.href = 'login.html';
+    return;
+  }
+  var name = localStorage.getItem('vc_name') || '用户';
+  document.getElementById('navUser').textContent = name;
+})();
+
+function handleLogout(){
+  localStorage.removeItem('vc_name');
+  localStorage.removeItem('vc_user_id');
+  localStorage.removeItem('vc_role');
+  localStorage.removeItem('vc_invite_code');
+  window.location.href = 'login.html';
+}
+
+/* Tab switching */
+(function(){
+  var btns = document.querySelectorAll('.tab-btn');
+  var panels = document.querySelectorAll('.tab-panel');
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btns.forEach(function(b){b.classList.remove('active')});
+      panels.forEach(function(p){p.classList.remove('active')});
+      btn.classList.add('active');
+      var target = document.getElementById('panel-' + btn.getAttribute('data-tab'));
+      if(target) target.classList.add('active');
+    });
+  });
+})();
+
+/* Literature expand/collapse */
+function toggleRead(btn){
+  var card = btn.parentElement;
+  var summary = card.querySelector('.card-summary');
+  var full = card.querySelector('.card-full');
+  var expanded = full.classList.contains('expanded');
+  if(expanded){
+    full.classList.remove('expanded');
+    summary.classList.remove('hidden');
+    btn.textContent = '阅读更多';
+  } else {
+    full.classList.add('expanded');
+    summary.classList.add('hidden');
+    btn.textContent = '收起';
+  }
+}
+
+/* Course progress */
+(function(){
+  var defaults = {'1':30,'2':0,'3':60,'4':100};
+  for(var i=1;i<=4;i++){
+    var key = 'vc_progress_' + i;
+    var stored = localStorage.getItem(key);
+    var pct = stored !== null ? parseInt(stored,10) : defaults[i];
+    var bar = document.getElementById('progress-'+i);
+    var pctEl = document.getElementById('pct-'+i);
+    var btn = document.querySelector('[data-course="'+i+'"]');
+    if(bar) bar.style.width = pct + '%';
+    if(pctEl) pctEl.textContent = pct + '%';
+    if(btn && pct >= 100){
+      btn.textContent = '已完成';
+      btn.classList.add('completed');
+    }
+  }
+})();
+
+function handleCourseClick(btn){
+  var courseId = btn.getAttribute('data-course');
+  var key = 'vc_progress_' + courseId;
+  var current = parseInt(localStorage.getItem(key) || '0', 10);
+  if(current >= 100) return;
+  var next = Math.min(current + 10, 100);
+  localStorage.setItem(key, next);
+  var bar = document.getElementById('progress-'+courseId);
+  var pctEl = document.getElementById('pct-'+courseId);
+  if(bar) bar.style.width = next + '%';
+  if(pctEl) pctEl.textContent = next + '%';
+  if(next >= 100){
+    btn.textContent = '已完成';
+    btn.classList.add('completed');
+  }
+}
+</script>
+
+</body>
+</html>

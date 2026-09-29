@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>进入训练计划 — 8周女性训练</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,'PingFang SC',sans-serif;background:#0a0a0a;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;position:relative;overflow-x:hidden}
+body::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(197,165,90,.06) 0%,transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(197,165,90,.04) 0%,transparent 50%);pointer-events:none}
+.brand{text-align:center;margin-bottom:12px;position:relative;z-index:1}
+.brand h1{font-size:clamp(36px,8vw,56px);font-weight:900;color:#C5A55A;letter-spacing:2px;line-height:1.1}
+.brand-sub{font-size:clamp(12px,2vw,14px);font-weight:600;color:rgba(255,255,255,.4);letter-spacing:4px;text-transform:uppercase;margin-top:8px}
+.tagline{font-size:clamp(14px,2.5vw,18px);font-weight:600;color:rgba(255,255,255,.5);letter-spacing:2px;margin-top:12px;text-align:center;position:relative;z-index:1}
+.login-wrap{position:relative;z-index:2;width:100%;max-width:420px;margin-top:40px}
+.login-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:36px 32px;backdrop-filter:blur(20px)}
+.login-card h2{font-size:18px;font-weight:700;color:#C5A55A;margin-bottom:6px;letter-spacing:1px}
+.login-card p{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:24px}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:12px;font-weight:600;color:rgba(255,255,255,.4);margin-bottom:8px;letter-spacing:1px;text-transform:uppercase}
+.field input{width:100%;height:50px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:10px;padding:0 18px;font-size:16px;color:#fff;font-family:inherit;outline:none;transition:border-color .25s,background .25s}
+.field input:focus{border-color:#C5A55A;background:rgba(197,165,90,.04)}
+.field input::placeholder{color:rgba(255,255,255,.2)}
+.login-btn{width:100%;height:52px;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:1px;text-transform:uppercase;font-family:inherit;background:#C5A55A;color:#fff}
+.login-btn:hover{background:#B8960C;transform:translateY(-1px);box-shadow:0 8px 30px rgba(197,165,90,.2)}
+.login-btn:active{transform:scale(.98)}
+.err{color:#EF4444;font-size:13px;margin-top:10px;display:none;font-weight:500}
+.err.show{display:block}
+.back-link{display:inline-block;margin-top:24px;font-size:13px;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s}
+.back-link:hover{color:#C5A55A}
+</style>
+</head>
+<body>
+
+<div class="brand">
+  <h1>8 周女性训练</h1>
+  <div class="brand-sub">Women's Training Blueprint</div>
+</div>
+<div class="tagline">请输入邀请码以继续</div>
+
+<div class="login-wrap">
+  <div class="login-card">
+    <h2>邀请码验证</h2>
+    <p>本训练计划为邀请制，请联系教练获取专属邀请码</p>
+    <div class="field">
+      <label>Invite Code</label>
+      <input type="text" id="inviteCode" placeholder="输入邀请码" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="err" id="errMsg">邀请码无效，请重新输入</div>
+    <button class="login-btn" onclick="doLogin()">进入训练计划</button>
+  </div>
+  <div style="text-align:center">
+    <a href="index.html" class="back-link">← 返回项目概览</a>
+  </div>
+</div>
+
+<script>
+// Invitation codes
+var CODES = {
+  'WT2026A': { name: '学员A', id: 'u1' },
+  'WT2026B': { name: '学员B', id: 'u2' },
+  'WT2026C': { name: '学员C', id: 'u3' },
+  'WT2026D': { name: '学员D', id: 'u4' },
+  'COACH': { name: '教练', id: 'coach', isCoach: true }
+};
+
+function doLogin(){
+  var code = document.getElementById('inviteCode').value.trim().toUpperCase();
+  if(CODES[code]){
+    var u = CODES[code];
+    localStorage.setItem('wt_role', u.isCoach ? 'coach' : 'user');
+    localStorage.setItem('wt_user_id', u.id);
+    localStorage.setItem('wt_user_name', u.name);
+    localStorage.setItem('wt_invite_code', code);
+    // Check if questionnaire is done
+    var profile = localStorage.getItem('wt_profile');
+    if(profile){
+      window.location.href = 'app.html';
+    } else {
+      window.location.href = 'questionnaire.html';
+    }
+  } else {
+    document.getElementById('errMsg').classList.add('show');
+  }
+}
+
+document.getElementById('inviteCode').addEventListener('keydown', function(e){
+  if(e.key === 'Enter') doLogin();
+});
+
+// If already logged in, redirect
+(function(){
+  var role = localStorage.getItem('wt_role');
+  if(role){
+    var profile = localStorage.getItem('wt_profile');
+    if(profile) window.location.href = 'app.html';
+    else window.location.href = 'questionnaire.html';
+  }
+})();
+</script>
+</body>
+</html>

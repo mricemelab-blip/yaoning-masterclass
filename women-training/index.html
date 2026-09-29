@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8周女性训练计划 — 姚宁大师课</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F5F0E8;--bg-alt:#FAF8F5;--black:#1A1A1A;--gold:#C5A55A;--gold-dark:#B8960C;--gray:#8A8A8A;--light-gray:#D4CFC6}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,'PingFang SC','Noto Sans SC',sans-serif;background:var(--bg);color:var(--black);line-height:1.6;overflow-x:hidden}
+
+/* Hero */
+.hero{min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:80px 8vw 60px;position:relative}
+.hero::after{content:'';position:absolute;bottom:0;left:8vw;right:8vw;height:1px;background:var(--light-gray)}
+.hero-tag{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
+.hero-title{font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--black)}
+.hero-title-main{font-size:clamp(48px,10vw,90px);margin-bottom:-.05em}
+.hero-title-sub{font-size:clamp(36px,7vw,64px);color:var(--gold)}
+.hero-desc{margin-top:28px;font-size:clamp(14px,1.5vw,17px);color:var(--gray);max-width:640px;line-height:1.8}
+
+/* Section */
+.section{padding:80px 8vw}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);margin-bottom:40px}
+.section-title{font-size:clamp(24px,3.5vw,36px);font-weight:800;letter-spacing:-.02em;line-height:1.3;margin-bottom:12px}
+.section-desc{font-size:15px;color:var(--gray);margin-bottom:32px;max-width:680px;line-height:1.7}
+
+/* Symptom Assessment */
+.assess-card{background:var(--bg-alt);border:1px solid var(--light-gray);border-radius:2px;padding:40px;margin-bottom:32px}
+.assess-intro{font-size:14px;color:var(--gray);margin-bottom:24px;line-height:1.7}
+.symptom-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+@media(max-width:600px){.symptom-grid{grid-template-columns:1fr}}
+.symptom-item{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--bg);border:1.5px solid var(--light-gray);border-radius:8px;cursor:pointer;transition:all .2s;user-select:none}
+.symptom-item:hover{border-color:var(--gold)}
+.symptom-item.checked{border-color:var(--gold);background:rgba(197,165,90,.06)}
+.symptom-check{width:20px;height:20px;border-radius:4px;border:2px solid var(--light-gray);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.symptom-item.checked .symptom-check{background:var(--gold);border-color:var(--gold)}
+.symptom-item.checked .symptom-check::after{content:'✓';color:#fff;font-size:12px;font-weight:700}
+.symptom-text{font-size:14px;color:var(--black);line-height:1.4}
+
+/* Result */
+.result-box{display:none;background:var(--bg-alt);border:2px solid var(--gold);border-radius:2px;padding:40px;text-align:center}
+.result-box.show{display:block}
+.result-score{font-size:72px;font-weight:900;color:var(--gold);line-height:1}
+.result-label{font-size:13px;color:var(--gray);letter-spacing:.1em;text-transform:uppercase;margin-top:8px;margin-bottom:24px}
+.result-text{font-size:16px;color:var(--black);line-height:1.8;max-width:560px;margin:0 auto 28px}
+.result-action{display:inline-block;padding:14px 40px;background:var(--gold);color:#fff;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:2px;text-decoration:none;transition:all .2s}
+.result-action:hover{background:var(--gold-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(197,165,90,.25)}
+
+/* Pillars */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:768px){.pillars{grid-template-columns:1fr}}
+.pillar{background:var(--bg-alt);border:1px solid var(--light-gray);border-radius:2px;padding:32px 28px;transition:all .3s}
+.pillar:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.06)}
+.pillar-num{font-size:48px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:12px}
+.pillar-title{font-size:18px;font-weight:800;margin-bottom:8px}
+.pillar-sub{font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px}
+.pillar-desc{font-size:14px;color:#555;line-height:1.7}
+
+/* Phases */
+.phases{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:768px){.phases{grid-template-columns:1fr}}
+.phase{background:var(--bg-alt);border-left:3px solid var(--gold);padding:24px 28px}
+.phase-week{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px}
+.phase-name{font-size:18px;font-weight:800;margin-bottom:6px}
+.phase-desc{font-size:13px;color:#666;line-height:1.7}
+
+/* Nutrition Brief */
+.nutri-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media(max-width:600px){.nutri-grid{grid-template-columns:1fr}}
+.nutri-card{background:var(--bg-alt);border:1px solid var(--light-gray);border-radius:2px;padding:28px}
+.nutri-card h4{font-size:16px;font-weight:700;margin-bottom:8px}
+.nutri-card p{font-size:13px;color:#666;line-height:1.7}
+.nutri-highlight{color:var(--gold);font-weight:700}
+
+/* Footer */
+footer{padding:40px 8vw;border-top:1px solid var(--light-gray);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray)}
+
+/* Buttons */
+.btn-primary{display:inline-block;padding:14px 40px;background:var(--gold);color:#fff;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:2px;text-decoration:none;border:none;cursor:pointer;transition:all .2s}
+.btn-primary:hover{background:var(--gold-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(197,165,90,.25)}
+.btn-outline{display:inline-block;padding:12px 32px;background:transparent;color:var(--gold);font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:2px;border:1.5px solid var(--gold);text-decoration:none;cursor:pointer;transition:all .2s}
+.btn-outline:hover{background:var(--gold);color:#fff}
+.btn-group{display:flex;gap:16px;flex-wrap:wrap;margin-top:28px}
+
+/* Responsive */
+@media(max-width:768px){
+  .hero{padding:60px 6vw 40px;min-height:60vh}
+  .hero::after{left:6vw;right:6vw}
+  .section{padding:60px 6vw}
+  .assess-card{padding:28px 20px}
+  footer{padding:30px 6vw;flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Series 04 · 姚宁大师课</div>
+  <div class="hero-title hero-title-main">8 周女性训练计划</div>
+  <div class="hero-title hero-title-sub">Women's Training Blueprint</div>
+  <p class="hero-desc">
+    基于围绝经期运动科学循证研究，融合灵活力量、稳定力量与运动表现三大训练体系，为 40+ 女性设计的系统性训练方案。支持健身房与居家双场景自由切换，同步匹配个性化营养与补剂方案。
+  </p>
+  <div class="btn-group">
+    <a href="#assessment" class="btn-primary">开始症状自测</a>
+    <a href="login.html" class="btn-outline">已有邀请码 → 登录</a>
+  </div>
+</section>
+
+<!-- SYMPTOM ASSESSMENT -->
+<section class="section" id="assessment">
+  <div class="section-label">Symptom Self-Assessment</div>
+  <div class="section-title">围绝经期症状自测</div>
+  <div class="section-desc">以下症状是否正在影响你？勾选所有符合的项目，帮助你判断身体所处阶段，并获得针对性建议。</div>
+
+  <div class="assess-card">
+    <div class="assess-intro">请勾选当前正在经历的症状（基于 TDP Women's Program 症状评估框架）</div>
+    <div class="symptom-grid" id="symptomGrid">
+      <div class="symptom-item" onclick="toggleSymptom(this)">
+        <div class="symptom-check"></div>
+        <div class="symptom-text">月经周期变化：更短、更长、更重或跳月</div>
+      </div>
+      <div class="symptom-item" onclick="toggleSymptom(this)">
+        <div class="symptom-check"></div>
+        <div class="symptom-text">夜间盗汗或白天潮热</div>
+      </div>
+      <div class="symptom-item" onclick="toggleSymptom(this)">
+        <div class="symptom-check"></div>
+        <div class="symptom-text">凌晨 2-4 点醒来，难以再入睡</div>
+      </div>
+      <div class="symptom-item" onclick="toggleSymptom(this)">
+        <div class="symptom-check"></div>
+        <div class="symptom-text">脂肪向腹部集中转移</div>
+      </div>
+      <div class="symptom-item" onclick="toggleSymptom(this)">
+        <div class="symptom-check"></div>
+        <div class="symptom-text">同样的饮食计划但减脂停滞</div>
+      </div>
+      <div class="symptom-item" onclick="toggleSymptom(this)">
+        <div class="symptom-check"></div>
+        <div class="symptom-text">新出现的焦虑、易怒或情绪低落</div>
+      </div>
+      <div class="symptom-item" onclick="toggleSymptom(this)">
+        <div class="symptom-check"></div>
+        <div class="symptom-text">脑雾或频繁忘词</div>
+      </div>
+      <div class="symptom-item" onclick="toggleSymptom(this)">
+        <div class="symptom-check"></div>
+        <div class="symptom-text">关节疼痛或训练后恢复变慢</div>
+      </div>
+      <div class="symptom-item" onclick="toggleSymptom(this)">
+        <div class="symptom-check"></div>
+        <div class="symptom-text">对糖或碳水的渴望明显增强</div>
+      </div>
+      <div class="symptom-item" onclick="toggleSymptom(this)">
+        <div class="symptom-check"></div>
+        <div class="symptom-text">能量水平或训练驱动力明显下降</div>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="showResult()" style="width:100%">查看评估结果</button>
+  </div>
+
+  <div class="result-box" id="resultBox">
+    <div class="result-score" id="resultScore">0</div>
+    <div class="result-label">你的症状评分</div>
+    <div class="result-text" id="resultText"></div>
+    <a href="login.html" class="result-action">进入训练计划 →</a>
+  </div>
+</section>
+
+<!-- THREE PILLARS -->
+<section class="section" style="background:var(--bg-alt)">
+  <div class="section-label">Three Pillars</div>
+  <div class="section-title">三大训练支柱</div>
+  <div class="section-desc">基于姚宁教练多年执教经验与 TDP 女性训练体系，构建完整的围绝经期女性力量训练框架。</div>
+
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-title">灵活力量</div>
+      <div class="pillar-sub">Flexible Strength</div>
+      <div class="pillar-desc">蹲、拉、推、铰链四大基础动作模式，配合脊椎波浪与毛毛虫等柔韧力量训练。每个动作均有从入门到高级的完整进阶序列，确保在任何阶段都能找到合适的负荷与幅度。</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-title">稳定力量</div>
+      <div class="pillar-sub">Stable Strength</div>
+      <div class="pillar-desc">Hollow 系列、悬挂系列、农夫行走、帕洛夫抗旋转、不对称负重和手持壶铃仰卧大风车。强化核心稳定与关节控制能力，为灵活力量提供安全基础，降低围绝经期关节与骨骼风险。</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-title">运动表现</div>
+      <div class="pillar-sub">Athletic Performance</div>
+      <div class="pillar-desc">速度与爆发力训练：冲刺、敏捷梯、跳箱系列、壶铃摇摆（含旋转 Swing）、药球投掷、壶铃跳和暴躁小弹弹。维持神经肌肉反应与爆发力，对抗年龄相关的运动单位流失。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 PHASES -->
+<section class="section">
+  <div class="section-label">8-Week Progression</div>
+  <div class="section-title">三阶段渐进设计</div>
+  <div class="section-desc">从动作奠基到重负荷骨密度刺激，8 周科学递进，每阶段有明确目标与强度标准。</div>
+
+  <div class="phases">
+    <div class="phase">
+      <div class="phase-week">Week 1-2</div>
+      <div class="phase-name">动作奠基</div>
+      <div class="phase-desc">学习五大动作模式，建立神经肌肉通路。RPE 6-7，RIR 3。重点：动作质量优先于负荷，找到每个动作的正确发力模式。</div>
+    </div>
+    <div class="phase">
+      <div class="phase-week">Week 3-5</div>
+      <div class="phase-name">渐进加载</div>
+      <div class="phase-desc">逐步增加负荷与训练量，引入进阶动作变式。RPE 7-8，RIR 1-2。核心原则：接近力竭 = 有效的机械张力刺激。</div>
+    </div>
+    <div class="phase">
+      <div class="phase-week">Week 6-8</div>
+      <div class="phase-name">重负荷 · 骨密度</div>
+      <div class="phase-desc">80-85% 1RM 大重量训练，LIFTMOR 试验验证的骨密度改善方案。Week 8 为测试周，评估 8 周训练成果。</div>
+    </div>
+  </div>
+</section>
+
+<!-- NUTRITION BRIEF -->
+<section class="section" style="background:var(--bg-alt)">
+  <div class="section-label">Nutrition & Supplements</div>
+  <div class="section-title">个性化营养与补剂方案</div>
+  <div class="section-desc">根据你的生理数据和训练状态，自动生成匹配的营养目标和补剂建议。</div>
+
+  <div class="nutri-grid">
+    <div class="nutri-card">
+      <h4>蛋白质目标</h4>
+      <p>每日 <span class="nutri-highlight">1.0-1.2g / 磅体重</span>，每餐 30-40g 均匀分配。研究表明均匀分配比集中晚餐多产生 25% 的肌肉蛋白合成（Mamerow 2014）。</p>
+    </div>
+    <div class="nutri-card">
+      <h4>营养周期化</h4>
+      <p>减脂季（中等赤字）→ 反式饮食（逐步恢复热量）→ 维持季 → <span class="nutri-highlight">增肌季</span>（微盈余 + 大重量）。随训练阶段动态调整。</p>
+    </div>
+    <div class="nutri-card">
+      <h4>核心补剂</h4>
+      <p>肌酸 3-5g/d、维生素 D（先测后补）、钙 1000-1200mg/d、镁 300-400mg 睡前、维生素 K2。所有建议基于循证研究。</p>
+    </div>
+    <div class="nutri-card">
+      <h4>Dr. Wang 时间规划</h4>
+      <p>9 前晨练设定神经信号；9-11AM 深度工作；12:30 蛋白质锚定午餐；<span class="nutri-highlight">3-4PM 力量训练</span>；11PM 前熄灯修复。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="text-align:center;padding:100px 8vw">
+  <div class="section-title">准备好开始了？</div>
+  <div class="section-desc" style="margin:12px auto 32px;text-align:center">完成症状自测后，使用邀请码进入训练系统。根据你的生理数据和训练反应，系统会生成个性化的训练、营养和补剂方案。</div>
+  <a href="login.html" class="btn-primary">输入邀请码 → 开始训练</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© YAOYAO NUMBER ONE · All Rights Reserved</span>
+  <span>姚宁大师课 Series 04</span>
+</footer>
+
+<script>
+function toggleSymptom(el){
+  el.classList.toggle('checked');
+}
+
+function showResult(){
+  var checked = document.querySelectorAll('.symptom-item.checked').length;
+  var scoreEl = document.getElementById('resultScore');
+  var textEl = document.getElementById('resultText');
+  var box = document.getElementById('resultBox');
+  
+  scoreEl.textContent = checked + ' / 10';
+  
+  if(checked <= 2){
+    textEl.innerHTML = '<strong>当前状态良好。</strong>你正处于打基础的最佳时机——在症状明显出现之前就开始系统训练，能有效延缓围绝经期的身体变化。建议在维持当前生活习惯的同时，启动本计划的动作奠基阶段。';
+  } else if(checked <= 5){
+    textEl.innerHTML = '<strong>身体可能正在转变。</strong>你正在经历多个围绝经期典型症状，本方案正是为你设计的。系统训练 + 营养调整 + 补剂支持可以显著改善这些症状。建议尽快开始，并同步进行基线体检。';
+  } else {
+    textEl.innerHTML = '<strong>建议先咨询医生。</strong>你正在经历较多围绝经期症状，强烈建议先完成基线体检（血糖、血脂、维生素D、甲状腺、骨密度、激素面板），与医生讨论 MHT（绝经激素治疗）的可能性，再启动训练计划。';
+  }
+  
+  box.classList.add('show');
+  box.scrollIntoView({behavior:'smooth',block:'center'});
+}
+</script>
+
+</body>
+</html>

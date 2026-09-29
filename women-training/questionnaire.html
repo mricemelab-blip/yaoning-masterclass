@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>问卷评估 — 8周女性训练</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,'PingFang SC',sans-serif;background:#0a0a0a;color:#e0e0e0;min-height:100vh;line-height:1.6}
+.nav{background:linear-gradient(90deg,#0d0d0d,#1a1a1a);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:2px solid #C5A55A}
+.nav .logo{font-size:16px;font-weight:900;letter-spacing:2px;color:#C5A55A}
+.nav .exit{background:transparent;border:1px solid rgba(255,255,255,.3);color:#ccc;padding:4px 12px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:600}
+.nav .exit:hover{border-color:#C5A55A;color:#C5A55A}
+
+.container{max-width:640px;margin:0 auto;padding:32px 20px 80px}
+.progress-bar{width:100%;height:4px;background:rgba(255,255,255,.1);border-radius:2px;margin-bottom:32px;overflow:hidden}
+.progress-fill{height:100%;background:#C5A55A;border-radius:2px;transition:width .4s ease}
+.step-label{font-size:12px;font-weight:700;color:#C5A55A;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px}
+.step-title{font-size:clamp(22px,4vw,28px);font-weight:800;color:#fff;margin-bottom:8px}
+.step-desc{font-size:14px;color:#888;margin-bottom:32px;line-height:1.7}
+
+.form-section{display:none}
+.form-section.active{display:block}
+
+.fg{margin-bottom:18px}
+.fg label{display:block;font-size:12px;font-weight:600;color:#888;margin-bottom:6px;letter-spacing:.5px;text-transform:uppercase}
+.fg input[type=number],.fg input[type=text],.fg select,.fg textarea{width:100%;padding:12px;border:1.5px solid #333;border-radius:8px;font-size:14px;background:#111;color:#e0e0e0;font-family:inherit}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#C5A55A;outline:none}
+.fg select option{background:#111;color:#e0e0e0}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:500px){.fr{grid-template-columns:1fr}}
+
+.radio-group{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:18px}
+.radio-item{position:relative}
+.radio-item input{position:absolute;opacity:0;width:0;height:0}
+.radio-item label{display:block;padding:12px 16px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.1);border-radius:8px;font-size:13px;font-weight:600;color:#ccc;cursor:pointer;text-align:center;transition:all .2s}
+.radio-item input:checked + label{background:rgba(197,165,90,.1);border-color:#C5A55A;color:#C5A55A}
+.radio-item label:hover{border-color:rgba(197,165,90,.5)}
+
+.symptom-check{display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:8px;margin-bottom:8px;cursor:pointer;transition:all .2s;user-select:none}
+.symptom-check:hover{border-color:rgba(197,165,90,.4)}
+.symptom-check.checked{border-color:#C5A55A;background:rgba(197,165,90,.06)}
+.symptom-box{width:18px;height:18px;border-radius:4px;border:2px solid #555;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.symptom-check.checked .symptom-box{background:#C5A55A;border-color:#C5A55A}
+.symptom-check.checked .symptom-box::after{content:'✓';color:#fff;font-size:11px;font-weight:700}
+.symptom-label{font-size:13px;color:#ccc}
+
+.range-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.range-row .rl{width:120px;font-size:12px;color:#888;text-align:right;flex-shrink:0}
+.range-row input[type=range]{flex:1;accent-color:#C5A55A}
+.range-row .rv{min-width:28px;text-align:center;font-weight:700;font-size:14px;color:#C5A55A}
+
+.btn{padding:12px 28px;border-radius:8px;border:none;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all .2s;font-family:inherit}
+.btn-primary{background:#C5A55A;color:#fff}
+.btn-primary:hover{background:#B8960C;transform:translateY(-1px)}
+.btn-back{background:transparent;border:1.5px solid rgba(255,255,255,.2);color:#aaa}
+.btn-back:hover{border-color:#C5A55A;color:#C5A55A}
+.btn-row{display:flex;gap:12px;margin-top:32px}
+
+.err{color:#EF4444;font-size:13px;margin-top:8px;display:none}
+.err.show{display:block}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="logo">8 周女性训练</span>
+  <button class="exit" onclick="logout()">退出</button>
+</nav>
+
+<div class="container">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:25%"></div></div>
+
+  <!-- STEP 1: 基础生理数据 -->
+  <div class="form-section active" id="step1">
+    <div class="step-label">Step 1 / 4</div>
+    <div class="step-title">基础生理数据</div>
+    <div class="step-desc">填写你的基本信息，用于计算每日营养目标和训练强度建议。</div>
+
+    <div class="fr">
+      <div class="fg">
+        <label>年龄</label>
+        <input type="number" id="q_age" placeholder="如 45" min="18" max="80">
+      </div>
+      <div class="fg">
+        <label>身高 (cm)</label>
+        <input type="number" id="q_height" placeholder="如 165" step="0.1">
+      </div>
+    </div>
+    <div class="fr">
+      <div class="fg">
+        <label>当前体重 (kg)</label>
+        <input type="number" id="q_weight" placeholder="如 62" step="0.1">
+      </div>
+      <div class="fg">
+        <label>目标体重 (kg)（可选）</label>
+        <input type="number" id="q_target_weight" placeholder="如 58" step="0.1">
+      </div>
+    </div>
+    <div class="fg">
+      <label>月经状态</label>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q_mens" id="mens1" value="regular"><label for="mens1">周期规律</label></div>
+        <div class="radio-item"><input type="radio" name="q_mens" id="mens2" value="irregular"><label for="mens2">周期不规律</label></div>
+        <div class="radio-item"><input type="radio" name="q_mens" id="mens3" value="perimenopause"><label for="mens3">围绝经期</label></div>
+        <div class="radio-item"><input type="radio" name="q_mens" id="mens4" value="menopause"><label for="mens4">已绝经</label></div>
+      </div>
+    </div>
+    <div class="fg">
+      <label>是否正在接受激素治疗（MHT/HRT）</label>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q_mht" id="mht1" value="yes"><label for="mht1">是</label></div>
+        <div class="radio-item"><input type="radio" name="q_mht" id="mht2" value="no"><label for="mht2">否</label></div>
+        <div class="radio-item"><input type="radio" name="q_mht" id="mht3" value="considering"><label for="mht3">正在考虑</label></div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="goStep(2)">下一步 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: 训练经验 -->
+  <div class="form-section" id="step2">
+    <div class="step-label">Step 2 / 4</div>
+    <div class="step-title">训练经验与偏好</div>
+    <div class="step-desc">帮助我们为你匹配最合适的训练强度和动作选择。</div>
+
+    <div class="fg">
+      <label>当前训练频率</label>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q_freq" id="freq1" value="0"><label for="freq1">基本不练</label></div>
+        <div class="radio-item"><input type="radio" name="q_freq" id="freq2" value="1-2"><label for="freq2">1-2 次/周</label></div>
+        <div class="radio-item"><input type="radio" name="q_freq" id="freq3" value="3-4"><label for="freq3">3-4 次/周</label></div>
+        <div class="radio-item"><input type="radio" name="q_freq" id="freq4" value="5+"><label for="freq4">5 次以上/周</label></div>
+      </div>
+    </div>
+    <div class="fg">
+      <label>训练经验年限</label>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q_exp" id="exp1" value="beginner"><label for="exp1">零基础</label></div>
+        <div class="radio-item"><input type="radio" name="q_exp" id="exp2" value="some"><label for="exp2">1-2 年</label></div>
+        <div class="radio-item"><input type="radio" name="q_exp" id="exp3" value="intermediate"><label for="exp3">3-5 年</label></div>
+        <div class="radio-item"><input type="radio" name="q_exp" id="exp4" value="advanced"><label for="exp4">5 年以上</label></div>
+      </div>
+    </div>
+    <div class="fg">
+      <label>主要训练场景</label>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q_scene" id="scene1" value="gym"><label for="scene1">健身房</label></div>
+        <div class="radio-item"><input type="radio" name="q_scene" id="scene2" value="home"><label for="scene2">居家</label></div>
+        <div class="radio-item"><input type="radio" name="q_scene" id="scene3" value="both"><label for="scene3">两者都有</label></div>
+      </div>
+    </div>
+    <div class="fg">
+      <label>目前可用的居家器材（多选，居家训练者必填）</label>
+      <div id="equipGroup">
+        <div class="symptom-check" onclick="toggleEquip(this,'kb')" data-val="kb"><div class="symptom-box"></div><div class="symptom-label">壶铃（Kettlebell）</div></div>
+        <div class="symptom-check" onclick="toggleEquip(this,'band')" data-val="band"><div class="symptom-box"></div><div class="symptom-label">弹力带/阻力带</div></div>
+        <div class="symptom-check" onclick="toggleEquip(this,'trx')" data-val="trx"><div class="symptom-box"></div><div class="symptom-label">TRX/悬挂带</div></div>
+        <div class="symptom-check" onclick="toggleEquip(this,'pullup')" data-val="pullup"><div class="symptom-box"></div><div class="symptom-label">引体向上杆</div></div>
+        <div class="symptom-check" onclick="toggleEquip(this,'db')" data-val="db"><div class="symptom-box"></div><div class="symptom-label">哑铃（可调节）</div></div>
+        <div class="symptom-check" onclick="toggleEquip(this,'barbell')" data-val="barbell"><div class="symptom-box"></div><div class="symptom-label">杠铃 + 深蹲架</div></div>
+        <div class="symptom-check" onclick="toggleEquip(this,'medball')" data-val="medball"><div class="symptom-box"></div><div class="symptom-label">药球/实心球</div></div>
+        <div class="symptom-check" onclick="toggleEquip(this,'none')" data-val="none"><div class="symptom-box"></div><div class="symptom-label">暂无器材（纯自重）</div></div>
+      </div>
+    </div>
+    <div class="fg">
+      <label>是否有伤病或运动限制</label>
+      <textarea id="q_injury" rows="3" placeholder="如有请简述，如无请留空" style="resize:vertical"></textarea>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-back" onclick="goStep(1)">← 上一步</button>
+      <button class="btn btn-primary" onclick="goStep(3)">下一步 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: 症状详细评估 -->
+  <div class="form-section" id="step3">
+    <div class="step-label">Step 3 / 4</div>
+    <div class="step-title">症状详细评估</div>
+    <div class="step-desc">更详细的症状信息将帮助我们调整训练强度和营养方案。</div>
+
+    <div class="fg">
+      <label>当前主要症状（可多选）</label>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">潮热 / 盗汗</div></div>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">睡眠障碍（入睡困难 / 夜醒）</div></div>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">焦虑 / 易怒 / 情绪波动</div></div>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">脑雾 / 注意力下降</div></div>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">关节疼痛</div></div>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">体重增加 / 腹部脂肪</div></div>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">疲劳 / 能量下降</div></div>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">骨密度降低 / 骨质疏松</div></div>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">肌肉量下降</div></div>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">对糖/碳水渴望增强</div></div>
+    </div>
+
+    <div class="fg">
+      <label>睡眠质量自评</label>
+      <div class="range-row">
+        <span class="rl">很差</span>
+        <input type="range" min="1" max="5" value="3" id="q_sleep" oninput="document.getElementById('q_sleep_v').textContent=this.value">
+        <span class="rv" id="q_sleep_v">3</span>
+      </div>
+    </div>
+    <div class="fg">
+      <label>日常能量水平</label>
+      <div class="range-row">
+        <span class="rl">很低</span>
+        <input type="range" min="1" max="5" value="3" id="q_energy" oninput="document.getElementById('q_energy_v').textContent=this.value">
+        <span class="rv" id="q_energy_v">3</span>
+      </div>
+    </div>
+    <div class="fg">
+      <label>压力水平</label>
+      <div class="range-row">
+        <span class="rl">很低</span>
+        <input type="range" min="1" max="5" value="3" id="q_stress" oninput="document.getElementById('q_stress_v').textContent=this.value">
+        <span class="rv" id="q_stress_v">3</span>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-back" onclick="goStep(2)">← 上一步</button>
+      <button class="btn btn-primary" onclick="goStep(4)">下一步 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: 训练目标 -->
+  <div class="form-section" id="step4">
+    <div class="step-label">Step 4 / 4</div>
+    <div class="step-title">训练目标</div>
+    <div class="step-desc">你最希望通过这 8 周训练实现什么？（可多选）</div>
+
+    <div class="fg">
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">增加肌肉量和力量</div></div>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">改善骨密度</div></div>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">减脂 / 控制体重</div></div>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">缓解围绝经期症状</div></div>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">改善睡眠</div></div>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">提升体能和运动表现</div></div>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">改善情绪和心理健康</div></div>
+      <div class="symptom-check" onclick="toggleCheck(this)"><div class="symptom-box"></div><div class="symptom-label">建立长期运动习惯</div></div>
+    </div>
+
+    <div class="fg">
+      <label>其他补充说明（可选）</label>
+      <textarea id="q_notes" rows="3" placeholder="任何你希望教练了解的情况" style="resize:vertical"></textarea>
+    </div>
+
+    <div class="err" id="step4Err">请至少填写年龄、体重和训练频率</div>
+
+    <div class="btn-row">
+      <button class="btn btn-back" onclick="goStep(3)">← 上一步</button>
+      <button class="btn btn-primary" onclick="submitAll()">提交并开始训练 →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function goStep(n){
+  document.querySelectorAll('.form-section').forEach(function(s){s.classList.remove('active')});
+  document.getElementById('step'+n).classList.add('active');
+  document.getElementById('progressFill').style.width = (n*25)+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function toggleCheck(el){el.classList.toggle('checked')}
+function toggleEquip(el){el.classList.toggle('checked')}
+
+function logout(){
+  localStorage.removeItem('wt_role');
+  localStorage.removeItem('wt_user_id');
+  localStorage.removeItem('wt_user_name');
+  localStorage.removeItem('wt_invite_code');
+  window.location.href = 'login.html';
+}
+
+function submitAll(){
+  // Validate required fields
+  var age = document.getElementById('q_age').value;
+  var weight = document.getElementById('q_weight').value;
+  var freq = document.querySelector('input[name="q_freq"]:checked');
+  
+  if(!age || !weight || !freq){
+    document.getElementById('step4Err').classList.add('show');
+    goStep(1);
+    return;
+  }
+
+  // Collect all data
+  var profile = {
+    age: parseInt(age),
+    height: parseFloat(document.getElementById('q_height').value) || 0,
+    weight: parseFloat(weight),
+    targetWeight: parseFloat(document.getElementById('q_target_weight').value) || null,
+    menstrualStatus: (document.querySelector('input[name="q_mens"]:checked')||{}).value || '',
+    mhtStatus: (document.querySelector('input[name="q_mht"]:checked')||{}).value || '',
+    trainingFreq: freq.value,
+    experience: (document.querySelector('input[name="q_exp"]:checked')||{}).value || 'beginner',
+    scene: (document.querySelector('input[name="q_scene"]:checked')||{}).value || 'both',
+    equipment: Array.from(document.querySelectorAll('#equipGroup .symptom-check.checked')).map(function(el){return el.dataset.val}),
+    injury: document.getElementById('q_injury').value.trim(),
+    symptoms: Array.from(document.querySelectorAll('#step3 .symptom-check.checked')).map(function(el){return el.querySelector('.symptom-label').textContent}),
+    sleepQuality: parseInt(document.getElementById('q_sleep').value),
+    energyLevel: parseInt(document.getElementById('q_energy').value),
+    stressLevel: parseInt(document.getElementById('q_stress').value),
+    goals: Array.from(document.querySelectorAll('#step4 .symptom-check.checked')).map(function(el){return el.querySelector('.symptom-label').textContent}),
+    notes: document.getElementById('q_notes').value.trim(),
+    submittedAt: new Date().toISOString()
+  };
+
+  localStorage.setItem('wt_profile', JSON.stringify(profile));
+  window.location.href = 'app.html';
+}
+</script>
+</body>
+</html>

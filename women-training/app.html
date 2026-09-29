@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>训练主页 — 8周女性训练</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0a;--card:rgba(255,255,255,.04);--border:rgba(255,255,255,.08);--gold:#C5A55A;--gold-dim:rgba(197,165,90,.15);--text:#fff;--text2:rgba(255,255,255,.6);--text3:rgba(255,255,255,.35);--green:#22C55E;--red:#EF4444;--radius:12px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,'PingFang SC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:80px}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(197,165,90,.05) 0%,transparent 60%);pointer-events:none;z-index:0}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-size:18px;font-weight:800;color:var(--gold);letter-spacing:1px}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-week{font-size:12px;font-weight:700;color:var(--gold);background:var(--gold-dim);padding:4px 12px;border-radius:20px;letter-spacing:1px}
+.nav-user{font-size:13px;color:var(--text2)}
+.nav-logout{font-size:12px;color:var(--text3);text-decoration:none;padding:4px 10px;border:1px solid var(--border);border-radius:6px;transition:all .2s}
+.nav-logout:hover{color:var(--gold);border-color:var(--gold)}
+
+/* WEEK BAR */
+.week-bar{display:flex;gap:6px;padding:16px 20px;overflow-x:auto;-webkit-overflow-scrolling:touch;position:relative;z-index:1}
+.week-btn{flex-shrink:0;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:1px;border:1.5px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all .25s}
+.week-btn.active{background:var(--gold);color:#fff;border-color:var(--gold)}
+.week-btn.done{border-color:rgba(197,165,90,.4);color:var(--gold)}
+
+/* SCENE TOGGLE */
+.scene-toggle{display:flex;gap:0;margin:0 20px 16px;border-radius:10px;overflow:hidden;border:1.5px solid var(--border);position:relative;z-index:1}
+.scene-btn{flex:1;padding:12px;font-size:14px;font-weight:700;letter-spacing:1px;border:none;background:transparent;color:var(--text3);cursor:pointer;transition:all .25s;font-family:inherit}
+.scene-btn.active{background:var(--gold-dim);color:var(--gold)}
+
+/* TABS */
+.tabs{display:flex;border-bottom:1px solid var(--border);margin:0 20px;position:relative;z-index:1}
+.tab-btn{flex:1;padding:12px 0;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);background:none;border:none;cursor:pointer;position:relative;transition:color .2s;font-family:inherit}
+.tab-btn.active{color:var(--gold)}
+.tab-btn.active::after{content:'';position:absolute;bottom:-1px;left:20%;right:20%;height:2px;background:var(--gold);border-radius:1px}
+
+/* CONTENT */
+.content{padding:20px;position:relative;z-index:1;max-width:720px;margin:0 auto}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:16px}
+.card-title{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.card h3{font-size:16px;font-weight:700;margin-bottom:8px}
+.card p{font-size:14px;color:var(--text2);line-height:1.6}
+
+/* PHASE BADGE */
+.phase-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:12px}
+.phase-1{background:rgba(59,130,246,.15);color:#60A5FA}
+.phase-2{background:rgba(197,165,90,.15);color:var(--gold)}
+.phase-3{background:rgba(239,68,68,.15);color:#F87171}
+
+/* DAY CARDS */
+.day-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:10px;display:flex;align-items:flex-start;gap:14px}
+.day-label{flex-shrink:0;width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;letter-spacing:0}
+.day-mon{background:rgba(197,165,90,.12);color:var(--gold)}
+.day-tue{background:rgba(59,130,246,.12);color:#60A5FA}
+.day-wed{background:rgba(34,197,94,.12);color:#22C55E}
+.day-thu{background:rgba(168,85,247,.12);color:#A855F7}
+.day-fri{background:rgba(249,115,22,.12);color:#F97316}
+.day-sat{background:rgba(236,72,153,.12);color:#EC4899}
+.day-sun{background:rgba(255,255,255,.06);color:var(--text3)}
+.day-info{flex:1;min-width:0}
+.day-info h4{font-size:14px;font-weight:700;margin-bottom:2px}
+.day-info p{font-size:12px;color:var(--text3)}
+.day-check{flex-shrink:0;width:28px;height:28px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:transparent;transition:all .2s;margin-top:6px}
+.day-check.done{border-color:var(--green);background:rgba(34,197,94,.15);color:var(--green)}
+
+/* EXERCISE */
+.exercise{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-bottom:10px}
+.ex-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.ex-name{font-size:15px;font-weight:700}
+.ex-sets{font-size:13px;color:var(--gold);font-weight:600;white-space:nowrap;margin-left:12px}
+.ex-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.ex-tag{font-size:11px;font-weight:600;padding:2px 10px;border-radius:4px;letter-spacing:.5px}
+.tag-mode-flex{background:rgba(59,130,246,.12);color:#60A5FA}
+.tag-mode-stab{background:rgba(34,197,94,.12);color:#22C55E}
+.tag-mode-perf{background:rgba(249,115,22,.12);color:#F97316}
+.tag-rest{background:rgba(255,255,255,.06);color:var(--text3)}
+.ex-note{font-size:12px;color:var(--text3);margin-top:6px}
+
+/* PRINCIPLE */
+.principle{background:linear-gradient(135deg,rgba(197,165,90,.08),rgba(197,165,90,.02));border:1px solid rgba(197,165,90,.2);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.principle h4{font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:8px}
+.principle p{font-size:13px;color:var(--text2);line-height:1.6}
+
+/* CHECKIN BUTTON */
+.checkin-btn{width:100%;padding:16px;border:none;border-radius:var(--radius);font-size:15px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .25s;font-family:inherit;margin-top:20px}
+.checkin-btn.pending{background:var(--gold);color:#fff}
+.checkin-btn.pending:hover{background:#B8960C}
+.checkin-btn.completed{background:rgba(34,197,94,.12);color:var(--green);border:1.5px solid rgba(34,197,94,.3);cursor:default}
+
+/* NUTRITION */
+.macro-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0}
+.macro-item{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.macro-val{font-size:24px;font-weight:800;color:var(--gold)}
+.macro-label{font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+.meal-plan{margin-top:16px}
+.meal-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px}
+.meal-row:last-child{border-bottom:none}
+.meal-name{font-weight:700;color:var(--text)}
+.meal-detail{color:var(--text3);text-align:right;max-width:55%}
+
+/* SUPPLEMENT */
+.supp-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-bottom:10px}
+.supp-header{display:flex;justify-content:space-between;align-items:center}
+.supp-name{font-size:15px;font-weight:700}
+.supp-evidence{font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.5px}
+.evidence-a{background:rgba(34,197,94,.15);color:#22C55E}
+.evidence-b{background:rgba(197,165,90,.15);color:var(--gold)}
+.evidence-c{background:rgba(255,255,255,.08);color:var(--text3)}
+.supp-detail{margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;font-size:12px}
+.supp-detail dt{color:var(--text3)}
+.supp-detail dd{color:var(--text2)}
+.supp-note{font-size:12px;color:var(--text3);margin-top:8px;font-style:italic}
+
+/* EMPTY */
+.empty{text-align:center;padding:60px 20px;color:var(--text3)}
+.empty h3{font-size:16px;margin-bottom:8px;color:var(--text2)}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+.content{padding:16px}
+.card{padding:18px}
+.macro-grid{grid-template-columns:1fr 1fr}
+.scene-toggle{margin:0 16px 12px}
+.week-bar{padding:12px 16px}
+.tabs{margin:0 16px}
+.nav{padding:0 16px}
+.nav-user{display:none}
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(197,165,90,.2);border-radius:2px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">8 周女性训练</div>
+  <div class="nav-right">
+    <span class="nav-week" id="navWeek"></span>
+    <span class="nav-user" id="navUser"></span>
+    <a href="login.html" class="nav-logout" onclick="doLogout()">退出</a>
+  </div>
+</nav>
+
+<!-- WEEK BAR -->
+<div class="week-bar" id="weekBar"></div>
+
+<!-- SCENE TOGGLE -->
+<div class="scene-toggle" id="sceneToggle">
+  <button class="scene-btn active" data-scene="gym" onclick="setScene('gym')">🏋️ 健身房</button>
+  <button class="scene-btn" data-scene="home" onclick="setScene('home')">🏠 居家</button>
+</div>
+
+<!-- TABS -->
+<div class="tabs" id="tabBar">
+  <button class="tab-btn active" data-tab="overview" onclick="setTab('overview')">Overview</button>
+  <button class="tab-btn" data-tab="today" onclick="setTab('today')">Today</button>
+  <button class="tab-btn" data-tab="nutrition" onclick="setTab('nutrition')">Nutrition</button>
+  <button class="tab-btn" data-tab="supplements" onclick="setTab('supplements')">Supplements</button>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+  <div class="tab-panel active" id="panel-overview"></div>
+  <div class="tab-panel" id="panel-today"></div>
+  <div class="tab-panel" id="panel-nutrition"></div>
+  <div class="tab-panel" id="panel-supplements"></div>
+</div>
+
+<script>
+// ===== STATE =====
+var state = {
+  role: localStorage.getItem('wt_role'),
+  userId: localStorage.getItem('wt_user_id'),
+  userName: localStorage.getItem('wt_user_name'),
+  profile: null,
+  currentWeek: 1,
+  currentScene: localStorage.getItem('wt_scene') || 'gym',
+  currentTab: 'overview',
+  checkins: JSON.parse(localStorage.getItem('wt_checkins') || '{}')
+};
+
+if (!state.role) { window.location.href = 'login.html'; }
+
+try { state.profile = JSON.parse(localStorage.getItem('wt_profile') || '{}'); } catch(e) { state.profile = {}; }
+
+// Start date
+if (!localStorage.getItem('wt_start_date')) {
+  localStorage.setItem('wt_start_date', new Date().toISOString().slice(0,10));
+}
+var startDate = new Date(localStorage.getItem('wt_start_date'));
+
+// ===== TRAINING DATA =====
+var TRAINING = {
+  phase1: {
+    name: 'Phase 1 · 动作奠基',
+    weeks: [1,2],
+    cls: 'phase-1',
+    intensity: 'RPE 6-7 / RIR 3 / ~60-65% 1RM',
+    goal: '建立正确动作模式，激活目标肌群，适应训练负荷',
+    nutrition: '维持热量 (TDEE)'
+  },
+  phase2: {
+    name: 'Phase 2 · 渐进加载',
+    weeks: [3,4,5],
+    cls: 'phase-2',
+    intensity: 'RPE 7-8 / RIR 1-2',
+    goal: '逐步增加负荷，发展力量基础，提升骨密度刺激',
+    nutrition: '维持或轻度减脂 (TDEE × 0.9)'
+  },
+  phase3: {
+    name: 'Phase 3 · 重负荷骨密度',
+    weeks: [6,7,8],
+    cls: 'phase-3',
+    intensity: 'RPE 8-9 / RIR 0-1',
+    goal: '高负荷骨骼加载，最大化骨密度适应，力量峰值',
+    nutrition: '微盈余增肌 (TDEE × 1.1)'
+  }
+};
+
+function getPhase(w) {
+  if (w <= 2) return TRAINING.phase1;
+  if (w <= 5) return TRAINING.phase2;
+  return TRAINING.phase3;
+}
+
+// --- PHASE 1 (W1-2) ---
+var P1 = {
+  gym: {
+    'Lower A': {
+      day: '周一', focus: '蹲 + 铰链',
+      exercises: [
+        { name: '脊椎波浪 + 毛毛虫', sets: '2×8', rest: '—', mode: 'flex', note: '热身激活，逐节活动脊椎', type: '热身' },
+        { name: '分腿蹲 DB Split Squat', sets: '3×10', rest: '60s', mode: 'flex', note: '主项，控制膝关节追踪方向，重心在前脚跟', type: '主项' },
+        { name: '分腿硬拉 Split Stance DL', sets: '3×10', rest: '60s', mode: 'flex', note: '铰链模式，感受腘绳肌离心拉伸', type: '主项' },
+        { name: '保加利亚蹲 Bulgarian SS', sets: '2×8/侧', rest: '60s', mode: 'flex', note: '单侧强化，后脚放凳面', type: '辅项' },
+        { name: 'Hollow 保持', sets: '3×20s', rest: '30s', mode: 'stab', note: '骨盆后倾，腰椎压实地面', type: '稳定' }
+      ]
+    },
+    'Upper A': {
+      day: '周二', focus: '推 + 拉',
+      exercises: [
+        { name: '释手俯卧撑', sets: '2×10', rest: '—', mode: 'flex', note: '热身，每组底部完全释手再推起', type: '热身' },
+        { name: '死虫卧推 DB Dead Bug Press', sets: '3×8', rest: '60s', mode: 'flex', note: '仰卧交替推举，腰椎保持中立', type: '主项' },
+        { name: '反向划船 Inverted Row', sets: '3×10', rest: '60s', mode: 'flex', note: '杠铃或TRX，肩胛骨主动后缩', type: '主项' },
+        { name: '弹力绳划船 Band Row', sets: '3×10', rest: '45s', mode: 'flex', note: '末端挤压肩胛，控制回放', type: '辅项' },
+        { name: 'Hollow 摇摆', sets: '3×15s', rest: '30s', mode: 'stab', note: '骨盆后倾位小幅度摇摆', type: '稳定' }
+      ]
+    },
+    'Lower B': {
+      day: '周四', focus: '蹲 + 稳定力量',
+      exercises: [
+        { name: '脊椎波浪 + 毛毛虫', sets: '2×8', rest: '—', mode: 'flex', note: '热身激活', type: '热身' },
+        { name: '相扑蹲 Sumo Squat', sets: '3×10', rest: '60s', mode: 'flex', note: '宽站距，脚尖外展30°，髋部主导', type: '主项' },
+        { name: 'RDL 罗马尼亚硬拉', sets: '3×10', rest: '60s', mode: 'flex', note: '微屈膝，髋铰链向后推', type: '主项' },
+        { name: '农夫行走（等重）', sets: '3×30s', rest: '45s', mode: 'stab', note: '等重持握，核心抗侧屈', type: '稳定' },
+        { name: '不对称负重单腿蹲', sets: '3×8/侧', rest: '60s', mode: 'stab', note: '对侧手持轻哑铃，抗旋转', type: '稳定' }
+      ]
+    },
+    'Upper B': {
+      day: '周五', focus: '推 + 爆发',
+      exercises: [
+        { name: '杠铃卧推 Barbell Bench', sets: '3×10', rest: '90s', mode: 'flex', note: '肩胛后缩稳定，杠铃触胸', type: '主项' },
+        { name: '哑铃划船 DB Row', sets: '3×10', rest: '60s', mode: 'flex', note: '单臂，肘部贴身向后拉', type: '主项' },
+        { name: '眼镜蛇俯卧撑 Cobra Push-up', sets: '3×8', rest: '45s', mode: 'flex', note: '推起后伸展胸椎，前锯肌激活', type: '辅项' },
+        { name: '帕洛夫（弹力带）Band Pallof', sets: '3×10s/侧', rest: '30s', mode: 'stab', note: '抗旋转，双手推出保持稳定', type: '稳定' },
+        { name: '被动悬吊 Dead Hang', sets: '3×20s', rest: '30s', mode: 'stab', note: '肩胛放松悬吊，拉伸+肩关节健康', type: '稳定' }
+      ]
+    },
+    'Saturday': {
+      day: '周六', focus: '运动表现',
+      exercises: [
+        { name: '敏捷梯/地板标记', sets: '3组', rest: '30s', mode: 'perf', note: '快速脚步，强调频率和协调', type: '速度' },
+        { name: '壶铃摇摆（轻）', sets: '3×10', rest: '45s', mode: 'perf', note: '髋部爆发性伸展，轻重量求速度', type: '爆发' },
+        { name: '药球投掷/壶铃投掷', sets: '3×8', rest: '45s', mode: 'perf', note: '全力投掷，追求最大速度', type: '爆发' }
+      ]
+    }
+  },
+  home: {
+    'Lower A': {
+      day: '周一', focus: '蹲 + 铰链',
+      exercises: [
+        { name: '脊椎波浪 + 毛毛虫', sets: '2×8', rest: '—', mode: 'flex', note: '热身激活，逐节活动脊椎', type: '热身' },
+        { name: '保加利亚分腿蹲（后脚放沙发）', sets: '3×10', rest: '60s', mode: 'flex', note: '自重或手持壶铃，控制下蹲深度', type: '主项' },
+        { name: '壶铃分腿硬拉 KB Split Stance DL', sets: '3×10', rest: '60s', mode: 'flex', note: '前后脚站位，髋铰链向后推', type: '主项' },
+        { name: '前脚抬高 ATG 分腿蹲', sets: '2×8/侧', rest: '60s', mode: 'flex', note: '前脚垫高，全幅度下蹲', type: '辅项' },
+        { name: 'Hollow 保持', sets: '3×20s', rest: '30s', mode: 'stab', note: '骨盆后倾，腰椎压实地面', type: '稳定' }
+      ]
+    },
+    'Upper A': {
+      day: '周二', focus: '推 + 拉',
+      exercises: [
+        { name: '释手俯卧撑', sets: '2×10', rest: '—', mode: 'flex', note: '热身，底部完全释手', type: '热身' },
+        { name: '弹力带死虫推举 Band Dead Bug Press', sets: '3×8', rest: '60s', mode: 'flex', note: '弹力带固定于门框，仰卧交替推', type: '主项' },
+        { name: 'TRX 反向划船', sets: '3×10', rest: '60s', mode: 'flex', note: '身体越水平越难，调节脚位', type: '主项' },
+        { name: '弹力带俯身划船 Band Bent-over Row', sets: '3×10', rest: '45s', mode: 'flex', note: '踩带俯身，挤压肩胛', type: '辅项' },
+        { name: 'Hollow 摇摆', sets: '3×15s', rest: '30s', mode: 'stab', note: '骨盆后倾位小幅度摇摆', type: '稳定' }
+      ]
+    },
+    'Lower B': {
+      day: '周四', focus: '蹲 + 稳定力量',
+      exercises: [
+        { name: '脊椎波浪 + 毛毛虫', sets: '2×8', rest: '—', mode: 'flex', note: '热身激活', type: '热身' },
+        { name: '壶铃相扑蹲 KB Sumo Squat', sets: '3×10', rest: '60s', mode: 'flex', note: '宽站距，手持壶铃下沉', type: '主项' },
+        { name: '壶铃 RDL', sets: '3×10', rest: '60s', mode: 'flex', note: '双手持壶铃，髋铰链向后', type: '主项' },
+        { name: '壶铃农夫行走', sets: '3×30s', rest: '45s', mode: 'stab', note: '单侧或双侧持壶铃行走', type: '稳定' },
+        { name: '单侧 KB 不对称行走', sets: '3×30s/侧', rest: '45s', mode: 'stab', note: '仅单手持壶铃，抗侧屈', type: '稳定' }
+      ]
+    },
+    'Upper B': {
+      day: '周五', focus: '推 + 爆发',
+      exercises: [
+        { name: '壶铃地板卧推 KB Floor Press', sets: '3×10', rest: '90s', mode: 'flex', note: '仰卧地板，肘触地后推起', type: '主项' },
+        { name: '壶铃单臂俯身划船 KB Single-arm Row', sets: '3×10', rest: '60s', mode: 'flex', note: '单膝跪凳，肘部贴身向后拉', type: '主项' },
+        { name: '眼镜蛇俯卧撑 Cobra Push-up', sets: '3×8', rest: '45s', mode: 'flex', note: '推起后伸展胸椎', type: '辅项' },
+        { name: '弹力带帕洛夫 Band Pallof', sets: '3×10s/侧', rest: '30s', mode: 'stab', note: '弹力带固定门框，抗旋转', type: '稳定' },
+        { name: '被动悬吊 Dead Hang', sets: '3×20s', rest: '30s', mode: 'stab', note: '引体杆悬吊，肩胛放松', type: '稳定' }
+      ]
+    },
+    'Saturday': {
+      day: '周六', focus: '运动表现',
+      exercises: [
+        { name: '敏捷梯/地板标记', sets: '3组', rest: '30s', mode: 'perf', note: '用胶带标记地面格子，快速脚步', type: '速度' },
+        { name: '壶铃摇摆（轻）', sets: '3×10', rest: '45s', mode: 'perf', note: '髋部爆发性伸展', type: '爆发' },
+        { name: '药球投掷/壶铃投掷', sets: '3×8', rest: '45s', mode: 'perf', note: '对墙投掷或向上投掷', type: '爆发' }
+      ]
+    }
+  }
+};
+
+// --- PHASE 2 (W3-5) ---
+var P2 = {
+  gym: {
+    'Lower A': {
+      day: '周一', focus: '蹲 + 铰链',
+      exercises: [
+        { name: '高脚杯深蹲 Goblet Squat', sets: '3×10', rest: '75s', mode: 'flex', note: '壶铃胸前持握，全幅度下蹲', type: '主项' },
+        { name: 'RDL 罗马尼亚硬拉', sets: '3×8', rest: '75s', mode: 'flex', note: '杠铃或哑铃，离心控制3秒', type: '主项' },
+        { name: '保加利亚蹲 Bulgarian SS', sets: '3×8/侧', rest: '60s', mode: 'flex', note: '手持哑铃，增加负荷', type: '辅项' },
+        { name: '手持壶铃仰卧大风车', sets: '3×5/侧', rest: '45s', mode: 'stab', note: '肩关节稳定+髋关节活动度', type: '稳定' }
+      ]
+    },
+    'Upper A': {
+      day: '周二', focus: '推 + 拉',
+      exercises: [
+        { name: '杠铃卧推 Barbell Bench', sets: '3×8', rest: '90s', mode: 'flex', note: '增加负荷，控制离心', type: '主项' },
+        { name: '哑铃划船 DB Row', sets: '3×8', rest: '60s', mode: 'flex', note: '重量递增，保持躯干稳定', type: '主项' },
+        { name: '哑铃过头推举 DB OHP', sets: '3×10', rest: '60s', mode: 'flex', note: '坐姿或站姿，全程控制', type: '辅项' },
+        { name: '辅助引体 Assisted Pull-up', sets: '3×6', rest: '60s', mode: 'flex', note: '辅助器械或弹力带', type: '辅项' },
+        { name: 'Hollow 摇摆', sets: '3×20s', rest: '30s', mode: 'stab', note: '时间递增', type: '稳定' }
+      ]
+    },
+    'Lower B': {
+      day: '周四', focus: '蹲 + 稳定力量',
+      exercises: [
+        { name: '赤字蹲 Deficit Squat', sets: '3×10', rest: '75s', mode: 'flex', note: '脚踩2-5cm垫片，增加ROM', type: '主项' },
+        { name: 'RDL', sets: '3×8', rest: '75s', mode: 'flex', note: '杠铃，增加负荷', type: '主项' },
+        { name: '农夫行走（不等重）', sets: '3×30s', rest: '45s', mode: 'stab', note: '左右手不同重量，抗旋转', type: '稳定' },
+        { name: '帕洛夫（绳索）Cable Pallof', sets: '3×10s/侧', rest: '30s', mode: 'stab', note: '绳索抗旋转，增加阻力', type: '稳定' },
+        { name: '不对称负重行走', sets: '3×30s', rest: '45s', mode: 'stab', note: 'rack carry单侧负重', type: '稳定' }
+      ]
+    },
+    'Upper B': {
+      day: '周五', focus: '推 + 爆发',
+      exercises: [
+        { name: '上斜卧推 Incline Bench', sets: '3×8', rest: '90s', mode: 'flex', note: '30-45°斜角，上胸发力', type: '主项' },
+        { name: '杠铃划船 Barbell Row', sets: '3×8', rest: '75s', mode: 'flex', note: '俯身45°，杠铃拉至下胸', type: '主项' },
+        { name: '眼镜蛇俯卧撑 Cobra Push-up', sets: '3×8', rest: '45s', mode: 'flex', note: '推起后胸椎伸展', type: '辅项' },
+        { name: '悬挂主动悬吊 Active Hang', sets: '3×15s', rest: '30s', mode: 'stab', note: '肩胛下沉激活，非完全放松', type: '稳定' },
+        { name: '杠铃推举（轻）', sets: '3×10', rest: '60s', mode: 'flex', note: '轻重量，追求速度', type: '爆发' }
+      ]
+    },
+    'Saturday': {
+      day: '周六', focus: '运动表现',
+      exercises: [
+        { name: '冲刺 Sprint', sets: '6×30m', rest: '60s', mode: 'perf', note: '全力冲刺，走回起点休息', type: '速度' },
+        { name: '壶铃摇摆 + 旋转 Swing', sets: '4×12', rest: '45s', mode: 'perf', note: '摆动后加旋转投掷', type: '爆发' },
+        { name: '跳箱/深蹲跳', sets: '4×5', rest: '45s', mode: 'perf', note: '全力起跳，软着陆', type: '爆发' },
+        { name: '暴躁小弹弹', sets: '3×10', rest: '30s', mode: 'perf', note: '连续小跳，踝关节刚性训练', type: '爆发' }
+      ]
+    }
+  },
+  home: {
+    'Lower A': {
+      day: '周一', focus: '蹲 + 铰链',
+      exercises: [
+        { name: '壶铃古法深蹲 KB Old School Squat', sets: '3×10', rest: '75s', mode: 'flex', note: '壶铃架式持握，全幅度', type: '主项' },
+        { name: '双壶铃 RDL', sets: '3×8', rest: '75s', mode: 'flex', note: '双手持壶铃，离心3秒', type: '主项' },
+        { name: '前脚抬高 ATG 分腿蹲', sets: '3×8/侧', rest: '60s', mode: 'flex', note: '全幅度，膝盖过脚尖', type: '辅项' },
+        { name: '手持壶铃仰卧大风车', sets: '3×5/侧', rest: '45s', mode: 'stab', note: '肩+髋联合稳定', type: '稳定' }
+      ]
+    },
+    'Upper A': {
+      day: '周二', focus: '推 + 拉',
+      exercises: [
+        { name: '壶铃地板卧推 KB Floor Press', sets: '3×8', rest: '90s', mode: 'flex', note: '双持或单持壶铃', type: '主项' },
+        { name: '壶铃单臂划船 KB Single-arm Row', sets: '3×8', rest: '60s', mode: 'flex', note: '增加壶铃重量', type: '主项' },
+        { name: '壶铃过头推举 KB OHP', sets: '3×10', rest: '60s', mode: 'flex', note: '站姿，核心收紧', type: '辅项' },
+        { name: '弹力带辅助引体', sets: '3×6', rest: '60s', mode: 'flex', note: '弹力带绕脚辅助', type: '辅项' },
+        { name: 'Hollow 摇摆', sets: '3×20s', rest: '30s', mode: 'stab', note: '时间递增', type: '稳定' }
+      ]
+    },
+    'Lower B': {
+      day: '周四', focus: '蹲 + 稳定力量',
+      exercises: [
+        { name: '壶铃赤字蹲 KB Deficit Squat', sets: '3×10', rest: '75s', mode: 'flex', note: '壶铃站在垫片上', type: '主项' },
+        { name: '双壶铃 RDL', sets: '3×8', rest: '75s', mode: 'flex', note: '双持壶铃，离心控制', type: '主项' },
+        { name: '不等重壶铃农夫行走', sets: '3×30s', rest: '45s', mode: 'stab', note: '左右不同重量', type: '稳定' },
+        { name: '弹力带帕洛夫 Band Pallof', sets: '3×10s/侧', rest: '30s', mode: 'stab', note: '门框固定弹力带', type: '稳定' },
+        { name: '单侧KB不对称行走', sets: '3×30s/侧', rest: '45s', mode: 'stab', note: '单手持壶铃行走', type: '稳定' }
+      ]
+    },
+    'Upper B': {
+      day: '周五', focus: '推 + 爆发',
+      exercises: [
+        { name: '壶铃上斜卧推（背垫高）', sets: '3×8', rest: '90s', mode: 'flex', note: '背靠瑜伽垫叠高', type: '主项' },
+        { name: '壶铃单臂划船 KB Single-arm Row', sets: '3×8', rest: '60s', mode: 'flex', note: '重量递增', type: '主项' },
+        { name: '眼镜蛇俯卧撑（脚垫高）', sets: '3×8', rest: '45s', mode: 'flex', note: '脚放沙发上增加难度', type: '辅项' },
+        { name: '悬挂主动悬吊 Active Hang', sets: '3×15s', rest: '30s', mode: 'stab', note: '引体杆上肩胛激活', type: '稳定' },
+        { name: '弹力带过头推举 Band OHP', sets: '3×10', rest: '60s', mode: 'flex', note: '踩带推举，追求速度', type: '爆发' }
+      ]
+    },
+    'Saturday': {
+      day: '周六', focus: '运动表现',
+      exercises: [
+        { name: '冲刺 Sprint', sets: '6×30m', rest: '60s', mode: 'perf', note: '户外或走廊', type: '速度' },
+        { name: '壶铃摇摆 + 旋转 Swing', sets: '4×12', rest: '45s', mode: 'perf', note: '摆动+旋转投掷', type: '爆发' },
+        { name: '深蹲跳 Squat Jump', sets: '4×5', rest: '45s', mode: 'perf', note: '全力起跳', type: '爆发' },
+        { name: '暴躁小弹弹', sets: '3×10', rest: '30s', mode: 'perf', note: '连续小跳', type: '爆发' }
+      ]
+    }
+  }
+};
+
+// --- PHASE 3 (W6-8) ---
+var P3 = {
+  gym: {
+    'Lower A': {
+      day: '周一', focus: '蹲 + 铰链',
+      exercises: [
+        { name: '后蹲 Back Squat', sets: '5×5 @80%', rest: '120s', mode: 'flex', note: '主项，重负荷，全幅度', type: '主项' },
+        { name: 'RDL', sets: '3×6', rest: '90s', mode: 'flex', note: '杠铃，大重量', type: '主项' },
+        { name: '保加利亚蹲 Bulgarian SS', sets: '3×8/侧', rest: '60s', mode: 'flex', note: '手持重哑铃', type: '辅项' },
+        { name: 'ATG蹲（轻）', sets: '3×6', rest: '60s', mode: 'flex', note: '轻重量全幅度，保持张力', type: '辅项' }
+      ]
+    },
+    'Upper A': {
+      day: '周二', focus: '推 + 拉',
+      exercises: [
+        { name: '杠铃卧推 Barbell Bench', sets: '5×5 @75%', rest: '120s', mode: 'flex', note: '重负荷主项', type: '主项' },
+        { name: '引体 Pull-up', sets: '3×5', rest: '90s', mode: 'flex', note: '自重，严格全程', type: '主项' },
+        { name: '杠铃推举 Barbell OHP', sets: '3×6', rest: '75s', mode: 'flex', note: '站姿，严格推举', type: '辅项' },
+        { name: '帕洛夫抗旋转推举 Pallof Press', sets: '3×8/侧', rest: '30s', mode: 'stab', note: '绳索推出并保持', type: '稳定' },
+        { name: '悬挂膝举 Hanging Knee Raise', sets: '3×8', rest: '45s', mode: 'stab', note: '骨盆后倾卷起', type: '稳定' }
+      ]
+    },
+    'Lower B': {
+      day: '周四', focus: '蹲 + 稳定力量',
+      exercises: [
+        { name: '前蹲 Front Squat', sets: '3×6 @70%', rest: '120s', mode: 'flex', note: '杠铃架式，躯干直立', type: '主项' },
+        { name: 'RDL', sets: '3×6', rest: '90s', mode: 'flex', note: '杠铃，大重量', type: '主项' },
+        { name: '农夫行走（过顶）OH Farmer Walk', sets: '3×30s', rest: '45s', mode: 'stab', note: '壶铃或哑铃过顶持握', type: '稳定' },
+        { name: '不对称负重', sets: '3×8/侧', rest: '60s', mode: 'stab', note: '单侧负重分腿蹲', type: '稳定' },
+        { name: '手持壶铃大风车 Windmill', sets: '3×5/侧', rest: '45s', mode: 'stab', note: '过顶锁定，缓慢侧屈', type: '稳定' }
+      ]
+    },
+    'Upper B': {
+      day: '周五', focus: '推 + 爆发',
+      exercises: [
+        { name: '杠铃卧推 Barbell Bench', sets: '3×6', rest: '120s', mode: 'flex', note: '重负荷', type: '主项' },
+        { name: '杠铃划船 Barbell Row', sets: '3×6', rest: '90s', mode: 'flex', note: '大重量划船', type: '主项' },
+        { name: '眼镜蛇俯卧撑 Cobra Push-up', sets: '3×8', rest: '45s', mode: 'flex', note: '可加负重', type: '辅项' },
+        { name: '杠铃推举 Barbell OHP', sets: '3×5', rest: '75s', mode: 'flex', note: '轻重量爆发推举', type: '爆发' },
+        { name: 'Hollow 摇摆', sets: '3×20s', rest: '30s', mode: 'stab', note: '核心耐力收尾', type: '稳定' }
+      ]
+    },
+    'Saturday': {
+      day: '周六', focus: '运动表现（全量）',
+      exercises: [
+        { name: '冲刺 Sprint', sets: '8×30m', rest: '60s', mode: 'perf', note: '全量冲刺', type: '速度' },
+        { name: '壶铃摇摆（重）+ 旋转', sets: '4×10', rest: '45s', mode: 'perf', note: '重壶铃+旋转投掷', type: '爆发' },
+        { name: '跳箱/台阶爆发跳', sets: '4×5', rest: '45s', mode: 'perf', note: '全力起跳', type: '爆发' },
+        { name: '药球投掷/壶铃投掷', sets: '4×6', rest: '45s', mode: 'perf', note: '全力投掷', type: '爆发' },
+        { name: '暴躁小弹弹', sets: '3×10', rest: '30s', mode: 'perf', note: '踝关节刚性', type: '爆发' },
+        { name: '壶铃跳 KB Jump', sets: '3×6', rest: '45s', mode: 'perf', note: '轻壶铃持握跳', type: '爆发' }
+      ]
+    }
+  },
+  home: {
+    'Lower A': {
+      day: '周一', focus: '蹲 + 铰链',
+      exercises: [
+        { name: '弹力带+壶铃蹲', sets: '5×5', rest: '90s', mode: 'flex', note: '弹力带绕柱+壶铃，全幅度+接近力竭', type: '主项' },
+        { name: '双壶铃 RDL（离心3s）', sets: '3×6', rest: '90s', mode: 'flex', note: '慢速离心，增加时间张力', type: '主项' },
+        { name: '前脚抬高 ATG 分腿蹲', sets: '3×8/侧', rest: '60s', mode: 'flex', note: '全幅度深蹲', type: '辅项' },
+        { name: '壶铃古法深蹲（轻）', sets: '3×6', rest: '60s', mode: 'flex', note: '轻重量，追求完美动作', type: '辅项' }
+      ]
+    },
+    'Upper A': {
+      day: '周二', focus: '推 + 拉',
+      exercises: [
+        { name: '壶铃地板卧推（离心3s）', sets: '5×5', rest: '90s', mode: 'flex', note: '慢速离心增加张力', type: '主项' },
+        { name: '引体/离心引体', sets: '3×5', rest: '90s', mode: 'flex', note: '能做引体做引体，否则离心控制', type: '主项' },
+        { name: '壶铃过头推举 KB OHP', sets: '3×6', rest: '75s', mode: 'flex', note: '严格推举', type: '辅项' },
+        { name: '弹力带抗旋转推举 Band Pallof Press', sets: '3×8/侧', rest: '30s', mode: 'stab', note: '弹力带固定', type: '稳定' },
+        { name: '悬挂膝举 Hanging Knee Raise', sets: '3×8', rest: '45s', mode: 'stab', note: '引体杆上', type: '稳定' }
+      ]
+    },
+    'Lower B': {
+      day: '周四', focus: '蹲 + 稳定力量',
+      exercises: [
+        { name: '壶铃赤字蹲 KB Deficit Squat', sets: '3×6', rest: '90s', mode: 'flex', note: '踩垫片增加ROM', type: '主项' },
+        { name: '双壶铃 RDL（离心3s）', sets: '3×6', rest: '90s', mode: 'flex', note: '慢速离心', type: '主项' },
+        { name: '壶铃过顶农夫行走', sets: '3×30s', rest: '45s', mode: 'stab', note: '壶铃举过头顶行走', type: '稳定' },
+        { name: '单侧KB不对称蹲走', sets: '3×8/侧', rest: '60s', mode: 'stab', note: '单侧负重行走', type: '稳定' },
+        { name: '手持壶铃大风车 Windmill', sets: '3×5/侧', rest: '45s', mode: 'stab', note: '过顶锁定侧屈', type: '稳定' }
+      ]
+    },
+    'Upper B': {
+      day: '周五', focus: '推 + 爆发',
+      exercises: [
+        { name: '壶铃地板卧推（单臂交替）', sets: '3×6/侧', rest: '90s', mode: 'flex', note: '交替推举', type: '主项' },
+        { name: '壶铃单臂划船 KB Single-arm Row', sets: '3×6/侧', rest: '60s', mode: 'flex', note: '大重量', type: '主项' },
+        { name: '眼镜蛇俯卧撑（脚垫高）', sets: '3×8', rest: '45s', mode: 'flex', note: '脚放沙发', type: '辅项' },
+        { name: '弹力带过头推举 Band OHP', sets: '3×5', rest: '60s', mode: 'flex', note: '爆发推举', type: '爆发' },
+        { name: 'Hollow 摇摆', sets: '3×20s', rest: '30s', mode: 'stab', note: '核心耐力', type: '稳定' }
+      ]
+    },
+    'Saturday': {
+      day: '周六', focus: '运动表现（全量）',
+      exercises: [
+        { name: '冲刺 Sprint', sets: '8×30m', rest: '60s', mode: 'perf', note: '全量冲刺', type: '速度' },
+        { name: '壶铃摇摆（重）+ 旋转', sets: '4×10', rest: '45s', mode: 'perf', note: '重壶铃+旋转', type: '爆发' },
+        { name: '台阶爆发跳', sets: '4×5', rest: '45s', mode: 'perf', note: '台阶上全力跳', type: '爆发' },
+        { name: '壶铃投掷', sets: '4×6', rest: '45s', mode: 'perf', note: '全力投掷', type: '爆发' },
+        { name: '暴躁小弹弹', sets: '3×10', rest: '30s', mode: 'perf', note: '连续弹跳', type: '爆发' },
+        { name: '壶铃跳 KB Jump', sets: '3×6', rest: '45s', mode: 'perf', note: '轻壶铃持握跳', type: '爆发' }
+      ]
+    }
+  }
+};
+
+// Week 8 test week
+var P3_TEST = {
+  gym: {
+    'Lower A': {
+      day: '周一', focus: '下肢力量测试',
+      exercises: [
+        { name: '后蹲 3RM 测试', sets: '渐增至3RM', rest: '120s', mode: 'flex', note: '热身4组后测试3RM', type: '测试' },
+        { name: '保加利亚蹲（测试重量）', sets: '3×5/侧', rest: '60s', mode: 'flex', note: '用训练重量验证', type: '辅助' },
+        { name: '单腿平衡测试', sets: '1组', rest: '—', mode: 'stab', note: '闭眼单腿站立计时', type: '测试' }
+      ]
+    },
+    'Upper A': {
+      day: '周二', focus: '上肢力量测试',
+      exercises: [
+        { name: '卧推 3RM 测试', sets: '渐增至3RM', rest: '120s', mode: 'flex', note: '热身4组后测试3RM', type: '测试' },
+        { name: '引体最大次数', sets: '1组', rest: '—', mode: 'flex', note: '严格全程最大次数', type: '测试' }
+      ]
+    },
+    'Lower B': {
+      day: '周四', focus: '下肢稳定性测试',
+      exercises: [
+        { name: '单腿蹲质量评估', sets: '3×5/侧', rest: '60s', mode: 'stab', note: '评估膝关节追踪和平衡', type: '测试' },
+        { name: '农夫行走（最重）', sets: '3×30s', rest: '45s', mode: 'stab', note: '测试最大持握时间', type: '测试' },
+        { name: '大风车（测试重量）', sets: '3×3/侧', rest: '45s', mode: 'stab', note: '壶铃大风车质量', type: '测试' }
+      ]
+    },
+    'Upper B': {
+      day: '周五', focus: '上肢拉力测试',
+      exercises: [
+        { name: '引体最大次数（加重）', sets: '3组', rest: '90s', mode: 'flex', note: '可加负重', type: '测试' },
+        { name: '悬吊时间测试', sets: '1组', rest: '—', mode: 'stab', note: '被动悬吊最长时间', type: '测试' }
+      ]
+    },
+    'Saturday': {
+      day: '周六', focus: '运动表现测试',
+      exercises: [
+        { name: '30m冲刺计时', sets: '3次', rest: '120s', mode: 'perf', note: '取最佳成绩', type: '测试' },
+        { name: '立定跳远', sets: '3次', rest: '60s', mode: 'perf', note: '取最佳成绩', type: '测试' },
+        { name: '壶铃摇摆最大次数（固定重量）', sets: '1组', rest: '—', mode: 'perf', note: '不限时', type: '测试' }
+      ]
+    }
+  },
+  home: {
+    'Lower A': {
+      day: '周一', focus: '下肢力量测试',
+      exercises: [
+        { name: 'KB蹲最大次数测试', sets: '1组', rest: '—', mode: 'flex', note: '固定重量壶铃，做到力竭', type: '测试' },
+        { name: '保加利亚蹲（最重KB）', sets: '3×5/侧', rest: '60s', mode: 'flex', note: '最大壶铃重量', type: '辅助' },
+        { name: '单腿平衡测试', sets: '1组', rest: '—', mode: 'stab', note: '闭眼单腿站立计时', type: '测试' }
+      ]
+    },
+    'Upper A': {
+      day: '周二', focus: '上肢力量测试',
+      exercises: [
+        { name: 'KB地板卧推 5RM 测试', sets: '渐增至5RM', rest: '90s', mode: 'flex', note: '渐增次数测试', type: '测试' },
+        { name: '引体/离心引体最大次数', sets: '1组', rest: '—', mode: 'flex', note: '严格全程', type: '测试' }
+      ]
+    },
+    'Lower B': {
+      day: '周四', focus: '下肢稳定性测试',
+      exercises: [
+        { name: '单腿蹲质量评估', sets: '3×5/侧', rest: '60s', mode: 'stab', note: '膝关节追踪质量', type: '测试' },
+        { name: '壶铃农夫行走（最重）', sets: '3×30s', rest: '45s', mode: 'stab', note: '最大壶铃', type: '测试' }
+      ]
+    },
+    'Upper B': {
+      day: '周五', focus: '上肢拉力测试',
+      exercises: [
+        { name: '引体最大次数', sets: '3组', rest: '90s', mode: 'flex', note: '可弹力带辅助', type: '测试' },
+        { name: '悬吊时间测试', sets: '1组', rest: '—', mode: 'stab', note: '被动悬吊最长时间', type: '测试' }
+      ]
+    },
+    'Saturday': {
+      day: '周六', focus: '运动表现测试',
+      exercises: [
+        { name: '30m冲刺计时', sets: '3次', rest: '120s', mode: 'perf', note: '取最佳成绩', type: '测试' },
+        { name: '立定跳远', sets: '3次', rest: '60s', mode: 'perf', note: '取最佳', type: '测试' },
+        { name: '壶铃摇摆最大次数', sets: '1组', rest: '—', mode: 'perf', note: '固定重量不限时', type: '测试' }
+      ]
+    }
+  }
+};
+
+var CARDIO = { day: '周三', focus: 'Cardio Easy', exercises: [
+  { name: '轻松有氧', sets: '30-45min', rest: '—', mode: 'flex', note: '快走、慢跑、骑车均可。心率控制在最大心率的60-70%。可以正常说话不喘。', type: '有氧' }
+]};
+
+var REST = { day: '周日', focus: 'Rest', exercises: [
+  { name: '长走 + 休息', sets: '自由', rest: '—', mode: 'flex', note: '30-60分钟轻松散步。充分休息，为下周训练做准备。', type: '恢复' }
+]};
+
+// ===== FUNCTIONS =====
+function calcWeek() {
+  var now = new Date();
+  var diff = Math.floor((now - startDate) / (7*24*60*60*1000));
+  return Math.max(1, Math.min(8, diff + 1));
+}
+
+function getDayOfWeek() {
+  var d = new Date().getDay();
+  return d; // 0=Sun,1=Mon,...,6=Sat
+}
+
+function getPhaseData(w, scene) {
+  if (w === 8) return P3_TEST[scene];
+  var pool = w <= 2 ? P1 : (w <= 5 ? P2 : P3);
+  return pool[scene];
+}
+
+var DAY_MAP = { 1: 'Lower A', 2: 'Upper A', 3: 'Cardio', 4: 'Lower B', 5: 'Upper B', 6: 'Saturday', 0: 'Rest' };
+
+function getTodayKey() {
+  return DAY_MAP[getDayOfWeek()];
+}
+
+function getCheckinKey(w, dayOfWeek) {
+  return 'w' + w + 'd' + dayOfWeek;
+}
+
+function isCheckinDone(w, dayOfWeek) {
+  return !!state.checkins[getCheckinKey(w, dayOfWeek)];
+}
+
+function toggleCheckin(w, dayOfWeek) {
+  var key = getCheckinKey(w, dayOfWeek);
+  if (state.checkins[key]) {
+    delete state.checkins[key];
+  } else {
+    state.checkins[key] = { time: new Date().toISOString() };
+  }
+  localStorage.setItem('wt_checkins', JSON.stringify(state.checkins));
+  state.checkins = JSON.parse(localStorage.getItem('wt_checkins') || '{}');
+}
+
+// ===== INIT =====
+function init() {
+  // Nav
+  document.getElementById('navUser').textContent = state.userName || '';
+  var cw = calcWeek();
+  state.currentWeek = cw;
+  document.getElementById('navWeek').textContent = 'Week ' + cw + ' / 8';
+
+  // Week bar
+  var wb = document.getElementById('weekBar');
+  wb.innerHTML = '';
+  for (var i = 1; i <= 8; i++) {
+    var btn = document.createElement('button');
+    btn.className = 'week-btn' + (i === cw ? ' active' : '') + (i < cw ? ' done' : '');
+    btn.textContent = 'W' + i;
+    btn.setAttribute('data-week', i);
+    btn.onclick = (function(w){ return function(){ state.currentWeek = w; updateAll(); }; })(i);
+    wb.appendChild(btn);
+  }
+
+  // Scene
+  var sbtns = document.querySelectorAll('.scene-btn');
+  sbtns.forEach(function(b) { b.classList.toggle('active', b.getAttribute('data-scene') === state.currentScene); });
+
+  // Render
+  renderAll();
+}
+
+function setScene(s) {
+  state.currentScene = s;
+  localStorage.setItem('wt_scene', s);
+  document.querySelectorAll('.scene-btn').forEach(function(b) { b.classList.toggle('active', b.getAttribute('data-scene') === s); });
+  renderAll();
+}
+
+function setTab(t) {
+  state.currentTab = t;
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.toggle('active', b.getAttribute('data-tab') === t); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('panel-' + t).classList.add('active');
+  renderAll();
+}
+
+function doLogout() {
+  localStorage.removeItem('wt_role');
+  localStorage.removeItem('wt_user_id');
+  localStorage.removeItem('wt_user_name');
+  localStorage.removeItem('wt_invite_code');
+  localStorage.removeItem('wt_profile');
+  localStorage.removeItem('wt_start_date');
+  localStorage.removeItem('wt_checkins');
+  localStorage.removeItem('wt_scene');
+}
+
+function updateAll() {
+  // Week bar
+  document.querySelectorAll('.week-btn').forEach(function(b) {
+    var w = parseInt(b.getAttribute('data-week'));
+    b.className = 'week-btn' + (w === state.currentWeek ? ' active' : '') + (w < state.currentWeek ? ' done' : '');
+  });
+  document.getElementById('navWeek').textContent = 'Week ' + state.currentWeek + ' / 8';
+  renderAll();
+}
+
+function renderAll() {
+  renderOverview();
+  renderToday();
+  renderNutrition();
+  renderSupplements();
+}
+
+// ===== RENDER: OVERVIEW =====
+function renderOverview() {
+  var w = state.currentWeek;
+  var phase = getPhase(w);
+  var data = getPhaseData(w, state.currentScene);
+  var dayKeys = ['Lower A','Upper A','Cardio','Lower B','Upper B','Saturday','Rest'];
+  var dayNames = ['周一','周二','周三','周四','周五','周六','周日'];
+  var dayClasses = ['day-mon','day-tue','day-wed','day-thu','day-fri','day-sat','day-sun'];
+
+  var html = '';
+  html += '<div class="phase-badge ' + phase.cls + '">' + phase.name + '</div>';
+  html += '<div class="card"><div class="card-title">阶段目标</div><h3>' + phase.goal + '</h3>';
+  html += '<p style="margin-top:8px;color:var(--gold);font-size:13px">强度：' + phase.intensity + '</p></div>';
+
+  html += '<div class="card"><div class="card-title">本周训练概览</div>';
+  dayKeys.forEach(function(dk, idx) {
+    var info = dk === 'Cardio' ? CARDIO : (dk === 'Rest' ? REST : (data[dk] || { focus: '—' }));
+    var cw = calcWeek();
+    var dow = idx + 1; if (idx === 6) dow = 0;
+    var done = isCheckinDone(w, dow);
+    html += '<div class="day-card">';
+    html += '<div class="day-label ' + dayClasses[idx] + '">' + dayNames[idx] + '</div>';
+    html += '<div class="day-info"><h4>' + info.focus + '</h4><p>' + (info.exercises ? info.exercises.length + ' 个动作' : '') + '</p></div>';
+    html += '<div class="day-check ' + (done ? 'done' : '') + '" title="打卡">✓</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  html += '<div class="principle"><h4>⚡ 训练原则</h4>';
+  html += '<p><strong>机械张力 = 力 × 时间 × 肌纤维募集数</strong></p>';
+  html += '<p style="margin-top:6px">骨骼适应的关键不是"动了多少"，而是骨骼承受的应变量(strain)是否超过最小有效阈值(MES, ~1500με)。高负荷、多方向的力学刺激是骨密度提升的核心驱动力。</p></div>';
+
+  html += '<div class="card"><div class="card-title">营养策略</div><p>' + phase.nutrition + '</p></div>';
+
+  document.getElementById('panel-overview').innerHTML = html;
+}
+
+// ===== RENDER: TODAY =====
+function renderToday() {
+  var w = state.currentWeek;
+  var dow = getDayOfWeek();
+  var dayKey = getTodayKey();
+  var html = '';
+
+  html += '<div class="card-title" style="margin-bottom:12px">Week ' + w + ' · ' + ['周日','周一','周二','周三','周四','周五','周六'][dow] + '</div>';
+
+  if (dayKey === 'Cardio') {
+    html += renderExerciseGroup(CARDIO);
+    var ck = isCheckinDone(w, 3);
+    html += '<button class="checkin-btn ' + (ck ? 'completed' : 'pending') + '" onclick="doCheckin(3)">' + (ck ? '✓ 今日已完成' : '完成打卡') + '</button>';
+  } else if (dayKey === 'Rest') {
+    html += renderExerciseGroup(REST);
+    var ck = isCheckinDone(w, 0);
+    html += '<button class="checkin-btn ' + (ck ? 'completed' : 'pending') + '" onclick="doCheckin(0)">☀ 休息日</button>';
+  } else {
+    var data = getPhaseData(w, state.currentScene);
+    var session = data[dayKey];
+    if (session) {
+      html += '<div class="card" style="margin-bottom:16px"><div class="card-title">' + session.day + '</div><h3>' + session.focus + '</h3></div>';
+      session.exercises.forEach(function(ex) {
+        html += renderExercise(ex);
+      });
+      var ck = isCheckinDone(w, dow);
+      html += '<button class="checkin-btn ' + (ck ? 'completed' : 'pending') + '" onclick="doCheckin(' + dow + ')">' + (ck ? '✓ 今日训练已完成' : '完成今日训练打卡') + '</button>';
+    } else {
+      html += '<div class="empty"><h3>今日无训练安排</h3></div>';
+    }
+  }
+
+  document.getElementById('panel-today').innerHTML = html;
+}
+
+function renderExercise(ex) {
+  var modeClass = ex.mode === 'flex' ? 'tag-mode-flex' : (ex.mode === 'stab' ? 'tag-mode-stab' : 'tag-mode-perf');
+  var modeText = ex.mode === 'flex' ? '灵活力量' : (ex.mode === 'stab' ? '稳定力量' : '运动表现');
+  var h = '<div class="exercise">';
+  h += '<div class="ex-header"><span class="ex-name">' + ex.name + '</span><span class="ex-sets">' + ex.sets + '</span></div>';
+  h += '<div class="ex-meta">';
+  h += '<span class="ex-tag ' + modeClass + '">' + modeText + '</span>';
+  if (ex.rest && ex.rest !== '—') h += '<span class="ex-tag tag-rest">休息 ' + ex.rest + '</span>';
+  if (ex.type) h += '<span class="ex-tag tag-rest">' + ex.type + '</span>';
+  h += '</div>';
+  if (ex.note) h += '<p class="ex-note">' + ex.note + '</p>';
+  h += '</div>';
+  return h;
+}
+
+function renderExerciseGroup(session) {
+  var h = '<div class="card" style="margin-bottom:16px"><div class="card-title">' + session.day + '</div><h3>' + session.focus + '</h3></div>';
+  session.exercises.forEach(function(ex) { h += renderExercise(ex); });
+  return h;
+}
+
+function doCheckin(dow) {
+  var w = state.currentWeek;
+  var key = getCheckinKey(w, dow);
+  if (state.checkins[key]) return; // already done
+  toggleCheckin(w, dow);
+  renderToday();
+  renderOverview();
+}
+
+// ===== RENDER: NUTRITION =====
+function renderNutrition() {
+  var p = state.profile;
+  var html = '';
+
+  if (!p || !p.weight || !p.height || !p.age) {
+    html = '<div class="empty"><h3>请先完成问卷</h3><p>营养方案需要根据您的身体数据计算</p></div>';
+    document.getElementById('panel-nutrition').innerHTML = html;
+    return;
+  }
+
+  var weightKg = parseFloat(p.weight);
+  var heightCm = parseFloat(p.height);
+  var age = parseInt(p.age);
+  var weightLbs = weightKg * 2.205;
+
+  // BMR Mifflin-St Jeor Female
+  var bmr = 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
+
+  // Activity factor
+  var freq = parseInt(p.trainingFreq) || 3;
+  var af = 1.2;
+  if (freq === 0) af = 1.2;
+  else if (freq <= 2) af = 1.375;
+  else if (freq <= 4) af = 1.55;
+  else af = 1.725;
+
+  var tdee = Math.round(bmr * af);
+  bmr = Math.round(bmr);
+
+  // Phase adjustment
+  var w = state.currentWeek;
+  var multiplier = 1;
+  var strategy = '';
+  if (w <= 2) { multiplier = 1; strategy = '维持热量'; }
+  else if (w <= 5) { multiplier = 0.9; strategy = '轻度减脂'; }
+  else { multiplier = 1.1; strategy = '微盈余增肌'; }
+
+  var targetCal = Math.round(tdee * multiplier);
+
+  // Macros
+  var proteinG = Math.round(weightLbs * 1.1); // midpoint 1.0-1.2
+  var carbG = Math.round((targetCal * 0.4) / 4);
+  var fatG = Math.round((targetCal * 0.25) / 9);
+
+  html += '<div class="phase-badge ' + getPhase(w).cls + '">' + getPhase(w).name + ' · ' + strategy + '</div>';
+
+  html += '<div class="card"><div class="card-title">基础代谢</div>';
+  html += '<div class="macro-grid">';
+  html += '<div class="macro-item"><div class="macro-val">' + bmr + '</div><div class="macro-label">BMR kcal</div></div>';
+  html += '<div class="macro-item"><div class="macro-val">' + tdee + '</div><div class="macro-label">TDEE kcal</div></div>';
+  html += '</div></div>';
+
+  html += '<div class="card"><div class="card-title">每日目标</div>';
+  html += '<div class="macro-grid">';
+  html += '<div class="macro-item"><div class="macro-val">' + targetCal + '</div><div class="macro-label">目标热量 kcal</div></div>';
+  html += '<div class="macro-item"><div class="macro-val">' + proteinG + 'g</div><div class="macro-label">蛋白质</div></div>';
+  html += '<div class="macro-item"><div class="macro-val">' + carbG + 'g</div><div class="macro-label">碳水化合物</div></div>';
+  html += '<div class="macro-item"><div class="macro-val">' + fatG + 'g</div><div class="macro-label">脂肪</div></div>';
+  html += '</div>';
+  html += '<p style="font-size:12px;color:var(--text3);margin-top:8px">蛋白质 ' + proteinG + 'g × 4 = ' + (proteinG*4) + ' kcal | 碳水 ' + carbG + 'g × 4 = ' + (carbG*4) + ' kcal | 脂肪 ' + fatG + 'g × 9 = ' + (fatG*9) + ' kcal</p>';
+  html += '</div>';
+
+  // Meal template
+  var proteinPerMeal = Math.round(proteinG / 4);
+  var carbPerMeal = Math.round(carbG / 4);
+
+  html += '<div class="card"><div class="card-title">4餐模板</div>';
+  html += '<div class="meal-plan">';
+  html += mealRow('早餐 7-8am', '鸡蛋2个 + 燕麦50g + 莓果 + ' + proteinPerMeal + 'g 蛋白');
+  html += mealRow('午餐 12pm', '鸡胸/鱼150g + 糙米/红薯 + 蔬菜');
+  html += mealRow('训练前 4pm', '香蕉 + 全麦面包 + 蛋白粉（可选）');
+  html += mealRow('晚餐 7pm', '瘦牛肉/三文鱼150g + 蔬菜 + 适量主食');
+  html += '</div>';
+  html += '<p style="font-size:12px;color:var(--text3);margin-top:12px">每餐约 ' + proteinPerMeal + 'g 蛋白质 · ' + carbPerMeal + 'g 碳水</p>';
+  html += '</div>';
+
+  html += '<div class="principle"><h4>💡 营养原则</h4>';
+  html += '<p>骨骼重建需要充足的蛋白质作为胶原基质，同时需要钙、维生素D、维生素K2协同作用。训练日营养围绕训练窗口分配，非训练日均匀分配即可。</p></div>';
+
+  document.getElementById('panel-nutrition').innerHTML = html;
+}
+
+function mealRow(name, detail) {
+  return '<div class="meal-row"><span class="meal-name">' + name + '</span><span class="meal-detail">' + detail + '</span></div>';
+}
+
+// ===== RENDER: SUPPLEMENTS =====
+function renderSupplements() {
+  var p = state.profile;
+  var symptoms = [];
+  if (p && p.symptoms) {
+    if (Array.isArray(p.symptoms)) symptoms = p.symptoms;
+    else if (typeof p.symptoms === 'string') {
+      try { symptoms = JSON.parse(p.symptoms); } catch(e) { symptoms = [p.symptoms]; }
+    }
+  }
+  var sympStr = symptoms.join(',').toLowerCase();
+
+  var html = '<div class="card-title" style="margin-bottom:12px">补剂方案</div>';
+  html += '<p style="font-size:13px;color:var(--text3);margin-bottom:16px">基于您的症状评估结果个性化推荐</p>';
+
+  // Always: Creatine
+  html += suppCard('肌酸 Creatine Monohydrate', '3-5g / 天', '每日任意时间，训练后更佳',
+    '提升磷酸肌酸储备，增强高强度运动表现；对骨密度有间接正面影响', 'A',
+    '一水肌酸，无需特殊剂型');
+
+  // Always: Protein powder if needed
+  var proteinNote = '';
+  if (p && p.weight) {
+    var proteinTarget = Math.round(parseFloat(p.weight) * 2.205 * 1.1);
+    proteinNote = '每日蛋白质目标 ' + proteinTarget + 'g，若食物摄入不足则补充';
+  } else {
+    proteinNote = '用于补充日常蛋白质摄入缺口';
+  }
+  html += suppCard('蛋白粉 Whey/Plant Protein', '按需补充', '训练后30min内或加餐',
+    proteinNote, 'A',
+    '乳清蛋白或植物蛋白均可，选择口味可接受的');
+
+  // Conditionals
+  var needBoneJoint = /骨密度|骨质疏松|关节|膝盖|疼痛|arthr|bone|joint/i.test(sympStr);
+  var needSleep = /睡眠|失眠|sleep|insomnia/i.test(sympStr);
+  var needIron = /疲劳|能量|fatigue|energy|贫血|铁/i.test(sympStr);
+
+  if (needBoneJoint) {
+    html += suppCard('维生素D3 Vitamin D3', '2000-4000 IU / 天', '随餐服用（脂溶性）',
+      '促进钙吸收，调节骨代谢；多数女性存在VD不足', 'A',
+      '建议先检测血清25(OH)D水平');
+    html += suppCard('钙 Calcium', '500-1000mg / 天', '分2次随餐服用',
+      '骨骼矿化核心原料；配合VD+K2协同', 'A',
+      '柠檬酸钙吸收率优于碳酸钙；单次不超过500mg');
+    html += suppCard('维生素K2 Vitamin K2 (MK-7)', '100-200μg / 天', '随含脂肪餐服用',
+      '引导钙沉积至骨骼而非血管，激活骨钙素(osteocalcin)', 'B',
+      '服用抗凝血药物者需咨询医生');
+  } else {
+    html += suppCard('维生素D3 Vitamin D3', '1000-2000 IU / 天', '随餐服用',
+      '维持基础VD水平，支持骨骼和免疫健康', 'B',
+      '日照不足地区建议常规补充');
+  }
+
+  if (needSleep) {
+    html += suppCard('镁 Magnesium (Glycinate)', '300-400mg / 天', '睡前30-60min',
+      '促进肌肉放松和睡眠质量；甘氨酸镁吸收率高、不引起腹泻', 'B',
+      '避免氧化镁（吸收差、易腹泻）');
+  }
+
+  if (needIron) {
+    html += suppCard('铁蛋白检测提醒', '—', '—',
+      '疲劳和能量下降可能与铁缺乏相关，建议进行血清铁蛋白(ferritin)检测。女性运动员铁缺乏率高。', 'C',
+      '切勿盲目补铁，需先检测确认');
+  }
+
+  // General
+  html += suppCard('Omega-3 鱼油', '1-2g EPA+DHA / 天', '随餐服用',
+    '抗炎、支持关节健康和心血管功能', 'B',
+    '选择IFOS认证产品');
+
+  html += '<div class="principle" style="margin-top:20px"><h4>⚠️ 重要提示</h4>';
+  html += '<p>补剂是"补充"而非"替代"。优先通过均衡饮食获取营养。所有补剂建议在使用前咨询医疗专业人员，特别是存在基础疾病或服用药物的情况。</p></div>';
+
+  document.getElementById('panel-supplements').innerHTML = html;
+}
+
+function suppCard(name, dose, timing, effect, evidence, note) {
+  var evClass = evidence === 'A' ? 'evidence-a' : (evidence === 'B' ? 'evidence-b' : 'evidence-c');
+  var h = '<div class="supp-item">';
+  h += '<div class="supp-header"><span class="supp-name">' + name + '</span><span class="supp-evidence ' + evClass + '">证据等级 ' + evidence + '</span></div>';
+  h += '<dl class="supp-detail">';
+  h += '<dt>剂量</dt><dd>' + dose + '</dd>';
+  h += '<dt>时间</dt><dd>' + timing + '</dd>';
+  h += '<dt>作用</dt><dd>' + effect + '</dd>';
+  h += '</dl>';
+  if (note) h += '<p class="supp-note">' + note + '</p>';
+  h += '</div>';
+  return h;
+}
+
+// ===== BOOT =====
+init();
+</script>
+</body>
+</html>

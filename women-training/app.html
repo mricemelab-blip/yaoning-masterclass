@@ -19,33 +19,40 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .nav-logout{font-size:12px;color:var(--text3);text-decoration:none;padding:4px 10px;border:1px solid var(--border);border-radius:6px;transition:all .2s}
 .nav-logout:hover{color:var(--gold);border-color:var(--gold)}
 
-/* MORNING CHECKIN */
-.morning-bar{margin:70px 20px 0;padding:0;position:relative;z-index:1}
-.morning-toggle{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;background:var(--card);color:var(--text2);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .25s;font-family:inherit;letter-spacing:.5px}
-.morning-toggle:hover{border-color:var(--gold);color:var(--gold)}
-.morning-toggle.done{border-color:rgba(34,197,94,.3);color:var(--green)}
-.morning-toggle .arrow{transition:transform .25s;font-size:10px}
-.morning-toggle.open .arrow{transform:rotate(180deg)}
-.morning-panel{max-height:0;overflow:hidden;transition:max-height .35s ease}
-.morning-panel.open{max-height:600px}
-.morning-form{padding:16px;background:var(--card);border:1px solid var(--border);border-radius:0 0 10px 10px;margin-top:-1px}
-.morning-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-.morning-field label{display:block;font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
-.morning-field input,.morning-field textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:rgba(255,255,255,.03);color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:border .2s}
-.morning-field input:focus,.morning-field textarea:focus{border-color:var(--gold)}
-.morning-field textarea{resize:vertical;min-height:40px}
-.morning-field input[type=range]{padding:4px 0;-webkit-appearance:none;background:transparent;border:none}
-.morning-field input[type=range]::-webkit-slider-runnable-track{height:4px;background:var(--border);border-radius:2px}
-.morning-field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--gold);margin-top:-7px;cursor:pointer}
-.range-val{font-size:13px;color:var(--gold);font-weight:700;margin-top:2px}
-.morning-submit{width:100%;padding:10px;border:none;border-radius:8px;background:var(--gold);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:1px;transition:background .2s}
-.morning-submit:hover{background:#B8960C}
-.morning-summary{padding:16px;background:var(--card);border:1px solid var(--border);border-radius:0 0 10px 10px;margin-top:-1px}
-.morning-summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
-.morning-summary-grid .ms-val{font-size:18px;font-weight:800;color:var(--gold)}
-.morning-summary-grid .ms-label{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
-.morning-reset{margin-top:10px;width:100%;padding:6px;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--text3);font-size:11px;cursor:pointer;font-family:inherit;transition:all .2s}
-.morning-reset:hover{color:var(--red);border-color:var(--red)}
+/* REPORT */
+.report-section{margin-bottom:16px}
+.report-section .card-title{margin-bottom:14px}
+.rf-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.rf-field label{display:block;font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.rf-field input[type=number]{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:rgba(255,255,255,.03);color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:border .2s}
+.rf-field input[type=number]:focus{border-color:var(--gold)}
+.rf-range{display:flex;align-items:center;gap:8px}
+.rf-range input[type=range]{flex:1;-webkit-appearance:none;background:transparent;padding:4px 0}
+.rf-range input[type=range]::-webkit-slider-runnable-track{height:4px;background:var(--border);border-radius:2px}
+.rf-range input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--gold);margin-top:-7px;cursor:pointer}
+.rf-val{font-size:14px;color:var(--gold);font-weight:700;min-width:20px;text-align:center}
+.rf-btn{width:100%;padding:10px;border:none;border-radius:8px;background:var(--gold);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:1px;transition:background .2s;margin-top:14px}
+.rf-btn:hover{background:#B8960C}
+.rf-saved{font-size:12px;color:var(--green);margin-top:6px;text-align:center}
+.rf-note{font-size:11px;color:var(--text3);margin-top:4px}
+.rc-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:16px}
+.rc{width:100px;height:100px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;border:3px solid var(--border);transition:border-color .3s}
+.rc .rc-num{font-size:28px;font-weight:800;line-height:1}
+.rc .rc-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+.rc.g{border-color:var(--green);color:var(--green)}
+.rc.y{border-color:#EAB308;color:#EAB308}
+.rc.r{border-color:var(--red);color:var(--red)}
+.rc.na{border-color:var(--border);color:var(--text3)}
+.rb{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.rb-lbl{font-size:12px;color:var(--text2);min-width:56px;font-weight:600}
+.rbg{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.rf{height:100%;border-radius:3px;transition:width .4s}
+.rf.g{background:var(--green)}.rf.y{background:#EAB308}.rf.r{background:var(--red)}.rf.na{background:var(--text3)}
+.rb-val{font-size:12px;color:var(--text2);min-width:32px;text-align:right;font-weight:600}
+.rd-status{text-align:center;font-size:13px;font-weight:700;margin-top:4px;letter-spacing:1px}
+.rd-dehyd{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;color:var(--text2)}
+.rd-dehyd strong{color:var(--gold)}
+.rd-dehyd .dehyd-warn{color:var(--red);font-weight:700}
 
 /* WEEK BAR */
 .week-bar{display:flex;gap:6px;padding:16px 20px;overflow-x:auto;-webkit-overflow-scrolling:touch;position:relative;z-index:1}
@@ -195,8 +202,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .tabs{margin:0 16px}
 .nav{padding:0 16px}
 .nav-user{display:none}
-.morning-bar{margin:0 16px}
-.morning-row{grid-template-columns:1fr 1fr}
+.rf-grid{grid-template-columns:1fr 1fr}
 .progress-stat-row{grid-template-columns:1fr 1fr}
 }
 
@@ -218,9 +224,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   </div>
 </nav>
 
-<!-- MORNING CHECKIN -->
-<div class="morning-bar" id="morningBar"></div>
-
 <!-- WEEK BAR -->
 <div class="week-bar" id="weekBar"></div>
 
@@ -232,8 +235,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 <!-- TABS -->
 <div class="tabs" id="tabBar">
-  <button class="tab-btn active" data-tab="overview" onclick="setTab('overview')">Overview</button>
+  <button class="tab-btn" data-tab="overview" onclick="setTab('overview')">Overview</button>
   <button class="tab-btn" data-tab="today" onclick="setTab('today')">Today</button>
+  <button class="tab-btn" data-tab="report" onclick="setTab('report')">Report</button>
   <button class="tab-btn" data-tab="nutrition" onclick="setTab('nutrition')">Nutrition</button>
   <button class="tab-btn" data-tab="supplements" onclick="setTab('supplements')">Supplements</button>
   <button class="tab-btn" data-tab="progress" onclick="setTab('progress')">Progress</button>
@@ -243,6 +247,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <div class="content">
   <div class="tab-panel active" id="panel-overview"></div>
   <div class="tab-panel" id="panel-today"></div>
+  <div class="tab-panel" id="panel-report"></div>
   <div class="tab-panel" id="panel-nutrition"></div>
   <div class="tab-panel" id="panel-supplements"></div>
   <div class="tab-panel" id="panel-progress"></div>
@@ -258,8 +263,7 @@ var state = {
   currentWeek: 1,
   currentScene: localStorage.getItem('wt_scene') || 'gym',
   currentTab: 'overview',
-  checkins: JSON.parse(localStorage.getItem('wt_checkins') || '{}'),
-  morningOpen: false
+  checkins: JSON.parse(localStorage.getItem('wt_checkins') || '{}')
 };
 
 if (!state.role) { window.location.href = 'login.html'; }
@@ -756,96 +760,189 @@ function toggleCheckin(w, dayOfWeek) {
   state.checkins = JSON.parse(localStorage.getItem('wt_checkins') || '{}');
 }
 
-// ===== MORNING CHECKIN =====
+// ===== REPORT =====
 function getTodayStr() {
   var d = new Date();
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
 
-function getMorningData() {
-  var key = 'wt_morning_' + getTodayStr();
+function getReportData() {
+  var key = 'wt_report_' + getTodayStr();
   try { return JSON.parse(localStorage.getItem(key)); } catch(e) { return null; }
 }
 
-function saveMorningData(data) {
-  var key = 'wt_morning_' + getTodayStr();
+function saveReportData(data) {
+  var key = 'wt_report_' + getTodayStr();
   localStorage.setItem(key, JSON.stringify(data));
 }
 
-function renderMorningBar() {
-  var container = document.getElementById('morningBar');
-  var data = getMorningData();
-  var done = !!data;
+function calcHrvScore(hrv) {
+  if (hrv === null || hrv === undefined) return null;
+  if (hrv >= 60) return 100;
+  if (hrv >= 40) return 60 + (hrv - 40) * 2;
+  if (hrv >= 20) return 30 + (hrv - 20) * 1.5;
+  return Math.max(0, hrv * 1.5);
+}
+
+function calcReadiness(d) {
+  if (!d) return null;
+  var hrv = d.hrv, sleep = d.sleepQuality, pain = d.pain, appetite = d.appetite;
+  var hrvS = calcHrvScore(hrv);
+  var sleepS = (sleep !== null && sleep !== undefined) ? sleep * 20 : null;
+  var painS = (pain !== null && pain !== undefined) ? (10 - pain) * 10 : null;
+  var appS = (appetite !== null && appetite !== undefined) ? appetite * 20 : null;
+  var scores = [];
+  var weights = [];
+  if (hrvS !== null) { scores.push(hrvS); weights.push(0.35); }
+  if (sleepS !== null) { scores.push(sleepS); weights.push(0.30); }
+  if (painS !== null) { scores.push(painS); weights.push(0.20); }
+  if (appS !== null) { scores.push(appS); weights.push(0.15); }
+  if (scores.length === 0) return null;
+  var totalW = 0;
+  var totalS = 0;
+  for (var i = 0; i < scores.length; i++) { totalS += scores[i] * weights[i]; totalW += weights[i]; }
+  return { total: Math.round(totalS / totalW), hrv: hrvS, sleep: sleepS, pain: painS, appetite: appS };
+}
+
+function readinessClass(v) {
+  if (v === null) return 'na';
+  if (v >= 70) return 'g';
+  if (v >= 40) return 'y';
+  return 'r';
+}
+
+function readinessLabel(v) {
+  if (v === null) return 'No Data';
+  if (v >= 70) return 'Good';
+  if (v >= 40) return 'Moderate';
+  return 'Poor';
+}
+
+function renderReport() {
+  var d = getReportData() || {};
+  var rd = calcReadiness(d);
   var h = '';
-  h += '<button class="morning-toggle ' + (done ? 'done' : '') + (state.morningOpen ? ' open' : '') + '" onclick="toggleMorningPanel()">';
-  h += '<span>' + (done ? '✓ 晨间打卡已完成' : '☀ 晨间打卡') + '</span>';
-  h += '<span class="arrow">▼</span>';
-  h += '</button>';
 
-  if (done) {
-    h += '<div class="morning-panel' + (state.morningOpen ? ' open' : '') + '">';
-    h += '<div class="morning-summary">';
-    h += '<div class="morning-summary-grid">';
-    h += '<div><div class="ms-val">' + (data.weight || '—') + '</div><div class="ms-label">体重 kg</div></div>';
-    h += '<div><div class="ms-val">' + (data.hr || '—') + '</div><div class="ms-label">心率 bpm</div></div>';
-    h += '<div><div class="ms-val">' + (data.hrv || '—') + '</div><div class="ms-label">HRV ms</div></div>';
-    h += '</div>';
-    h += '<div class="morning-summary-grid" style="margin-top:8px">';
-    h += '<div><div class="ms-val">' + (data.sleep || '—') + '/5</div><div class="ms-label">睡眠</div></div>';
-    h += '<div><div class="ms-val">' + (data.energy || '—') + '/5</div><div class="ms-label">能量</div></div>';
-    if (data.notes) {
-      h += '<div style="grid-column:span 1"><div style="font-size:11px;color:var(--text3);margin-top:4px">' + data.notes + '</div></div>';
-    }
-    h += '</div>';
-    h += '<button class="morning-reset" onclick="resetMorning()">重新打卡</button>';
-    h += '</div></div>';
+  // Card 1: MORNING CHECK-IN
+  h += '<div class="card report-section"><div class="card-title">Morning Check-in</div>';
+  h += '<div class="rf-grid">';
+  h += '<div class="rf-field"><label>空腹体重 (kg)</label><input type="number" id="rWeight" step="0.1" min="30" max="200" placeholder="62.5" value="' + (d.weight || '') + '"></div>';
+  h += '<div class="rf-field"><label>静息心率 (bpm)</label><input type="number" id="rHR" min="30" max="120" placeholder="58" value="' + (d.hr || '') + '"></div>';
+  h += '</div>';
+  h += '<div class="rf-grid">';
+  h += '<div class="rf-field"><label>HRV (ms)</label><input type="number" id="rHRV" min="10" max="200" placeholder="45" value="' + (d.hrv || '') + '"></div>';
+  h += '<div class="rf-field"><label>晨僵时长 (min)</label><input type="number" id="rStiff" min="0" max="120" placeholder="10" value="' + (d.stiffness || '') + '"></div>';
+  h += '</div>';
+  h += '<div class="rf-grid">';
+  h += '<div class="rf-field"><label>睡眠质量 (1-5)</label><div class="rf-range"><input type="range" id="rSleep" min="1" max="5" value="' + (d.sleepQuality || 3) + '" oninput="document.getElementById(\'rSleepV\').textContent=this.value"><span class="rf-val" id="rSleepV">' + (d.sleepQuality || 3) + '</span></div></div>';
+  h += '<div class="rf-field"><label>睡眠时长 (hrs)</label><input type="number" id="rSleepDur" step="0.5" min="0" max="16" placeholder="7.5" value="' + (d.sleepDuration || '') + '"></div>';
+  h += '</div>';
+  h += '<div class="rf-grid">';
+  h += '<div class="rf-field"><label>食欲 (1-5)</label><div class="rf-range"><input type="range" id="rApp" min="1" max="5" value="' + (d.appetite || 3) + '" oninput="document.getElementById(\'rAppV\').textContent=this.value"><span class="rf-val" id="rAppV">' + (d.appetite || 3) + '</span></div></div>';
+  h += '<div class="rf-field"><label>疼痛评分 (0-10)</label><div class="rf-range"><input type="range" id="rPain" min="0" max="10" value="' + (d.pain !== undefined && d.pain !== null ? d.pain : 0) + '" oninput="document.getElementById(\'rPainV\').textContent=this.value"><span class="rf-val" id="rPainV">' + (d.pain !== undefined && d.pain !== null ? d.pain : 0) + '</span></div></div>';
+  h += '</div>';
+  var morningDone = d.weight || d.hr || d.hrv || d.sleepQuality || d.pain !== undefined;
+  h += '<button class="rf-btn" onclick="saveMorningReport()">' + (morningDone ? '更新数据' : '保存晨间数据') + '</button>';
+  h += '<div class="rf-saved" id="rMorningSaved" style="display:none">✓ 已保存</div>';
+  h += '</div>';
+
+  // Card 2: READINESS SCORE
+  h += '<div class="card report-section"><div class="card-title">Readiness Score</div>';
+  if (rd) {
+    var cls = readinessClass(rd.total);
+    var lbl = readinessLabel(rd.total);
+    h += '<div class="rc-wrap"><div class="rc ' + cls + '"><span class="rc-num">' + rd.total + '</span><span class="rc-label">/ 100</span></div>';
+    h += '<div class="rd-status" style="color:var(--' + (cls === 'g' ? 'green' : cls === 'y' ? 'gold' : cls === 'r' ? 'red' : 'text3') + ')">' + lbl + '</div></div>';
+    h += '<div class="rb"><span class="rb-lbl">HRV</span><div class="rbg"><div class="rf ' + readinessClass(rd.hrv) + '" style="width:' + (rd.hrv !== null ? rd.hrv : 0) + '%"></div></div><span class="rb-val">' + (rd.hrv !== null ? Math.round(rd.hrv) : '—') + '</span></div>';
+    h += '<div class="rb"><span class="rb-lbl">Sleep</span><div class="rbg"><div class="rf ' + readinessClass(rd.sleep) + '" style="width:' + (rd.sleep !== null ? rd.sleep : 0) + '%"></div></div><span class="rb-val">' + (rd.sleep !== null ? Math.round(rd.sleep) : '—') + '</span></div>';
+    h += '<div class="rb"><span class="rb-lbl">Pain</span><div class="rbg"><div class="rf ' + readinessClass(rd.pain) + '" style="width:' + (rd.pain !== null ? rd.pain : 0) + '%"></div></div><span class="rb-val">' + (rd.pain !== null ? Math.round(rd.pain) : '—') + '</span></div>';
+    h += '<div class="rb"><span class="rb-lbl">Appetite</span><div class="rbg"><div class="rf ' + readinessClass(rd.appetite) + '" style="width:' + (rd.appetite !== null ? rd.appetite : 0) + '%"></div></div><span class="rb-val">' + (rd.appetite !== null ? Math.round(rd.appetite) : '—') + '</span></div>';
   } else {
-    h += '<div class="morning-panel' + (state.morningOpen ? ' open' : '') + '">';
-    h += '<div class="morning-form">';
-    h += '<div class="morning-row">';
-    h += '<div class="morning-field"><label>体重 (kg)</label><input type="number" id="mWeight" step="0.1" min="30" max="200" placeholder="62.5"></div>';
-    h += '<div class="morning-field"><label>静息心率 (bpm)</label><input type="number" id="mHR" min="30" max="120" placeholder="58"></div>';
-    h += '</div>';
-    h += '<div class="morning-row">';
-    h += '<div class="morning-field"><label>HRV (ms)</label><input type="number" id="mHRV" min="10" max="200" placeholder="45"></div>';
-    h += '<div class="morning-field"><label>备注</label><textarea id="mNotes" placeholder="身体感觉、疼痛等（可选）"></textarea></div>';
-    h += '</div>';
-    h += '<div class="morning-row">';
-    h += '<div class="morning-field"><label>睡眠质量</label><input type="range" id="mSleep" min="1" max="5" value="3" oninput="document.getElementById(\'mSleepVal\').textContent=this.value"><div class="range-val" id="mSleepVal">3</div></div>';
-    h += '<div class="morning-field"><label>能量水平</label><input type="range" id="mEnergy" min="1" max="5" value="3" oninput="document.getElementById(\'mEnergyVal\').textContent=this.value"><div class="range-val" id="mEnergyVal">3</div></div>';
-    h += '</div>';
-    h += '<button class="morning-submit" onclick="submitMorning()">提交晨间数据</button>';
-    h += '</div></div>';
+    h += '<div class="rc-wrap"><div class="rc na"><span class="rc-num">—</span><span class="rc-label">/ 100</span></div>';
+    h += '<div class="rd-status" style="color:var(--text3)">No Data</div></div>';
+    h += '<div class="rb"><span class="rb-lbl">HRV</span><div class="rbg"><div class="rf na" style="width:0%"></div></div><span class="rb-val">—</span></div>';
+    h += '<div class="rb"><span class="rb-lbl">Sleep</span><div class="rbg"><div class="rf na" style="width:0%"></div></div><span class="rb-val">—</span></div>';
+    h += '<div class="rb"><span class="rb-lbl">Pain</span><div class="rbg"><div class="rf na" style="width:0%"></div></div><span class="rb-val">—</span></div>';
+    h += '<div class="rb"><span class="rb-lbl">Appetite</span><div class="rbg"><div class="rf na" style="width:0%"></div></div><span class="rb-val">—</span></div>';
   }
+  h += '</div>';
 
-  container.innerHTML = h;
+  // Card 3: PRE-WORKOUT REPORT
+  h += '<div class="card report-section"><div class="card-title">Pre-Workout Report</div>';
+  h += '<div class="rf-grid">';
+  h += '<div class="rf-field"><label>训练欲望 (1-10)</label><div class="rf-range"><input type="range" id="rMotiv" min="1" max="10" value="' + (d.motivation || 5) + '" oninput="document.getElementById(\'rMotivV\').textContent=this.value"><span class="rf-val" id="rMotivV">' + (d.motivation || 5) + '</span></div></div>';
+  h += '<div class="rf-field"><label>练前体重 (kg)<br><span class="rf-note">补水后称重</span></label><input type="number" id="rPreWeight" step="0.1" min="30" max="200" placeholder="63.0" value="' + (d.preWeight || '') + '"></div>';
+  h += '</div>';
+  var preDone = d.motivation || d.preWeight;
+  h += '<button class="rf-btn" onclick="savePreWorkout()">' + (preDone ? '更新数据' : '保存练前数据') + '</button>';
+  h += '<div class="rf-saved" id="rPreSaved" style="display:none">✓ 已保存</div>';
+  h += '</div>';
+
+  // Card 4: POST-WORKOUT REPORT
+  h += '<div class="card report-section"><div class="card-title">Post-Workout Report</div>';
+  h += '<div class="rf-grid">';
+  h += '<div class="rf-field"><label>练后体重 (kg)</label><input type="number" id="rPostWeight" step="0.1" min="30" max="200" placeholder="62.5" value="' + (d.postWeight || '') + '"></div>';
+  h += '<div class="rf-field"><label>RPE (1-10)</label><div class="rf-range"><input type="range" id="rRPE" min="1" max="10" value="' + (d.rpe || 5) + '" oninput="document.getElementById(\'rRPEV\').textContent=this.value"><span class="rf-val" id="rRPEV">' + (d.rpe || 5) + '</span></div></div>';
+  h += '</div>';
+  h += '<div class="rf-field" style="margin-bottom:10px"><label>实际训练时长 (min)</label><input type="number" id="rDuration" min="1" max="300" placeholder="60" value="' + (d.duration || '') + '" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:rgba(255,255,255,.03);color:var(--text);font-size:14px;font-family:inherit;outline:none"></div>';
+  // Dehydration estimate
+  if (d.preWeight && d.postWeight) {
+    var dehyd = ((d.preWeight - d.postWeight) / d.preWeight * 100).toFixed(1);
+    var dehydClass = parseFloat(dehyd) > 2 ? 'dehyd-warn' : '';
+    h += '<div class="rd-dehyd">脱水估算：<strong>' + dehyd + '%</strong>';
+    if (parseFloat(dehyd) > 0) {
+      var waterNeed = Math.round(Math.abs(parseFloat(dehyd)) * 10 * (d.preWeight || 60));
+      h += '<br>每1%脱水≈需补充10ml/kg水，建议补液约 <strong>' + waterNeed + 'ml</strong>';
+    }
+    if (parseFloat(dehyd) > 2) h += '<br><span class="dehyd-warn">脱水>2%，运动表现显著下降</span>';
+    h += '</div>';
+  }
+  var postDone = d.postWeight || d.rpe || d.duration;
+  h += '<button class="rf-btn" onclick="savePostWorkout()">' + (postDone ? '更新数据' : '保存练后数据') + '</button>';
+  h += '<div class="rf-saved" id="rPostSaved" style="display:none">✓ 已保存</div>';
+  h += '</div>';
+
+  document.getElementById('panel-report').innerHTML = h;
 }
 
-function toggleMorningPanel() {
-  state.morningOpen = !state.morningOpen;
-  renderMorningBar();
+function saveMorningReport() {
+  var d = getReportData() || {};
+  d.weight = parseFloat(document.getElementById('rWeight').value) || null;
+  d.hr = parseInt(document.getElementById('rHR').value) || null;
+  d.hrv = parseInt(document.getElementById('rHRV').value) || null;
+  d.stiffness = parseInt(document.getElementById('rStiff').value) || null;
+  d.sleepQuality = parseInt(document.getElementById('rSleep').value);
+  d.sleepDuration = parseFloat(document.getElementById('rSleepDur').value) || null;
+  d.appetite = parseInt(document.getElementById('rApp').value);
+  d.pain = parseInt(document.getElementById('rPain').value);
+  saveReportData(d);
+  var el = document.getElementById('rMorningSaved');
+  el.style.display = 'block';
+  setTimeout(function(){ el.style.display = 'none'; }, 2000);
+  renderReport();
 }
 
-function submitMorning() {
-  var data = {
-    weight: parseFloat(document.getElementById('mWeight').value) || null,
-    hr: parseInt(document.getElementById('mHR').value) || null,
-    hrv: parseInt(document.getElementById('mHRV').value) || null,
-    sleep: parseInt(document.getElementById('mSleep').value),
-    energy: parseInt(document.getElementById('mEnergy').value),
-    notes: document.getElementById('mNotes').value.trim()
-  };
-  saveMorningData(data);
-  state.morningOpen = false;
-  renderMorningBar();
-  if (state.currentTab === 'progress') renderProgress();
+function savePreWorkout() {
+  var d = getReportData() || {};
+  d.motivation = parseInt(document.getElementById('rMotiv').value);
+  d.preWeight = parseFloat(document.getElementById('rPreWeight').value) || null;
+  saveReportData(d);
+  var el = document.getElementById('rPreSaved');
+  el.style.display = 'block';
+  setTimeout(function(){ el.style.display = 'none'; }, 2000);
+  renderReport();
 }
 
-function resetMorning() {
-  var key = 'wt_morning_' + getTodayStr();
-  localStorage.removeItem(key);
-  state.morningOpen = true;
-  renderMorningBar();
+function savePostWorkout() {
+  var d = getReportData() || {};
+  d.postWeight = parseFloat(document.getElementById('rPostWeight').value) || null;
+  d.rpe = parseInt(document.getElementById('rRPE').value);
+  d.duration = parseInt(document.getElementById('rDuration').value) || null;
+  saveReportData(d);
+  var el = document.getElementById('rPostSaved');
+  el.style.display = 'block';
+  setTimeout(function(){ el.style.display = 'none'; }, 2000);
+  renderReport();
 }
 
 // ===== POST-WORKOUT LOG =====
@@ -1002,11 +1099,11 @@ function doLogout() {
   localStorage.removeItem('wt_start_date');
   localStorage.removeItem('wt_checkins');
   localStorage.removeItem('wt_scene');
-  // Clean up morning and log data on logout
+  // Clean up morning, report and log data on logout
   var keysToRemove = [];
   for (var i = 0; i < localStorage.length; i++) {
     var k = localStorage.key(i);
-    if (k.indexOf('wt_morning_') === 0 || k.indexOf('wt_log_') === 0) keysToRemove.push(k);
+    if (k.indexOf('wt_morning_') === 0 || k.indexOf('wt_log_') === 0 || k.indexOf('wt_report_') === 0) keysToRemove.push(k);
   }
   keysToRemove.forEach(function(k) { localStorage.removeItem(k); });
 }
@@ -1022,9 +1119,9 @@ function updateAll() {
 }
 
 function renderAll() {
-  renderMorningBar();
   renderOverview();
   renderToday();
+  renderReport();
   renderNutrition();
   renderSupplements();
   renderProgress();
@@ -1361,19 +1458,30 @@ function renderProgress() {
   var html = '';
   var today = new Date();
 
-  // Collect last 7 days of morning data
+  // Collect last 7 days of data (report first, fallback to morning)
   var morningDays = [];
   for (var di = 6; di >= 0; di--) {
     var d = new Date(today);
     d.setDate(d.getDate() - di);
     var ds = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
     var label = String(d.getMonth()+1) + '/' + String(d.getDate());
+    var mData = null;
     try {
-      var mData = JSON.parse(localStorage.getItem('wt_morning_' + ds));
-      morningDays.push({ date: ds, label: label, data: mData });
-    } catch(e) {
-      morningDays.push({ date: ds, label: label, data: null });
+      mData = JSON.parse(localStorage.getItem('wt_report_' + ds));
+      if (mData) {
+        mData.weight = mData.weight || null;
+        mData.hrv = mData.hrv || null;
+      }
+    } catch(e) { mData = null; }
+    if (!mData) {
+      try {
+        var oldData = JSON.parse(localStorage.getItem('wt_morning_' + ds));
+        if (oldData) {
+          mData = { weight: oldData.weight || null, hrv: oldData.hrv || null, sleepQuality: oldData.sleep || null };
+        }
+      } catch(e) {}
     }
+    morningDays.push({ date: ds, label: label, data: mData });
   }
 
   // Stats: checkin count this week, avg RPE

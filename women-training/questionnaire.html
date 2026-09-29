@@ -249,8 +249,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,'PingFa
       <textarea id="q_notes" rows="3" placeholder="任何你希望教练了解的情况" style="resize:vertical"></textarea>
     </div>
 
-    <div class="err" id="step4Err">请至少填写年龄、体重和训练频率</div>
-
     <div class="btn-row">
       <button class="btn btn-back" onclick="goStep(3)">← 上一步</button>
       <button class="btn btn-primary" onclick="submitAll()">提交并开始训练 →</button>
@@ -260,6 +258,44 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,'PingFa
 
 <script>
 function goStep(n){
+  // Validate current step before moving forward
+  var currentStep = 0;
+  document.querySelectorAll('.form-section').forEach(function(s,i){
+    if(s.classList.contains('active')) currentStep = i+1;
+  });
+  if(n > currentStep){
+    if(currentStep === 1){
+      var age = document.getElementById('q_age').value;
+      var weight = document.getElementById('q_weight').value;
+      if(!age || !weight){
+        var el = document.getElementById('step1Err');
+        if(el) el.classList.add('show');
+        else{
+          el = document.createElement('div');
+          el.id = 'step1Err';
+          el.className = 'err show';
+          el.textContent = '请至少填写年龄和体重';
+          document.querySelector('#step1 .btn-row').before(el);
+        }
+        return;
+      }
+    }
+    if(currentStep === 2){
+      var freq = document.querySelector('input[name="q_freq"]:checked');
+      if(!freq){
+        var el = document.getElementById('step2Err');
+        if(el) el.classList.add('show');
+        else{
+          el = document.createElement('div');
+          el.id = 'step2Err';
+          el.className = 'err show';
+          el.textContent = '请选择当前训练频率';
+          document.querySelector('#step2 .btn-row').before(el);
+        }
+        return;
+      }
+    }
+  }
   document.querySelectorAll('.form-section').forEach(function(s){s.classList.remove('active')});
   document.getElementById('step'+n).classList.add('active');
   document.getElementById('progressFill').style.width = (n*25)+'%';
@@ -278,17 +314,6 @@ function logout(){
 }
 
 function submitAll(){
-  // Validate required fields
-  var age = document.getElementById('q_age').value;
-  var weight = document.getElementById('q_weight').value;
-  var freq = document.querySelector('input[name="q_freq"]:checked');
-  
-  if(!age || !weight || !freq){
-    document.getElementById('step4Err').classList.add('show');
-    goStep(1);
-    return;
-  }
-
   // Collect all data
   var profile = {
     age: parseInt(age),

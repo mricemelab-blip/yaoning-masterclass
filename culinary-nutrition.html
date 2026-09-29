@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Series 02: 中国烹饪营养学 | 姚宁大师课系列</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #F5F0E8;
+      --bg-alt: #FAF8F5;
+      --black: #1A1A1A;
+      --gold: #C5A55A;
+      --gold-dark: #B8960C;
+      --gray: #8A8A8A;
+      --light-gray: #D4CFC6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang SC', 'Noto Sans SC', sans-serif;
+      background-color: var(--bg);
+      color: var(--black);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ===== NAV ===== */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 8vw;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .nav-back {
+      text-decoration: none;
+      color: var(--black);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.25s ease;
+    }
+
+    .nav-back:hover { color: var(--gold); }
+
+    .nav-back svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .nav-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 6px 16px;
+      border-radius: 1px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      padding: 80px 8vw 60px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .hero-bg-number {
+      position: absolute;
+      top: 50%;
+      right: 8vw;
+      transform: translateY(-50%);
+      font-size: clamp(160px, 28vw, 380px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--gold);
+      opacity: 0.08;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-title {
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle-en {
+      font-size: clamp(14px, 1.6vw, 20px);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+
+    .hero-tagline {
+      font-size: clamp(14px, 1.4vw, 18px);
+      font-weight: 500;
+      color: var(--gold-dark);
+      letter-spacing: 0.02em;
+    }
+
+    /* ===== CONTENT ===== */
+    .content-area {
+      padding: 80px 8vw 100px;
+      max-width: 960px;
+    }
+
+    .content-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 40px;
+    }
+
+    .course-overview {
+      background: var(--bg-alt);
+      border: 1px solid var(--light-gray);
+      border-radius: 2px;
+      padding: 48px;
+      margin-bottom: 60px;
+    }
+
+    .course-overview h2 {
+      font-size: clamp(20px, 2.4vw, 28px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .course-overview .en-label {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 24px;
+    }
+
+    .course-overview p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    /* ===== CHAPTER LIST ===== */
+    .chapter-section {
+      margin-bottom: 48px;
+    }
+
+    .chapter-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 32px;
+    }
+
+    .chapter-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--light-gray);
+      border-radius: 2px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+
+    .chapter-card:hover {
+      border-color: var(--gold);
+    }
+
+    .chapter-header {
+      display: flex;
+      align-items: center;
+      padding: 20px 28px;
+      cursor: pointer;
+      user-select: none;
+      gap: 20px;
+    }
+
+    .chapter-num {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      min-width: 48px;
+      flex-shrink: 0;
+    }
+
+    .chapter-title-wrap {
+      flex: 1;
+    }
+
+    .chapter-title {
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .chapter-title-en {
+      font-size: 12px;
+      color: var(--gray);
+      letter-spacing: 0.04em;
+      margin-top: 4px;
+    }
+
+    .chapter-toggle {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .chapter-toggle svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--gray);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .chapter-card.open .chapter-toggle {
+      transform: rotate(180deg);
+    }
+
+    .chapter-body {
+      display: none;
+      padding: 0 28px 24px 96px;
+    }
+
+    .chapter-card.open .chapter-body {
+      display: block;
+    }
+
+    .section-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .section-list > li {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #444;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(212, 207, 198, 0.4);
+      font-weight: 600;
+    }
+
+    .section-list > li:last-child { border-bottom: none; }
+
+    .subsection-list {
+      list-style: none;
+      padding: 0 0 0 16px;
+      margin-top: 4px;
+    }
+
+    .subsection-list li {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #777;
+      padding: 3px 0;
+      position: relative;
+      padding-left: 12px;
+    }
+
+    .subsection-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 4px;
+      background: var(--light-gray);
+      border-radius: 50%;
+    }
+
+    .badge-new {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      background: rgba(197, 165, 90, 0.12);
+      padding: 2px 8px;
+      border-radius: 2px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* ===== APPENDIX SECTION ===== */
+    .appendix-section {
+      background: var(--bg-alt);
+      border: 1px solid var(--light-gray);
+      border-radius: 2px;
+      padding: 40px 48px;
+      margin-top: 48px;
+    }
+
+    .appendix-section h3 {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .appendix-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .appendix-list li {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #555;
+      padding: 6px 0 6px 20px;
+      position: relative;
+    }
+
+    .appendix-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 1px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 40px 8vw;
+      border-top: 1px solid var(--light-gray);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer span {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .top-nav { padding: 16px 6vw; }
+      .hero { padding: 60px 6vw 40px; }
+      .hero-bg-number { right: 4vw; font-size: 140px; }
+      .content-area { padding: 48px 6vw 60px; }
+      .course-overview { padding: 28px 24px; }
+      .chapter-header { padding: 16px 20px; gap: 12px; }
+      .chapter-body { padding: 0 20px 20px 20px; }
+      .chapter-num { font-size: 22px; min-width: 36px; }
+      .appendix-section { padding: 28px 24px; }
+      footer { padding: 30px 6vw; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <a class="nav-back" href="index.html">
+      <svg viewBox="0 0 24 24">
+        <line x1="20" y1="12" x2="4" y2="12"/>
+        <polyline points="10 18 4 12 10 6"/>
+      </svg>
+      返回系列首页
+    </a>
+    <span class="nav-tag">Series 02</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-number">02</div>
+    <div class="hero-content">
+      <h1 class="hero-title">中国烹饪营养学</h1>
+      <p class="hero-subtitle-en">Chinese Culinary Nutrition</p>
+      <p class="hero-tagline">From Kitchen to Evidence — 基于亚利桑那大学原著改编的中国循证烹饪营养学</p>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="content-area">
+    <div class="content-label">Course Overview</div>
+
+    <div class="course-overview">
+      <h2>课程概述</h2>
+      <p class="en-label">Chinese Culinary Nutrition — From Kitchen to Evidence</p>
+      <p>本教材基于亚利桑那大学《Culinary Medicine》(2025) 改编，保留原书章节结构与逻辑主线，将食材、食谱、饮食文化、营养数据全面替换为中国场景。新增章节基于中国高频健康需求补充。全书涵盖膳食规划、厨房科学与食物储存、宏量/微量营养素深度解析、膳食补充剂循证评估、生物活性化合物、流行饮食模式审视、烹饪示范设计、食物系统与社区营养，以及抗炎饮食、抗衰老饮食、青少年营养、更年期女性营养、老年人饮食等5个专题新增章节，共16章 + 附录。</p>
+    </div>
+
+    <div class="chapter-section">
+      <div class="chapter-section-label">Table of Contents · 完整目录</div>
+
+      <!-- Chapter 1 -->
+      <div class="chapter-card">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <span class="chapter-num">01</span>
+          <div class="chapter-title-wrap">
+            <div class="chapter-title">社会影响、膳食规划与聪明购物</div>
+            <div class="chapter-title-en">Social Influences, Meal Planning & Smart Shopping</div>
+          </div>
+          <div class="chapter-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="chapter-body">
+          <ul class="section-list">
+            <li>第一节 社会因素如何塑造我们的饮食
+              <ul class="subsection-list">
+                <li>家庭、文化、社交圈与饮食行为</li>
+                <li>中国餐桌文化对饮食选择的影响</li>
+                <li>社交媒体、短视频与"网红食品"的冲击</li>
+              </ul>
+            </li>
+            <li>第二节 膳食规划
+              <ul class="subsection-list">
+                <li>一周膳食规划的基本思路</li>
+                <li>中国家庭采购节奏与季节性规划</li>
+                <li>外卖/食堂场景下的规划策略</li>
+              </ul>
+            </li>
+            <li>第三节 聪明购物
+              <ul class="subsection-list">
+                <li>读懂中国食品标签（GB 28050、配料表、营养成分表）</li>
+                <li>"0糖""低脂""全麦"等声称的真实含义</li>
+                <li>菜市场、超市、生鲜电商的选购策略</li>
+                <li>如何在预算内买到高营养密度食材</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chapter 2 -->
+      <div class="chapter-card">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <span class="chapter-num">02</span>
+          <div class="chapter-title-wrap">
+            <div class="chapter-title">厨房篇 — 食物储存、制备与防浪费</div>
+            <div class="chapter-title-en">The Kitchen — Food Storage, Preparation & Waste Prevention</div>
+          </div>
+          <div class="chapter-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="chapter-body">
+          <ul class="section-list">
+            <li>第一节 厨房基础与工具
+              <ul class="subsection-list">
+                <li>中式厨房的标配工具与设备</li>
+                <li>刀具、砧板、锅具的选择与使用</li>
+                <li>食品安全基础：交叉污染、储存温度、生熟分区</li>
+              </ul>
+            </li>
+            <li>第二节 食材储存与保鲜
+              <ul class="subsection-list">
+                <li>蔬菜、肉类、海鲜、豆制品的正确储存方式</li>
+                <li>冷冻对营养素的影响：什么该冻、什么不该冻</li>
+                <li>干货与调料（枸杞、红枣、花椒、八角等）的保存</li>
+              </ul>
+            </li>
+            <li>第三节 食材制备技巧
+              <ul class="subsection-list">
+                <li>基础刀工与预处理</li>
+                <li>浸泡、焯水、腌制的营养学意义</li>
+                <li>粗粮、豆类的浸泡与烹煮优化</li>
+              </ul>
+            </li>
+            <li>第四节 减少食物浪费
+              <ul class="subsection-list">
+                <li>中国家庭食物浪费现状</li>
+                <li>边角料再利用与剩菜安全处理</li>
+                <li>从采购到餐桌的全链路减废策略</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chapter 3 -->
+      <div class="chapter-card">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <span class="chapter-num">03</span>
+          <div class="chapter-title-wrap">
+            <div class="chapter-title">我们与食物的关系</div>
+            <div class="chapter-title-en">Our Relationship with Food</div>
+          </div>
+          <div class="chapter-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="chapter-body">
+          <ul class="section-list">
+            <li>第一节 进食行为的心理机制
+              <ul class="subsection-list">
+                <li>饥饿信号与饱腹信号的生物学基础</li>
+                <li>情绪性进食：压力、焦虑与食物奖励回路</li>
+                <li>限制性饮食与反弹效应</li>
+              </ul>
+            </li>
+            <li>第二节 在中国饮食文化中建立健康关系
+              <ul class="subsection-list">
+                <li>聚餐文化、劝酒劝菜与个人饮食边界</li>
+                <li>"光盘"观念与过度进食的心理张力</li>
+                <li>正念饮食（Mindful Eating）的实践方法</li>
+              </ul>
+            </li>
+            <li>第三节 饮食失调的识别与应对
+              <ul class="subsection-list">
+                <li>暴食症、神经性厌食的早期信号</li>
+                <li>何时需要寻求专业帮助</li>
+                <li>教练/营养师的支持角色与边界</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chapter 4 -->
+      <div class="chapter-card">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <span class="chapter-num">04</span>
+          <div class="chapter-title-wrap">
+            <div class="chapter-title">宏量营养素（Macronutrients）</div>
+            <div class="chapter-title-en">Macronutrients</div>
+          </div>
+          <div class="chapter-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="chapter-body">
+          <ul class="section-list">
+            <li>第一节 蛋白质
+              <ul class="subsection-list">
+                <li>氨基酸谱与蛋白质质量评价（DIAAS）</li>
+                <li>中国优质蛋白食材图谱：畜禽鱼蛋奶 + 大豆制品</li>
+                <li>不同人群每日蛋白需求与分配策略</li>
+              </ul>
+            </li>
+            <li>第二节 碳水化合物
+              <ul class="subsection-list">
+                <li>碳水的分类：简单糖 vs 复合碳水</li>
+                <li>GI/GL 概念与中国常见主食速查</li>
+                <li>精制主食与全谷物的营养差异</li>
+              </ul>
+            </li>
+            <li>第三节 脂肪
+              <ul class="subsection-list">
+                <li>脂肪酸分类：饱和、单不饱和、多不饱和</li>
+                <li>中国烹饪用油指南与脂肪酸构成</li>
+                <li>omega-3/omega-6 比例：中国饮食的结构性失衡</li>
+              </ul>
+            </li>
+            <li>第四节 宏量营养素的餐桌实践
+              <ul class="subsection-list">
+                <li>如何用中式烹饪实现合理的宏量配比</li>
+                <li>常见中式菜肴的宏量营养素拆解</li>
+                <li>一日三餐的宏量搭配示例</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chapter 5 -->
+      <div class="chapter-card">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <span class="chapter-num">05</span>
+          <div class="chapter-title-wrap">
+            <div class="chapter-title">微量营养素（Micronutrients）</div>
+            <div class="chapter-title-en">Micronutrients</div>
+          </div>
+          <div class="chapter-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="chapter-body">
+          <ul class="section-list">
+            <li>第一节 脂溶性维生素
+              <ul class="subsection-list">
+                <li>维生素A：来源与功能</li>
+                <li>维生素D：中国人群普遍缺乏的现状与补充策略</li>
+                <li>维生素E：坚果、植物油的贡献</li>
+                <li>维生素K：绿叶蔬菜与发酵食品</li>
+              </ul>
+            </li>
+            <li>第二节 水溶性维生素
+              <ul class="subsection-list">
+                <li>B族维生素：功能、缺乏风险、中国膳食中的主要来源</li>
+                <li>维生素C：中式烹饪中的损失与保留策略</li>
+              </ul>
+            </li>
+            <li>第三节 矿物质
+              <ul class="subsection-list">
+                <li>钙：中国膳食钙摄入不足的原因与食物来源方案</li>
+                <li>铁：血红素铁 vs 非血红素铁</li>
+                <li>锌：贝类、红肉、坚果中的含量</li>
+                <li>镁：与肌肉功能、睡眠的关系</li>
+              </ul>
+            </li>
+            <li>第四节 微量营养素的烹饪影响
+              <ul class="subsection-list">
+                <li>不同烹饪方式对维生素保留率的影响</li>
+                <li>食材搭配促进吸收</li>
+                <li>抗营养因子：植酸、草酸的处理</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chapter 6 -->
+      <div class="chapter-card">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <span class="chapter-num">06</span>
+          <div class="chapter-title-wrap">
+            <div class="chapter-title">膳食补充剂（Dietary Supplements）</div>
+            <div class="chapter-title-en">Dietary Supplements</div>
+          </div>
+          <div class="chapter-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="chapter-body">
+          <ul class="section-list">
+            <li>第一节 补充剂的基础知识
+              <ul class="subsection-list">
+                <li>什么是膳食补充剂、谁需要、谁不需要</li>
+                <li>中国保健食品注册与备案制度（蓝帽子标识）</li>
+                <li>补充剂市场的常见风险</li>
+              </ul>
+            </li>
+            <li>第二节 常见补充剂的循证评估
+              <ul class="subsection-list">
+                <li>维生素D、鱼油/omega-3、钙片、益生菌、蛋白粉</li>
+              </ul>
+            </li>
+            <li>第三节 中草药与功能性补充剂
+              <ul class="subsection-list">
+                <li>人参、枸杞、灵芝、冬虫夏草等的循证审视</li>
+                <li>药食同源目录的法规框架</li>
+                <li>"食补"观念的科学边界</li>
+              </ul>
+            </li>
+            <li>第四节 补充剂的安全使用
+              <ul class="subsection-list">
+                <li>与药物的相互作用</li>
+                <li>剂量上限与中毒风险</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chapter 7 -->
+      <div class="chapter-card">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <span class="chapter-num">07</span>
+          <div class="chapter-title-wrap">
+            <div class="chapter-title">生物活性化合物（Bioactive Compounds）</div>
+            <div class="chapter-title-en">Bioactive Compounds</div>
+          </div>
+          <div class="chapter-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="chapter-body">
+          <ul class="section-list">
+            <li>第一节 多酚与黄酮类
+              <ul class="subsection-list">
+                <li>茶多酚（EGCG）：绿茶、乌龙茶的代谢健康效应</li>
+                <li>大豆异黄酮：对更年期女性的意义</li>
+                <li>花青素：紫甘蓝、蓝莓、黑芝麻</li>
+              </ul>
+            </li>
+            <li>第二节 类胡萝卜素
+              <ul class="subsection-list">
+                <li>β-胡萝卜素、番茄红素、叶黄素的功能</li>
+                <li>中式烹饪对类胡萝卜素生物利用度的影响</li>
+              </ul>
+            </li>
+            <li>第三节 香辛料的生物活性
+              <ul class="subsection-list">
+                <li>姜黄素的抗炎证据与生物利用度</li>
+                <li>花椒、八角、桂皮、丁香的传统应用与现代研究</li>
+                <li>大蒜素的抗菌与心血管保护</li>
+              </ul>
+            </li>
+            <li>第四节 发酵食品中的活性物质
+              <ul class="subsection-list">
+                <li>中国发酵食品图谱：泡菜、豆豉、腐乳、纳豆、醋</li>
+                <li>发酵产生的活性肽、维生素K2、短链脂肪酸</li>
+                <li>发酵食品与肠道菌群的关系</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chapter 8 -->
+      <div class="chapter-card">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <span class="chapter-num">08</span>
+          <div class="chapter-title-wrap">
+            <div class="chapter-title">流行饮食模式与健康</div>
+            <div class="chapter-title-en">Popular Dietary Patterns & Health</div>
+          </div>
+          <div class="chapter-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="chapter-body">
+          <ul class="section-list">
+            <li>第一节 地中海饮食</li>
+            <li>第二节 低碳水与生酮饮食</li>
+            <li>第三节 间歇性禁食</li>
+            <li>第四节 DASH饮食</li>
+            <li>第五节 植物性饮食</li>
+            <li>第六节 中国常见饮食迷思
+              <ul class="subsection-list">
+                <li>"发物"的营养学审视</li>
+                <li>"上火/寒气"与食物选择</li>
+                <li>代餐、酵素、排毒产品的证据评估</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chapter 9 -->
+      <div class="chapter-card">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <span class="chapter-num">09</span>
+          <div class="chapter-title-wrap">
+            <div class="chapter-title">烹饪示范的艺术</div>
+            <div class="chapter-title-en">The Art of Cooking Demonstration</div>
+          </div>
+          <div class="chapter-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="chapter-body">
+          <ul class="section-list">
+            <li>第一节 为什么"教做菜"是营养干预的关键一环</li>
+            <li>第二节 烹饪示范的设计与执行</li>
+            <li>第三节 中式烹饪示范案例
+              <ul class="subsection-list">
+                <li>30分钟快手高蛋白晚餐</li>
+                <li>低GI主食的替换与做法</li>
+                <li>减盐不减味的调味技巧</li>
+                <li>适合三高人群的家常菜谱</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chapter 10 -->
+      <div class="chapter-card">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <span class="chapter-num">10</span>
+          <div class="chapter-title-wrap">
+            <div class="chapter-title">从种子到餐桌 — 食物系统与社区营养</div>
+            <div class="chapter-title-en">Seed to Table — Food Systems & Community Nutrition</div>
+          </div>
+          <div class="chapter-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="chapter-body">
+          <ul class="section-list">
+            <li>第一节 中国食物供应链概览</li>
+            <li>第二节 本地食物与季节性饮食</li>
+            <li>第三节 食物获取与营养公平
+              <ul class="subsection-list">
+                <li>中国城乡食物环境差异</li>
+                <li>营养贫困与食物可及性</li>
+                <li>社区营养干预的成功案例</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chapter 11 -->
+      <div class="chapter-card">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <span class="chapter-num">11</span>
+          <div class="chapter-title-wrap">
+            <div class="chapter-title">以文化为中心的烹饪营养方法</div>
+            <div class="chapter-title-en">Culture-Centered Culinary Nutrition Approaches</div>
+          </div>
+          <div class="chapter-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="chapter-body">
+          <ul class="section-list">
+            <li>第一节 饮食文化的力量</li>
+            <li>第二节 尊重文化背景的营养干预</li>
+            <li>第三节 中式家庭厨房的健康改良
+              <ul class="subsection-list">
+                <li>传统家常菜的营养升级（少油少盐不丢味）</li>
+                <li>节日饮食的平衡策略</li>
+                <li>家庭烹饪传承与健康教育的结合</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chapter 12 -->
+      <div class="chapter-card">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <span class="chapter-num">12</span>
+          <div class="chapter-title-wrap">
+            <div class="chapter-title">抗炎饮食 <span class="badge-new">NEW</span></div>
+            <div class="chapter-title-en">Anti-Inflammatory Diet</div>
+          </div>
+          <div class="chapter-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="chapter-body">
+          <ul class="section-list">
+            <li>第一节 慢性低度炎症与健康
+              <ul class="subsection-list">
+                <li>meta-inflammation、炎症标志物：CRP、IL-6、TNF-α</li>
+              </ul>
+            </li>
+            <li>第二节 抗炎饮食的科学基础
+              <ul class="subsection-list">
+                <li>促炎食物 vs 抗炎食物清单</li>
+                <li>地中海饮食的抗炎证据</li>
+              </ul>
+            </li>
+            <li>第三节 中式抗炎饮食方案
+              <ul class="subsection-list">
+                <li>中国食材中的抗炎明星</li>
+                <li>中式抗炎食谱设计原则</li>
+                <li>一周抗炎食谱示例</li>
+              </ul>
+            </li>
+            <li>第四节 烹饪方式与炎症
+              <ul class="subsection-list">
+                <li>高温煎炸 vs 低温蒸煮对炎症产物的影响（AGEs）</li>
+                <li>用中式烹饪方法降低促炎物质生成</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chapter 13 -->
+      <div class="chapter-card">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <span class="chapter-num">13</span>
+          <div class="chapter-title-wrap">
+            <div class="chapter-title">抗衰老饮食 <span class="badge-new">NEW</span></div>
+            <div class="chapter-title-en">Anti-Aging Diet</div>
+          </div>
+          <div class="chapter-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="chapter-body">
+          <ul class="section-list">
+            <li>第一节 衰老的生物学机制与营养角色
+              <ul class="subsection-list">
+                <li>氧化应激、端粒缩短、线粒体功能衰退</li>
+                <li>mTOR、AMPK、Sirtuins 通路</li>
+                <li>热量限制与间歇性禁食的抗衰老证据</li>
+              </ul>
+            </li>
+            <li>第二节 抗衰老关键营养素与食物
+              <ul class="subsection-list">
+                <li>NAD+前体（NMN/NR）的食物来源与补充剂证据</li>
+                <li>胶原蛋白肽的口服补充：证据与争议</li>
+                <li>中式抗衰老食材的循证评估</li>
+              </ul>
+            </li>
+            <li>第三节 抗衰老饮食策略</li>
+            <li>第四节 抗衰老的烹饪实践</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chapter 14 -->
+      <div class="chapter-card">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <span class="chapter-num">14</span>
+          <div class="chapter-title-wrap">
+            <div class="chapter-title">青少年营养与饮食指导 <span class="badge-new">NEW</span></div>
+            <div class="chapter-title-en">Adolescent Nutrition & Dietary Guidance</div>
+          </div>
+          <div class="chapter-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="chapter-body">
+          <ul class="section-list">
+            <li>第一节 青少年生长发育的营养需求</li>
+            <li>第二节 青少年常见营养问题
+              <ul class="subsection-list">
+                <li>含糖饮料与零食过量</li>
+                <li>早餐缺失与学业表现</li>
+                <li>节食减肥与饮食失调风险</li>
+                <li>运动青少年的营养支持</li>
+              </ul>
+            </li>
+            <li>第三节 青少年健康饮食的培养</li>
+            <li>第四节 中式青少年食谱示例</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chapter 15 -->
+      <div class="chapter-card">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <span class="chapter-num">15</span>
+          <div class="chapter-title-wrap">
+            <div class="chapter-title">更年期女性营养与饮食指导 <span class="badge-new">NEW</span></div>
+            <div class="chapter-title-en">Menopausal Women's Nutrition & Dietary Guidance</div>
+          </div>
+          <div class="chapter-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="chapter-body">
+          <ul class="section-list">
+            <li>第一节 更年期的生理变化与营养影响</li>
+            <li>第二节 更年期关键营养策略
+              <ul class="subsection-list">
+                <li>蛋白上调至1.6-2.0g/kg/d对抗肌肉流失</li>
+                <li>钙+维D+K2协同保护骨密度</li>
+                <li>植物雌激素的循证评估</li>
+                <li>omega-3对心血管与情绪的支持</li>
+              </ul>
+            </li>
+            <li>第三节 中式更年期饮食方案</li>
+            <li>第四节 体重管理与生活方式</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chapter 16 -->
+      <div class="chapter-card">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <span class="chapter-num">16</span>
+          <div class="chapter-title-wrap">
+            <div class="chapter-title">老年人饮食与营养 <span class="badge-new">NEW</span></div>
+            <div class="chapter-title-en">Elderly Nutrition & Dietary Guidance</div>
+          </div>
+          <div class="chapter-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="chapter-body">
+          <ul class="section-list">
+            <li>第一节 老年人生理变化与营养挑战
+              <ul class="subsection-list">
+                <li>合成代谢抵抗</li>
+                <li>咀嚼与消化功能下降</li>
+                <li>味觉嗅觉减退对食欲的影响</li>
+                <li>多重用药与营养素吸收的交互</li>
+              </ul>
+            </li>
+            <li>第二节 老年人关键营养需求
+              <ul class="subsection-list">
+                <li>蛋白需求上调：1.0-1.5g/kg/d</li>
+                <li>肌少症的饮食预防与干预</li>
+                <li>维生素B12与膳食纤维</li>
+              </ul>
+            </li>
+            <li>第三节 中式老年饮食实践</li>
+            <li>第四节 老年人饮食的常见误区</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Appendix -->
+    <div class="appendix-section">
+      <h3>附录 A · 案例研究</h3>
+      <ul class="appendix-list">
+        <li>案例1：三高人群的厨房改造计划</li>
+        <li>案例2：更年期女性的抗炎饮食实践</li>
+        <li>案例3：青少年家庭的膳食优化</li>
+        <li>案例4：老年人营养不良的识别与干预</li>
+        <li>案例5：素食者的营养规划</li>
+        <li>案例6：社区烹饪营养课程设计实例</li>
+      </ul>
+    </div>
+
+    <div class="appendix-section" style="margin-top: 24px;">
+      <h3>附录 B · 疾病预防食谱</h3>
+      <ul class="appendix-list">
+        <li>心血管保护食谱（中式）</li>
+        <li>糖尿病管理食谱（中式）</li>
+        <li>骨质疏松预防食谱</li>
+        <li>抗炎食谱合集</li>
+        <li>抗衰老食谱合集</li>
+        <li>青少年成长食谱</li>
+        <li>更年期调理食谱</li>
+        <li>老年人营养食谱</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© YAOYAO NUMBER ONE · All Rights Reserved</span>
+  </footer>
+
+  <script>
+    function toggleChapter(header) {
+      const card = header.parentElement;
+      card.classList.toggle('open');
+    }
+  </script>
+
+</body>
+</html>

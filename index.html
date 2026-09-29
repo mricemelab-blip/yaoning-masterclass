@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>姚宁大师课系列 | Master Yaoning's Masterclass Series</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg: #F5F0E8;
+      --bg-alt: #FAF8F5;
+      --black: #1A1A1A;
+      --gold: #C5A55A;
+      --gold-dark: #B8960C;
+      --gray: #8A8A8A;
+      --light-gray: #D4CFC6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang SC', 'Noto Sans SC', sans-serif;
+      background-color: var(--bg);
+      color: var(--black);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 80px 8vw 60px;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 8vw;
+      right: 8vw;
+      height: 1px;
+      background: var(--light-gray);
+    }
+
+    .hero-title-line {
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.0;
+      color: var(--black);
+    }
+
+    .hero-title-name {
+      font-size: clamp(80px, 15vw, 150px);
+      margin-bottom: -0.05em;
+    }
+
+    .hero-title-course {
+      font-size: clamp(64px, 12vw, 130px);
+      margin-bottom: -0.05em;
+    }
+
+    .hero-title-series {
+      font-size: clamp(64px, 12vw, 130px);
+      color: var(--gold);
+    }
+
+    .hero-subtitle {
+      margin-top: 32px;
+      font-size: clamp(12px, 1.4vw, 16px);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* ===== SERIES LIST ===== */
+    .series-section {
+      padding: 100px 8vw 120px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 60px;
+    }
+
+    .series-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: var(--bg-alt);
+      border: 1px solid var(--light-gray);
+      border-radius: 2px;
+      padding: 48px 56px;
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  border-color 0.35s ease;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+
+    .series-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .series-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
+      border-color: var(--gold);
+    }
+
+    .series-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .series-number {
+      font-size: clamp(72px, 8vw, 110px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--gold);
+    }
+
+    .series-arrow {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.35s ease;
+    }
+
+    .series-card:hover .series-arrow {
+      transform: translateX(6px);
+    }
+
+    .series-arrow svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--gold);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .series-title {
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .series-subtitle {
+      font-size: clamp(12px, 1.2vw, 15px);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--gray);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .series-desc {
+      font-size: clamp(14px, 1.3vw, 17px);
+      color: #555;
+      line-height: 1.7;
+      max-width: 680px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 40px 8vw;
+      border-top: 1px solid var(--light-gray);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer span {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero { padding: 60px 6vw 40px; }
+      .hero::after { left: 6vw; right: 6vw; }
+      .series-section { padding: 60px 6vw 80px; }
+      .series-card { padding: 32px 28px; margin-bottom: 24px; }
+      .series-number { font-size: 64px; }
+      footer { padding: 30px 6vw; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-title-line hero-title-name">姚宁</div>
+    <div class="hero-title-line hero-title-course">大师课</div>
+    <div class="hero-title-line hero-title-series">系列</div>
+    <p class="hero-subtitle">Master Yaoning's Masterclass Series</p>
+  </section>
+
+  <!-- SERIES LIST -->
+  <section class="series-section">
+    <div class="section-label">Course Series</div>
+
+    <a class="series-card" href="menopause.html">
+      <div class="series-card-top">
+        <div class="series-number">01</div>
+        <div class="series-arrow">
+          <svg viewBox="0 0 24 24">
+            <line x1="4" y1="12" x2="20" y2="12"/>
+            <polyline points="14 6 20 12 14 18"/>
+          </svg>
+        </div>
+      </div>
+      <div class="series-title">女性更年期 — 从激素到运动处方</div>
+      <div class="series-subtitle">Women's Menopause: From Hormones to Exercise Prescription</div>
+      <p class="series-desc">围绝经期女性的运动干预、激素治疗与生活方式管理循证指南</p>
+    </a>
+
+    <a class="series-card" href="culinary-nutrition.html">
+      <div class="series-card-top">
+        <div class="series-number">02</div>
+        <div class="series-arrow">
+          <svg viewBox="0 0 24 24">
+            <line x1="4" y1="12" x2="20" y2="12"/>
+            <polyline points="14 6 20 12 14 18"/>
+          </svg>
+        </div>
+      </div>
+      <div class="series-title">中国烹饪营养学</div>
+      <div class="series-subtitle">Chinese Culinary Nutrition — From Kitchen to Evidence</div>
+      <p class="series-desc">基于亚利桑那大学《Culinary Medicine》(2025) 改编，全面适配中国饮食文化与食材体系的循证烹饪营养学教材。涵盖膳食规划、厨房科学、宏量/微量营养素、生物活性化合物、流行饮食解析、疾病预防食谱等15章内容。</p>
+    </a>
+
+    <a class="series-card" href="culinary-medicine.html">
+      <div class="series-card-top">
+        <div class="series-number">03</div>
+        <div class="series-arrow">
+          <svg viewBox="0 0 24 24">
+            <line x1="4" y1="12" x2="20" y2="12"/>
+            <polyline points="14 6 20 12 14 18"/>
+          </svg>
+        </div>
+      </div>
+      <div class="series-title">烹饪医学原著（英文版）</div>
+      <div class="series-subtitle">Culinary Medicine — The Original Textbook</div>
+      <p class="series-desc">亚利桑那大学《Culinary Medicine》2025版完整中译框架。16章覆盖从社会饮食行为、厨房科学、营养生化、膳食补充剂、生物活性化合物到社区烹饪医学的全知识体系。</p>
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© YAOYAO NUMBER ONE · All Rights Reserved</span>
+  </footer>
+
+</body>
+</html>

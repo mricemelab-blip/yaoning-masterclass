@@ -314,6 +314,9 @@ function logout(){
 }
 
 function submitAll(){
+  var age = document.getElementById('q_age').value;
+  var weight = document.getElementById('q_weight').value;
+  var freq = document.querySelector('input[name="q_freq"]:checked');
   // Collect all data
   var profile = {
     age: parseInt(age),

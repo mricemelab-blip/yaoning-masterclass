@@ -6,11 +6,10 @@
 <title>ARISE CLUB — Where Strength Meets Science</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-@font-face{font-family:'ARISE';src:local('Georgia'),local('Times New Roman'),local(serif)}
 body{
   min-height:100vh;
   background:
-    linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,.65) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.55) 100%),
     url('bg.png') center center / cover no-repeat;
   color:#fff;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
@@ -18,197 +17,147 @@ body{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  padding:0;
-  position:relative;
-  overflow:hidden;
-}
-
-/* ── Slogan (center, from image 1) ── */
-.slogan{
-  text-align:center;
-  margin-bottom:48px;
-  z-index:2;
-}
-.slogan .line{
-  font-family:'ARISE',Georgia,"Times New Roman",serif;
-  font-size:clamp(18px,3.2vw,26px);
-  font-weight:400;
-  letter-spacing:3px;
-  line-height:2.1;
-  color:#fff;
-  text-shadow:0 2px 24px rgba(0,0,0,.6);
+  padding:24px;
 }
 
 /* ── Login Card ── */
 .login-card{
   width:100%;
-  max-width:360px;
-  background:rgba(10,10,10,.55);
-  backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:16px;
-  padding:36px 28px 32px;
-  z-index:2;
+  max-width:320px;
+  background:rgba(10,10,10,.50);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;
+  padding:32px 24px 28px;
 }
 
-/* ── Logo (image 2 style: 发生俱乐部 ARISE) ── */
-.logo-wrap{
+/* ── Logo: 发生俱乐部 ARISE ── */
+.logo{
   text-align:center;
   margin-bottom:28px;
-  padding-bottom:20px;
-  border-bottom:1px solid rgba(255,255,255,.1);
+  padding-bottom:22px;
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
-.logo-top-line,.logo-bottom-line{
-  width:120px;
-  height:1px;
-  background:#fff;
+.logo-bar{
+  width:100px;
   margin:0 auto;
-  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
 }
-.logo-top-line::before,.logo-bottom-line::before{
-  content:'';
-  position:absolute;
-  left:0;right:0;
+.logo-bar span{
+  display:block;
   height:1px;
   background:#fff;
+  width:100%;
 }
-.logo-top-line{margin-bottom:14px}
-.logo-top-line::before{bottom:3px}
-.logo-bottom-line{margin-top:14px}
-.logo-bottom-line::before{top:3px}
-.logo-text{
+.logo-bar span:nth-child(2){opacity:.5}
+.logo-bar + .logo-bar{margin-top:12px}
+.logo-bar + .logo-bar span:nth-child(1){opacity:.5}
+.logo-row{
   display:flex;
-  align-items:baseline;
+  align-items:center;
   justify-content:center;
-  gap:12px;
+  gap:14px;
+  margin:12px 0;
 }
-.logo-text .cn{
-  font-size:18px;
+.logo-row .cn{
+  font-size:14px;
   font-weight:500;
-  letter-spacing:6px;
-  color:#fff;
+  letter-spacing:3px;
+  line-height:1.7;
+  color:rgba(255,255,255,.9);
 }
-.logo-text .en{
-  font-family:'ARISE',Georgia,"Times New Roman",serif;
-  font-size:28px;
+.logo-row .en{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:30px;
   font-weight:400;
-  letter-spacing:4px;
+  letter-spacing:5px;
   color:#fff;
 }
 
 /* ── Fields ── */
-.field{margin-bottom:16px}
+.field{margin-bottom:14px}
 .field label{
   display:block;
-  font-size:12px;
-  color:rgba(255,255,255,.5);
-  margin-bottom:6px;
-  letter-spacing:.5px;
+  font-size:11px;
+  color:rgba(255,255,255,.4);
+  margin-bottom:5px;
+  letter-spacing:1px;
   text-transform:uppercase;
 }
 .field input{
   width:100%;
-  height:42px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);
+  height:40px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
   border-radius:8px;
   padding:0 14px;
-  font-size:15px;
+  font-size:14px;
   color:#fff;
   outline:none;
-  transition:border-color .2s,background .2s;
+  transition:border-color .2s;
 }
-.field input:focus{
-  border-color:rgba(255,255,255,.35);
-  background:rgba(255,255,255,.1);
-}
-.field input::placeholder{color:rgba(255,255,255,.25)}
+.field input:focus{border-color:rgba(255,255,255,.28)}
+.field input::placeholder{color:rgba(255,255,255,.2)}
 
 /* ── Button ── */
 .btn{
   width:100%;
-  height:44px;
+  height:42px;
   background:#fff;
   color:#0a0a0a;
-  font-size:14px;
-  font-weight:600;
-  letter-spacing:2px;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:3px;
   border:none;
   border-radius:8px;
   cursor:pointer;
-  margin-top:8px;
-  transition:opacity .2s,transform .15s;
+  margin-top:6px;
+  transition:opacity .2s;
   text-transform:uppercase;
 }
-.btn:hover{opacity:.9}
-.btn:active{transform:scale(.98)}
+.btn:hover{opacity:.88}
+.btn:active{opacity:.75}
 
-/* ─ Error ── */
+/* ── Error ── */
 .error{
   color:#e87070;
-  font-size:13px;
+  font-size:12px;
   text-align:center;
-  margin-top:14px;
-  min-height:20px;
+  margin-top:12px;
+  min-height:18px;
 }
 
-/* ── Brand Footer ── */
-.brand-footer{
+/* ── Bottom Brand ── */
+.brand-foot{
+  margin-top:28px;
   text-align:center;
-  margin-top:40px;
-  z-index:2;
-  opacity:.7;
-}
-.brand-footer .mountain{
-  font-size:22px;
-  margin-bottom:4px;
-  letter-spacing:4px;
-}
-.brand-footer .club-name{
-  font-family:'ARISE',Georgia,"Times New Roman",serif;
-  font-size:16px;
-  font-weight:700;
-  letter-spacing:6px;
-  text-transform:uppercase;
-}
-.brand-footer .club-tag{
+  opacity:.45;
   font-size:11px;
-  letter-spacing:2px;
-  color:rgba(255,255,255,.5);
-  margin-top:2px;
+  letter-spacing:3px;
+  color:rgba(255,255,255,.6);
 }
 
 /* ── Responsive ── */
-@media(max-width:420px){
-  .slogan .line{font-size:17px;line-height:2}
-  .login-card{padding:28px 20px 24px}
-  .logo-text .cn{font-size:16px;letter-spacing:4px}
-  .logo-text .en{font-size:24px}
-  .brand-footer .club-name{font-size:14px;letter-spacing:4px}
+@media(max-width:380px){
+  .login-card{padding:24px 18px 22px}
+  .logo-row .en{font-size:26px}
 }
 </style>
 </head>
 <body>
 
-<!-- Slogan from image 1 -->
-<div class="slogan">
-  <div class="line">Fit body</div>
-  <div class="line">Kind heart</div>
-  <div class="line">Focused mind</div>
-  <div class="line">Unbreakable spirit</div>
-</div>
-
-<!-- Login Card -->
 <div class="login-card">
-  <!-- Logo: 发生俱乐部 ARISE (image 2 style) -->
-  <div class="logo-wrap">
-    <div class="logo-top-line"></div>
-    <div class="logo-text">
+  <!-- Logo: 发生俱乐部 ARISE -->
+  <div class="logo">
+    <div class="logo-bar"><span></span><span></span></div>
+    <div class="logo-row">
       <span class="cn">发生<br>俱乐部</span>
       <span class="en">ARISE</span>
     </div>
-    <div class="logo-bottom-line"></div>
+    <div class="logo-bar"><span></span><span></span></div>
   </div>
 
   <div class="field">
@@ -219,50 +168,36 @@ body{
     <label for="codeInput">邀请码</label>
     <input type="text" id="codeInput" placeholder="请输入邀请码" autocomplete="off" style="text-transform:uppercase">
   </div>
-  <button class="btn" id="loginBtn" onclick="doLogin()">Enter</button>
+  <button class="btn" onclick="doLogin()">Enter</button>
   <div class="error" id="errorBox"></div>
 </div>
 
-<!-- Brand footer (image 1 bottom) -->
-<div class="brand-footer">
-  <div class="mountain">⛰</div>
-  <div class="club-name">ARISE CLUB</div>
-  <div class="club-tag">Where Strength Meets Science</div>
-</div>
+<div class="brand-foot">ARISE CLUB · Where Strength Meets Science</div>
 
 <script>
-var CODES = {
-  'VC2026A': { name: '学员A', id: 'vc001' },
-  'VC2026B': { name: '学员B', id: 'vc002' },
-  'VC2026C': { name: '学员C', id: 'vc003' },
-  'COACH':   { name: '教练',   id: 'coach', isCoach: true }
+var CODES={
+  'VC2026A':{name:'学员A',id:'vc001'},
+  'VC2026B':{name:'学员B',id:'vc002'},
+  'VC2026C':{name:'学员C',id:'vc003'},
+  'COACH':{name:'教练',id:'coach',isCoach:true}
 };
-
-(function init() {
-  if (localStorage.getItem('vc_role')) {
-    window.location.href = 'app.html';
-  }
-})();
-
-function doLogin() {
-  var name = document.getElementById('nameInput').value.trim();
-  var code = document.getElementById('codeInput').value.trim().toUpperCase();
-  var err  = document.getElementById('errorBox');
-  err.textContent = '';
-  if (!name) { err.textContent = '请输入姓名'; return; }
-  if (!code) { err.textContent = '请输入邀请码'; return; }
-  var user = CODES[code];
-  if (!user) { err.textContent = '邀请码无效，请检查后重试'; return; }
-  localStorage.setItem('vc_name', name);
-  localStorage.setItem('vc_user_id', user.id);
-  localStorage.setItem('vc_role', user.isCoach ? 'coach' : 'student');
-  localStorage.setItem('vc_invite_code', code);
-  window.location.href = 'app.html';
+(function(){if(localStorage.getItem('vc_role'))window.location.href='app.html'})();
+function doLogin(){
+  var n=document.getElementById('nameInput').value.trim();
+  var c=document.getElementById('codeInput').value.trim().toUpperCase();
+  var e=document.getElementById('errorBox');
+  e.textContent='';
+  if(!n){e.textContent='请输入姓名';return}
+  if(!c){e.textContent='请输入邀请码';return}
+  var u=CODES[c];
+  if(!u){e.textContent='邀请码无效，请检查后重试';return}
+  localStorage.setItem('vc_name',n);
+  localStorage.setItem('vc_user_id',u.id);
+  localStorage.setItem('vc_role',u.isCoach?'coach':'student');
+  localStorage.setItem('vc_invite_code',c);
+  window.location.href='app.html';
 }
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') doLogin();
-});
+document.addEventListener('keydown',function(ev){if(ev.key==='Enter')doLogin()});
 </script>
 </body>
 </html>

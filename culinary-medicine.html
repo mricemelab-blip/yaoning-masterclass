@@ -118,6 +118,43 @@
       letter-spacing: 0.02em;
     }
 
+    /* ===== READ LINKS ===== */
+    .read-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    .read-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--black);
+      border: 1.5px solid var(--gold);
+      padding: 10px 24px;
+      border-radius: 2px;
+      transition: all 0.25s ease;
+    }
+
+    .read-link:hover {
+      background: var(--gold);
+      color: #fff;
+    }
+
+    .read-link svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
     /* ===== CONTENT ===== */
     .content-area {
       padding: 80px 8vw 100px;
@@ -190,6 +227,31 @@
       text-transform: uppercase;
       color: var(--black);
       margin-bottom: 4px;
+    }
+
+    /* ===== SECTION DIVIDER ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 48px 0 32px;
+      padding-top: 16px;
+    }
+
+    .section-divider span {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--light-gray);
     }
 
     /* ===== CHAPTER LIST ===== */
@@ -296,6 +358,20 @@
       transform: translateX(4px);
     }
 
+    .ext-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gray);
+      border: 1px solid var(--light-gray);
+      padding: 1px 6px;
+      border-radius: 2px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
     /* ===== FOOTER ===== */
     footer {
       padding: 40px 8vw;
@@ -325,6 +401,7 @@
       .chapter-num { font-size: 24px; min-width: 40px; }
       .chapter-item { padding: 20px 0; }
       .meta-info { gap: 20px; }
+      .read-links { flex-direction: column; }
       footer { padding: 30px 6vw; flex-direction: column; align-items: flex-start; }
     }
   </style>
@@ -338,7 +415,7 @@
         <line x1="20" y1="12" x2="4" y2="12"/>
         <polyline points="10 18 4 12 10 6"/>
       </svg>
-      返回系列首页
+      Back to Series
     </a>
     <span class="nav-tag">Series 03</span>
   </nav>
@@ -348,8 +425,18 @@
     <div class="hero-bg-number">03</div>
     <div class="hero-content">
       <h1 class="hero-title">Culinary Medicine</h1>
-      <p class="hero-subtitle-en">The Original Textbook</p>
-      <p class="hero-tagline">University of Arizona · 2025 Edition · 完整中译框架</p>
+      <p class="hero-subtitle-en">The Original Textbook — Full English Edition</p>
+      <p class="hero-tagline">University of Arizona · 2025 Edition · CC BY-NC 4.0 Open Educational Resource</p>
+      <div class="read-links">
+        <a class="read-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/" target="_blank" rel="noopener">
+          Read Online
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="read-link" href="https://extension.arizona.edu/sites/default/files/2025-02/Culinary-Medicine-1737477786-print.pdf" target="_blank" rel="noopener">
+          Download PDF
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -358,11 +445,11 @@
     <div class="content-label">About This Textbook</div>
 
     <div class="course-overview">
-      <h2>原著介绍</h2>
+      <h2>About the Textbook</h2>
       <p class="en-label">Culinary Medicine — University of Arizona, 2025</p>
-      <p><em>Culinary Medicine</em> 由亚利桑那大学（University of Arizona）出版，是一部开创性的循证烹饪医学教材。该书将营养科学与烹饪艺术相结合，为医疗专业人员和健康从业者提供从社会饮食行为到临床营养干预的完整知识体系。</p>
-      <p>全书共16章，涵盖社会决定因素与膳食规划、厨房科学与食物安全、饮食心理、宏量/微量营养素、膳食补充剂、生物活性化合物、流行饮食模式、烹饪示范设计、食物系统与社区营养、文化响应式营养方法，以及临床案例和疾病预防食谱。</p>
-      <p>原书采用 Creative Commons Attribution-NonCommercial 4.0 International License 发布。</p>
+      <p><em>Culinary Medicine</em> is a pioneering evidence-based textbook published by the University of Arizona. It integrates nutritional science with the culinary arts, providing healthcare professionals and wellness practitioners with a comprehensive knowledge system spanning from social dietary behaviors to clinical nutritional interventions.</p>
+      <p>The book comprises 12 chapters organized into four sections — from social determinants and meal planning, kitchen science and food safety, food psychology, macro- and micronutrients, dietary supplements, bioactive compounds, popular diet patterns, culinary demonstration design, food systems and community nutrition, to culturally responsive approaches. Appendices include clinical case studies and disease prevention recipes.</p>
+      <p>Published under the Creative Commons Attribution-NonCommercial 4.0 International License. Full text is freely accessible.</p>
 
       <div class="meta-info">
         <div class="meta-item">
@@ -378,221 +465,247 @@
           CC BY-NC 4.0
         </div>
         <div class="meta-item">
+          <strong>Editors</strong>
+          Cheryl Casey, Scott Going, Melanie Hingle, Lauren McCullough
+        </div>
+        <div class="meta-item">
           <strong>Location</strong>
           Tucson, Arizona
         </div>
       </div>
     </div>
 
-    <div class="content-label">Chapters · 全16章</div>
+    <div class="content-label">Full Table of Contents · 12 Chapters + Appendices</div>
 
+    <!-- FRONT MATTER -->
+    <div class="section-divider"><span>Front Matter</span></div>
     <ul class="chapter-list">
 
-      <!-- Preface -->
       <li class="chapter-item">
-        <a class="chapter-link" href="#">
+        <a class="chapter-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/front-matter/preface/" target="_blank" rel="noopener">
           <span class="chapter-num">00</span>
           <div class="chapter-info">
-            <div class="chapter-title">前言（Preface）</div>
-            <div class="chapter-authors">Stavroula N. Antonopoulos; Bahar Bakhshi; Katelyn Barker; et al. — University of Arizona</div>
-            <div class="chapter-desc">版权声明、作者团队介绍与全书结构概览。原书采用 Creative Commons BY-NC 4.0 许可协议。</div>
+            <div class="chapter-title">Preface <span class="ext-badge">External</span></div>
+            <div class="chapter-authors">Stavroula N. Antonopoulos; Bahar Bakhshi; Katelyn Barker; Constance Bell; Martina Cartwright; Amy A. Drescher; et al.</div>
+            <div class="chapter-desc">Overview of the book's purpose, scope, and structure. Defines culinary medicine as a subdiscipline integrating nutrition evidence and culinary techniques. Describes the intended audiences and how to use the textbook.</div>
             <span class="chapter-tag">Front Matter</span>
           </div>
           <div class="chapter-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         </a>
       </li>
 
-      <!-- Chapter 1 -->
+    </ul>
+
+    <!-- SECTION I -->
+    <div class="section-divider"><span>Section I — Preparing, Selecting & Enjoying Nutritious Food</span></div>
+    <ul class="chapter-list">
+
       <li class="chapter-item">
-        <a class="chapter-link" href="#">
+        <a class="chapter-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/chapter/chapter-1-shopping-smarter/" target="_blank" rel="noopener">
           <span class="chapter-num">01</span>
           <div class="chapter-info">
-            <div class="chapter-title">理解社会影响、膳食规划与聪明购物</div>
+            <div class="chapter-title">Understanding Social Influences, Planning Meals, and Shopping Smarter <span class="ext-badge">External</span></div>
             <div class="chapter-authors">Constance Bell; Stavroula N. Antonopoulos; Milad Hasankhani; Aimee Novak</div>
-            <div class="chapter-desc">探讨社会健康决定因素（SDOH）如何影响食物获取，如何在有限资源内制定营养密集的膳食计划，以及聪明购物策略。</div>
+            <div class="chapter-desc">Explores how social determinants of health (SDOH) shape food access. Meal planning within limited resources, strategies for purchasing nutrient-dense foods, and smart shopping on a budget.</div>
           </div>
           <div class="chapter-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         </a>
       </li>
 
-      <!-- Chapter 2 -->
       <li class="chapter-item">
-        <a class="chapter-link" href="#">
+        <a class="chapter-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/chapter/chapter-2-kitchen/" target="_blank" rel="noopener">
           <span class="chapter-num">02</span>
           <div class="chapter-info">
-            <div class="chapter-title">厨房篇 — 食物储存与制备；预防食物浪费</div>
+            <div class="chapter-title">In the Kitchen — Food Storage and Preparation; Preventing Food Waste <span class="ext-badge">External</span></div>
             <div class="chapter-authors">Aimee Novak; Stavroula N. Antonopoulos; Milad Hasankhani</div>
-            <div class="chapter-desc">食品安全原则、有效储存策略与制备技巧，最大化食物健康益处并最小化浪费，是维持健康饮食模式的核心。</div>
+            <div class="chapter-desc">General food safety principles, effective storage strategies, and preparation techniques — including whole grains, pulses, proteins, and nutrient-dense fats — to maximize health benefits and minimize waste.</div>
           </div>
           <div class="chapter-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         </a>
       </li>
 
-      <!-- Chapter 3 -->
       <li class="chapter-item">
-        <a class="chapter-link" href="#">
+        <a class="chapter-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/chapter/chapter-3-relationship-with-food/" target="_blank" rel="noopener">
           <span class="chapter-num">03</span>
           <div class="chapter-info">
-            <div class="chapter-title">在家与外出享受食物 — 我们与食物的关系</div>
+            <div class="chapter-title">Enjoying Food at Home and Beyond — Our Relationship with Food <span class="ext-badge">External</span></div>
             <div class="chapter-authors">Ashley Munro; Katelyn Barker; Hope Wilson; Jennifer Parlin; Constance Bell</div>
-            <div class="chapter-desc">进食行为的心理机制、情绪性进食、正念饮食实践，以及如何在尊重食物社会文化意义的同时建立健康饮食模式。</div>
+            <div class="chapter-desc">The psychology of eating, emotional eating, mindful eating practices, and building a healthy relationship with food while honoring its social and cultural significance. Emphasizes flexibility over rigid dietary rules.</div>
           </div>
           <div class="chapter-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         </a>
       </li>
 
-      <!-- Chapter 4 -->
+    </ul>
+
+    <!-- SECTION II -->
+    <div class="section-divider"><span>Section II — Food as Medicine</span></div>
+    <ul class="chapter-list">
+
       <li class="chapter-item">
-        <a class="chapter-link" href="#">
+        <a class="chapter-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/chapter/chapter-4-macronutrients/" target="_blank" rel="noopener">
           <span class="chapter-num">04</span>
           <div class="chapter-info">
-            <div class="chapter-title">宏量营养素（Macronutrients）</div>
+            <div class="chapter-title">Macronutrients <span class="ext-badge">External</span></div>
             <div class="chapter-authors">Katelyn Barker</div>
-            <div class="chapter-desc">碳水化合物、蛋白质、脂肪的生化功能与能量代谢。每日需求量、食物来源，以及宏量营养素在烹饪医学中的应用。</div>
+            <div class="chapter-desc">Biochemical functions and energy metabolism of carbohydrates, proteins, lipids, and water. Daily requirements, food sources, and applications in culinary medicine practice.</div>
           </div>
           <div class="chapter-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         </a>
       </li>
 
-      <!-- Chapter 5 -->
       <li class="chapter-item">
-        <a class="chapter-link" href="#">
+        <a class="chapter-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/chapter/chapter-5-micronutrients/" target="_blank" rel="noopener">
           <span class="chapter-num">05</span>
           <div class="chapter-info">
-            <div class="chapter-title">微量营养素（Micronutrients）</div>
+            <div class="chapter-title">Micronutrients <span class="ext-badge">External</span></div>
             <div class="chapter-authors">Mary Marian; Bahar Bakhshi</div>
-            <div class="chapter-desc">维生素、矿物质与微量元素的功能、缺乏症、食物来源与生物标志物。烹饪与加工对微量营养素可用性的影响。</div>
+            <div class="chapter-desc">Functions, deficiency signs, food sources, and biomarkers of vitamins and minerals. How cooking and food processing affect micronutrient bioavailability.</div>
           </div>
           <div class="chapter-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         </a>
       </li>
 
-      <!-- Chapter 6 -->
       <li class="chapter-item">
-        <a class="chapter-link" href="#">
+        <a class="chapter-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/chapter/chapter-6-dietary-supplements/" target="_blank" rel="noopener">
           <span class="chapter-num">06</span>
           <div class="chapter-info">
-            <div class="chapter-title">膳食补充剂（Dietary Supplements）</div>
+            <div class="chapter-title">Dietary Supplements <span class="ext-badge">External</span></div>
             <div class="chapter-authors">Mary Marian</div>
-            <div class="chapter-desc">膳食补充剂的安全性、有效性评估，FDA监管框架，虚假广告风险，以及与处方药物的相互作用。</div>
+            <div class="chapter-desc">Safety and efficacy evaluation of dietary supplements. FDA regulatory framework, risks of misleading advertising, and interactions with prescription medications.</div>
           </div>
           <div class="chapter-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         </a>
       </li>
 
-      <!-- Chapter 7 -->
       <li class="chapter-item">
-        <a class="chapter-link" href="#">
+        <a class="chapter-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/chapter/chapter-7-bioactive-compounds/" target="_blank" rel="noopener">
           <span class="chapter-num">07</span>
           <div class="chapter-info">
-            <div class="chapter-title">生物活性化合物（Bioactive Compounds）</div>
+            <div class="chapter-title">Bioactive Compounds <span class="ext-badge">External</span></div>
             <div class="chapter-authors">Amy A. Drescher</div>
-            <div class="chapter-desc">多酚、萜类、有机硫化物等植物化学物的代谢效应与健康促进机制。"超级食物"的循证审视与生物利用度差异。</div>
+            <div class="chapter-desc">Polyphenols, terpenes, organosulfur compounds, probiotics, omega-3 fatty acids, and isoflavones — their metabolic effects and health promotion mechanisms. Evidence-based examination of "superfoods" and bioavailability considerations.</div>
           </div>
           <div class="chapter-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         </a>
       </li>
 
-      <!-- Chapter 8 -->
       <li class="chapter-item">
-        <a class="chapter-link" href="#">
+        <a class="chapter-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/chapter/chapter-8-popular-diets/" target="_blank" rel="noopener">
           <span class="chapter-num">08</span>
           <div class="chapter-info">
-            <div class="chapter-title">流行饮食与健康（Popular Diets and Health）</div>
+            <div class="chapter-title">Popular Diets and Health <span class="ext-badge">External</span></div>
             <div class="chapter-authors">Farshad Fani Marvasti</div>
-            <div class="chapter-desc">时尚饮食的风险辨析，以及地中海饮食、DASH饮食等循证饮食模式在疾病预防中的干预证据。</div>
+            <div class="chapter-desc">Critical analysis of fad diets versus evidence-based eating patterns. Intervention evidence for Mediterranean diet, DASH diet, and other dietary approaches in chronic disease prevention.</div>
           </div>
           <div class="chapter-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         </a>
       </li>
 
-      <!-- Chapter 9 -->
+    </ul>
+
+    <!-- SECTION III -->
+    <div class="section-divider"><span>Section III — Anatomy of a Food Demonstration</span></div>
+    <ul class="chapter-list">
+
       <li class="chapter-item">
-        <a class="chapter-link" href="#">
+        <a class="chapter-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/chapter/chapter-9-food-demonstration/" target="_blank" rel="noopener">
           <span class="chapter-num">09</span>
           <div class="chapter-info">
-            <div class="chapter-title">烹饪示范的艺术（Anatomy of a Food Demonstration）</div>
+            <div class="chapter-title">Anatomy of a Food Demonstration <span class="ext-badge">External</span></div>
             <div class="chapter-authors">Jennifer Parlin; Stavroula N. Antonopoulos; Aimee Novak; Constance E. Bell</div>
-            <div class="chapter-desc">食物示范的设计与执行：食品安全、受众分析、文化敏感性，以及在不同场景中有效传递营养信息的方法。</div>
+            <div class="chapter-desc">Design and execution of culinary demonstrations. Food safety protocols, audience analysis, cultural sensitivity, and effective nutrition communication across diverse community settings.</div>
           </div>
           <div class="chapter-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         </a>
       </li>
 
-      <!-- Chapter 10 -->
+    </ul>
+
+    <!-- SECTION IV -->
+    <div class="section-divider"><span>Section IV — Implementing Culinary Medicine in Your Community</span></div>
+    <ul class="chapter-list">
+
       <li class="chapter-item">
-        <a class="chapter-link" href="#">
+        <a class="chapter-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/chapter/chapter-10-seed-to-table/" target="_blank" rel="noopener">
           <span class="chapter-num">10</span>
           <div class="chapter-info">
-            <div class="chapter-title">从种子到餐桌项目（Seed-to-Table Programs）</div>
+            <div class="chapter-title">Seed-to-Table Programs <span class="ext-badge">External</span></div>
             <div class="chapter-authors">Hope Wilson; Jennifer Parlin</div>
-            <div class="chapter-desc">社区花园、农贸市场、CSA等项目如何缩短食物生产与消费的距离，增加营养食物可及性，以及与烹饪医学的协同关系。</div>
+            <div class="chapter-desc">Community gardens, farmers markets, and CSA programs that bridge food production and consumption. How these programs increase access to nutritious foods and complement culinary medicine practice.</div>
           </div>
           <div class="chapter-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         </a>
       </li>
 
-      <!-- Chapter 11 -->
       <li class="chapter-item">
-        <a class="chapter-link" href="#">
+        <a class="chapter-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/chapter/chapter-11-partnerships/" target="_blank" rel="noopener">
           <span class="chapter-num">11</span>
           <div class="chapter-info">
-            <div class="chapter-title">建立社区合作伙伴关系（Community Partnerships）</div>
+            <div class="chapter-title">Creating Partnerships in Your Community <span class="ext-badge">External</span></div>
             <div class="chapter-authors">Hope Wilson; Stephanie Grutzmacher; Lauren McCullough; Jennifer Parlin; Lily McNair</div>
-            <div class="chapter-desc">社区参与和社会生态模型在烹饪医学项目中的应用，健康社会决定因素的理解，以及合作伙伴关系的培育策略。</div>
+            <div class="chapter-desc">Community engagement and the social ecological model in culinary medicine programs. Understanding social determinants of health and cultivating sustainable partnerships.</div>
           </div>
           <div class="chapter-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         </a>
       </li>
 
-      <!-- Chapter 12 -->
       <li class="chapter-item">
-        <a class="chapter-link" href="#">
+        <a class="chapter-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/chapter/chapter-12-culture/" target="_blank" rel="noopener">
           <span class="chapter-num">12</span>
           <div class="chapter-info">
-            <div class="chapter-title">以文化为中心的烹饪医学方法（Culture-Centered Culinary Medicine）</div>
+            <div class="chapter-title">Culturally Centered Approaches to Culinary Medicine <span class="ext-badge">External</span></div>
             <div class="chapter-authors">Martina Cartwright; Lauren McCullough; Lucia Ramonet; Ashley Munro; Hope Wilson</div>
-            <div class="chapter-desc">食物与文化的不可分割性。如何在尊重文化传统和个人遗产的前提下，支持多样化饮食和健康改变。文化食物的营养学理解。</div>
+            <div class="chapter-desc">The inseparable link between food, diet, and culture. Supporting diverse diets and healthy dietary change while respecting cultural traditions and personal heritage. Cultural humility and competence in nutrition practice.</div>
           </div>
           <div class="chapter-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         </a>
       </li>
 
-      <!-- Appendix A -->
+    </ul>
+
+    <!-- APPENDICES -->
+    <div class="section-divider"><span>Appendices</span></div>
+    <ul class="chapter-list">
+
       <li class="chapter-item">
-        <a class="chapter-link" href="#">
+        <a class="chapter-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/back-matter/appendix-a-case-studies/" target="_blank" rel="noopener">
           <span class="chapter-num">A</span>
           <div class="chapter-info">
-            <div class="chapter-title">案例研究（Case Studies）</div>
+            <div class="chapter-title">Appendix A: Case Studies <span class="ext-badge">External</span></div>
             <div class="chapter-authors">Hope Wilson</div>
-            <div class="chapter-desc">7个临床案例研究，涵盖癌症、心血管疾病、肝病、代谢综合征和糖尿病。每个案例包含患者病史、生命体征、实验室检查及营养干预建议。</div>
+            <div class="chapter-desc">Clinical case studies covering cancer, cardiovascular disease, liver disease, metabolic syndrome, and diabetes. Each case includes patient history, vital signs, laboratory findings, and nutritional intervention recommendations.</div>
             <span class="chapter-tag">Appendix</span>
           </div>
           <div class="chapter-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         </a>
       </li>
 
-      <!-- Appendix B -->
       <li class="chapter-item">
-        <a class="chapter-link" href="#">
+        <a class="chapter-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/back-matter/appendix-b-recipes/" target="_blank" rel="noopener">
           <span class="chapter-num">B</span>
           <div class="chapter-info">
-            <div class="chapter-title">疾病预防食谱（Recipes for Disease Prevention）</div>
+            <div class="chapter-title">Appendix B: Recipes for Disease Prevention <span class="ext-badge">External</span></div>
             <div class="chapter-authors">Aimee Novak; Lucia Ramonet</div>
-            <div class="chapter-desc">健康食谱改良策略：全麦替代、健康脂肪替换、天然甜味剂、增加蔬果、减盐增香。支持慢性疾病管理与预防的循证食谱设计。</div>
+            <div class="chapter-desc">Healthy recipe modification strategies: whole grain substitutions, healthy fat replacements, natural sweeteners, increased fruit and vegetable incorporation, sodium reduction, and flavor enhancement. Evidence-based recipe design for chronic disease management.</div>
             <span class="chapter-tag">Appendix</span>
           </div>
           <div class="chapter-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         </a>
       </li>
 
-      <!-- Glossary -->
+    </ul>
+
+    <!-- REFERENCE -->
+    <div class="section-divider"><span>Reference</span></div>
+    <ul class="chapter-list">
+
       <li class="chapter-item">
-        <a class="chapter-link" href="#">
+        <a class="chapter-link" href="https://opentextbooks.library.arizona.edu/culinarymedicine/back-matter/glossary-terms/" target="_blank" rel="noopener">
           <span class="chapter-num">G</span>
           <div class="chapter-info">
-            <div class="chapter-title">术语表（Glossary）</div>
-            <div class="chapter-desc">全书专业术语中英对照索引，涵盖营养学、烹饪医学、食品科学核心概念定义。</div>
+            <div class="chapter-title">Glossary Terms <span class="ext-badge">External</span></div>
+            <div class="chapter-desc">Comprehensive glossary of professional terminology covering core concepts in nutrition science, culinary medicine, and food science.</div>
             <span class="chapter-tag">Reference</span>
           </div>
           <div class="chapter-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
@@ -606,6 +719,7 @@
   <!-- FOOTER -->
   <footer>
     <span>© YAOYAO NUMBER ONE · All Rights Reserved</span>
+    <span>Textbook: CC BY-NC 4.0 · University of Arizona</span>
   </footer>
 
 </body>

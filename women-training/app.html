@@ -19,6 +19,34 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .nav-logout{font-size:12px;color:var(--text3);text-decoration:none;padding:4px 10px;border:1px solid var(--border);border-radius:6px;transition:all .2s}
 .nav-logout:hover{color:var(--gold);border-color:var(--gold)}
 
+/* MORNING CHECKIN */
+.morning-bar{margin:0 20px;padding:0;position:relative;z-index:1}
+.morning-toggle{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;background:var(--card);color:var(--text2);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .25s;font-family:inherit;letter-spacing:.5px}
+.morning-toggle:hover{border-color:var(--gold);color:var(--gold)}
+.morning-toggle.done{border-color:rgba(34,197,94,.3);color:var(--green)}
+.morning-toggle .arrow{transition:transform .25s;font-size:10px}
+.morning-toggle.open .arrow{transform:rotate(180deg)}
+.morning-panel{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.morning-panel.open{max-height:600px}
+.morning-form{padding:16px;background:var(--card);border:1px solid var(--border);border-radius:0 0 10px 10px;margin-top:-1px}
+.morning-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.morning-field label{display:block;font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.morning-field input,.morning-field textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:rgba(255,255,255,.03);color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:border .2s}
+.morning-field input:focus,.morning-field textarea:focus{border-color:var(--gold)}
+.morning-field textarea{resize:vertical;min-height:40px}
+.morning-field input[type=range]{padding:4px 0;-webkit-appearance:none;background:transparent;border:none}
+.morning-field input[type=range]::-webkit-slider-runnable-track{height:4px;background:var(--border);border-radius:2px}
+.morning-field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--gold);margin-top:-7px;cursor:pointer}
+.range-val{font-size:13px;color:var(--gold);font-weight:700;margin-top:2px}
+.morning-submit{width:100%;padding:10px;border:none;border-radius:8px;background:var(--gold);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:1px;transition:background .2s}
+.morning-submit:hover{background:#B8960C}
+.morning-summary{padding:16px;background:var(--card);border:1px solid var(--border);border-radius:0 0 10px 10px;margin-top:-1px}
+.morning-summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.morning-summary-grid .ms-val{font-size:18px;font-weight:800;color:var(--gold)}
+.morning-summary-grid .ms-label{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+.morning-reset{margin-top:10px;width:100%;padding:6px;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--text3);font-size:11px;cursor:pointer;font-family:inherit;transition:all .2s}
+.morning-reset:hover{color:var(--red);border-color:var(--red)}
+
 /* WEEK BAR */
 .week-bar{display:flex;gap:6px;padding:16px 20px;overflow-x:auto;-webkit-overflow-scrolling:touch;position:relative;z-index:1}
 .week-btn{flex-shrink:0;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:1px;border:1.5px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all .25s}
@@ -32,7 +60,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 /* TABS */
 .tabs{display:flex;border-bottom:1px solid var(--border);margin:0 20px;position:relative;z-index:1}
-.tab-btn{flex:1;padding:12px 0;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);background:none;border:none;cursor:pointer;position:relative;transition:color .2s;font-family:inherit}
+.tab-btn{flex:1;padding:12px 0;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);background:none;border:none;cursor:pointer;position:relative;transition:color .2s;font-family:inherit}
 .tab-btn.active{color:var(--gold)}
 .tab-btn.active::after{content:'';position:absolute;bottom:-1px;left:20%;right:20%;height:2px;background:var(--gold);border-radius:1px}
 
@@ -81,6 +109,42 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .tag-mode-perf{background:rgba(249,115,22,.12);color:#F97316}
 .tag-rest{background:rgba(255,255,255,.06);color:var(--text3)}
 .ex-note{font-size:12px;color:var(--text3);margin-top:6px}
+
+/* POST-WORKOUT LOG */
+.ex-log-toggle{margin-top:8px;padding:4px 0;border:none;background:none;color:var(--text3);font-size:11px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:4px;transition:color .2s}
+.ex-log-toggle:hover{color:var(--gold)}
+.ex-log-panel{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.ex-log-panel.open{max-height:500px}
+.ex-log-form{padding:10px 0 4px;border-top:1px solid var(--border);margin-top:8px}
+.ex-log-sets{margin-bottom:8px}
+.ex-log-set{display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:12px}
+.ex-log-set label{color:var(--text3);min-width:32px;font-weight:600}
+.ex-log-set input{width:56px;padding:5px 6px;border:1px solid var(--border);border-radius:6px;background:rgba(255,255,255,.03);color:var(--text);font-size:13px;text-align:center;font-family:inherit;outline:none}
+.ex-log-set input:focus{border-color:var(--gold)}
+.ex-log-set .unit{color:var(--text3);font-size:11px}
+.ex-log-rpe{display:flex;align-items:center;gap:6px;margin-bottom:8px;font-size:12px}
+.ex-log-rpe label{color:var(--text3);font-weight:600}
+.ex-log-rpe select{padding:4px 8px;border:1px solid var(--border);border-radius:6px;background:rgba(255,255,255,.03);color:var(--text);font-size:13px;font-family:inherit;outline:none}
+.ex-log-save{padding:6px 16px;border:none;border-radius:6px;background:var(--gold);color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:.5px;transition:background .2s}
+.ex-log-save:hover{background:#B8960C}
+.ex-log-saved{font-size:11px;color:var(--green);margin-top:4px}
+
+/* PROGRESS TAB */
+.progress-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.progress-card .card-title{margin-bottom:10px}
+.progress-stat-row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px}
+.progress-stat{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.progress-stat .ps-val{font-size:22px;font-weight:800;color:var(--gold)}
+.progress-stat .ps-label{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+.chart-container{width:100%;overflow:hidden}
+.chart-container svg{width:100%;height:auto}
+.chart-label{font-size:11px;fill:var(--text3);font-family:inherit}
+.chart-line{fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.chart-dot{fill:var(--gold);stroke:var(--bg);stroke-width:2}
+.chart-area{fill:rgba(197,165,90,.08)}
+.chart-grid{stroke:var(--border);stroke-width:0.5}
+.chart-date{font-size:9px;fill:var(--text3);font-family:inherit}
+.progress-empty{text-align:center;padding:40px 20px;color:var(--text3);font-size:13px}
 
 /* PRINCIPLE */
 .principle{background:linear-gradient(135deg,rgba(197,165,90,.08),rgba(197,165,90,.02));border:1px solid rgba(197,165,90,.2);border-radius:var(--radius);padding:20px;margin-bottom:16px}
@@ -131,6 +195,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .tabs{margin:0 16px}
 .nav{padding:0 16px}
 .nav-user{display:none}
+.morning-bar{margin:0 16px}
+.morning-row{grid-template-columns:1fr 1fr}
+.progress-stat-row{grid-template-columns:1fr 1fr}
 }
 
 /* SCROLLBAR */
@@ -151,6 +218,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   </div>
 </nav>
 
+<!-- MORNING CHECKIN -->
+<div class="morning-bar" id="morningBar"></div>
+
 <!-- WEEK BAR -->
 <div class="week-bar" id="weekBar"></div>
 
@@ -166,6 +236,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <button class="tab-btn" data-tab="today" onclick="setTab('today')">Today</button>
   <button class="tab-btn" data-tab="nutrition" onclick="setTab('nutrition')">Nutrition</button>
   <button class="tab-btn" data-tab="supplements" onclick="setTab('supplements')">Supplements</button>
+  <button class="tab-btn" data-tab="progress" onclick="setTab('progress')">Progress</button>
 </div>
 
 <!-- CONTENT -->
@@ -174,6 +245,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <div class="tab-panel" id="panel-today"></div>
   <div class="tab-panel" id="panel-nutrition"></div>
   <div class="tab-panel" id="panel-supplements"></div>
+  <div class="tab-panel" id="panel-progress"></div>
 </div>
 
 <script>
@@ -186,7 +258,8 @@ var state = {
   currentWeek: 1,
   currentScene: localStorage.getItem('wt_scene') || 'gym',
   currentTab: 'overview',
-  checkins: JSON.parse(localStorage.getItem('wt_checkins') || '{}')
+  checkins: JSON.parse(localStorage.getItem('wt_checkins') || '{}'),
+  morningOpen: false
 };
 
 if (!state.role) { window.location.href = 'login.html'; }
@@ -683,6 +756,200 @@ function toggleCheckin(w, dayOfWeek) {
   state.checkins = JSON.parse(localStorage.getItem('wt_checkins') || '{}');
 }
 
+// ===== MORNING CHECKIN =====
+function getTodayStr() {
+  var d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+
+function getMorningData() {
+  var key = 'wt_morning_' + getTodayStr();
+  try { return JSON.parse(localStorage.getItem(key)); } catch(e) { return null; }
+}
+
+function saveMorningData(data) {
+  var key = 'wt_morning_' + getTodayStr();
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function renderMorningBar() {
+  var container = document.getElementById('morningBar');
+  var data = getMorningData();
+  var done = !!data;
+  var h = '';
+  h += '<button class="morning-toggle ' + (done ? 'done' : '') + (state.morningOpen ? ' open' : '') + '" onclick="toggleMorningPanel()">';
+  h += '<span>' + (done ? '✓ 晨间打卡已完成' : '☀ 晨间打卡') + '</span>';
+  h += '<span class="arrow">▼</span>';
+  h += '</button>';
+
+  if (done) {
+    h += '<div class="morning-panel' + (state.morningOpen ? ' open' : '') + '">';
+    h += '<div class="morning-summary">';
+    h += '<div class="morning-summary-grid">';
+    h += '<div><div class="ms-val">' + (data.weight || '—') + '</div><div class="ms-label">体重 kg</div></div>';
+    h += '<div><div class="ms-val">' + (data.hr || '—') + '</div><div class="ms-label">心率 bpm</div></div>';
+    h += '<div><div class="ms-val">' + (data.hrv || '—') + '</div><div class="ms-label">HRV ms</div></div>';
+    h += '</div>';
+    h += '<div class="morning-summary-grid" style="margin-top:8px">';
+    h += '<div><div class="ms-val">' + (data.sleep || '—') + '/5</div><div class="ms-label">睡眠</div></div>';
+    h += '<div><div class="ms-val">' + (data.energy || '—') + '/5</div><div class="ms-label">能量</div></div>';
+    if (data.notes) {
+      h += '<div style="grid-column:span 1"><div style="font-size:11px;color:var(--text3);margin-top:4px">' + data.notes + '</div></div>';
+    }
+    h += '</div>';
+    h += '<button class="morning-reset" onclick="resetMorning()">重新打卡</button>';
+    h += '</div></div>';
+  } else {
+    h += '<div class="morning-panel' + (state.morningOpen ? ' open' : '') + '">';
+    h += '<div class="morning-form">';
+    h += '<div class="morning-row">';
+    h += '<div class="morning-field"><label>体重 (kg)</label><input type="number" id="mWeight" step="0.1" min="30" max="200" placeholder="62.5"></div>';
+    h += '<div class="morning-field"><label>静息心率 (bpm)</label><input type="number" id="mHR" min="30" max="120" placeholder="58"></div>';
+    h += '</div>';
+    h += '<div class="morning-row">';
+    h += '<div class="morning-field"><label>HRV (ms)</label><input type="number" id="mHRV" min="10" max="200" placeholder="45"></div>';
+    h += '<div class="morning-field"><label>备注</label><textarea id="mNotes" placeholder="身体感觉、疼痛等（可选）"></textarea></div>';
+    h += '</div>';
+    h += '<div class="morning-row">';
+    h += '<div class="morning-field"><label>睡眠质量</label><input type="range" id="mSleep" min="1" max="5" value="3" oninput="document.getElementById(\'mSleepVal\').textContent=this.value"><div class="range-val" id="mSleepVal">3</div></div>';
+    h += '<div class="morning-field"><label>能量水平</label><input type="range" id="mEnergy" min="1" max="5" value="3" oninput="document.getElementById(\'mEnergyVal\').textContent=this.value"><div class="range-val" id="mEnergyVal">3</div></div>';
+    h += '</div>';
+    h += '<button class="morning-submit" onclick="submitMorning()">提交晨间数据</button>';
+    h += '</div></div>';
+  }
+
+  container.innerHTML = h;
+}
+
+function toggleMorningPanel() {
+  state.morningOpen = !state.morningOpen;
+  renderMorningBar();
+}
+
+function submitMorning() {
+  var data = {
+    weight: parseFloat(document.getElementById('mWeight').value) || null,
+    hr: parseInt(document.getElementById('mHR').value) || null,
+    hrv: parseInt(document.getElementById('mHRV').value) || null,
+    sleep: parseInt(document.getElementById('mSleep').value),
+    energy: parseInt(document.getElementById('mEnergy').value),
+    notes: document.getElementById('mNotes').value.trim()
+  };
+  saveMorningData(data);
+  state.morningOpen = false;
+  renderMorningBar();
+  if (state.currentTab === 'progress') renderProgress();
+}
+
+function resetMorning() {
+  var key = 'wt_morning_' + getTodayStr();
+  localStorage.removeItem(key);
+  state.morningOpen = true;
+  renderMorningBar();
+}
+
+// ===== POST-WORKOUT LOG =====
+function getLogKey() {
+  return 'wt_log_W' + state.currentWeek + '_' + getTodayKey();
+}
+
+function getLogData() {
+  try { return JSON.parse(localStorage.getItem(getLogKey())) || {exercises:{}}; } catch(e) { return {exercises:{}}; }
+}
+
+function saveLogData(data) {
+  localStorage.setItem(getLogKey(), JSON.stringify(data));
+}
+
+function toggleExLog(exName) {
+  var el = document.getElementById('logpanel-' + CSS.escape(exName));
+  if (el) el.classList.toggle('open');
+}
+
+function saveExLog(exName) {
+  var data = getLogData();
+  var container = document.getElementById('logform-' + CSS.escape(exName));
+  if (!container) return;
+  var setEls = container.querySelectorAll('.ex-log-set');
+  var sets = [];
+  setEls.forEach(function(s) {
+    var w = parseFloat(s.querySelector('.log-weight').value) || 0;
+    var r = parseInt(s.querySelector('.log-reps').value) || 0;
+    sets.push({weight: w, reps: r});
+  });
+  var rpe = parseInt(container.querySelector('.log-rpe').value) || 5;
+  data.exercises[exName] = { sets: sets, rpe: rpe };
+  saveLogData(data);
+  // Show saved feedback
+  var savedEl = container.querySelector('.ex-log-saved');
+  if (savedEl) {
+    savedEl.textContent = '✓ 已保存';
+    savedEl.style.display = 'block';
+    setTimeout(function(){ savedEl.style.display = 'none'; }, 2000);
+  }
+}
+
+function addLogSet(exName) {
+  var container = document.getElementById('logsets-' + CSS.escape(exName));
+  if (!container) return;
+  var idx = container.children.length + 1;
+  var div = document.createElement('div');
+  div.className = 'ex-log-set';
+  div.innerHTML = '<label>#' + idx + '</label><input type="number" class="log-weight" placeholder="kg" step="0.5" min="0"><span class="unit">×</span><input type="number" class="log-reps" placeholder="次" min="0"><span class="unit">rep</span>';
+  container.appendChild(div);
+}
+
+function renderExerciseWithLog(ex) {
+  var modeClass = ex.mode === 'flex' ? 'tag-mode-flex' : (ex.mode === 'stab' ? 'tag-mode-stab' : 'tag-mode-perf');
+  var modeText = ex.mode === 'flex' ? '灵活力量' : (ex.mode === 'stab' ? '稳定力量' : '运动表现');
+  var h = '<div class="exercise">';
+  h += '<div class="ex-header"><span class="ex-name">' + ex.name + '</span><span class="ex-sets">' + ex.sets + '</span></div>';
+  h += '<div class="ex-meta">';
+  h += '<span class="ex-tag ' + modeClass + '">' + modeText + '</span>';
+  if (ex.rest && ex.rest !== '—') h += '<span class="ex-tag tag-rest">休息 ' + ex.rest + '</span>';
+  if (ex.type) h += '<span class="ex-tag tag-rest">' + ex.type + '</span>';
+  h += '</div>';
+  if (ex.note) h += '<p class="ex-note">' + ex.note + '</p>';
+
+  // Post-workout log toggle
+  var logData = getLogData();
+  var hasLog = logData.exercises && logData.exercises[ex.name];
+  var safeId = ex.name;
+  h += '<button class="ex-log-toggle" onclick="toggleExLog(\'' + safeId.replace(/'/g, "\\'") + '\')">📝 ' + (hasLog ? '查看/编辑记录' : '记录训练数据') + ' <span style="font-size:8px">▼</span></button>';
+  h += '<div class="ex-log-panel" id="logpanel-' + safeId + '">';
+  h += '<div class="ex-log-form" id="logform-' + safeId + '">';
+
+  // Parse sets count from ex.sets string
+  var setsMatch = ex.sets.match(/(\d+)/);
+  var numSets = setsMatch ? Math.min(parseInt(setsMatch[1]), 8) : 3;
+
+  h += '<div class="ex-log-sets" id="logsets-' + safeId + '">';
+  if (hasLog) {
+    logData.exercises[ex.name].sets.forEach(function(s, i) {
+      h += '<div class="ex-log-set"><label>#' + (i+1) + '</label><input type="number" class="log-weight" placeholder="kg" step="0.5" min="0" value="' + (s.weight || '') + '"><span class="unit">×</span><input type="number" class="log-reps" placeholder="次" min="0" value="' + (s.reps || '') + '"><span class="unit">rep</span></div>';
+    });
+  } else {
+    for (var si = 0; si < numSets; si++) {
+      h += '<div class="ex-log-set"><label>#' + (si+1) + '</label><input type="number" class="log-weight" placeholder="kg" step="0.5" min="0"><span class="unit">×</span><input type="number" class="log-reps" placeholder="次" min="0"><span class="unit">rep</span></div>';
+    }
+  }
+  h += '</div>';
+  h += '<button class="ex-log-toggle" onclick="addLogSet(\'' + safeId.replace(/'/g, "\\'") + '\')" style="margin-bottom:8px;font-size:10px">+ 添加一组</button>';
+
+  var currentRpe = hasLog ? logData.exercises[ex.name].rpe : 5;
+  h += '<div class="ex-log-rpe"><label>RPE</label><select class="log-rpe">';
+  for (var ri = 1; ri <= 10; ri++) {
+    h += '<option value="' + ri + '"' + (ri === currentRpe ? ' selected' : '') + '>' + ri + '</option>';
+  }
+  h += '</select><span style="color:var(--text3);font-size:11px;margin-left:4px">/ 10</span></div>';
+  h += '<button class="ex-log-save" onclick="saveExLog(\'' + safeId.replace(/'/g, "\\'") + '\')">保存记录</button>';
+  h += '<div class="ex-log-saved" style="display:none">✓ 已保存</div>';
+  h += '</div></div>';
+
+  h += '</div>';
+  return h;
+}
+
 // ===== INIT =====
 function init() {
   // Nav
@@ -735,6 +1002,13 @@ function doLogout() {
   localStorage.removeItem('wt_start_date');
   localStorage.removeItem('wt_checkins');
   localStorage.removeItem('wt_scene');
+  // Clean up morning and log data on logout
+  var keysToRemove = [];
+  for (var i = 0; i < localStorage.length; i++) {
+    var k = localStorage.key(i);
+    if (k.indexOf('wt_morning_') === 0 || k.indexOf('wt_log_') === 0) keysToRemove.push(k);
+  }
+  keysToRemove.forEach(function(k) { localStorage.removeItem(k); });
 }
 
 function updateAll() {
@@ -748,10 +1022,12 @@ function updateAll() {
 }
 
 function renderAll() {
+  renderMorningBar();
   renderOverview();
   renderToday();
   renderNutrition();
   renderSupplements();
+  renderProgress();
 }
 
 // ===== RENDER: OVERVIEW =====
@@ -842,11 +1118,11 @@ function renderToday() {
   html += '<div class="card-title" style="margin-bottom:12px">Week ' + w + ' · ' + ['周日','周一','周二','周三','周四','周五','周六'][dow] + '</div>';
 
   if (dayKey === 'Cardio') {
-    html += renderExerciseGroup(CARDIO);
+    html += renderExerciseGroupWithLog(CARDIO);
     var ck = isCheckinDone(w, 3);
     html += '<button class="checkin-btn ' + (ck ? 'completed' : 'pending') + '" onclick="doCheckin(3)">' + (ck ? '✓ 今日已完成' : '完成打卡') + '</button>';
   } else if (dayKey === 'Rest') {
-    html += renderExerciseGroup(REST);
+    html += renderExerciseGroupWithLog(REST);
     var ck = isCheckinDone(w, 0);
     html += '<button class="checkin-btn ' + (ck ? 'completed' : 'pending') + '" onclick="doCheckin(0)">☀ 休息日</button>';
   } else {
@@ -855,7 +1131,7 @@ function renderToday() {
     if (session) {
       html += '<div class="card" style="margin-bottom:16px"><div class="card-title">' + session.day + '</div><h3>' + session.focus + '</h3></div>';
       session.exercises.forEach(function(ex) {
-        html += renderExercise(ex);
+        html += renderExerciseWithLog(ex);
       });
       var ck = isCheckinDone(w, dow);
       html += '<button class="checkin-btn ' + (ck ? 'completed' : 'pending') + '" onclick="doCheckin(' + dow + ')">' + (ck ? '✓ 今日训练已完成' : '完成今日训练打卡') + '</button>';
@@ -885,6 +1161,12 @@ function renderExercise(ex) {
 function renderExerciseGroup(session) {
   var h = '<div class="card" style="margin-bottom:16px"><div class="card-title">' + session.day + '</div><h3>' + session.focus + '</h3></div>';
   session.exercises.forEach(function(ex) { h += renderExercise(ex); });
+  return h;
+}
+
+function renderExerciseGroupWithLog(session) {
+  var h = '<div class="card" style="margin-bottom:16px"><div class="card-title">' + session.day + '</div><h3>' + session.focus + '</h3></div>';
+  session.exercises.forEach(function(ex) { h += renderExerciseWithLog(ex); });
   return h;
 }
 
@@ -1072,6 +1354,195 @@ function suppCard(name, dose, timing, effect, evidence, note) {
   if (note) h += '<p class="supp-note">' + note + '</p>';
   h += '</div>';
   return h;
+}
+
+// ===== RENDER: PROGRESS =====
+function renderProgress() {
+  var html = '';
+  var today = new Date();
+
+  // Collect last 7 days of morning data
+  var morningDays = [];
+  for (var di = 6; di >= 0; di--) {
+    var d = new Date(today);
+    d.setDate(d.getDate() - di);
+    var ds = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    var label = String(d.getMonth()+1) + '/' + String(d.getDate());
+    try {
+      var mData = JSON.parse(localStorage.getItem('wt_morning_' + ds));
+      morningDays.push({ date: ds, label: label, data: mData });
+    } catch(e) {
+      morningDays.push({ date: ds, label: label, data: null });
+    }
+  }
+
+  // Stats: checkin count this week, avg RPE
+  var w = state.currentWeek;
+  var checkinCount = 0;
+  for (var dow = 0; dow <= 6; dow++) {
+    if (isCheckinDone(w, dow)) checkinCount++;
+  }
+
+  // Collect RPE from all logs for current week
+  var dayKeys = ['Lower A','Upper A','Cardio','Lower B','Upper B','Saturday'];
+  var rpeSum = 0, rpeCount = 0;
+  var totalVolume = 0;
+  dayKeys.forEach(function(dk) {
+    try {
+      var logData = JSON.parse(localStorage.getItem('wt_log_W' + w + '_' + dk));
+      if (logData && logData.exercises) {
+        Object.keys(logData.exercises).forEach(function(exName) {
+          var ex = logData.exercises[exName];
+          if (ex.rpe) { rpeSum += ex.rpe; rpeCount++; }
+          if (ex.sets) {
+            ex.sets.forEach(function(s) {
+              totalVolume += (s.weight || 0) * (s.reps || 0);
+            });
+          }
+        });
+      }
+    } catch(e) {}
+  });
+  var avgRpe = rpeCount > 0 ? (rpeSum / rpeCount).toFixed(1) : '—';
+
+  // Stats cards
+  html += '<div class="card-title" style="margin-bottom:12px">数据趋势</div>';
+  html += '<div class="progress-stat-row">';
+  html += '<div class="progress-stat"><div class="ps-val">' + checkinCount + '</div><div class="ps-label">本周打卡天数</div></div>';
+  html += '<div class="progress-stat"><div class="ps-val">' + avgRpe + '</div><div class="ps-label">平均 RPE</div></div>';
+  html += '</div>';
+  html += '<div class="progress-stat-row">';
+  html += '<div class="progress-stat"><div class="ps-val">' + totalVolume + '</div><div class="ps-label">训练量 (kg×rep)</div></div>';
+  html += '<div class="progress-stat"><div class="ps-val">' + rpeCount + '</div><div class="ps-label">已记录动作</div></div>';
+  html += '</div>';
+
+  // Weight chart (last 7 days)
+  var weightVals = morningDays.filter(function(d){ return d.data && d.data.weight; });
+  html += '<div class="progress-card"><div class="card-title">体重趋势 (近7天)</div>';
+  if (weightVals.length >= 2) {
+    html += buildLineChart(morningDays, function(d){ return d.data ? d.data.weight : null; }, 'kg');
+  } else {
+    html += '<div class="progress-empty">至少需要2天晨间打卡数据才能显示趋势</div>';
+  }
+  html += '</div>';
+
+  // HRV chart
+  var hrvVals = morningDays.filter(function(d){ return d.data && d.data.hrv; });
+  html += '<div class="progress-card"><div class="card-title">HRV 趋势 (近7天)</div>';
+  if (hrvVals.length >= 2) {
+    html += buildLineChart(morningDays, function(d){ return d.data ? d.data.hrv : null; }, 'ms');
+  } else {
+    html += '<div class="progress-empty">至少需要2天晨间打卡数据才能显示趋势</div>';
+  }
+  html += '</div>';
+
+  // Training volume from logs across recent days
+  html += '<div class="progress-card"><div class="card-title">本周训练记录</div>';
+  var hasAnyLog = false;
+  dayKeys.forEach(function(dk) {
+    try {
+      var logData = JSON.parse(localStorage.getItem('wt_log_W' + w + '_' + dk));
+      if (logData && logData.exercises && Object.keys(logData.exercises).length > 0) {
+        hasAnyLog = true;
+        var dayVol = 0;
+        var dayRpeSum = 0, dayRpeN = 0;
+        Object.keys(logData.exercises).forEach(function(exName) {
+          var ex = logData.exercises[exName];
+          if (ex.rpe) { dayRpeSum += ex.rpe; dayRpeN++; }
+          if (ex.sets) ex.sets.forEach(function(s) { dayVol += (s.weight||0) * (s.reps||0); });
+        });
+        html += '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px">';
+        html += '<span style="font-weight:700">' + dk + '</span>';
+        html += '<span style="color:var(--text3)">' + Object.keys(logData.exercises).length + ' 动作 · ' + dayVol + ' kg · RPE ' + (dayRpeN > 0 ? (dayRpeSum/dayRpeN).toFixed(1) : '—') + '</span>';
+        html += '</div>';
+      }
+    } catch(e) {}
+  });
+  if (!hasAnyLog) {
+    html += '<div class="progress-empty">暂无训练记录数据，在 Today 页面完成训练后可记录每个动作的实际数据</div>';
+  }
+  html += '</div>';
+
+  document.getElementById('panel-progress').innerHTML = html;
+}
+
+// SVG line chart builder
+function buildLineChart(days, valueFn, unit) {
+  var W = 300, H = 120, padL = 36, padR = 10, padT = 10, padB = 24;
+  var chartW = W - padL - padR;
+  var chartH = H - padT - padB;
+
+  // Extract values and filter nulls
+  var points = [];
+  var vals = [];
+  days.forEach(function(d, i) {
+    var v = valueFn(d);
+    if (v !== null && v !== undefined) {
+      points.push({ idx: i, val: v, label: d.label });
+      vals.push(v);
+    }
+  });
+
+  if (vals.length < 2) return '<div class="progress-empty">数据不足</div>';
+
+  var minV = Math.min.apply(null, vals);
+  var maxV = Math.max.apply(null, vals);
+  if (minV === maxV) { minV -= 1; maxV += 1; }
+  var rangeV = maxV - minV;
+  // Add 10% padding
+  minV -= rangeV * 0.1;
+  maxV += rangeV * 0.1;
+  rangeV = maxV - minV;
+
+  var xStep = points.length > 1 ? chartW / (days.length - 1) : 0;
+
+  var svg = '<div class="chart-container"><svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg">';
+
+  // Grid lines
+  for (var gi = 0; gi <= 3; gi++) {
+    var gy = padT + (chartH / 3) * gi;
+    svg += '<line class="chart-grid" x1="' + padL + '" y1="' + gy + '" x2="' + (W - padR) + '" y2="' + gy + '"/>';
+    var gv = (maxV - (rangeV / 3) * gi).toFixed(1);
+    svg += '<text class="chart-label" x="' + (padL - 4) + '" y="' + (gy + 3) + '" text-anchor="end">' + gv + '</text>';
+  }
+
+  // Build path
+  var pathPoints = [];
+  points.forEach(function(p) {
+    var x = padL + p.idx * xStep;
+    var y = padT + chartH - ((p.val - minV) / rangeV) * chartH;
+    pathPoints.push({ x: x, y: y, val: p.val, label: p.label });
+  });
+
+  // Area fill
+  if (pathPoints.length > 1) {
+    var areaPath = 'M' + pathPoints[0].x + ',' + (padT + chartH);
+    pathPoints.forEach(function(p) { areaPath += ' L' + p.x + ',' + p.y; });
+    areaPath += ' L' + pathPoints[pathPoints.length-1].x + ',' + (padT + chartH) + ' Z';
+    svg += '<path class="chart-area" d="' + areaPath + '"/>';
+  }
+
+  // Line
+  var linePath = 'M' + pathPoints[0].x + ',' + pathPoints[0].y;
+  for (var li = 1; li < pathPoints.length; li++) {
+    linePath += ' L' + pathPoints[li].x + ',' + pathPoints[li].y;
+  }
+  svg += '<path class="chart-line" d="' + linePath + '"/>';
+
+  // Dots and labels
+  pathPoints.forEach(function(p) {
+    svg += '<circle class="chart-dot" cx="' + p.x + '" cy="' + p.y + '" r="3"/>';
+    svg += '<text class="chart-label" x="' + p.x + '" y="' + (p.y - 8) + '" text-anchor="middle" style="font-size:9px;fill:var(--gold)">' + p.val + '</text>';
+  });
+
+  // X-axis date labels
+  days.forEach(function(d, i) {
+    var x = padL + i * xStep;
+    svg += '<text class="chart-date" x="' + x + '" y="' + (H - 4) + '" text-anchor="middle">' + d.label + '</text>';
+  });
+
+  svg += '</svg></div>';
+  return svg;
 }
 
 // ===== BOOT =====

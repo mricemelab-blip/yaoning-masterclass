@@ -959,13 +959,13 @@ function saveLogData(data) {
 }
 
 function toggleExLog(exName) {
-  var el = document.getElementById('logpanel-' + CSS.escape(exName));
+  var el = document.getElementById('logpanel-' + exName);
   if (el) el.classList.toggle('open');
 }
 
 function saveExLog(exName) {
   var data = getLogData();
-  var container = document.getElementById('logform-' + CSS.escape(exName));
+  var container = document.getElementById('logform-' + exName);
   if (!container) return;
   var setEls = container.querySelectorAll('.ex-log-set');
   var sets = [];
@@ -977,7 +977,6 @@ function saveExLog(exName) {
   var rpe = parseInt(container.querySelector('.log-rpe').value) || 5;
   data.exercises[exName] = { sets: sets, rpe: rpe };
   saveLogData(data);
-  // Show saved feedback
   var savedEl = container.querySelector('.ex-log-saved');
   if (savedEl) {
     savedEl.textContent = '✓ 已保存';
@@ -987,7 +986,7 @@ function saveExLog(exName) {
 }
 
 function addLogSet(exName) {
-  var container = document.getElementById('logsets-' + CSS.escape(exName));
+  var container = document.getElementById('logsets-' + exName);
   if (!container) return;
   var idx = container.children.length + 1;
   var div = document.createElement('div');
@@ -1287,7 +1286,8 @@ function renderNutrition() {
     return;
   }
 
-  var weightKg = parseFloat(p.weight);
+  var reportToday = getReportData() || {};
+  var weightKg = reportToday.weight ? parseFloat(reportToday.weight) : parseFloat(p.weight);
   var heightCm = parseFloat(p.height);
   var age = parseInt(p.age);
   var weightLbs = weightKg * 2.205;
@@ -1322,6 +1322,9 @@ function renderNutrition() {
   var fatG = Math.round((targetCal * 0.25) / 9);
 
   html += '<div class="phase-badge ' + getPhase(w).cls + '">' + getPhase(w).name + ' · ' + strategy + '</div>';
+
+  var weightSource = reportToday.weight ? '今日晨重 ' + weightKg + 'kg' : '问卷体重 ' + weightKg + 'kg（填写晨间打卡后自动更新）';
+  html += '<div style="font-size:11px;color:var(--text3);margin-bottom:12px">计算体重：' + weightSource + '</div>';
 
   html += '<div class="card"><div class="card-title">基础代谢</div>';
   html += '<div class="macro-grid">';

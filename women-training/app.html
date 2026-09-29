@@ -763,7 +763,48 @@ function renderOverview() {
   var dayNames = ['周一','周二','周三','周四','周五','周六','周日'];
   var dayClasses = ['day-mon','day-tue','day-wed','day-thu','day-fri','day-sat','day-sun'];
 
+  var p = state.profile || {};
   var html = '';
+
+  // Profile card
+  if(p.age || p.weight){
+    html += '<div class="card"><div class="card-title">我的资料</div>';
+    html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px">';
+    if(p.age) html += '<div><span style="color:var(--text3)">年龄</span><br><strong>' + p.age + '</strong></div>';
+    if(p.height) html += '<div><span style="color:var(--text3)">身高</span><br><strong>' + p.height + ' cm</strong></div>';
+    if(p.weight) html += '<div><span style="color:var(--text3)">体重</span><br><strong>' + p.weight + ' kg</strong></div>';
+    if(p.targetWeight) html += '<div><span style="color:var(--text3)">目标体重</span><br><strong>' + p.targetWeight + ' kg</strong></div>';
+    html += '</div>';
+    var mensMap = {regular:'周期规律',irregular:'周期不规律',perimenopause:'围绝经期',menopause:'已绝经'};
+    var mhtMap = {yes:'是',no:'否',considering:'正在考虑'};
+    html += '<div style="margin-top:12px;display:flex;gap:20px;flex-wrap:wrap;font-size:12px">';
+    if(p.menstrualStatus) html += '<span><span style="color:var(--text3)">月经状态</span> ' + (mensMap[p.menstrualStatus]||p.menstrualStatus) + '</span>';
+    if(p.mhtStatus) html += '<span><span style="color:var(--text3)">激素治疗</span> ' + (mhtMap[p.mhtStatus]||p.mhtStatus) + '</span>';
+    if(p.trainingFreq) html += '<span><span style="color:var(--text3)">训练频率</span> ' + p.trainingFreq + ' 次/周</span>';
+    if(p.experience){
+      var expMap = {beginner:'零基础',some:'1-2年',intermediate:'3-5年',advanced:'5年以上'};
+      html += '<span><span style="color:var(--text3)">训练经验</span> ' + (expMap[p.experience]||p.experience) + '</span>';
+    }
+    html += '</div>';
+    if(p.symptoms && p.symptoms.length){
+      html += '<div style="margin-top:12px"><span style="color:var(--text3);font-size:11px;letter-spacing:1px;text-transform:uppercase">当前症状</span>';
+      html += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">';
+      p.symptoms.forEach(function(s){
+        html += '<span style="font-size:11px;padding:3px 10px;background:rgba(239,68,68,.1);color:#F87171;border-radius:4px;font-weight:600">' + s + '</span>';
+      });
+      html += '</div></div>';
+    }
+    if(p.goals && p.goals.length){
+      html += '<div style="margin-top:12px"><span style="color:var(--text3);font-size:11px;letter-spacing:1px;text-transform:uppercase">训练目标</span>';
+      html += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">';
+      p.goals.forEach(function(g){
+        html += '<span style="font-size:11px;padding:3px 10px;background:var(--gold-dim);color:var(--gold);border-radius:4px;font-weight:600">' + g + '</span>';
+      });
+      html += '</div></div>';
+    }
+    html += '</div>';
+  }
+
   html += '<div class="phase-badge ' + phase.cls + '">' + phase.name + '</div>';
   html += '<div class="card"><div class="card-title">阶段目标</div><h3>' + phase.goal + '</h3>';
   html += '<p style="margin-top:8px;color:var(--gold);font-size:13px">强度：' + phase.intensity + '</p></div>';

@@ -84,6 +84,43 @@ a:hover{text-decoration:underline}
   .course-footer{flex-direction:column;align-items:flex-start;gap:.5rem}
   .course-btn{width:100%;text-align:center}
 }
+
+/* ===== LITERATURE TOOLBAR ===== */
+.lit-toolbar{margin-bottom:1.25rem}
+.lit-search{width:100%;height:40px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:0 14px;font-size:.875rem;color:var(--text);outline:none;margin-bottom:.75rem;transition:border-color .2s}
+.lit-search:focus{border-color:var(--gold)}
+.lit-search::placeholder{color:var(--text3)}
+.lit-filters{display:flex;gap:.375rem;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:.25rem}
+.lit-filters::-webkit-scrollbar{display:none}
+.lit-filter{flex:0 0 auto;background:var(--bg3);border:1px solid var(--border);color:var(--text3);padding:.25rem .625rem;border-radius:20px;font-size:.75rem;cursor:pointer;transition:all .2s;white-space:nowrap}
+.lit-filter:hover{border-color:var(--gold-dim);color:var(--text2)}
+.lit-filter.active{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.lit-filter span{font-size:.6875rem;opacity:.7;margin-left:2px}
+
+/* ===== LIT CARD ===== */
+.lit-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem;transition:border-color .2s}
+.lit-card:hover{border-color:var(--gold-dim)}
+.lit-card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;margin-bottom:.375rem}
+.lit-card-title{font-size:.9375rem;font-weight:600;color:var(--text);line-height:1.45;flex:1}
+.lit-card-type{flex:0 0 auto;font-size:.625rem;padding:.125rem .5rem;border-radius:10px;letter-spacing:.5px;white-space:nowrap;margin-top:2px}
+.type-srma{background:rgba(200,164,94,.12);color:#C8A45E;border:1px solid rgba(200,164,94,.2)}
+.type-nma{background:rgba(76,175,80,.1);color:#66BB6A;border:1px solid rgba(76,175,80,.2)}
+.type-umb{background:rgba(100,181,246,.1);color:#64B5F6;border:1px solid rgba(100,181,246,.2)}
+.type-rct{background:rgba(255,152,0,.1);color:#FFA726;border:1px solid rgba(255,152,0,.2)}
+.type-pos{background:rgba(171,71,188,.1);color:#CE93D8;border:1px solid rgba(171,71,188,.2)}
+.type-other{background:rgba(255,255,255,.05);color:var(--text3);border:1px solid var(--border)}
+.lit-card-meta{font-size:.75rem;color:var(--text3);margin-bottom:.5rem}
+.lit-card-meta span{margin-right:.75rem}
+.lit-card-summary{font-size:.8125rem;color:var(--text2);line-height:1.65}
+.lit-card-journal{font-size:.6875rem;color:var(--text3);margin-top:.5rem;font-style:italic}
+.lit-card-journal a{color:var(--gold-dim);text-decoration:none}
+.lit-card-journal a:hover{color:var(--gold);text-decoration:underline}
+.lit-empty{text-align:center;padding:3rem 1rem}
+
+@media(max-width:480px){
+  .lit-card{padding:.875rem 1rem}
+  .lit-card-title{font-size:.875rem}
+}
 </style>
 </head>
 <body>
@@ -110,26 +147,24 @@ a:hover{text-decoration:underline}
 
   <!-- TAB 1: LITERATURE -->
   <div class="tab-panel active" id="panel-literature">
-    <div class="card">
-      <div class="card-title">呼吸肌训练对歌唱耐力的影响：一项系统综述</div>
-      <div class="card-meta">2026-09-25</div>
-      <div class="card-summary">本综述纳入了12项RCT，系统评估了呼吸肌训练（IMT）对专业歌手歌唱耐力的影响。结果表明，经过6-8周的结构化呼吸肌训练，歌手在高强度歌唱任务中的耐力表现显著提升，呼气肌力量增长约23%-31%。</div>
-      <div class="card-full">本综述纳入了12项RCT，系统评估了呼吸肌训练（IMT）对专业歌手歌唱耐力的影响。结果表明，经过6-8周的结构化呼吸肌训练，歌手在高强度歌唱任务中的耐力表现显著提升，呼气肌力量增长约23%-31%。训练方案主要采用阈值负荷式呼吸训练器，阻力设定为最大吸气压的30%-50%，每次训练15-20分钟，每周5次。值得注意的是，部分研究同时报告了主观疲劳评分的下降和肺活量的改善，但效果量存在异质性。综述认为呼吸肌训练可作为歌手体能训练的有效补充，但现有研究样本量偏小、缺乏长期随访数据。</div>
-      <button class="card-btn" onclick="toggleRead(this)">阅读更多</button>
+    <!-- Search & Filter Bar -->
+    <div class="lit-toolbar">
+      <input type="text" id="litSearch" class="lit-search" placeholder="搜索作者、标题、关键词…" oninput="filterLit()">
+      <div class="lit-filters" id="litFilters">
+        <button class="lit-filter active" data-type="all" onclick="setFilter(this)">全部 <span id="count-all">0</span></button>
+        <button class="lit-filter" data-type="SR/MA" onclick="setFilter(this)">SR/MA <span id="count-srma">0</span></button>
+        <button class="lit-filter" data-type="NMA" onclick="setFilter(this)">NMA <span id="count-nma">0</span></button>
+        <button class="lit-filter" data-type="伞评" onclick="setFilter(this)">伞评 <span id="count-umb">0</span></button>
+        <button class="lit-filter" data-type="RCT" onclick="setFilter(this)">RCT <span id="count-rct">0</span></button>
+        <button class="lit-filter" data-type="立场声明" onclick="setFilter(this)">立场声明</button>
+        <button class="lit-filter" data-type="文献解读" onclick="setFilter(this)">解读 <span id="count-other">0</span></button>
+      </div>
     </div>
-    <div class="card">
-      <div class="card-title">声带结节保守治疗的循证进展</div>
-      <div class="card-meta">2026-09-20</div>
-      <div class="card-summary">声带结节是常见嗓音疾病，多见于职业用嗓人群。本文梳理了近年来声带结节保守治疗的循证进展，涵盖嗓音治疗、药物干预和生活方式调整三个维度，为临床决策提供参考依据。</div>
-      <div class="card-full">声带结节是常见嗓音疾病，多见于职业用嗓人群。本文梳理了近年来声带结节保守治疗的循证进展，涵盖嗓音治疗、药物干预和生活方式调整三个维度。嗓音治疗方面，直接嗓音治疗和间接嗓音治疗均显示出改善声带闭合模式和降低发声疲劳的证据，尤其以嗓音卫生教育结合共鸣训练的方案在多项研究中效果显著。药物干预方面，质子泵抑制剂用于伴随反流的病例有一定依据，但单纯药物治疗的循证等级有限。生活方式调整包括充分水化、避免声带过度使用和减少刺激性物质摄入，这些措施在多数指南中被列为一线保守管理策略。</div>
-      <button class="card-btn" onclick="toggleRead(this)">阅读更多</button>
-    </div>
-    <div class="card">
-      <div class="card-title">腹式呼吸与胸式呼吸对发声效率的对比研究</div>
-      <div class="card-meta">2026-09-15</div>
-      <div class="card-summary">通过声学分析和空气动力学测量，本研究对比了腹式呼吸和胸式呼吸两种呼吸模式对发声效率的影响。结果提示腹式呼吸在声门下压稳定性和发声持续时长方面具有优势。</div>
-      <div class="card-full">通过声学分析和空气动力学测量，本研究对比了腹式呼吸和胸式呼吸两种呼吸模式对发声效率的影响。研究招募了40名无嗓音障碍的成年受试者，分别以腹式呼吸和胸式呼吸模式完成标准化发声任务。声学参数方面，腹式呼吸组的基频微扰（jitter）和振幅微扰（shimmer）均显著低于胸式呼吸组，表明声带振动模式更为规则。空气动力学测量显示腹式呼吸组的声门下压波动更小，最大发声持续时长（MPT）延长约18%。研究认为腹式呼吸通过优化膈肌参与度和胸腔压力调控，为发声提供了更稳定的气流支撑，但个体差异仍需关注。</div>
-      <button class="card-btn" onclick="toggleRead(this)">阅读更多</button>
+    <!-- Literature Cards Container -->
+    <div id="litContainer"></div>
+    <div class="lit-empty" id="litEmpty" style="display:none">
+      <div style="font-size:2rem;opacity:.3;margin-bottom:.75rem">🔍</div>
+      <div style="color:var(--text3);font-size:.875rem">没有找到匹配的文献</div>
     </div>
   </div>
 
@@ -315,6 +350,83 @@ function handleCourseClick(btn){
     btn.classList.add('completed');
   }
 }
+
+/* ===== LITERATURE DATA & RENDERING ===== */
+var LIT_DATA = [{"id": 1, "date": "2026-06-05", "author": "Currier", "year": "2026", "title": "ACSM · ResistanceTraining · PositionStand", "type": "立场声明", "journal": "", "doi": "", "conclusion": "ACSM 2026 抗阻训练处方立场声明"}, {"id": 2, "date": "2026-06-05", "author": "Refalo", "year": "2025", "title": "性别差异 · 肌肉肥大 · BayesianNMA PeerJ", "type": "NMA", "journal": "", "doi": "", "conclusion": "男女抗阻训练后肌肉肥大差异——贝叶斯系统综述与荟萃分析"}, {"id": 3, "date": "2026-06-06", "author": "Solon-Julio", "year": "2026", "title": "心理疲劳 · 抗阻训练 · MA", "type": "文献解读", "journal": "", "doi": "", "conclusion": "心理疲劳对抵抗训练表现的影响"}, {"id": 4, "date": "2026-06-07", "author": "Henselmans", "year": "2026", "title": "碳水肌肥大", "type": "SR/MA", "journal": "asystematicreview—Nutrients期刊，同一作者团队对碳水与力量表现的系统综述", "doi": "", "conclusion": "碳水化合物摄入对肌肉肥大的影响"}, {"id": 5, "date": "2026-06-07", "author": "Poon", "year": "2026", "title": "儿童肥胖 · 抗阻训练 · UmbrellaReview", "type": "伞评", "journal": "", "doi": "", "conclusion": "Poon et al. 2026 | 抗阻训练对超重及肥胖儿童青少年的影响"}, {"id": 6, "date": "2026-06-08", "author": "Fuertes-Kenneally", "year": "2026", "title": "内皮功能 · CVD · 运动NMA 文献解读", "type": "NMA", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 7, "date": "2026-06-08", "author": "McKee", "year": "2026", "title": "高负荷BFR · 抗阻训练", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "高负荷抗阻训练联合血流限制对健康成人的急慢性影响——系统综述与荟萃分析"}, {"id": 8, "date": "2026-06-09", "author": "Masse", "year": "2026", "title": "钙VD · 骨折跌倒", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "钙、维生素D或联合补充预防骨折与跌倒"}, {"id": 9, "date": "2026-06-10", "author": "Brinkmann", "year": "2026", "title": "热量限制 · 训练模式 · 瘦体重 NMA", "type": "NMA", "journal": "", "doi": "//doi.org/10.1111/dom.70873) |", "conclusion": "每日文献解读 · 2026年6月10日"}, {"id": 10, "date": "2026-06-11", "author": "Gu", "year": "2026", "title": "肌酸 · 抗阻训练 · 瘦体重 SRMA N-2", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "一、文献基本信息"}, {"id": 11, "date": "2026-06-11", "author": "Shi", "year": "2026", "title": "心力衰竭 · LVEF · 运动NMA 文献解读", "type": "NMA", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 12, "date": "2026-06-12", "author": "Yang", "year": "2026", "title": "损伤预防 · 青少年足球 · SRMA T-10", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "青少年足球运动员结构化损伤预防项目的有效性"}, {"id": 13, "date": "2026-06-13", "author": "McCarthy", "year": "2026", "title": "铁状态 · 运动女性 · 补铁 文献解读", "type": "文献解读", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 14, "date": "2026-06-13", "author": "Naddafha", "year": "2026", "title": "肌酸绝经后女性", "type": "文献解读", "journal": "", "doi": "", "conclusion": "一、文献基本信息"}, {"id": 15, "date": "2026-06-14", "author": "Camargo", "year": "2026", "title": "肌酸抗炎", "type": "文献解读", "journal": "", "doi": "//doi.org/10.3389/fimmu.2026.1743603) |", "conclusion": "一、文献基本信息"}, {"id": 16, "date": "2026-06-15", "author": "Chang", "year": "2026", "title": "内脏脂肪运动剂量", "type": "文献解读", "journal": "", "doi": "//doi.org/10.1186/s12986-026-01129-w) |", "conclusion": "一、文献基本信息"}, {"id": 17, "date": "2026-06-16", "author": "Gawelczyk", "year": "2026", "title": "生酮饮食 · 无氧表现 · 低碳水 文献解读", "type": "文献解读", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 18, "date": "2026-06-16", "author": "Salame", "year": "2026", "title": "高温补糖", "type": "文献解读", "journal": "", "doi": "//doi.org/10.1080/15502783.2026.2669307) |", "conclusion": "每日文献解读：高温环境下耐力运动的碳水化合物补充"}, {"id": 19, "date": "2026-06-16", "author": "Zhao", "year": "2026", "title": "舞蹈 · 认知障碍 · 运动NMA 文献解读", "type": "NMA", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 20, "date": "2026-06-17", "author": "Walczak", "year": "2026", "title": "损伤预防 · 神经肌肉训练 · 伞评", "type": "伞评", "journal": "", "doi": "//doi.org/10.12775/QS.2026.56.71637) |", "conclusion": "每日文献解读：青少年团队运动多成分神经肌肉训练的下肢损伤预防效果"}, {"id": 21, "date": "2026-06-18", "author": "Strauss", "year": "2026", "title": "HIIT心代谢", "type": "文献解读", "journal": "", "doi": "//doi.org/10.1002/14651858.CD013617.pub2) |", "conclusion": "每日文献解读：高强度间歇训练改善久坐成人心血管代谢健康——Cochrane系统综述"}, {"id": 22, "date": "2026-06-19", "author": "Thurlow", "year": "2026", "title": "短时HIIT急性效应", "type": "文献解读", "journal": "", "doi": "", "conclusion": "短间歇 HIIT 急性生理与感知效应 —— 系统综述与荟萃分析"}, {"id": 23, "date": "2026-06-20", "author": "Li", "year": "2026", "title": "HIIT糖尿病前期", "type": "文献解读", "journal": "", "doi": "", "conclusion": "Li 2026 文献解读：HIIT对糖尿病前期成人血糖控制的系统综述与荟萃分析"}, {"id": 24, "date": "2026-06-21", "author": "Xin", "year": "2026", "title": "高血压运动NMA", "type": "NMA", "journal": "", "doi": "//doi.org/10.1161/JAHA.125.044003) |", "conclusion": "一、文献基本信息"}, {"id": 25, "date": "2026-06-22", "author": "Lin", "year": "2026", "title": "肌少症最优干预方案", "type": "NMA", "journal": "", "doi": "//doi.org/10.3390/nu18091409) |", "conclusion": "一、文献基本信息"}, {"id": 26, "date": "2026-06-23", "author": "Held", "year": "2026", "title": "同时训练伞评", "type": "伞评", "journal": "", "doi": "//doi.org/10.1007/s40279-026-02401-y) |", "conclusion": "一、文献基本信息"}, {"id": 27, "date": "2026-06-23", "author": "Zhang", "year": "2026", "title": "抗阻训练 · 死亡率 · 剂量反应 文献解读", "type": "文献解读", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 28, "date": "2026-06-25", "author": "Minahan", "year": "2026", "title": "压力表现 · 心理技能 · 立场声明 文献解读", "type": "文献解读", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 29, "date": "2026-06-25", "author": "Yao", "year": "2026", "title": "NMT预防ACL年龄差异", "type": "文献解读", "journal": "", "doi": "//doi.org/10.3389/fpubh.2026.1801019) |", "conclusion": "每日文献解读：神经肌肉训练预防ACL损伤的效果年龄差异"}, {"id": 30, "date": "2026-06-25", "author": "Zhou", "year": "2026", "title": "骨质疏松 · 骨密度 · 有氧运动NMA 文献解读", "type": "NMA", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 31, "date": "2026-06-27", "author": "Guo", "year": "2026", "title": "运动类型睡眠 · T22", "type": "NMA", "journal": "", "doi": "//doi.org/10.7717/peerj.21037) |", "conclusion": "每日文献解读：不同运动类型对久坐人群睡眠的影响——系统综述与网络Meta分析"}, {"id": 32, "date": "2026-06-27", "author": "Heidari", "year": "2026", "title": "维生素D肌肉骨骼 · HealthSciRep · N14", "type": "文献解读", "journal": "10.1002/hsr2.72407经Wiley期刊库检索可匹配，发表于HealthScienceReports2026", "doi": "10.1002/hsr2.72407 经Wiley期刊库检索可匹配，发表于*Health Science Reports* 2026年。", "conclusion": "每日文献解读：维生素D状态与补充对人体肌肉骨骼组织功能结局的影响——分层系统综述"}, {"id": 33, "date": "2026-06-27", "author": "Ivanic", "year": "2026", "title": "脑震荡头部加速度 · SportsMed · T23", "type": "文献解读", "journal": "10.1007/s4027902602448x经SpringerLink期刊数据库检索可匹配，发表于SportsMedi", "doi": "10.1007/s40279-026-02448-x 经SpringerLink期刊数据库检索可匹配，发表于*Sports Medicine* 2026年。", "conclusion": "每日文献解读：运动相关脑震荡冲击的头部加速度大小——系统综述与Meta分析"}, {"id": 34, "date": "2026-06-27", "author": "Shirzad", "year": "2026", "title": "咖啡因运动心理疲劳 · PLOSONE · H24", "type": "文献解读", "journal": "", "doi": "10.1371/journal.pone.0348279 经PLOS官网检索可匹配，发表于2026年4月。", "conclusion": "每日文献解读：咖啡因、急性有氧运动与安慰剂对心理疲劳的差异效应——随机对照交叉试验"}, {"id": 35, "date": "2026-06-27", "author": "Soares", "year": "2026", "title": "咖啡因女性自行车表现 · N11", "type": "文献解读", "journal": "", "doi": "10.1123/ijsnem.2026-0022 经搜索可匹配到相关文献记录，发表于IJSNEM 2026年。", "conclusion": "每日文献解读：咖啡因对女性自行车运动表现的增效作用——系统综述与三水平Meta分析"}, {"id": 36, "date": "2026-06-27", "author": "Takezawa", "year": "2026", "title": "正念HRV · mHealth · JMIR H23", "type": "文献解读", "journal": "", "doi": "10.2196/78244 经JMIR官网检索可匹配，为2026年发表的观察性研究。", "conclusion": "每日文献解读：正念冥想练习者的日常压力与心率变异性——mHealth观察性研究"}, {"id": 37, "date": "2026-06-27", "author": "TeixeiraSilva", "year": "2026", "title": "高蛋白肾功能 · 身体成分 · N12", "type": "文献解读", "journal": "10.1111/dom.70996经Wiley期刊数据库检索可匹配，发表于Diabetes,ObesityandMeta", "doi": "10.1111/dom.70996 经Wiley期刊数据库检索可匹配，发表于*Diabetes, Obesity and Metabolism* 2026年。", "conclusion": "每日文献解读：高蛋白饮食对无慢性肾病成人肾功能和身体成分的影响——随机对照试验的系统综述与Meta分析"}, {"id": 38, "date": "2026-06-27", "author": "Wang", "year": "2026", "title": "益生菌运动表现 · FrontNutr · N13", "type": "文献解读", "journal": "", "doi": "10.3389/fnut.2026.1731627 经Frontiers官网检索可匹配，发表于*Frontiers in Nutrition* 2026年。", "conclusion": "每日文献解读：益生菌摄入对健康人运动能力的影响——系统综述与贝叶斯Meta分析"}, {"id": 39, "date": "2026-06-27", "author": "Wang", "year": "2026", "title": "网络正念GAD · JMIR H22", "type": "RCT", "journal": "", "doi": "10.2196/91751 经JMIR官网检索可匹配，为2026年发表的RCT研究。", "conclusion": "每日文献解读：自助式网络正念压力管理治疗广泛性焦虑障碍——随机对照试验"}, {"id": 40, "date": "2026-06-29", "author": "NUS", "year": "2026", "title": "体力活动表观遗传年龄 · Lancet · T24", "type": "文献解读", "journal": "", "doi": "//doi.org/10.1016/j.lanhl.2026.100835) |", "conclusion": "每日文献解读：体力活动与表观遗传衰老——《柳叶刀·老龄健康》系统综述与荟萃分析"}, {"id": 41, "date": "2026-07-02", "author": "Li", "year": "2026", "title": "复合维生素表观遗传衰老", "type": "文献解读", "journal": "", "doi": "", "conclusion": "一、文献基本信息"}, {"id": 42, "date": "2026-07-03", "author": "Pelland", "year": "2026", "title": "抗阻训练剂量反应", "type": "文献解读", "journal": "", "doi": "", "conclusion": "抗阻训练剂量反应——每周容量与频率对肌肥大与力量增长的meta回归分析"}, {"id": 43, "date": "2026-07-05", "author": "Abdelhamid", "year": "2020", "title": "Omega-3脂肪酸心血管疾病一级二级预防 · Cochrane伞评 · N17", "type": "伞评", "journal": "CD003177", "doi": "", "conclusion": "文献解读 | Abdelhamid et al. (2020) — Omega-3脂肪酸用于心血管疾病一级与二级预防：Cochrane系统综述"}, {"id": 44, "date": "2026-07-05", "author": "Ravindran", "year": "2026", "title": "胶原蛋白补剂骨骼肌肉健康 · 伞评 · N16", "type": "伞评", "journal": "", "doi": "", "conclusion": "胶原蛋白补剂与皮肤及骨骼肌肉健康——首项全领域伞评揭示证据真相"}, {"id": 45, "date": "2026-07-06", "author": "Yimam", "year": "2026", "title": "植物蛋白vs动物蛋白长期补剂 · T28", "type": "SR/MA", "journal": "", "doi": "//doi.org/10.3389/fnut.2026.1813846) |", "conclusion": "系统综述与荟萃分析（Systematic Review and Meta-Analysis, SR/MA）"}, {"id": 46, "date": "2026-07-11", "author": "Li", "year": "2026", "title": "器官生物年龄", "type": "文献解读", "journal": "", "doi": "", "conclusion": "每日文献解读 H-26"}, {"id": 47, "date": "2026-07-14", "author": "Ren", "year": "2026", "title": "T2DM肥胖运动HbA1c · BayesianNMA", "type": "NMA", "journal": "", "doi": "", "conclusion": "每日文献解读 T-33"}, {"id": 48, "date": "2026-07-17", "author": "Bao", "year": "2026", "title": "5种RT模式", "type": "NMA", "journal": "", "doi": "", "conclusion": "每日文献解读 T-35"}, {"id": 49, "date": "2026-07-19", "author": "WangY", "year": "2026", "title": "RT血管功能高血压超重 · T37", "type": "SR/MA", "journal": "", "doi": "a systematic review and meta-analysis」（Front Endocrinol (Lausanne). 2026;17:1824213. DOI 10.3389/fendo.2026.1824213. PROSPERO CRD420261323648）共同构成\"RT 血管功能\"的姊妹 SR/MA：前者聚焦高血压/超重人群，后者聚焦 T2DM 人群。同一研究团队 2 个月内连续发表 2 篇主题一致的 SR/MA，方法学连贯", "conclusion": "每日文献解读 T-37"}, {"id": 50, "date": "2026-07-20", "author": "YangY", "year": "2026", "title": "认知NMA · T-38", "type": "NMA", "journal": "", "doi": "9）、关键词均一致。通讯作者 Zbigniew Ossowski 单位 Gdańsk University of Physical Education and Sport（波兰格但斯克体育大学，邮箱 zbigniew.ossowski@awf.gda.pl）已通过 PubMed 官方页 Affiliation 3 核证。第一作者 Yong Yang 双重隶属：成都体育大学（Chengdu Sport University, 641418 Chengdu, China, Affiliation 1）+ 格但斯克体育大学（Affiliation 2）。本文关联同团队近期 Nutrients 2025 姊妹研究「Yang Y, Pan N, Luo J, Liu Y, Ossowski Z. Exercise and Nutrition for Sarcopenia: A Systematic Review and Meta-Analysis with Subgroup Analysis by Population Characteristics. *Nutrients* 2025;17:2342. DOI 10.3390/nu17142342」（15 RCT, 1,258 干预 + 1,233 对照）—— 同通讯作者 Ossowski，方法学风格延续。文献 PMC 全文直链因 captcha 与安全策略本轮未直接抓取 PDF，方法学细节（RoB 各域分布、节点分裂 I² 完整矩阵、SUCRA 精确值、CINeMA/GRADE 评级）以 PubMed 摘要 + PubMed Central 显示的图注（PRISMA 流程、RoB 概况、网络图、森林图、剂量-反应图、SUCRA 图、≤12 周 vs >12 周亚组网络图、≤12 周 vs >12 周 SUCRA 图）为主要信息源。下文以 PubMed 摘要 + 已核证作者背景为信息源。**注**：本文方法学部分细节需在主人有权限时二次核验 PDF 全文。", "conclusion": "每日文献解读 T-38"}, {"id": 51, "date": "2026-07-21", "author": "Seyhan", "year": "2026", "title": "乳清胶原联合补剂RCT · 文献解读口播稿", "type": "RCT", "journal": "", "doi": "10.1186/s13102-026-01846-y", "conclusion": "Seyhan 2026 文献解读：乳清蛋白+胶原蛋白联合补充对骨骼与肌肉的影响"}, {"id": 52, "date": "2026-07-21", "author": "Watson", "year": "2026", "title": "ACL · IPP · SRMA T39", "type": "SR/MA", "journal": "733740）+WakeMed全文PDF+SAGE内部PDF（附Appendix1训练方案表+Figure3森林图+各亚", "doi": "733-740）+ WakeMed 全文 PDF + SAGE 内部 PDF（附 Appendix 1 训练方案表 + Figure 3 森林图 + 各亚组 I² 数据）四源核证完全一致。通讯作者 Samantha L Watson 单位 Northwestern University Feinberg School of Medicine, Chicago, IL, USA（邮箱 samantha.watson1@northwestern.edu）已通过 PubMed Affiliation 1 + SAGE 期刊页\"Notes\"段双源核证。第一作者为医学博士在读（BS, Feinberg School of Medicine），由 Vehniah K Tjong（MD, 双隶属 Northwestern Feinberg + Department of Orthopaedic Surgery, Northwestern Memorial Hospital）资深通讯监督。**全部核心数据**（整体 RR=0.46、<18 岁 0.35、≥18 岁 0.50、女性 0.57、足球 0.30、手球 0.66、平衡板 0.49、I²=32% / 0% / 66%、样本量 25,166、研究数 9 RCT + 9 队列、年龄 19.3±3.6、>85% 女性、4 项运动项目、干预最短 1 赛季、PROSPERO 注册号未在 PubMed 摘要显示——待原文核证）**与 PubMed 摘要 + SAGE 期刊页 + WakeMed PDF + SAGE 内部 PDF 全部一致**。", "conclusion": "每日文献解读 T-39"}, {"id": 53, "date": "2026-07-22", "author": "Sharifian", "year": "2026", "title": "肌酸运动老年人 · T40", "type": "SR/MA", "journal": "17,BMC旗下）三源核证完全一致。通讯作者共两位：①GhazalSharifian（TehranUniversityo", "doi": "17, BMC 旗下）三源核证完全一致。通讯作者共两位：①Ghazal Sharifian（Tehran University of Medical Sciences, Faculty of Pharmacy, Tehran, Iran）+ ②Diako Heidary（Allameh Tabataba'i University, Faculty of Physical Education and Sport Sciences, Tehran, Iran），均通过 PMC Author Information 核证。Joseph I Esformes（Cardiff Metropolitan University, Cardiff School of Sport and Health Sciences, UK）第三位非通讯共同作者，已通过 PMC 核证。**全部核心数据**（1RM MD=2.122 kg, Z=3.255, P=0.001, I²=0%；体脂率 MD=-0.548%, Z=-2.231, P=0.026, I²=0%；BMD MD=0.009, Z=0.587, P=0.557, I²=41%；样本量 1,093 / 20 RCT / 69% 女性；PEDro 7.95±0.89；RoB 2.0: 11 高 / 5 一些担忧 / 4 低；亚组 Lat Pull-Down P=0.022 + Leg Press P=0.018；敏感性分析剔除 Ejinde 2003 后体脂率效应消失 MD=-0.329, P=0.393；检索 3 数据库 / 2024-08-30 / 起始无年份限制）**与 PMC 全文（Methods + Results 段）+ PubMed 摘要 + Eur Rev Aging Phys Act 期刊页全部一致**。通讯邮箱、Funding 来源、具体 20 项纳入研究详细基线特征（Table 1）未在 PMC HTML 全文中显示完整——标注\"待原文 PDF 二次核证\"。", "conclusion": "每日文献解读 T-40"}, {"id": 54, "date": "2026-07-24", "author": "Wu", "year": "2026", "title": "冷疗NMA · T46", "type": "NMA", "journal": "//www.frontiersin.org/journals/sportsandactiveliving/article", "doi": "//www.frontiersin.org/journals/sports-and-active-living/articles/10.3389/fspor.2026.1819396/full）** + **PROSPERO 官方页（https://www.crd.york.ac.uk/PROSPERO/view/CRD420261300174）** 两源核证一致。", "conclusion": "每日文献解读 T-46：冷疗模态 SR/NMA"}, {"id": 55, "date": "2026-07-26", "author": "MallmannSchneider", "year": "2026", "title": "24h动态血压NMA · T100", "type": "NMA", "journal": "", "doi": "", "conclusion": "模块一：文献基本信息"}, {"id": 56, "date": "2026-07-28", "author": "Ekelund", "year": "2026", "title": "5minMVPA · IPDMA · H53 文献解读", "type": "文献解读", "journal": "339349", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 57, "date": "2026-07-29", "author": "BaiXu", "year": "2026", "title": "Cr · BA · NMA N19 文献解读", "type": "NMA", "journal": "2695133", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 58, "date": "2026-07-30", "author": "Lyristakis", "year": "2026", "title": "RT变量剂量反应", "type": "文献解读", "journal": "", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 59, "date": "2026-07-31", "author": "Ikeda", "year": "2026", "title": "早餐蛋白老年人肌肥大", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 60, "date": "2026-08-01", "author": "Svensson", "year": "2026", "title": "训练内蛋白CHO共摄入肌肥大RCT", "type": "RCT", "journal": "NutritionStrategyandResistanceTraining", "doi": "", "conclusion": "一、文献基本信息"}, {"id": 61, "date": "2026-08-02", "author": "Henselmans", "year": "2026", "title": "碳水摄入与肌肥大", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "一、文献基本信息"}, {"id": 62, "date": "2026-08-03", "author": "Shen", "year": "2026", "title": "运动干预代谢综合征NMA", "type": "NMA", "journal": "", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 63, "date": "2026-08-05", "author": "Havers", "year": "2026", "title": "降组训练SRMA · T127", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 64, "date": "2026-08-06", "author": "FernandezGarrido", "year": "2026", "title": "肌酸RT老年人神经认知RCT", "type": "RCT", "journal": "", "doi": "", "conclusion": "每日文献解读 · Fernandez-Garrido 2026"}, {"id": 65, "date": "2026-08-07", "author": "Pelland", "year": "2026", "title": "RT剂量反应贝叶斯Meta回归 · T149", "type": "文献解读", "journal": "", "doi": "", "conclusion": "每日文献解读 · Pelland 2026"}, {"id": 66, "date": "2026-08-08", "author": "Tretowicz", "year": "2026", "title": "全血NAD+不随年龄下降 · 7队列 · H61 文献解读", "type": "文献解读", "journal": "", "doi": "", "conclusion": "全血 NAD⁺ 水平不随年龄下降——七项独立队列的循证挑战"}, {"id": 67, "date": "2026-08-09", "author": "Zhao", "year": "2026", "title": "复合训练vs抗阻vs增强式NMA · T136", "type": "NMA", "journal": "", "doi": "", "conclusion": "每日文献解读 T-136：抗阻×增强式联合训练模态对纵跳与短跑的效应 · 贝叶斯网状荟萃分析"}, {"id": 68, "date": "2026-08-10", "author": "He", "year": "2026", "title": "等长收缩PAPE三级MA · H58", "type": "文献解读", "journal": "", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 69, "date": "2026-08-11", "author": "Zhang", "year": "2026", "title": "AEL · vs · CLRT急性慢性效应SRMA 文献解读", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 70, "date": "2026-08-12", "author": "Ohta", "year": "2026", "title": "运动营养干预老年人肌肉特异性力量SRMA", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 71, "date": "2026-08-13", "author": "Liu", "year": "2026", "title": "咖啡因青少年运动员SRMA · N46", "type": "SR/MA", "journal": "", "doi": "//osf.io/t2ea3（DOI: 10.17605/OSF.IO/PXAGY） |", "conclusion": "青少年运动员急性咖啡因摄入的运动表现效应与安全性——系统综述与三级荟萃分析"}, {"id": 72, "date": "2026-08-14", "author": "GuanFan", "year": "2026", "title": "5HT中枢疲劳SRMA · T147", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 73, "date": "2026-08-15", "author": "LaMonte", "year": "2026", "title": "老年女性力量与死亡率 · T143", "type": "文献解读", "journal": "", "doi": "", "conclusion": "一、研究问题"}, {"id": 74, "date": "2026-08-16", "author": "Gois", "year": "2026", "title": "联合训练冠心病SRMA · T145", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "一、研究问题"}, {"id": 75, "date": "2026-08-17", "author": "Heijmans", "year": "2026", "title": "全食物蛋白摄入SRMA · N44", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "一、核心文献 + 同级证据联合解读"}, {"id": 76, "date": "2026-08-18", "author": "Kristiansen", "year": "2026", "title": "年龄相关合成代谢抵抗SRMA · T150", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 77, "date": "2026-08-25", "author": "Singh", "year": "2026", "title": "运动青少年抑郁焦虑伞状综述 · T152", "type": "文献解读", "journal": "JournaloftheAmericanAcademyofChildandAdolescentPsychiatry(JA", "doi": "10.1016/j.jaac.2025.04.007", "conclusion": "核心发现"}, {"id": 78, "date": "2026-08-26", "author": "Adugna", "year": "2026", "title": "运动单位衰老SRMA · T146", "type": "SR/MA", "journal": "", "doi": "10.1016/j.neurobiolaging.2026.07.008 / PMID: 42520337", "conclusion": "一、研究问题"}, {"id": 79, "date": "2026-08-30", "author": "Souron", "year": "2026", "title": "心理疲劳骑行耐力表现与肌肉激活", "type": "文献解读", "journal": "e72.", "doi": "10.24072/pcjournal.760 | 预印本 DOI: 10.64898/2026.03.19.712281", "conclusion": "1. 研究问题"}];
+
+var litCurrentFilter = 'all';
+var litSearchTerm = '';
+
+function getTypeClass(type){
+  var map = {'SR/MA':'type-srma','NMA':'type-nma','伞评':'type-umb','RCT':'type-rct','立场声明':'type-pos'};
+  return map[type] || 'type-other';
+}
+
+function renderLitCounts(){
+  var counts = {'all':LIT_DATA.length,'SR/MA':0,'NMA':0,'伞评':0,'RCT':0,'文献解读':0};
+  for(var i=0;i<LIT_DATA.length;i++){
+    var t = LIT_DATA[i].type;
+    if(counts[t] !== undefined) counts[t]++;
+  }
+  counts['文献解读'] = LIT_DATA.length - counts['SR/MA'] - counts['NMA'] - counts['伞评'] - counts['RCT'] - 1;
+  document.getElementById('count-all').textContent = counts['all'];
+  document.getElementById('count-srma').textContent = counts['SR/MA'];
+  document.getElementById('count-nma').textContent = counts['NMA'];
+  document.getElementById('count-umb').textContent = counts['伞评'];
+  document.getElementById('count-rct').textContent = counts['RCT'];
+  document.getElementById('count-other').textContent = counts['文献解读'];
+}
+
+function renderLitCards(){
+  var container = document.getElementById('litContainer');
+  var empty = document.getElementById('litEmpty');
+  var term = litSearchTerm.toLowerCase();
+  var filter = litCurrentFilter;
+  var html = '';
+  var count = 0;
+  for(var i = LIT_DATA.length - 1; i >= 0; i--){
+    var d = LIT_DATA[i];
+    if(filter !== 'all' && d.type !== filter) continue;
+    if(term){
+      var searchStr = (d.title + ' ' + d.author + ' ' + d.year + ' ' + d.journal + ' ' + d.conclusion + ' ' + d.type).toLowerCase();
+      if(searchStr.indexOf(term) === -1) continue;
+    }
+    count++;
+    var typeClass = getTypeClass(d.type);
+    html += '<div class="lit-card">';
+    html += '<div class="lit-card-header">';
+    html += '<div class="lit-card-title">' + escHtml(d.title) + '</div>';
+    html += '<span class="lit-card-type ' + typeClass + '">' + escHtml(d.type) + '</span>';
+    html += '</div>';
+    html += '<div class="lit-card-meta"><span>' + d.author + ' ' + d.year + '</span><span>' + d.date + '</span></div>';
+    if(d.conclusion) html += '<div class="lit-card-summary">' + escHtml(d.conclusion) + '</div>';
+    if(d.journal) html += '<div class="lit-card-journal">' + escHtml(d.journal) + '</div>';
+    html += '</div>';
+  }
+  container.innerHTML = html;
+  empty.style.display = count === 0 ? 'block' : 'none';
+}
+
+function escHtml(s){
+  if(!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function setFilter(btn){
+  document.querySelectorAll('.lit-filter').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+  litCurrentFilter = btn.getAttribute('data-type');
+  renderLitCards();
+}
+
+function filterLit(){
+  litSearchTerm = document.getElementById('litSearch').value.trim();
+  renderLitCards();
+}
+
+// Init literature
+renderLitCounts();
+renderLitCards();
 </script>
 
 </body>

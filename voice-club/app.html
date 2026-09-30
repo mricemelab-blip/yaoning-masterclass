@@ -8,27 +8,25 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --bg:#111111;
-  --bg-card:#1A1A1A;
-  --bg-elevated:#222222;
-  --accent:#E8A838;
-  --accent-dim:rgba(232,168,56,.15);
-  --text:#F0EDE8;
-  --text2:#9A9898;
-  --text3:#6B6969;
-  --border:#2A2A32;
-  --border-light:#333338;
+  --bg:#000000;
+  --bg-card:#0A0A0A;
+  --text:#FFFFFF;
+  --text2:#888888;
+  --text3:#555555;
+  --border:#1A1A1A;
+  --border-light:#2A2A2A;
 }
 
 html{scroll-behavior:smooth}
 body{
-  font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,'PingFang SC','Noto Sans SC',sans-serif;
+  font-family:'Helvetica Neue',Arial,'PingFang SC','Noto Sans SC',sans-serif;
   background:var(--bg);
   color:var(--text);
   line-height:1.6;
   overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
 }
-a{color:var(--accent);text-decoration:none}
+a{color:var(--text);text-decoration:none}
 a:hover{text-decoration:underline}
 
 /* ===== NAV ===== */
@@ -36,7 +34,7 @@ a:hover{text-decoration:underline}
   background:var(--bg);
   border-bottom:1px solid var(--border);
   padding:0 8vw;
-  height:64px;
+  height:56px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -44,36 +42,28 @@ a:hover{text-decoration:underline}
   top:0;
   z-index:100;
 }
-.nav::after{
-  content:'';
-  position:absolute;
-  bottom:0;left:8vw;right:8vw;
-  height:1px;
-  background:var(--border);
-}
 .nav-logo{
-  font-size:14px;
-  font-weight:800;
-  letter-spacing:4px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:3px;
   color:var(--text);
   text-transform:uppercase;
 }
-.nav-logo span{color:var(--accent)}
 .nav-right{display:flex;align-items:center;gap:16px}
-.nav-user{font-size:13px;color:var(--text2)}
+.nav-user{font-size:12px;color:var(--text2);letter-spacing:.5px}
 .nav-logout{
   background:none;
-  border:1px solid var(--border);
-  color:var(--text2);
-  padding:5px 14px;
-  border-radius:3px;
-  font-size:11px;
+  border:1px solid var(--border-light);
+  color:var(--text3);
+  padding:5px 12px;
+  border-radius:2px;
+  font-size:10px;
   cursor:pointer;
   transition:all .2s;
   letter-spacing:1.5px;
   text-transform:uppercase;
 }
-.nav-logout:hover{border-color:var(--accent);color:var(--accent)}
+.nav-logout:hover{border-color:var(--text2);color:var(--text2)}
 
 /* ===== TABS ===== */
 .tab-bar{
@@ -82,7 +72,7 @@ a:hover{text-decoration:underline}
   border-bottom:1px solid var(--border);
   background:var(--bg);
   position:sticky;
-  top:64px;
+  top:56px;
   z-index:99;
   overflow-x:auto;
   -webkit-overflow-scrolling:touch;
@@ -91,164 +81,180 @@ a:hover{text-decoration:underline}
 .tab-bar::-webkit-scrollbar{display:none}
 .tab-btn{
   flex:0 0 auto;
-  padding:16px 24px;
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:2.5px;
+  padding:14px 20px;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:2px;
   color:var(--text3);
   background:none;
   border:none;
-  border-bottom:2px solid transparent;
+  border-bottom:1px solid transparent;
   cursor:pointer;
   transition:color .2s,border-color .2s;
   white-space:nowrap;
   text-transform:uppercase;
 }
 .tab-btn:hover{color:var(--text2)}
-.tab-btn.active{color:var(--text);border-bottom-color:var(--accent)}
+.tab-btn.active{color:var(--text);border-bottom-color:var(--text)}
 
 /* ===== MAIN ===== */
 .main{
-  flex:1;
   padding:80px 8vw 120px;
-  max-width:960px;
+  max-width:1080px;
   width:100%;
   margin:0 auto;
 }
-/* ===== HERO ===== */
-.hero{text-align:center;padding:80px 24px 60px;border-bottom:1px solid var(--border)}
-.hero-title{font-size:clamp(36px,6vw,56px);font-weight:900;letter-spacing:-.02em;line-height:1.1;color:var(--text);font-family:var(--font-sans);margin-bottom:20px}
-.hero-title br{display:block}
-.hero-tagline{font-size:clamp(12px,1.4vw,14px);font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--accent);font-family:var(--font-sans)}
 
-@media(max-width:600px){.main{padding:40px 6vw 80px}.nav{padding:0 6vw}.tab-bar{padding:0 6vw}}
-.tab-panel{display:none}
-.tab-panel.active{display:block}
+/* ===== HERO ===== */
+.hero{padding:100px 0 80px;border-bottom:1px solid var(--border)}
+.hero-number{
+  font-size:14px;
+  font-weight:400;
+  letter-spacing:1px;
+  color:var(--text3);
+  margin-bottom:32px;
+}
+.hero-title{
+  font-size:clamp(40px,7vw,72px);
+  font-weight:900;
+  letter-spacing:-.03em;
+  line-height:1.05;
+  color:var(--text);
+  margin-bottom:24px;
+}
+.hero-desc{
+  font-size:clamp(15px,1.8vw,18px);
+  font-weight:300;
+  line-height:1.8;
+  color:var(--text2);
+  max-width:560px;
+}
 
 /* ===== SECTION LABEL ===== */
 .section-label{
-  font-size:11px;
-  font-weight:700;
+  font-size:10px;
+  font-weight:600;
   letter-spacing:3px;
   text-transform:uppercase;
   color:var(--text3);
   margin-bottom:48px;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--border);
+}
+
+/* ===== QUICK FACTS ===== */
+.quick-facts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:32px;
+  padding:48px 0;
+  border-bottom:1px solid var(--border);
+}
+.fact-label{
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--text);
+  margin-bottom:8px;
+}
+.fact-value{
+  font-size:14px;
+  font-weight:300;
+  line-height:1.6;
+  color:var(--text2);
+}
+
+/* ===== TAB PANELS ===== */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ===== SERIES CARD (masterclass style) ===== */
+.series-card{
+  border-bottom:1px solid var(--border);
+  padding:56px 0;
+  display:grid;
+  grid-template-columns:100px 1fr;
+  gap:48px;
+  align-items:start;
+  transition:opacity .3s ease;
+}
+.series-card:hover{opacity:.85}
+.series-number{
+  font-size:clamp(48px,6vw,72px);
+  font-weight:900;
+  letter-spacing:-.04em;
+  line-height:1;
+  color:var(--text);
+}
+.series-body{padding-top:8px}
+.series-title{
+  font-size:clamp(22px,3vw,32px);
+  font-weight:800;
+  letter-spacing:-.02em;
+  line-height:1.2;
+  margin-bottom:8px;
+}
+.series-subtitle{
+  font-size:13px;
+  font-weight:400;
+  color:var(--text2);
+  letter-spacing:.5px;
+  margin-bottom:16px;
+}
+.series-desc{
+  font-size:14px;
+  font-weight:300;
+  line-height:1.8;
+  color:var(--text3);
 }
 
 /* ===== PLACEHOLDER ===== */
-.placeholder{text-align:center;padding:120px 0}
-.placeholder-icon{font-size:64px;opacity:.15;margin-bottom:24px}
-.placeholder-text{font-size:16px;line-height:2.2;color:var(--text3);letter-spacing:.5px}
-
-/* ===== COURSE CARD ===== */
-.course-card{
-  background:var(--bg-card);
-  border:1px solid var(--border);
-  border-radius:3px;
-  padding:40px 48px;
-  margin-bottom:24px;
-  transition:transform .35s ease,border-color .35s ease;
+.placeholder{
+  padding:120px 0;
+  text-align:center;
 }
-.course-card:hover{transform:translateY(-3px);border-color:var(--accent-dim)}
-.course-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}
-.course-name{font-size:20px;font-weight:800;letter-spacing:-0.01em;color:var(--text)}
-.course-hours{font-size:12px;color:var(--text3);letter-spacing:1px;text-transform:uppercase}
-.progress-wrap{background:var(--bg-elevated);border-radius:2px;height:4px;margin:16px 0;overflow:hidden}
-.progress-bar{height:100%;background:var(--accent);border-radius:2px;transition:width .4s ease}
-.course-footer{display:flex;justify-content:space-between;align-items:center}
-.course-pct{font-size:12px;color:var(--text3);letter-spacing:.5px}
-.course-btn{
-  background:none;
-  border:1px solid var(--accent);
-  color:var(--accent);
-  padding:8px 20px;
-  border-radius:3px;
-  font-size:11px;
-  font-weight:700;
-  cursor:pointer;
-  transition:all .2s;
-  letter-spacing:2px;
-  text-transform:uppercase;
+.placeholder-text{
+  font-size:14px;
+  font-weight:300;
+  color:var(--text3);
+  line-height:2.2;
+  letter-spacing:.5px;
 }
-.course-btn:hover{background:var(--accent);color:var(--bg)}
-.course-btn.completed{border-color:var(--border);color:var(--text3);cursor:default}
-.course-btn.completed:hover{background:none;color:var(--text3)}
-
-/* ===== REPLAY CARD ===== */
-.replay-card{
-  background:var(--bg-card);
-  border:1px solid var(--border);
-  border-radius:3px;
-  padding:32px 48px;
-  margin-bottom:24px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:24px;
-  transition:transform .35s ease,border-color .35s ease;
-}
-.replay-card:hover{transform:translateY(-3px);border-color:var(--accent-dim)}
-.replay-info{flex:1;min-width:0}
-.replay-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:-0.01em}
-.replay-meta{font-size:12px;color:var(--text3);letter-spacing:.5px}
-.replay-btn{
-  flex:0 0 auto;
-  background:none;
-  border:1px solid var(--accent);
-  color:var(--accent);
-  padding:8px 20px;
-  border-radius:3px;
-  font-size:11px;
-  font-weight:700;
-  cursor:pointer;
-  transition:all .2s;
-  white-space:nowrap;
-  letter-spacing:2px;
-  text-transform:uppercase;
-}
-.replay-btn:hover{background:var(--accent);color:var(--bg)}
-
-/* ===== PLACEHOLDER ===== */
-.placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 16px;text-align:center}
-.placeholder-icon{font-size:64px;margin-bottom:24px;opacity:.15}
-.placeholder-text{font-size:15px;color:var(--text3);line-height:1.8;letter-spacing:.3px}
 
 /* ===== FOOTER ===== */
 .footer{
   border-top:1px solid var(--border);
-  padding:32px 8vw;
+  padding:40px 8vw;
   text-align:center;
-  font-size:11px;
+  font-size:10px;
   color:var(--text3);
   letter-spacing:2px;
+  text-transform:uppercase;
 }
 
-@media(max-width:600px){
-  .lit-card,.course-card{padding:28px 24px}
-  .replay-card{padding:24px;flex-direction:column;align-items:flex-start;gap:16px}
-  .replay-btn{width:100%;text-align:center}
-  .course-footer{flex-direction:column;align-items:flex-start;gap:12px}
-  .course-btn{width:100%;text-align:center}
-  .lit-card-number{font-size:40px;margin-right:16px}
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .main{padding:48px 6vw 80px}
+  .nav{padding:0 6vw}
+  .tab-bar{padding:0 6vw}
+  .hero{padding:60px 0 48px}
+  .series-card{grid-template-columns:1fr;gap:16px;padding:40px 0}
+  .series-number{font-size:48px}
+  .quick-facts{grid-template-columns:1fr;gap:24px}
 }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav class="nav" style="position:relative">
-  <div class="nav-logo">ARISE <span>CLUB</span></div>
+<nav class="nav">
+  <div class="nav-logo">ARISE CLUB</div>
   <div class="nav-right">
     <span class="nav-user" id="navUser"></span>
     <button class="nav-logout" onclick="handleLogout()">退出</button>
   </div>
 </nav>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-title">发生俱乐部<br>ARISE CLUB</div>
-  <div class="hero-tagline">Where Strength Meets Science</div>
-</div>
 
 <!-- TABS -->
 <div class="tab-bar">
@@ -261,11 +267,17 @@ a:hover{text-decoration:underline}
 <!-- MAIN -->
 <div class="main">
 
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-number">//01</div>
+    <div class="hero-title">发生俱乐部<br>ARISE CLUB</div>
+    <div class="hero-desc">Where Strength Meets Science</div>
+  </div>
+
   <!-- TAB 1: LITERATURE -->
   <div class="tab-panel active" id="panel-literature">
     <div class="section-label">Evidence-Based Literature Review</div>
     <div class="placeholder">
-      <div class="placeholder-icon">&#128218;</div>
       <div class="placeholder-text">文献解读内容筹备中<br>敬请期待</div>
     </div>
   </div>
@@ -274,7 +286,6 @@ a:hover{text-decoration:underline}
   <div class="tab-panel" id="panel-courses">
     <div class="section-label">Online Courses</div>
     <div class="placeholder">
-      <div class="placeholder-icon">&#127891;</div>
       <div class="placeholder-text">在线课程内容筹备中<br>敬请期待</div>
     </div>
   </div>
@@ -283,7 +294,6 @@ a:hover{text-decoration:underline}
   <div class="tab-panel" id="panel-replays">
     <div class="section-label">Live Session Replays</div>
     <div class="placeholder">
-      <div class="placeholder-icon">&#127909;</div>
       <div class="placeholder-text">直播回放内容筹备中<br>敬请期待</div>
     </div>
   </div>
@@ -292,7 +302,6 @@ a:hover{text-decoration:underline}
   <div class="tab-panel" id="panel-training">
     <div class="section-label">Training Program</div>
     <div class="placeholder">
-      <div class="placeholder-icon">&#9881;</div>
       <div class="placeholder-text">训练计划正在制作中<br>敬请期待</div>
     </div>
   </div>
@@ -323,31 +332,6 @@ function handleLogout(){['vc_name','vc_user_id','vc_role','vc_invite_code'].forE
     if(t)t.classList.add('active');
   })});
 })();
-
-/* Course progress */
-(function(){
-  var defaults={'1':30,'2':0,'3':60,'4':100};
-  for(var i=1;i<=4;i++){
-    var key='vc_progress_'+i,stored=localStorage.getItem(key),pct=stored!==null?parseInt(stored,10):defaults[i];
-    var bar=document.getElementById('progress-'+i),pctEl=document.getElementById('pct-'+i),btn=document.querySelector('[data-course="'+i+'"]');
-    if(bar)bar.style.width=pct+'%';
-    if(pctEl)pctEl.textContent=pct+'%';
-    if(btn&&pct>=100){btn.textContent='已完成';btn.classList.add('completed')}
-  }
-})();
-function handleCourseClick(btn){
-  var cid=btn.getAttribute('data-course'),key='vc_progress_'+cid,cur=parseInt(localStorage.getItem(key)||'0',10);
-  if(cur>=100)return;
-  var next=Math.min(cur+10,100);
-  localStorage.setItem(key,next);
-  var bar=document.getElementById('progress-'+cid),pctEl=document.getElementById('pct-'+cid);
-  if(bar)bar.style.width=next+'%';
-  if(pctEl)pctEl.textContent=next+'%';
-  if(next>=100){btn.textContent='已完成';btn.classList.add('completed')}
-}
-
-/* ===== LITERATURE ===== */
-/* Content pending - placeholder page */
 </script>
 </body>
 </html>

@@ -7,34 +7,24 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-:root{
-  --bg:#F5F2ED;
-  --bg-card:#F5F2ED;
-  --text:#1A1A1A;
-  --text2:#6B6560;
-  --text3:#9A9590;
-  --border:#D5D0CA;
-  --accent:#1A1A1A;
-}
-
 html{scroll-behavior:smooth}
 body{
-  font-family:'Georgia','Times New Roman','Noto Serif SC','PingFang SC',serif;
-  background:var(--bg);
-  color:var(--text);
+  font-family:'Helvetica Neue','Arial Black',Arial,'PingFang SC','Noto Sans SC',sans-serif;
+  background:#E8E4DF;
+  color:#1A1A1A;
   line-height:1.6;
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
 }
-a{color:var(--text);text-decoration:none}
+a{color:#1A1A1A;text-decoration:none}
 a:hover{text-decoration:underline}
 
 /* ===== NAV ===== */
 .nav{
-  background:var(--bg);
-  border-bottom:1px solid var(--border);
+  background:#E8E4DF;
+  border-bottom:1px solid #D0CBC5;
   padding:0 8vw;
-  height:60px;
+  height:56px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -43,68 +33,89 @@ a:hover{text-decoration:underline}
   z-index:100;
 }
 .nav-logo{
-  font-family:'Georgia',serif;
-  font-size:16px;
-  font-weight:400;
-  letter-spacing:6px;
-  color:var(--text);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:5px;
   text-transform:uppercase;
 }
 .nav-right{display:flex;align-items:center;gap:16px}
-.nav-user{font-size:13px;color:var(--text2);font-family:'Helvetica Neue',sans-serif}
+.nav-user{font-size:12px;color:#888}
 .nav-logout{
   background:none;
-  border:1px solid var(--border);
-  color:var(--text2);
+  border:1px solid #ccc;
+  color:#888;
   padding:5px 14px;
   font-size:10px;
   font-weight:600;
   cursor:pointer;
   letter-spacing:2px;
   text-transform:uppercase;
-  font-family:'Helvetica Neue',sans-serif;
   transition:all .2s;
 }
-.nav-logout:hover{border-color:var(--text);color:var(--text)}
+.nav-logout:hover{border-color:#1A1A1A;color:#1A1A1A}
 
 /* ===== HERO ===== */
 .hero{
-  padding:120px 8vw 80px;
-  border-bottom:1px solid var(--border);
+  padding:100px 8vw 80px;
+  border-bottom:1px solid #D0CBC5;
 }
-.hero-lines{
-  display:flex;
-  flex-direction:column;
-  gap:0;
+.hero-number{
+  font-size:16px;
+  font-weight:400;
+  letter-spacing:1px;
+  color:#999;
   margin-bottom:40px;
 }
-.hero-line{
-  font-family:'Helvetica Neue','Arial Black',sans-serif;
-  font-size:clamp(56px,11vw,130px);
+.hero-title{
+  font-size:clamp(48px,10vw,120px);
   font-weight:900;
   letter-spacing:-.04em;
-  line-height:1;
-  color:var(--text);
+  line-height:1.0;
+  margin-bottom:32px;
+  max-width:700px;
 }
-.hero-tagline{
-  font-family:'Georgia',serif;
-  font-size:14px;
-  font-style:italic;
-  color:var(--text2);
-  letter-spacing:1px;
-  margin-top:32px;
-  padding-top:24px;
-  border-top:1px solid var(--border);
-  display:inline-block;
+.hero-desc{
+  font-size:clamp(15px,1.8vw,18px);
+  font-weight:300;
+  line-height:1.8;
+  color:#555;
+  max-width:520px;
+  margin-bottom:48px;
 }
 .hero-values{
-  margin-top:24px;
-  font-family:'Helvetica Neue',sans-serif;
-  font-size:12px;
-  letter-spacing:3px;
+  border-top:1px solid #D0CBC5;
+  padding-top:24px;
+}
+.hero-values-title{
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:2px;
   text-transform:uppercase;
-  color:var(--text3);
-  line-height:2.2;
+  margin-bottom:16px;
+}
+.hero-values-list{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px 32px;
+}
+.value-item{
+  display:flex;
+  gap:16px;
+  align-items:baseline;
+}
+.value-label{
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  white-space:nowrap;
+  min-width:100px;
+}
+.value-text{
+  font-size:14px;
+  font-weight:300;
+  color:#555;
+  line-height:1.6;
 }
 
 /* ===== SERIES ===== */
@@ -119,67 +130,54 @@ a:hover{text-decoration:underline}
   gap:40px;
   align-items:start;
   padding:64px 0;
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid #D0CBC5;
   cursor:pointer;
   transition:opacity .3s;
 }
 .series-card:hover{opacity:.6}
 .series-number{
-  font-family:'Helvetica Neue','Arial Black',sans-serif;
   font-size:clamp(64px,10vw,120px);
   font-weight:900;
   letter-spacing:-.04em;
   line-height:1;
-  color:var(--border);
+  color:#D0CBC5;
 }
 .series-body{padding-top:12px}
 .series-title{
-  font-family:'Helvetica Neue','Arial Black',sans-serif;
-  font-size:clamp(22px,3vw,32px);
+  font-size:clamp(24px,3.5vw,36px);
   font-weight:800;
   letter-spacing:-.02em;
   line-height:1.2;
   margin-bottom:8px;
 }
 .series-title-en{
-  font-family:'Georgia',serif;
   font-size:clamp(13px,1.6vw,16px);
-  font-style:italic;
-  color:var(--text2);
+  font-weight:400;
+  color:#888;
   margin-bottom:16px;
 }
 .series-desc{
-  font-family:'Helvetica Neue',sans-serif;
   font-size:14px;
   font-weight:300;
   line-height:1.8;
-  color:var(--text3);
+  color:#999;
 }
 
 /* ===== FOOTER ===== */
 .footer{
-  border-top:1px solid var(--border);
+  border-top:1px solid #D0CBC5;
   padding:40px 8vw;
   text-align:center;
-}
-.footer-logo{
-  font-family:'Georgia',serif;
-  font-size:14px;
-  letter-spacing:6px;
+  font-size:10px;
+  color:#999;
+  letter-spacing:2px;
   text-transform:uppercase;
-  color:var(--text);
-  margin-bottom:4px;
-}
-.footer-sub{
-  font-family:'Georgia',serif;
-  font-size:11px;
-  font-style:italic;
-  color:var(--text3);
 }
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
-  .hero{padding:80px 6vw 60px}
+  .hero{padding:60px 6vw 48px}
+  .hero-values-list{grid-template-columns:1fr}
   .series{padding:0 6vw}
   .series-card{grid-template-columns:1fr;gap:12px;padding:48px 0}
   .series-number{font-size:64px}
@@ -200,16 +198,29 @@ a:hover{text-decoration:underline}
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-lines">
-    <div class="hero-line">Where Strength</div>
-    <div class="hero-line">Meets Science</div>
-  </div>
-  <div class="hero-tagline">发生俱乐部 · ARISE CLUB</div>
+  <div class="hero-number">//01</div>
+  <div class="hero-title">Where Strength Meets Science.</div>
+  <div class="hero-desc">发生俱乐部 ARISE CLUB — 循证力量训练与运动表现科学</div>
   <div class="hero-values">
-    Fit body<br>
-    Kind heart<br>
-    Focused mind<br>
-    Unbreakable spirit
+    <div class="hero-values-title">Core Values</div>
+    <div class="hero-values-list">
+      <div class="value-item">
+        <span class="value-label">Fit body</span>
+        <span class="value-text">科学训练，构建功能性体魄</span>
+      </div>
+      <div class="value-item">
+        <span class="value-label">Kind heart</span>
+        <span class="value-text">以循证为本，拒绝伪科学</span>
+      </div>
+      <div class="value-item">
+        <span class="value-label">Focused mind</span>
+        <span class="value-text">深度研究，精准执行</span>
+      </div>
+      <div class="value-item">
+        <span class="value-label">Unbreakable spirit</span>
+        <span class="value-text">持续进化，永不止步</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -256,8 +267,7 @@ a:hover{text-decoration:underline}
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-logo">ARISE CLUB</div>
-  <div class="footer-sub">Where Strength Meets Science</div>
+  &copy; 2026 ARISE CLUB &middot; Where Strength Meets Science
 </footer>
 
 <script>

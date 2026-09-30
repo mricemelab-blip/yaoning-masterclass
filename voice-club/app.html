@@ -10,23 +10,27 @@
 :root{
   --bg:#000000;
   --bg-card:#0A0A0A;
+  --accent:#C8F230;
+  --accent-dim:rgba(200,242,48,.12);
   --text:#FFFFFF;
-  --text2:#888888;
-  --text3:#555555;
+  --text2:#999999;
+  --text3:#666666;
   --border:#1A1A1A;
   --border-light:#2A2A2A;
+  --font-display:'Helvetica Neue','Arial Black',Arial,sans-serif;
+  --font-body:'Helvetica Neue',Arial,'PingFang SC','Noto Sans SC',sans-serif;
 }
 
 html{scroll-behavior:smooth}
 body{
-  font-family:'Helvetica Neue',Arial,'PingFang SC','Noto Sans SC',sans-serif;
+  font-family:var(--font-body);
   background:var(--bg);
   color:var(--text);
   line-height:1.6;
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
 }
-a{color:var(--text);text-decoration:none}
+a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 
 /* ===== NAV ===== */
@@ -43,27 +47,29 @@ a:hover{text-decoration:underline}
   z-index:100;
 }
 .nav-logo{
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:3px;
+  font-family:var(--font-display);
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:4px;
   color:var(--text);
   text-transform:uppercase;
 }
+.nav-logo span{color:var(--accent)}
 .nav-right{display:flex;align-items:center;gap:16px}
 .nav-user{font-size:12px;color:var(--text2);letter-spacing:.5px}
 .nav-logout{
   background:none;
-  border:1px solid var(--border-light);
-  color:var(--text3);
-  padding:5px 12px;
-  border-radius:2px;
+  border:1px solid var(--accent);
+  color:var(--accent);
+  padding:5px 14px;
   font-size:10px;
+  font-weight:700;
   cursor:pointer;
   transition:all .2s;
-  letter-spacing:1.5px;
+  letter-spacing:2px;
   text-transform:uppercase;
 }
-.nav-logout:hover{border-color:var(--text2);color:var(--text2)}
+.nav-logout:hover{background:var(--accent);color:var(--bg)}
 
 /* ===== TABS ===== */
 .tab-bar{
@@ -82,20 +88,21 @@ a:hover{text-decoration:underline}
 .tab-btn{
   flex:0 0 auto;
   padding:14px 20px;
+  font-family:var(--font-display);
   font-size:11px;
-  font-weight:600;
+  font-weight:700;
   letter-spacing:2px;
   color:var(--text3);
   background:none;
   border:none;
-  border-bottom:1px solid transparent;
+  border-bottom:2px solid transparent;
   cursor:pointer;
   transition:color .2s,border-color .2s;
   white-space:nowrap;
   text-transform:uppercase;
 }
 .tab-btn:hover{color:var(--text2)}
-.tab-btn.active{color:var(--text);border-bottom-color:var(--text)}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
 
 /* ===== MAIN ===== */
 .main{
@@ -108,68 +115,42 @@ a:hover{text-decoration:underline}
 /* ===== HERO ===== */
 .hero{padding:100px 0 80px;border-bottom:1px solid var(--border)}
 .hero-number{
+  font-family:var(--font-display);
   font-size:14px;
-  font-weight:400;
+  font-weight:700;
   letter-spacing:1px;
-  color:var(--text3);
+  color:var(--accent);
   margin-bottom:32px;
 }
 .hero-title{
-  font-size:clamp(40px,7vw,72px);
+  font-family:var(--font-display);
+  font-size:clamp(44px,8vw,80px);
   font-weight:900;
   letter-spacing:-.03em;
   line-height:1.05;
   color:var(--text);
   margin-bottom:24px;
 }
-.hero-desc{
-  font-size:clamp(15px,1.8vw,18px);
-  font-weight:300;
-  line-height:1.8;
-  color:var(--text2);
-  max-width:560px;
-}
+.hero-title .accent{color:var(--accent)}
 
 /* ===== SECTION LABEL ===== */
 .section-label{
+  font-family:var(--font-display);
   font-size:10px;
-  font-weight:600;
+  font-weight:700;
   letter-spacing:3px;
   text-transform:uppercase;
-  color:var(--text3);
+  color:var(--accent);
   margin-bottom:48px;
   padding-bottom:16px;
   border-bottom:1px solid var(--border);
-}
-
-/* ===== QUICK FACTS ===== */
-.quick-facts{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:32px;
-  padding:48px 0;
-  border-bottom:1px solid var(--border);
-}
-.fact-label{
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  color:var(--text);
-  margin-bottom:8px;
-}
-.fact-value{
-  font-size:14px;
-  font-weight:300;
-  line-height:1.6;
-  color:var(--text2);
 }
 
 /* ===== TAB PANELS ===== */
 .tab-panel{display:none}
 .tab-panel.active{display:block}
 
-/* ===== SERIES CARD (masterclass style) ===== */
+/* ===== SERIES CARD ===== */
 .series-card{
   border-bottom:1px solid var(--border);
   padding:56px 0;
@@ -179,16 +160,18 @@ a:hover{text-decoration:underline}
   align-items:start;
   transition:opacity .3s ease;
 }
-.series-card:hover{opacity:.85}
+.series-card:hover{opacity:.8}
 .series-number{
+  font-family:var(--font-display);
   font-size:clamp(48px,6vw,72px);
   font-weight:900;
   letter-spacing:-.04em;
   line-height:1;
-  color:var(--text);
+  color:var(--accent-dim);
 }
 .series-body{padding-top:8px}
 .series-title{
+  font-family:var(--font-display);
   font-size:clamp(22px,3vw,32px);
   font-weight:800;
   letter-spacing:-.02em;
@@ -210,10 +193,7 @@ a:hover{text-decoration:underline}
 }
 
 /* ===== PLACEHOLDER ===== */
-.placeholder{
-  padding:120px 0;
-  text-align:center;
-}
+.placeholder{padding:120px 0;text-align:center}
 .placeholder-text{
   font-size:14px;
   font-weight:300;
@@ -232,6 +212,7 @@ a:hover{text-decoration:underline}
   letter-spacing:2px;
   text-transform:uppercase;
 }
+.footer span{color:var(--accent)}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
@@ -241,7 +222,6 @@ a:hover{text-decoration:underline}
   .hero{padding:60px 0 48px}
   .series-card{grid-template-columns:1fr;gap:16px;padding:40px 0}
   .series-number{font-size:48px}
-  .quick-facts{grid-template-columns:1fr;gap:24px}
 }
 </style>
 </head>
@@ -249,7 +229,7 @@ a:hover{text-decoration:underline}
 
 <!-- NAV -->
 <nav class="nav">
-  <div class="nav-logo">ARISE CLUB</div>
+  <div class="nav-logo">ARISE <span>CLUB</span></div>
   <div class="nav-right">
     <span class="nav-user" id="navUser"></span>
     <button class="nav-logout" onclick="handleLogout()">退出</button>
@@ -270,7 +250,7 @@ a:hover{text-decoration:underline}
   <!-- HERO -->
   <div class="hero">
     <div class="hero-number">//01</div>
-    <div class="hero-title">Where Strength Meets Science<br>ARISE CLUB 发生俱乐部</div>
+    <div class="hero-title">Where Strength Meets <span class="accent">Science</span><br>ARISE CLUB 发生俱乐部</div>
   </div>
 
   <!-- TAB 1: LITERATURE -->
@@ -309,7 +289,7 @@ a:hover{text-decoration:underline}
 
 <!-- FOOTER -->
 <footer class="footer">
-  &copy; 2026 ARISE CLUB &middot; Where Strength Meets Science
+  &copy; 2026 ARISE <span>CLUB</span> &middot; Where Strength Meets Science
 </footer>
 
 <script>
@@ -320,7 +300,6 @@ a:hover{text-decoration:underline}
 })();
 function handleLogout(){['vc_name','vc_user_id','vc_role','vc_invite_code'].forEach(function(k){localStorage.removeItem(k)});window.location.href='login.html'}
 
-/* Tab switching */
 (function(){
   var btns=document.querySelectorAll('.tab-btn'),panels=document.querySelectorAll('.tab-panel');
   btns.forEach(function(btn){btn.addEventListener('click',function(){

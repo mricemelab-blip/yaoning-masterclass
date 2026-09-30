@@ -1,0 +1,1309 @@
+<!DOCTYPE html><html lang="zh-CN"><head><!-- Coze Coding Analytics -->
+<script>
+(function(){
+  function randomUUID(){
+    if(typeof crypto!=="undefined"&&typeof crypto.randomUUID==="function"){
+      return crypto.randomUUID();
+    }
+    return "10000000-1000-4000-8000-100000000000".replace(/[018]/g,function(c){
+      return(+c^(crypto.getRandomValues(new Uint8Array(1))[0]&(15>>(+c/4)))).toString(16);
+    });
+  }
+
+  function encode(obj){return btoa(JSON.stringify(obj))}
+  function decode(str){try{return JSON.parse(atob(str))}catch(e){return null}}
+
+  function getDeviceId(){
+    var storageKey="__coze_coding_device_info";
+    try{
+      var info=decode(localStorage.getItem(storageKey));
+      if(info&&typeof info.did==="string"){return info.did}
+    }catch(e){}
+    var newInfo={did:randomUUID()};
+    try{localStorage.setItem(storageKey,encode(newInfo))}catch(e){}
+    return newInfo.did;
+  }
+
+  function sendPageViewEvent(){
+    var deviceId=getDeviceId();
+    var projectId="7690887521659830312";
+    var reportURL="https://code.coze.cn/api/coding/deployment/analytics/report?project_id="+encodeURIComponent(projectId)+"&did="+encodeURIComponent(deviceId);
+    try{
+      fetch(reportURL,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          events:[{
+            type:"page_view",
+            url:window.location.href,
+            path:window.location.pathname,
+            referrer:document.referrer,
+            timestamp:Date.now()
+          }]
+        })
+      }).catch(function(){});
+    }catch(e){}
+  }
+
+  if(document.readyState==="complete"){
+    sendPageViewEvent();
+  }else{
+    document.addEventListener("readystatechange",function(){
+      if(document.readyState==="complete"){sendPageViewEvent()}
+    });
+  }
+})();
+</script>
+<!-- WebPro SDK -->
+<script>
+(function(n,e,r,t,a,o,s,i,c,l,f,m,p,u){o="precollect";s="getAttribute";i="addEventListener";c="PerformanceObserver";l=function(e){f=[].slice.call(arguments);f.push(Date.now(),location.href);(e==o?l.p.a:l.q).push(f)};l.q=[];l.p={a:[]};n[a]=l;m=document.createElement("script");m.src=r+"?aid="+t+"&globalName="+a;m.crossOrigin="anonymous";e.getElementsByTagName("head")[0].appendChild(m);if(i in n){l.pcErr=function(e){e=e||n.event;p=e.target||e.srcElement;if(p instanceof Element||p instanceof HTMLElement){n[a](o,"st",{tagName:p.tagName,url:p[s]("href")||p[s]("src")})}else{n[a](o,"err",e.error||e.message)}};l.pcRej=function(e){e=e||n.event;n[a](o,"reject",e.reason||e.detail&&e.detail.reason)};n[i]("error",l.pcErr,true);n[i]("unhandledrejection",l.pcRej,true)}if("PerformanceLongTaskTiming"in n){u=l.pp={entries:[]};u.observer=new PerformanceObserver(function(e){u.entries=u.entries.concat(e.getEntries())});u.observer.observe({entryTypes:["longtask"]})}})(window,document,"https://apm.volccdn.com/mars-web/apmplus/web/browser.cn.js",1001891,"apmPlus");
+</script>
+<script>
+window.apmPlus("context.set", "project_id", "7690843518335762466");
+window.apmPlus("init",{
+  aid: 1001891,
+  token: '26a8704bd4d34b1698085c787d0c95d0'
+});
+window.apmPlus("start");
+</script>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>更年期激素治疗与运动疗法研究综述</title>
+<style>
+:root {
+  --c-bg: #faf8f6;
+  --c-surface: #ffffff;
+  --c-surface-2: #f4f1ed;
+  --c-border: #e6e0d8;
+  --c-text: #1a1a2e;
+  --c-text-2: #4a4a5e;
+  --c-text-3: #7a7a8e;
+  --c-rose: #c2185b;
+  --c-rose-soft: rgba(194,24,91,0.07);
+  --c-rose-mid: rgba(194,24,91,0.14);
+  --c-teal: #00897b;
+  --c-teal-soft: rgba(0,137,123,0.07);
+  --c-teal-mid: rgba(0,137,123,0.14);
+  --c-amber: #e65100;
+  --c-amber-soft: rgba(230,81,0,0.06);
+  --c-amber-mid: rgba(230,81,0,0.12);
+  --c-blue: #1565c0;
+  --c-blue-soft: rgba(21,101,192,0.06);
+  --c-blue-mid: rgba(21,101,192,0.12);
+  --c-purple: #6a1b9a;
+  --c-purple-soft: rgba(106,27,154,0.06);
+  --c-green: #2e7d32;
+  --c-green-soft: rgba(46,125,50,0.07);
+  --c-red: #c62828;
+  --c-red-soft: rgba(198,40,40,0.06);
+  --c-red-mid: rgba(198,40,40,0.12);
+  --c-indigo: #283593;
+  --c-indigo-soft: rgba(40,53,147,0.06);
+  --c-indigo-mid: rgba(40,53,147,0.12);
+  --c-brown: #5d4037;
+  --c-brown-soft: rgba(93,64,55,0.06);
+  --font-body: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.85rem;
+  --fs-base: 0.95rem;
+  --fs-lg: 1.1rem;
+  --fs-xl: 1.3rem;
+  --fs-2xl: 1.65rem;
+  --fs-3xl: clamp(1.8rem, 3.5vw, 2.4rem);
+  --lh: 1.75;
+  --max-w: 920px;
+  --sp-xs: 0.4rem;
+  --sp-sm: 0.75rem;
+  --sp-md: 1.25rem;
+  --sp-lg: 2rem;
+  --sp-xl: 3rem;
+  --sp-2xl: 4.5rem;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-size: var(--fs-base);
+  line-height: var(--lh);
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { width: 100%; padding: 0 clamp(1rem, 4vw, 3rem); }
+.inner { max-width: var(--max-w); margin: 0 auto; }
+
+/* Hero */
+.hero { padding: var(--sp-2xl) 0 var(--sp-xl); border-bottom: 2px solid var(--c-rose); }
+.hero-tag {
+  display: inline-block;
+  background: var(--c-rose-soft);
+  color: var(--c-rose);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  padding: 3px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-md);
+}
+.hero h1 {
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--sp-sm);
+  color: var(--c-text);
+}
+.hero h1 span { color: var(--c-rose); }
+.hero .sub {
+  font-size: var(--fs-lg);
+  color: var(--c-text-2);
+  line-height: 1.5;
+  max-width: 720px;
+}
+.hero .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-md) var(--sp-lg);
+  margin-top: var(--sp-md);
+  font-size: var(--fs-sm);
+  color: var(--c-text-3);
+}
+
+/* TOC */
+.toc {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  padding: var(--sp-md) var(--sp-lg);
+  margin: var(--sp-lg) 0 var(--sp-xl);
+}
+.toc-title {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--c-text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--sp-sm);
+}
+.toc ol { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2px var(--sp-md); }
+@media (max-width: 600px) { .toc ol { grid-template-columns: 1fr; } }
+.toc a { color: var(--c-text-2); text-decoration: none; font-size: var(--fs-sm); transition: color 0.2s; }
+.toc a:hover { color: var(--c-rose); }
+.toc a .num { color: var(--c-text-3); font-family: var(--font-mono); font-size: var(--fs-xs); margin-right: 6px; }
+
+/* Section */
+.sec { padding: var(--sp-xl) 0; border-bottom: 1px solid var(--c-border); }
+.sec-head { display: flex; align-items: center; gap: var(--sp-sm); margin-bottom: var(--sp-lg); }
+.sec-num {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  font-size: var(--fs-sm); font-weight: 800; flex-shrink: 0;
+}
+.sec-num.rose { background: var(--c-rose-soft); color: var(--c-rose); }
+.sec-num.teal { background: var(--c-teal-soft); color: var(--c-teal); }
+.sec-num.amber { background: var(--c-amber-soft); color: var(--c-amber); }
+.sec-num.blue { background: var(--c-blue-soft); color: var(--c-blue); }
+.sec-num.purple { background: var(--c-purple-soft); color: var(--c-purple); }
+.sec-num.green { background: var(--c-green-soft); color: var(--c-green); }
+.sec-num.indigo { background: var(--c-indigo-soft); color: var(--c-indigo); }
+.sec-num.brown { background: var(--c-brown-soft); color: var(--c-brown); }
+.sec h2 { font-size: var(--fs-2xl); font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: var(--fs-lg); font-weight: 700; margin: var(--sp-lg) 0 var(--sp-sm); }
+p { margin-bottom: var(--sp-sm); color: var(--c-text-2); }
+
+/* Core Conclusion */
+.conclusion {
+  background: var(--c-rose-soft);
+  border-left: 3px solid var(--c-rose);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  padding: var(--sp-md) var(--sp-lg);
+  margin: var(--sp-lg) 0 var(--sp-xl);
+}
+.conclusion p { color: var(--c-text); margin: 0; }
+.conclusion strong { color: var(--c-rose); }
+
+/* Cards */
+.card-grid { display: grid; grid-template-columns: 1fr; gap: var(--sp-md); margin: var(--sp-md) 0; }
+@media (min-width: 640px) { .card-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 900px) { .card-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; } }
+
+.card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  padding: var(--sp-md);
+  position: relative;
+  overflow: hidden;
+}
+.card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.card.rose::before { background: var(--c-rose); }
+.card.teal::before { background: var(--c-teal); }
+.card.amber::before { background: var(--c-amber); }
+.card.blue::before { background: var(--c-blue); }
+.card.purple::before { background: var(--c-purple); }
+.card.green::before { background: var(--c-green); }
+.card.red::before { background: var(--c-red); }
+.card.indigo::before { background: var(--c-indigo); }
+.card .label { font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: var(--sp-xs); }
+.card.rose .label { color: var(--c-rose); }
+.card.teal .label { color: var(--c-teal); }
+.card.amber .label { color: var(--c-amber); }
+.card.blue .label { color: var(--c-blue); }
+.card.purple .label { color: var(--c-purple); }
+.card.green .label { color: var(--c-green); }
+.card.red .label { color: var(--c-red); }
+.card.indigo .label { color: var(--c-indigo); }
+.card h4 { font-size: var(--fs-base); margin-bottom: 4px; }
+.card p { font-size: var(--fs-sm); margin: 0; line-height: 1.6; }
+
+/* Info Box */
+.info-box { border-radius: var(--r-md); padding: var(--sp-md) var(--sp-lg); margin: var(--sp-md) 0; }
+.info-box.warn { background: var(--c-red-soft); border: 1px solid var(--c-red-mid); }
+.info-box.insight { background: var(--c-blue-soft); border: 1px solid var(--c-blue-mid); }
+.info-box.key { background: var(--c-teal-soft); border: 1px solid rgba(0,137,123,0.2); }
+.info-box.debounce { background: var(--c-amber-soft); border: 1px solid rgba(230,81,0,0.2); }
+.info-box h4 { font-size: var(--fs-sm); font-weight: 700; margin-bottom: var(--sp-xs); }
+.info-box.warn h4 { color: var(--c-red); }
+.info-box.insight h4 { color: var(--c-blue); }
+.info-box.key h4 { color: var(--c-teal); }
+.info-box.debounce h4 { color: var(--c-amber); }
+.info-box p, .info-box li { font-size: var(--fs-sm); color: var(--c-text-2); line-height: 1.6; }
+.info-box ul { list-style: none; padding: 0; }
+.info-box li { padding: 3px 0 3px 18px; position: relative; }
+.info-box li::before { content: '→'; position: absolute; left: 0; font-weight: 700; }
+.info-box.key li::before { color: var(--c-teal); }
+.info-box.warn li::before { color: var(--c-red); }
+.info-box.insight li::before { color: var(--c-blue); }
+.info-box.debounce li::before { color: var(--c-amber); }
+
+/* Table */
+.tbl-wrap {
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  margin: var(--sp-md) 0;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  background: var(--c-surface);
+}
+table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+caption {
+  text-align: left; padding: var(--sp-sm) var(--sp-md);
+  font-weight: 600; font-size: var(--fs-sm);
+  color: var(--c-text-3); background: var(--c-surface-2);
+  border-bottom: 1px solid var(--c-border);
+}
+thead th {
+  background: var(--c-surface-2); font-weight: 600; text-align: left;
+  padding: var(--sp-sm) var(--sp-md);
+  border-bottom: 1px solid var(--c-border);
+  white-space: nowrap; color: var(--c-text);
+}
+tbody td {
+  padding: var(--sp-sm) var(--sp-md);
+  border-bottom: 1px solid var(--c-border);
+  vertical-align: top; color: var(--c-text-2);
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: rgba(194,24,91,0.02); }
+
+/* SVG */
+.svg-box {
+  background: var(--c-surface); border: 1px solid var(--c-border);
+  border-radius: var(--r-md); padding: var(--sp-md);
+  margin: var(--sp-md) 0; overflow-x: auto;
+}
+.svg-box svg { display: block; width: 100%; height: auto; min-width: 520px; }
+
+/* Severity */
+.severity { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: var(--fs-xs); font-weight: 700; }
+.sev-high { background: var(--c-rose-soft); color: var(--c-rose); }
+.sev-mid { background: var(--c-amber-soft); color: var(--c-amber); }
+.sev-low { background: var(--c-green-soft); color: var(--c-green); }
+.sev-neutral { background: var(--c-blue-soft); color: var(--c-blue); }
+
+/* Star Rating */
+.stars { color: var(--c-amber); font-size: var(--fs-sm); letter-spacing: 1px; }
+.stars-empty { color: var(--c-border); }
+
+/* Timeline */
+.timeline { margin: var(--sp-md) 0; padding-left: var(--sp-lg); border-left: 2px solid var(--c-rose-mid); }
+.timeline-item { position: relative; padding: var(--sp-sm) 0 var(--sp-md) var(--sp-md); }
+.timeline-item::before {
+  content: ''; position: absolute;
+  left: calc(-1 * var(--sp-lg) - 5px); top: 12px;
+  width: 8px; height: 8px; border-radius: 50%; background: var(--c-rose);
+}
+.timeline-item .year { font-size: var(--fs-xs); font-weight: 700; color: var(--c-rose); font-family: var(--font-mono); }
+.timeline-item .desc { font-size: var(--fs-sm); color: var(--c-text-2); margin-top: 2px; }
+
+/* References */
+.ref-list { list-style: none; padding: 0; counter-reset: ref; }
+.ref-list li {
+  counter-increment: ref; position: relative;
+  padding: var(--sp-xs) 0 var(--sp-xs) 36px;
+  font-size: var(--fs-sm); color: var(--c-text-3); line-height: 1.6;
+}
+.ref-list li::before {
+  content: '[' counter(ref) ']'; position: absolute; left: 0;
+  font-weight: 700; color: var(--c-text-3);
+  font-family: var(--font-mono); font-size: var(--fs-xs);
+}
+.ref-list a { color: var(--c-rose); text-decoration: none; overflow-wrap: break-word; }
+.ref-list a:hover { text-decoration: underline; }
+
+/* Footer */
+.foot {
+  margin-top: var(--sp-2xl); padding: var(--sp-lg) 0;
+  border-top: 1px solid var(--c-border);
+  font-size: var(--fs-sm); color: var(--c-text-3); text-align: center;
+}
+
+@media print { body { background: #fff; } .sec { break-inside: avoid; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="inner">
+
+<header class="hero">
+  <span class="hero-tag">Evidence-Based Review · 2024–2026</span>
+  <h1><span>更年期</span>激素治疗、运动与营养<br/>研究综述</h1>
+  <p class="sub">从骨骼保护到肌肉维持、从血管舒缩症状到心理健康——关于 MHT 与运动干预、营养策略及男性更年期综合征的系统性循证综述</p>
+  <div class="meta">
+    <span>2026-09-28 · 扩展版</span>
+    <span>基于 Frontiers 2025、STOP-EM 2026、LIFTMOR、LOH 指南 2025、ESPEN 2025 等</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <p class="toc-title">目录</p>
+  <ol>
+    <li><a href="#s1"><span class="num">01</span>核心结论</a></li>
+    <li><a href="#s2"><span class="num">02</span>研究概览</a></li>
+    <li><a href="#s3"><span class="num">03</span>MHT 的循证定位</a></li>
+    <li><a href="#s4"><span class="num">04</span>运动疗法的核心证据</a></li>
+    <li><a href="#s5"><span class="num">05</span>MHT + 运动：联合效应</a></li>
+    <li><a href="#s6"><span class="num">06</span>各系统综合对比</a></li>
+    <li><a href="#s7"><span class="num">07</span>男性&#34;更年期&#34;：LOH 与运动</a></li>
+    <li><a href="#s8"><span class="num">08</span>营养干预策略</a></li>
+    <li><a href="#s9"><span class="num">09</span>老年人与肌少症训练</a></li>
+    <li><a href="#s10"><span class="num">10</span>研究前沿与趋势</a></li>
+    <li><a href="#s11"><span class="num">11</span>证据质量评估</a></li>
+    <li><a href="#s12"><span class="num">12</span>实践启示</a></li>
+    <li><a href="#s13"><span class="num">13</span>参考文献</a></li>
+  </ol>
+</nav>
+
+<div class="conclusion">
+  <p><strong>核心结论：</strong>激素治疗（MHT）是缓解血管舒缩症状（潮热、盗汗）最有效的单一干预，但在骨骼健康、肌肉维持、代谢改善和心理福祉方面，<strong>抗阻训练 + 冲击性运动的组合</strong>展现出与 MHT 相当甚至协同增效的效果——两者的联合应用是目前保护更年期骨密度最有效的策略。男性同样面临与增龄相关的性激素下降（迟发性性腺功能减退症/LOH），运动和营养干预的核心地位与女性一致。对于所有更年期及老年人群，<strong>抗阻训练 + 足量蛋白质 + 骨骼营养素</strong>构成三大基石。</p>
+</div>
+
+<!-- Section 1 -->
+<section class="sec" id="s1">
+  <div class="sec-head"><span class="sec-num rose">01</span><h2>核心结论</h2></div>
+  <div class="card-grid cols-3">
+    <div class="card rose">
+      <p class="label">MHT 的不可替代性</p>
+      <h4>血管舒缩症状</h4>
+      <p>MHT 是缓解潮热和盗汗的<strong>金标准</strong>，起效快、效果确切。其他非药物干预无法完全替代。</p>
+    </div>
+    <div class="card teal">
+      <p class="label">运动的独特优势</p>
+      <h4>肌肉 + 代谢 + 骨</h4>
+      <p>抗阻训练在维持肌肉量、改善胰岛素敏感性、促进 NO 生成方面超越 MHT。大重量训练可直接增加骨密度。</p>
+    </div>
+    <div class="card green">
+      <p class="label">联合最优</p>
+      <h4>1 + 1 &gt; 2</h4>
+      <p>MHT + 结构化运动在腰椎 BMD 上产生<strong>额外 2.7%</strong>的提升，超越任一单一干预。</p>
+    </div>
+  </div>
+  <div class="card-grid cols-3">
+    <div class="card indigo">
+      <p class="label">男性也有更年期</p>
+      <h4>LOH / 迟发性性腺功能减退</h4>
+      <p>睾酮每年下降 1-2%，60岁后约 20% 男性达低睾酮标准。高强度运动可直接提升睾酮水平。</p>
+    </div>
+    <div class="card amber">
+      <p class="label">营养是第三支柱</p>
+      <h4>蛋白质 + 骨骼营养素</h4>
+      <p>蛋白质 1.0-1.5g/kg/d + 维生素D₃+K₂ + 钙 + Omega-3 是抗衰的必需底物，与运动协同增效。</p>
+    </div>
+    <div class="card purple">
+      <p class="label">老年人训练安全可行</p>
+      <h4>80-90岁仍可增肌</h4>
+      <p>RT 是唯一同时改善肌肉量、肌力和身体功能的干预。即使 90 岁以上也能从训练中获益。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section 2 -->
+<section class="sec" id="s2">
+  <div class="sec-head"><span class="sec-num blue">02</span><h2>研究概览</h2></div>
+  <div class="tbl-wrap">
+    <table>
+      <caption>核心纳入研究</caption>
+      <thead>
+        <tr><th scope="col">文献</th><th scope="col">类型</th><th scope="col">样本/范围</th><th scope="col">发表</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Frontiers Reprod Health 范围综述</td>
+          <td>Scoping Review</td>
+          <td>20项纳入研究</td>
+          <td>2025</td>
+        </tr>
+        <tr>
+          <td>Hogervorst et al. 心理QoL研究</td>
+          <td>横断面 (n=272)</td>
+          <td>40-60岁女性</td>
+          <td>2025</td>
+        </tr>
+        <tr>
+          <td>STOP-EM 试验</td>
+          <td>RCT (可行性)</td>
+          <td>围绝经/早期绝经女性</td>
+          <td>2026</td>
+        </tr>
+        <tr>
+          <td>Zhao et al. Meta分析</td>
+          <td>Meta-analysis</td>
+          <td>6项RCT, n=764</td>
+          <td>2025</td>
+        </tr>
+        <tr>
+          <td>LIFTMOR 试验</td>
+          <td>RCT</td>
+          <td>绝经后低骨量女性</td>
+          <td>2018</td>
+        </tr>
+        <tr>
+          <td>RT vs HRT 评论</td>
+          <td>Commentary</td>
+          <td>综述性评论</td>
+          <td>2026</td>
+        </tr>
+        <tr>
+          <td>Testosterone Trials (Snyder et al.)</td>
+          <td>RCT (n=790)</td>
+          <td>65岁以上低睾酮男性</td>
+          <td>2016</td>
+        </tr>
+        <tr>
+          <td>TRAVERSE Trial</td>
+          <td>RCT (n=5246)</td>
+          <td>中老年低睾酮男性心血管安全性</td>
+          <td>2023</td>
+        </tr>
+        <tr>
+          <td>中华医学杂志 LOH 诊疗指南</td>
+          <td>专家共识/指南</td>
+          <td>中国 LOH 诊疗标准</td>
+          <td>2025</td>
+        </tr>
+        <tr>
+          <td>Soy isoflavones Meta分析</td>
+          <td>Meta-analysis</td>
+          <td>62项研究, n=6600+</td>
+          <td>2016</td>
+        </tr>
+        <tr>
+          <td>Sarcopenia RT Meta分析</td>
+          <td>Meta-analysis</td>
+          <td>22项RCT, n=959 老年肌少症</td>
+          <td>2025</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 3 -->
+<section class="sec" id="s3">
+  <div class="sec-head"><span class="sec-num rose">03</span><h2>MHT 的循证定位</h2></div>
+
+  <h3>明确有效的领域</h3>
+  <div class="tbl-wrap">
+    <table>
+      <caption>MHT 已确认的获益</caption>
+      <thead>
+        <tr><th scope="col">领域</th><th scope="col">效果</th><th scope="col">证据等级</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>血管舒缩症状（潮热/盗汗）</strong></td>
+          <td>最有效治疗，起效快</td>
+          <td><span class="severity sev-high">⭐⭐⭐⭐⭐</span></td>
+        </tr>
+        <tr>
+          <td><strong>骨密度保护</strong></td>
+          <td>减少骨吸收，维持 BMD</td>
+          <td><span class="severity sev-mid">⭐⭐⭐</span></td>
+        </tr>
+        <tr>
+          <td><strong>睡眠改善</strong></td>
+          <td>通过缓解潮热间接改善</td>
+          <td><span class="severity sev-mid">⭐⭐⭐⭐</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>证据不确定 / 有争议的领域</h3>
+  <div class="card-grid">
+    <div class="card amber">
+      <p class="label">心理 QoL</p>
+      <h4>与预期相反</h4>
+      <p>2025年横断面研究（n=272）：MHT 使用者社会心理 QoL 更差、记忆主诉更多。但存在<strong>自选择偏倚</strong>——症状更重的女性更倾向使用 MHT。</p>
+    </div>
+    <div class="card amber">
+      <p class="label">情绪 / 抑郁 / 焦虑</p>
+      <h4>效果不一致</h4>
+      <p>MHT 对情绪的影响不一致，<strong>不推荐作为心理健康的一线治疗</strong>。运动（尤其瑜伽和一般体力活动）在此维度获益更一致。</p>
+    </div>
+    <div class="card amber">
+      <p class="label">认知功能</p>
+      <h4>短暂改善</h4>
+      <p>12个月 RCT 显示前 6 个月有改善，6 个月后回到基线。长期认知保护效果不明确。</p>
+    </div>
+    <div class="card red">
+      <p class="label">安全性考量</p>
+      <h4>风险因制剂而异</h4>
+      <p>经皮雌激素 + 微粒化黄体酮 = <strong>最低风险组合</strong>。<br/>口服联合制剂心血管和乳腺癌风险较高。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section 4 -->
+<section class="sec" id="s4">
+  <div class="sec-head"><span class="sec-num teal">04</span><h2>运动疗法的核心证据</h2></div>
+
+  <h3>抗阻训练（RT）—— 最被低估的更年期干预</h3>
+  <p>2026年评论文章揭示：RT 能部分<strong>&#34;模拟&#34;雌激素的全身效应</strong>：</p>
+
+  <div class="svg-box">
+    <svg viewBox="0 0 780 320" role="img" aria-labelledby="svg-t svg-d">
+      <title id="svg-t">RT 模拟雌激素效应对比图</title>
+      <desc id="svg-d">雌激素的六大生理作用与抗阻训练对应效应的对照</desc>
+      <!-- E2 column -->
+      <rect x="10" y="30" width="340" height="280" rx="10" fill="rgba(194,24,91,0.05)" stroke="#c2185b" stroke-width="1.5"></rect>
+      <text x="180" y="22" text-anchor="middle" font-size="13" font-weight="800" fill="#c2185b">雌激素（E2）的生理作用</text>
+      <!-- RT column -->
+      <rect x="400" y="30" width="370" height="280" rx="10" fill="rgba(0,137,123,0.05)" stroke="#00897b" stroke-width="1.5"></rect>
+      <text x="585" y="22" text-anchor="middle" font-size="13" font-weight="800" fill="#00897b">抗阻训练（RT）的对应效应</text>
+
+      <!-- Row 1 -->
+      <text x="30" y="65" font-size="11" font-weight="700" fill="#c2185b">维持瘦体重</text>
+      <line x1="360" y1="60" x2="390" y2="60" stroke="#888" stroke-width="1" stroke-dasharray="4,3"></line>
+      <text x="410" y="65" font-size="11" font-weight="700" fill="#00897b">↑ 肌肉量和静息代谢率</text>
+
+      <!-- Row 2 -->
+      <text x="30" y="100" font-size="11" font-weight="700" fill="#c2185b">维持胰岛素敏感性</text>
+      <line x1="360" y1="95" x2="390" y2="95" stroke="#888" stroke-width="1" stroke-dasharray="4,3"></line>
+      <text x="410" y="100" font-size="11" font-weight="700" fill="#00897b">↑ 胰岛素敏感性</text>
+
+      <!-- Row 3 -->
+      <text x="30" y="135" font-size="11" font-weight="700" fill="#c2185b">调节脂肪分布</text>
+      <line x1="360" y1="130" x2="390" y2="130" stroke="#888" stroke-width="1" stroke-dasharray="4,3"></line>
+      <text x="410" y="135" font-size="11" font-weight="700" fill="#00897b">↓ 腹部脂肪</text>
+
+      <!-- Row 4 -->
+      <text x="30" y="170" font-size="11" font-weight="700" fill="#c2185b">促进 NO 生成 → 血管舒张</text>
+      <line x1="360" y1="165" x2="390" y2="165" stroke="#888" stroke-width="1" stroke-dasharray="4,3"></line>
+      <text x="410" y="165" font-size="11" font-weight="700" fill="#00897b">RT 独立于 E2 促进 NO 生成</text>
+
+      <!-- Row 5 -->
+      <text x="30" y="205" font-size="11" font-weight="700" fill="#c2185b">改善情绪 / 认知</text>
+      <line x1="360" y1="200" x2="390" y2="200" stroke="#888" stroke-width="1" stroke-dasharray="4,3"></line>
+      <text x="410" y="200" font-size="11" font-weight="700" fill="#00897b">↑ 内啡肽、↓ 炎症、↑ 神经可塑性</text>
+
+      <!-- Row 6 -->
+      <text x="30" y="240" font-size="11" font-weight="700" fill="#c2185b">维持骨密度</text>
+      <line x1="360" y1="235" x2="390" y2="235" stroke="#888" stroke-width="1" stroke-dasharray="4,3"></line>
+      <text x="410" y="235" font-size="11" font-weight="700" fill="#00897b">机械应力 → 骨形成</text>
+
+      <!-- Key insight -->
+      <rect x="400" y="255" width="370" height="40" rx="6" fill="rgba(230,81,0,0.08)"></rect>
+      <text x="585" y="272" text-anchor="middle" font-size="10" font-weight="700" fill="#e65100">⚡ 关键区别：瑜伽/步行/轻度有氧不显著影响 NO 生成</text>
+      <text x="585" y="288" text-anchor="middle" font-size="10" font-weight="700" fill="#e65100">而 RT 可以——使 RT 在缓解潮热方面有独特潜力</text>
+    </svg>
+  </div>
+
+  <h3>STOP-EM 2026 RCT（Whitman et al.）</h3>
+  <div class="card-grid cols-3">
+    <div class="card teal">
+      <p class="label">研究设计</p>
+      <h4>9个月 HiRIT RCT</h4>
+      <p>大重量抗阻 + 冲击训练，围绝经/早期绝经女性，随机等待列表对照。</p>
+    </div>
+    <div class="card green">
+      <p class="label">核心结果</p>
+      <h4>四项指标全部改善</h4>
+      <p>✅ 瘦体重增加<br/>✅ 肌力增加<br/>✅ 下肢爆发力增加<br/>✅ <strong>腰椎 aBMD 增加</strong></p>
+    </div>
+    <div class="card blue">
+      <p class="label">意义</p>
+      <h4>窗口期证据</h4>
+      <p>首次证明大重量训练在<strong>围绝经到早期绝经</strong>窗口期的有效性，需要更大规模确证性试验。</p>
+    </div>
+  </div>
+
+  <h3>LIFTMOR 试验（Watson et al., 2018）</h3>
+  <div class="info-box key">
+    <h4>绝经后低骨量女性的安全性证据</h4>
+    <ul>
+      <li>HiRIT（高强度抗阻+冲击训练）vs 对照组，绝经后骨量减少/骨质疏松女性</li>
+      <li>骨强度指标和功能表现显著改善</li>
+      <li><strong>无不良事件</strong>——证明大重量训练对低骨量人群的安全性</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Section 5 -->
+<section class="sec" id="s5">
+  <div class="sec-head"><span class="sec-num green">05</span><h2>MHT + 运动：联合效应</h2></div>
+
+  <h3>骨密度（最强证据）</h3>
+  <div class="tbl-wrap">
+    <table>
+      <caption>联合干预 vs 单一干预的骨密度效果对比</caption>
+      <thead>
+        <tr><th scope="col">比较</th><th scope="col">效果</th><th scope="col">来源</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>MHT + 运动</strong> vs 运动 alone</td>
+          <td>腰椎 BMD 额外提升 <strong>2.7%</strong>，股骨颈额外提升 <strong>0.8%</strong></td>
+          <td>Zhao et al. Meta (n=764)</td>
+        </tr>
+        <tr>
+          <td>MHT + <strong>混合负荷运动</strong> vs MHT + 单一运动</td>
+          <td>脊柱保护效果更优（SMD = 1.073）</td>
+          <td>Zhao et al. 亚组分析</td>
+        </tr>
+        <tr>
+          <td>MHT alone vs 运动 alone</td>
+          <td>腰椎 BMD 保护效果相近，HRT 略优但不显著</td>
+          <td>Born et al. Meta</td>
+        </tr>
+        <tr>
+          <td>联合雌+孕激素 MHT vs 单用雌激素</td>
+          <td>联合制剂在骨保护上更有效</td>
+          <td>范围综述</td>
+        </tr>
+        <tr>
+          <td>Satpathy et al.（n=150）</td>
+          <td>联合组 BMD 增幅：腰椎 +3.2%，髋部 +2.9%</td>
+          <td>12个月干预</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>最优运动方案（基于范围综述）</h3>
+  <div class="card-grid cols-3">
+    <div class="card rose">
+      <p class="label">核心</p>
+      <h4>抗阻训练</h4>
+      <p>70-85% 1RM<br/>每周 2-3 次<br/>≥ 6 个月</p>
+    </div>
+    <div class="card amber">
+      <p class="label">冲击</p>
+      <h4>冲击性活动</h4>
+      <p>慢跑、跳跃、蹦跳<br/>每周 ≥ 3 次</p>
+    </div>
+    <div class="card blue">
+      <p class="label">补充</p>
+      <h4>低冲击活动</h4>
+      <p>太极、步行、普拉提<br/>可补充，不可替代</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section 6 -->
+<section class="sec" id="s6">
+  <div class="sec-head"><span class="sec-num purple">06</span><h2>各系统综合对比</h2></div>
+
+  <div class="tbl-wrap">
+    <table>
+      <caption>MHT、运动、联合干预的健康维度对比</caption>
+      <thead>
+        <tr><th scope="col">健康维度</th><th scope="col">MHT</th><th scope="col">运动（RT为主）</th><th scope="col">MHT + 运动</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>血管舒缩症状</strong></td>
+          <td><span class="stars">⭐⭐⭐⭐⭐</span> 最有效</td>
+          <td><span class="stars">⭐⭐⭐</span> 可能缓解</td>
+          <td><span class="stars">⭐⭐⭐⭐⭐</span> 最优</td>
+        </tr>
+        <tr>
+          <td><strong>骨密度保护</strong></td>
+          <td><span class="stars">⭐⭐⭐⭐</span> 有效</td>
+          <td><span class="stars">⭐⭐⭐⭐</span> 有效</td>
+          <td><span class="stars">⭐⭐⭐⭐⭐</span> 最优</td>
+        </tr>
+        <tr>
+          <td><strong>肌肉量维持</strong></td>
+          <td><span class="stars">⭐</span> 有限</td>
+          <td><span class="stars">⭐⭐⭐⭐⭐</span> 最有效</td>
+          <td><span class="stars">⭐⭐⭐⭐⭐</span> 最优</td>
+        </tr>
+        <tr>
+          <td><strong>代谢健康</strong></td>
+          <td><span class="stars">⭐⭐⭐</span> 改善</td>
+          <td><span class="stars">⭐⭐⭐⭐⭐</span> 全面改善</td>
+          <td><span class="stars">⭐⭐⭐⭐⭐</span> 最优</td>
+        </tr>
+        <tr>
+          <td><strong>心理 QoL</strong></td>
+          <td><span class="stars">⭐⭐</span> 不确定</td>
+          <td><span class="stars">⭐⭐⭐⭐</span> 一致获益</td>
+          <td><span class="stars">⭐⭐⭐⭐</span></td>
+        </tr>
+        <tr>
+          <td><strong>心血管风险</strong></td>
+          <td><span class="stars">⭐⭐</span> 因制剂而异</td>
+          <td><span class="stars">⭐⭐⭐⭐</span> 降低风险</td>
+          <td><span class="stars">⭐⭐⭐⭐</span></td>
+        </tr>
+        <tr>
+          <td><strong>认知功能</strong></td>
+          <td><span class="stars">⭐⭐</span> 短暂改善</td>
+          <td><span class="stars">⭐⭐⭐⭐</span> 持续获益</td>
+          <td>待研究</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 7 (NEW) -->
+<section class="sec" id="s7">
+  <div class="sec-head"><span class="sec-num indigo">07</span><h2>男性&#34;更年期&#34;：LOH 与运动</h2></div>
+
+  <h3>&#34;男性更年期&#34;到底存不存在？</h3>
+  <p>与女性的突然性卵巢功能衰退不同，男性的雄激素下降是<strong>渐进式的</strong>——睾酮从 30-35 岁起每年下降约 1-2%。到 60 岁时约 20% 的男性达到低睾酮标准，到 80 岁时这一比例升至 <strong>49%</strong>。</p>
+  <p>WHO 和国际泌尿学界使用的正式术语是<strong>「迟发性性腺功能减退症」（Late-Onset Hypogonadism, LOH）</strong>，而非&#34;男性更年期&#34;。中华医学杂志 2025 年发布的《男性迟发性性腺功能减退症的诊疗指南》明确指出：LOH 是一种生化综合征，而非所有男性必然经历的生理阶段。</p>
+
+  <div class="svg-box">
+    <svg viewBox="0 0 780 300" role="img" aria-labelledby="svg-mt svg-md">
+      <title id="svg-mt">男女激素衰退模式对比</title>
+      <desc id="svg-md">女性雌激素在围绝经期急剧下降 vs 男性睾酮缓慢线性下降的对比图</desc>
+      <!-- Axes -->
+      <line x1="60" y1="260" x2="750" y2="260" stroke="#ccc" stroke-width="1"></line>
+      <line x1="60" y1="30" x2="60" y2="260" stroke="#ccc" stroke-width="1"></line>
+      <!-- Y axis labels -->
+      <text x="50" y="35" text-anchor="end" font-size="10" fill="#888">高</text>
+      <text x="50" y="260" text-anchor="end" font-size="10" fill="#888">低</text>
+      <text x="15" y="150" text-anchor="middle" font-size="11" font-weight="700" fill="#555" transform="rotate(-90 15 150)">激素水平</text>
+      <!-- X axis labels -->
+      <text x="100" y="280" text-anchor="middle" font-size="10" fill="#888">30岁</text>
+      <text x="250" y="280" text-anchor="middle" font-size="10" fill="#888">40岁</text>
+      <text x="400" y="280" text-anchor="middle" font-size="10" fill="#888">50岁</text>
+      <text x="550" y="280" text-anchor="middle" font-size="10" fill="#888">55岁</text>
+      <text x="700" y="280" text-anchor="middle" font-size="10" fill="#888">65岁</text>
+
+      <!-- Female E2 curve (sharp drop) -->
+      <path d="M 100,50 C 200,50 300,55 350,60 Q 400,80 430,180 Q 460,240 550,255 L 700,258" fill="none" stroke="#c2185b" stroke-width="2.5"></path>
+      <text x="420" y="145" font-size="11" font-weight="700" fill="#c2185b">女性 E2</text>
+      <rect x="375" y="150" width="90" height="50" rx="4" fill="none" stroke="#c2185b" stroke-width="1" stroke-dasharray="4,3"></rect>
+      <text x="420" y="170" text-anchor="middle" font-size="9" fill="#c2185b">急剧下降窗口</text>
+      <text x="420" y="183" text-anchor="middle" font-size="9" fill="#c2185b">末次月经前后1-2年</text>
+
+      <!-- Male T curve (gradual decline) -->
+      <path d="M 100,55 C 250,70 400,120 550,170 L 700,200" fill="none" stroke="#283593" stroke-width="2.5"></path>
+      <text x="550" y="155" font-size="11" font-weight="700" fill="#283593">男性 T</text>
+      <text x="620" y="195" font-size="9" fill="#283593">-1%/年</text>
+
+      <!-- Prevalence note -->
+      <rect x="100" y="30" width="250" height="35" rx="6" fill="rgba(40,53,147,0.06)"></rect>
+      <text x="225" y="48" text-anchor="middle" font-size="10" fill="#283593" font-weight="600">60岁后 ~20% 达低睾酮标准</text>
+      <text x="225" y="61" text-anchor="middle" font-size="10" fill="#283593" font-weight="600">80岁后 ~49%（Harman 纵向研究）</text>
+    </svg>
+  </div>
+
+  <h3>LOH 的症状谱</h3>
+  <div class="card-grid">
+    <div class="card indigo">
+      <p class="label">性功能</p>
+      <h4>性欲下降 / 勃起功能</h4>
+      <p>性欲减退、勃起硬度下降、恢复时间延长。注意：勃起功能障碍在老年男性中常为非激素性病因。</p>
+    </div>
+    <div class="card indigo">
+      <p class="label">身体成分</p>
+      <h4>肌肉↓ 脂肪↑</h4>
+      <p>瘦体重减少、腹部和上身脂肪增加、体力量下降。但同样可由 GH 下降和生活方式因素解释。</p>
+    </div>
+    <div class="card indigo">
+      <p class="label">心理/认知</p>
+      <h4>情绪低落 / 认知下降</h4>
+      <p>易怒、抑郁、能量下降、空间认知能力减弱。研究提示仅当睾酮低于正常范围时，替代治疗才能改善情绪。</p>
+    </div>
+    <div class="card indigo">
+      <p class="label">骨骼/代谢</p>
+      <h4>骨密度↓ / 血脂异常</h4>
+      <p>低睾酮加速骨丢失；睾酮替代可降低 LDL 胆固醇，但目前无证据表明对心血管死亡率有影响。</p>
+    </div>
+  </div>
+
+  <div class="info-box warn">
+    <h4>关键区别：LOH ≠ 女性更年期</h4>
+    <ul>
+      <li>女性更年期是<strong>普遍性</strong>的——所有女性在 45-55 岁经历卵巢功能急剧衰退</li>
+      <li>男性睾酮下降是<strong>渐进性、个体差异大</strong>的——并非所有男性都会出现有临床意义的低睾酮</li>
+      <li>AUA 和内分泌学会<strong>不承认&#34;男性更年期&#34;</strong>作为临床诊断，仅使用 LOH 术语</li>
+      <li>LOH 的症状可由多种非激素因素引起（睡眠差、代谢紊乱、压力、药物副作用）</li>
+    </ul>
+  </div>
+
+  <h3>LOH 的治疗与运动干预</h3>
+  <div class="tbl-wrap">
+    <table>
+      <caption>男性 LOH 干预方案对比</caption>
+      <thead>
+        <tr><th scope="col">干预</th><th scope="col">获益</th><th scope="col">局限</th><th scope="col">证据等级</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>睾酮替代治疗（TRT）</strong></td>
+          <td>改善性功能、肌肉量、BMD、情绪（仅限低睾酮者）</td>
+          <td>需持续用药；可能增加前列腺癌风险；停药后效果消失</td>
+          <td><span class="severity sev-mid">⭐⭐⭐</span></td>
+        </tr>
+        <tr>
+          <td><strong>高强度运动</strong></td>
+          <td>↑ 血清总睾酮，↑ IIEF-5 评分（勃起功能），↓ 体重</td>
+          <td>需要足够的强度和持续性</td>
+          <td><span class="severity sev-mid">⭐⭐⭐⭐</span></td>
+        </tr>
+        <tr>
+          <td><strong>TRT + 抗阻训练</strong></td>
+          <td>体成分改善 &gt; 任一单用；运动增强 TRT 疗效持久性</td>
+          <td>研究样本小</td>
+          <td><span class="severity sev-mid">⭐⭐⭐</span></td>
+        </tr>
+        <tr>
+          <td><strong>减重 / 生活方式</strong></td>
+          <td>利拉鲁肽 vs TRT：减重效果更优，症状改善相当</td>
+          <td>需要长期依从性</td>
+          <td><span class="severity sev-mid">⭐⭐⭐</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-box key">
+    <h4>中国 LOH 指南核心推荐（2025）</h4>
+    <ul>
+      <li><strong>推荐意见14</strong>：高强度运动可改善血清总睾酮水平和勃起功能（证据 1a，强推荐）</li>
+      <li>每周 3-4 次，每次 30-60 min 运动可升高血清总睾酮水平</li>
+      <li>高体力活动组（3586-10486步/日）vs 低体力活动组（1110-3579步/日），12周后总睾酮差异显著</li>
+      <li>运动还能增强 TRT 的持久性：停 TRT 后继续运动组睾酮水平维持更高（Cho et al. RCT）</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Section 8 (NEW) -->
+<section class="sec" id="s8">
+  <div class="sec-head"><span class="sec-num amber">08</span><h2>营养干预策略</h2></div>
+
+  <p>更年期及绝经后的营养策略需要围绕三大目标：<strong>骨骼保护、肌肉维持、抗炎/代谢健康</strong>。以下按证据等级排列关键营养素。</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <caption>更年期关键营养素与证据等级</caption>
+      <thead>
+        <tr><th scope="col">营养素</th><th scope="col">推荐剂量</th><th scope="col">核心作用</th><th scope="col">证据</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>蛋白质</strong></td>
+          <td>1.0-1.5 g/kg/d（老年人可达 1.5 g/kg/d）</td>
+          <td>维持/增加肌肉量、骨骼基质、代谢率</td>
+          <td><span class="severity sev-high">A 级</span></td>
+        </tr>
+        <tr>
+          <td><strong>维生素 D₃ + K₂</strong></td>
+          <td>2000-4000 IU D₃ + 90-200 mcg K₂ (MK-7)</td>
+          <td>钙吸收 → 骨矿化；K₂ 引导钙入骨不入血管</td>
+          <td><span class="severity sev-high">A 级</span></td>
+        </tr>
+        <tr>
+          <td><strong>钙</strong></td>
+          <td>1000-1200 mg/d（饮食+补充）</td>
+          <td>骨矿化基础原料</td>
+          <td><span class="severity sev-high">A 级</span></td>
+        </tr>
+        <tr>
+          <td><strong>Omega-3 (EPA+DHA)</strong></td>
+          <td>2000-3000 mg/d</td>
+          <td>降低 TG、抗炎（IL-6、CRP↓）、心血管保护</td>
+          <td><span class="severity sev-mid">B 级</span></td>
+        </tr>
+        <tr>
+          <td><strong>镁（甘氨酸镁）</strong></td>
+          <td>300-400 mg/d（晚间服用）</td>
+          <td>改善睡眠（GABA）、支持骨密度、缓解焦虑</td>
+          <td><span class="severity sev-mid">B 级</span></td>
+        </tr>
+        <tr>
+          <td><strong>胶原蛋白肽</strong></td>
+          <td>10-15 g/d + 200 mg 维生素C</td>
+          <td>皮肤弹性、关节保护、骨基质支持</td>
+          <td><span class="severity sev-mid">B 级</span></td>
+        </tr>
+        <tr>
+          <td><strong>大豆异黄酮</strong></td>
+          <td>40-80 mg/d（食物或补充剂）</td>
+          <td>植物雌激素，轻度缓解潮热</td>
+          <td><span class="severity sev-low">C 级</span></td>
+        </tr>
+        <tr>
+          <td><strong>黑升麻（Black Cohosh）</strong></td>
+          <td>20-40 mg/d 标准化提取物</td>
+          <td>减少潮热频率和严重程度</td>
+          <td><span class="severity sev-mid">B 级</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>蛋白质分配：比总量更重要的是每餐分配</h3>
+  <div class="info-box debounce">
+    <h4>亮氨酸阈值与蛋白质分配</h4>
+    <ul>
+      <li>老年人每餐需要 <strong>25-30g 高质量蛋白</strong> + 约 <strong>3g 亮氨酸</strong>才能最大化刺激肌肉蛋白合成（MPS）</li>
+      <li>大多数老年人把蛋白质集中在晚餐——这是低效的。应<strong>均匀分配到三餐</strong></li>
+      <li>乳清蛋白因亮氨酸含量高、吸收快，在老年人增肌研究中效果最佳</li>
+      <li>多成分补充剂（乳清蛋白 + 肌酸 + VD₃ + 钙 + Omega-3）优于任何单一成分（2025年综述）</li>
+    </ul>
+  </div>
+
+  <h3>植物雌激素：争议与事实</h3>
+  <div class="card-grid">
+    <div class="card green">
+      <p class="label">大豆异黄酮</p>
+      <h4>2016年 Meta 分析（62项研究，n=6600+）</h4>
+      <p>与潮热频率和严重程度的<strong>轻度减少</strong>相关，效果远小于 MHT。对阴道干燥也有轻微改善。</p>
+    </div>
+    <div class="card amber">
+      <p class="label">注意事项</p>
+      <h4>甲状腺功能风险</h4>
+      <p>高剂量植物雌激素补充剂（16mg）在亚临床甲减女性中可使进展为临床甲减的风险<strong>增加 3 倍</strong>。正在接受甲状腺治疗的女性可能需要调整剂量。</p>
+    </div>
+  </div>
+
+  <h3>地中海饮食模式</h3>
+  <p>2025年多项综述一致推荐<strong>地中海饮食模式</strong>作为更年期女性的基础饮食框架：</p>
+  <div class="info-box insight">
+    <h4>地中海饮食的更年期获益</h4>
+    <ul>
+      <li>富含水果、蔬菜、全谷物、豆类、橄榄油、坚果、种子、鱼类</li>
+      <li>限制超加工食品、添加糖和饱和脂肪——这些会加重潮热和炎症</li>
+      <li>植物抗氧化物中和活性氧，减少骨分解风险</li>
+      <li>支持心血管健康——绝经后心血管风险显著升高（2-3倍）</li>
+      <li>个体化调整比&#34;完美食谱&#34;更重要</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Section 9 (NEW) -->
+<section class="sec" id="s9">
+  <div class="sec-head"><span class="sec-num green">09</span><h2>老年人与肌少症训练</h2></div>
+
+  <h3>肌少症：衰老的隐形威胁</h3>
+  <p>肌肉量和力量在 30-35 岁达到峰值，之后开始下降，<strong>65 岁后女性、70 岁后男性加速流失</strong>。当肌肉丢失达到影响功能的程度，即为<strong>肌少症（Sarcopenia）</strong>——与跌倒、骨折、失能和代谢紊乱密切相关。</p>
+
+  <div class="card-grid cols-3">
+    <div class="card green">
+      <p class="label">Meta分析 2025</p>
+      <h4>22项RCT, n=959</h4>
+      <p>抗阻训练显著增加肌少症老年人的肌肉量、握力和膝伸肌力。是<strong>唯一同时改善三大指标</strong>的干预。</p>
+    </div>
+    <div class="card teal">
+      <p class="label">另一项综述</p>
+      <h4>24项RCT, n=951（≥60岁）</h4>
+      <p>改善步速、5次起坐测试时间和功能表现。效果在 6-12 周即可显现。</p>
+    </div>
+    <div class="card amber">
+      <p class="label">90+ 岁也可获益</p>
+      <h4>Fiatarone 经典研究</h4>
+      <p>即使是 90 岁以上的护理院居民，进行抗阻训练后肌力仍显著增加。年龄不是训练的禁忌。</p>
+    </div>
+  </div>
+
+  <h3>肌少性肥胖：最危险的组合</h3>
+  <div class="info-box warn">
+    <h4>⚠️ 减重不等于健康</h4>
+    <ul>
+      <li>60 岁以上纯饮食限制或纯有氧运动减重，可能同时丢失<strong>肌肉量和骨密度</strong></li>
+      <li>肌少性肥胖（低肌肉 + 高体脂）是老年人失能风险最高的表型</li>
+      <li>正确策略：<strong>减脂不减肌</strong>——抗阻训练 + 足量蛋白质 + 适度热量缺口</li>
+      <li>WHO 推荐 65 岁以上每周 ≥ 2 天进行大肌群力量训练</li>
+    </ul>
+  </div>
+
+  <h3>老年人抗阻训练处方</h3>
+  <div class="tbl-wrap">
+    <table>
+      <caption>基于循证的老年人训练推荐</caption>
+      <thead>
+        <tr><th scope="col">要素</th><th scope="col">推荐</th><th scope="col">说明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>频率</strong></td>
+          <td>每周 2-3 次</td>
+          <td>每次训练后留足恢复时间</td>
+        </tr>
+        <tr>
+          <td><strong>强度</strong></td>
+          <td>60-80% 1RM</td>
+          <td>从轻开始、渐进增加；初学者可用弹力带或自重</td>
+        </tr>
+        <tr>
+          <td><strong>组数×次数</strong></td>
+          <td>2-3 组 × 8-12 次</td>
+          <td>可结合向心慢速 + 爆发力快速提拉</td>
+        </tr>
+        <tr>
+          <td><strong>肌群覆盖</strong></td>
+          <td>下肢、背部、胸部、核心</td>
+          <td>下肢优先（股四头肌、臀大肌与日常功能最相关）</td>
+        </tr>
+        <tr>
+          <td><strong>补充训练</strong></td>
+          <td>平衡训练（太极/单腿站立）+ 有氧（快走/游泳）</td>
+          <td>有氧不宜过长以免干扰增肌效果</td>
+        </tr>
+        <tr>
+          <td><strong>安全注意</strong></td>
+          <td>充分热身 + 拉伸；疼痛即停</td>
+          <td>已有骨质疏松者避免脊柱屈曲负重动作</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>多成分补充剂：RT 的最佳搭档</h3>
+  <div class="info-box key">
+    <h4>2025年综述：多成分 &gt; 单一成分</h4>
+    <ul>
+      <li>乳清蛋白 + 肌酸 + 维生素 D₃ + 钙 + Omega-3 = <strong>协同增效</strong></li>
+      <li>与抗阻训练配合时，增肌效果显著优于单独训练或单一补充剂</li>
+      <li>蛋白质 1.5-1.7 g/kg/d 在配合 RT 时效果最佳，更高剂量不产生额外收益（&#34;天花板效应&#34;）</li>
+      <li>维生素 D₃ + 钙保护骨密度；Omega-3 抗炎辅助肌肉合成</li>
+    </ul>
+  </div>
+
+  <div class="info-box insight">
+    <h4>未来方向（2025-2026 前沿）</h4>
+    <ul>
+      <li><strong>肌肉生长抑制素抑制剂</strong>（如 Bimagrumab）：可增加瘦体重 5-7%，改善爬楼梯能力</li>
+      <li><strong>精准营养</strong>：基于基因和代谢谱的个体化蛋白/补充剂方案</li>
+      <li><strong>肠道微生物组</strong>：新兴证据表明肠道菌群影响肌肉健康</li>
+      <li><strong>AI 预测</strong>：机器学习预测肌少症风险并个性化干预方案</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Section 10 -->
+<section class="sec" id="s10">
+  <div class="sec-head"><span class="sec-num amber">10</span><h2>研究前沿与趋势（2024-2026）</h2></div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <span class="year">趋势 1</span>
+      <p class="desc"><strong>运动作为 MHT 的替代或补充</strong>——越来越多指南将结构化运动列为与 MHT 并列的一线选择。对 MHT 有禁忌的女性（乳腺癌史、血栓风险），RT 是核心替代方案。</p>
+    </div>
+    <div class="timeline-item">
+      <span class="year">趋势 2</span>
+      <p class="desc"><strong>围绝经期是&#34;关键窗口&#34;</strong>——骨量流失最快发生在最后1次月经前1年到后2年（SWAN研究）。在此窗口期开始干预，效果远好于晚期干预。</p>
+    </div>
+    <div class="timeline-item">
+      <span class="year">趋势 3</span>
+      <p class="desc"><strong>个性化方案取代一刀切</strong>——经皮雌激素+微粒化黄体酮=最低风险 MHT；运动类型、强度、频率需个体化；联合方案优于单一干预。男性 LOH 同样需要个性化治疗。</p>
+    </div>
+    <div class="timeline-item">
+      <span class="year">趋势 4</span>
+      <p class="desc"><strong>RT 的研究缺口亟待填补</strong>——尽管证据累积，RT 在围绝经研究中仍被严重低估。需要更多 RCT 比较 RT alone vs RT+MHT vs MHT alone。</p>
+    </div>
+    <div class="timeline-item">
+      <span class="year">趋势 5</span>
+      <p class="desc"><strong>多成分营养 + RT 协同策略</strong>——从单一蛋白质补充走向蛋白+肌酸+VD₃+钙+Omega-3 的多靶点协同干预，尤其在老年肌少症人群中证据充分。</p>
+    </div>
+    <div class="timeline-item">
+      <span class="year">趋势 6</span>
+      <p class="desc"><strong>药物新靶点</strong>——肌肉生长抑制素抑制剂（Bimagrumab）、Notch 信号通路、mTOR 调节剂等正在走向临床，未来可能与运动/营养联合使用。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section 11 -->
+<section class="sec" id="s11">
+  <div class="sec-head"><span class="sec-num blue">11</span><h2>证据质量评估</h2></div>
+
+  <h3>证据优势</h3>
+  <div class="info-box insight">
+    <ul>
+      <li>2025年范围综述纳入20项研究，系统梳理了 MHT / 运动 / 联合三大方向</li>
+      <li>STOP-EM 2026 是首个针对围绝经-早期绝经窗口期的大重量训练 RCT</li>
+      <li>LIFTMOR 试验提供了绝经后低骨量女性 HiRIT 安全性的有力证据</li>
+      <li>Zhao et al. Meta分析直接量化了联合治疗的协同效应</li>
+      <li>RT &#34;模拟&#34;雌激素效应的机制假说为运动处方提供了理论支撑</li>
+      <li>Testosterone Trials (n=790) 和 TRAVERSE (n=5246) 为男性 TRT 提供了高质量 RCT 证据</li>
+      <li>2025年 LOH 中国指南首次整合高强度运动为强推荐方案</li>
+      <li>多项 Meta分析确认蛋白质分配和多成分补充剂在老年人群中的协同效应</li>
+    </ul>
+  </div>
+
+  <h3>证据局限</h3>
+  <div class="info-box warn">
+    <ul>
+      <li>MHT + 运动的交互作用研究仍非常有限（2025年研究发现无显著交互效应）</li>
+      <li>大部分联合治疗研究样本量小（n=8-91）</li>
+      <li>MHT 制剂、剂量、给药途径高度异质，难以直接比较</li>
+      <li>运动干预的强度、频率、类型不统一</li>
+      <li>长期随访数据（&gt;5年）缺乏</li>
+      <li>横断面研究无法确定因果关系（MHT使用者可能本身就是症状更重的群体）</li>
+      <li>男性 LOH 的运动干预研究样本量普遍偏小，且缺乏长期随访</li>
+      <li>大豆异黄酮/植物雌激素的 RCT 异质性高，结论不一致</li>
+      <li>肌少症药物（肌肉生长抑制素抑制剂）仍处于早期临床阶段</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Section 12 -->
+<section class="sec" id="s12">
+  <div class="sec-head"><span class="sec-num green">12</span><h2>实践启示</h2></div>
+
+  <h3>女性更年期</h3>
+  <div class="tbl-wrap">
+    <table>
+      <caption>不同人群的运动+MHT+营养建议</caption>
+      <thead>
+        <tr><th scope="col">人群</th><th scope="col">建议方案</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>围绝经期，症状明显</strong></td>
+          <td>MHT（首选经皮+微粒化黄体酮）+ 同步开始抗阻训练 + 蛋白质 1.0-1.2g/kg/d + VD₃/K₂</td>
+        </tr>
+        <tr>
+          <td><strong>绝经早期（&lt;5年），骨量下降</strong></td>
+          <td>大重量抗阻（70-85% 1RM，2-3次/周）+ 冲击训练（≥3次/周）+ 考虑 MHT + 钙 1200mg/d</td>
+        </tr>
+        <tr>
+          <td><strong>MHT 禁忌</strong></td>
+          <td>结构化抗阻+冲击训练作为核心替代方案 + 植物雌激素可辅助（注意甲状腺风险）</td>
+        </tr>
+        <tr>
+          <td><strong>骨量正常，预防性干预</strong></td>
+          <td>运动为主 + 地中海饮食 + 蛋白质充足 + MHT 非必需</td>
+        </tr>
+        <tr>
+          <td><strong>已有骨质疏松</strong></td>
+          <td>MHT 不能替代双膦酸盐等一线药物，但可作为辅助；运动仍需坚持</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>男性 LOH</h3>
+  <div class="tbl-wrap">
+    <table>
+      <caption>男性 LOH 干预建议</caption>
+      <thead>
+        <tr><th scope="col">人群</th><th scope="col">建议方案</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>低睾酮 + 有症状</strong></td>
+          <td>TRT + 高强度运动（每周 3-4 次，30-60min） + 减重。运动增强 TRT 持久性。</td>
+        </tr>
+        <tr>
+          <td><strong>边缘低睾酮 + 轻度症状</strong></td>
+          <td>优先生活方式干预（运动+减重+睡眠），3个月后复测睾酮</td>
+        </tr>
+        <tr>
+          <td><strong>肥胖 LOH 患者</strong></td>
+          <td>减重效果可能优于 TRT（利拉鲁肽 vs TRT：减重更好，症状改善相当）</td>
+        </tr>
+        <tr>
+          <td><strong>老年男性预防肌少症</strong></td>
+          <td>RT 2-3次/周 + 蛋白质 1.0-1.5g/kg/d（每餐 25-30g）+ 多成分补充剂</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-box key">
+    <h4> 一句话总结</h4>
+    <p style="font-size:var(--fs-lg); color:var(--c-text); margin:var(--sp-sm) 0 0"><strong>MHT 管症状，运动管全身，营养管底物。</strong>无论男女，进入中年后的核心策略是一致的：<strong>抗阻训练 + 足量蛋白质 + 骨骼/抗炎营养素</strong>。女性额外关注 MHT 管理血管舒缩症状；男性额外关注睾酮水平监测。两者联合营养，是衰老过程中维持功能独立性的最强证据组合。</p>
+  </div>
+</section>
+
+<!-- Section 13 -->
+<section class="sec" id="s13">
+  <div class="sec-head"><span class="sec-num rose">13</span><h2>参考文献</h2></div>
+
+  <ol class="ref-list">
+    <li>Frontiers in Reproductive Health 2025 — Impact of MHT, exercise, and their combination on BMD and mental wellbeing: scoping review (20 studies). <a href="https://www.frontiersin.org/journals/reproductive-health/articles/10.3389/frph.2025.1542746/full" target="_blank" rel="noopener noreferrer">frph.2025.1542746</a></li>
+    <li>Hogervorst E et al. 2025 — MHT and exercise on psychosocial well-being and stress in menopausal women (n=272). <a href="https://www.frontiersin.org/journals/reproductive-health/articles/10.3389/frph.2025.1582406/full" target="_blank" rel="noopener noreferrer">frph.2025.1582406</a></li>
+    <li>Semantic Scholar 2026 — Resistance Training vs HRT: Can Training Offset Perimenopausal Hormonal Shifts? <a href="https://pdfs.semanticscholar.org/c552/cdeb52e1627f373128eb978f08795d951ce9.pdf" target="_blank" rel="noopener noreferrer">PDF</a></li>
+    <li>Whitman PW et al. 2026 — STOP-EM: Heavy strength and impact training in peri/early post-menopausal females (RCT). <a href="https://www.semanticscholar.org/paper/Preventing-muscle-and-bone-loss-in-peri-menopausal-Whitman-Alexander/66e149a74de790ef8a21cce3e53788ea276f4575" target="_blank" rel="noopener noreferrer">Bone Reports 2026</a></li>
+    <li>Cureus 2025 — Comparative Effects of HRT and Exercise on Bone Health: Systematic Review. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12799281/" target="_blank" rel="noopener noreferrer">PMC12799281</a></li>
+    <li>Zhao et al. Meta-analysis — HRT enhanced skeletal response to exercise, combination greater BMD increases. (n=764, 6 trials)</li>
+    <li>Watson SL et al. 2018 — LIFTMOR RCT: HiRIT for postmenopausal women with osteopenia/osteoporosis. <em>JBMR</em>.</li>
+    <li>Born et al. Systematic Review — Exercise, HRT, HRT+Exercise comparison for BMD (n=219/178/188/189).</li>
+    <li>Maddalozzo G et al. 2007 — RT alone as effective as HRT in preventing spine bone loss. <em>Bone</em>.</li>
+    <li>Greendale GA et al. 2012 — SWAN: Bone loss rates greatest from 1 year before through 2 years after FMP. <em>JBMR</em>.</li>
+    <li>Khalafi M et al. 2023 — Exercise type/duration on CRF and muscular strength in post-menopausal women: meta-analysis. <em>Front Cardiovasc Med</em>.</li>
+    <li>Svensen E et al. 2024 — Low-impact resistance exercise increases strength and balance irrespective of menopause status. <em>MSSE</em>.</li>
+    <li>Snyder PJ et al. 2016 — Testosterone Trials: Effects of Testosterone Treatment in Older Men. <em>NEJM</em>, 374:611-624.</li>
+    <li>TRAVERSE Trial 2023 — Testosterone Replacement Therapy and Cardiovascular Outcomes (n=5246). <em>NEJM</em>.</li>
+    <li>中华医学杂志 2025 — 男性迟发性性腺功能减退症的诊疗指南。LOH 诊断标准与 TST/运动推荐。<a href="https://rs.yiigle.com/cmaid/1531306" target="_blank" rel="noopener noreferrer">原文</a></li>
+    <li>PMC 2007 — Testosterone Replacement in Men with Andropause: An Overview. <em>Rev Urol</em>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1472881/" target="_blank" rel="noopener noreferrer">PMC1472881</a></li>
+    <li>PMC 2016 — Male Andropause: A Myth or Reality. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4921612/" target="_blank" rel="noopener noreferrer">PMC4921612</a></li>
+    <li>Cho et al. 2017 — Exercise improves effects of TRT and durability of response after cessation: pilot RCT. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5566857/" target="_blank" rel="noopener noreferrer">PMC5566857</a></li>
+    <li>PMC 2019 — Strength training as supplemental therapy for ADAM: study protocol. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6731925/" target="_blank" rel="noopener noreferrer">PMC6731925</a></li>
+    <li>2016 Systematic Review &amp; Meta-analysis — Soy isoflavones and menopausal symptoms (62 studies, n=6600+). <a href="https://www.palomahealth.com/learn/natural-treatments-perimenopause-menopause" target="_blank" rel="noopener noreferrer">综述引用</a></li>
+    <li>Supplement Evidence Review 2026 — Best Supplements for Menopause: Evidence Grades A/B/C. <a href="https://bestsupplements.best/menopause-supplements/" target="_blank" rel="noopener noreferrer">原文</a></li>
+    <li>MyFitnessPal 2026 — Postmenopausal Diet: Mediterranean Pattern, Protein, Bone Health. <a href="https://blog.myfitnesspal.com/postmenopausal-diet/" target="_blank" rel="noopener noreferrer">原文</a></li>
+    <li>广西人民医院 2026 — 科学增肌：中老年人的力量与活力新篇章（中国老年人肌少症临床康复治疗指南）。<a href="http://www.gxhospital.com/gwzz_jkkp1_kpwz/010108500128829.html" target="_blank" rel="noopener noreferrer">原文</a></li>
+    <li>Liu et al. 2025 — Sarcopenia RT Meta-analysis: 22 RCTs, n=959. <em>Resistance training for sarcopenia</em>.</li>
+    <li>Cacciatore et al. 2024 — Protein distribution and leucine threshold in elderly MPS.</li>
+    <li>PROT-AGE Group / ESPEN 2025 — Protein requirements for older adults: 1.0-1.2 g/kg/d.</li>
+  </ol>
+</section>
+
+<footer class="foot">
+  <p>本报告为运动科学与医学综述，不构成个人医疗建议。更年期干预方案请咨询专业医师。</p>
+  <p style="margin-top:var(--sp-xs);">科研助理 Agent · Rise · 2026-09-28 · 扩展版（含男性 LOH / 营养 / 老年训练）</p>
+</footer>
+
+</div>
+</div>
+
+<script>
+(function() {
+  try {
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  } catch(e) {}
+})();
+</script>
+
+
+</body></html>

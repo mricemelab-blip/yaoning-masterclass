@@ -1,0 +1,1054 @@
+<!DOCTYPE html><html lang="zh-CN"><head><!-- Coze Coding Analytics -->
+<script>
+(function(){
+  function randomUUID(){
+    if(typeof crypto!=="undefined"&&typeof crypto.randomUUID==="function"){
+      return crypto.randomUUID();
+    }
+    return "10000000-1000-4000-8000-100000000000".replace(/[018]/g,function(c){
+      return(+c^(crypto.getRandomValues(new Uint8Array(1))[0]&(15>>(+c/4)))).toString(16);
+    });
+  }
+
+  function encode(obj){return btoa(JSON.stringify(obj))}
+  function decode(str){try{return JSON.parse(atob(str))}catch(e){return null}}
+
+  function getDeviceId(){
+    var storageKey="__coze_coding_device_info";
+    try{
+      var info=decode(localStorage.getItem(storageKey));
+      if(info&&typeof info.did==="string"){return info.did}
+    }catch(e){}
+    var newInfo={did:randomUUID()};
+    try{localStorage.setItem(storageKey,encode(newInfo))}catch(e){}
+    return newInfo.did;
+  }
+
+  function sendPageViewEvent(){
+    var deviceId=getDeviceId();
+    var projectId="7690887372539478016";
+    var reportURL="https://code.coze.cn/api/coding/deployment/analytics/report?project_id="+encodeURIComponent(projectId)+"&did="+encodeURIComponent(deviceId);
+    try{
+      fetch(reportURL,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          events:[{
+            type:"page_view",
+            url:window.location.href,
+            path:window.location.pathname,
+            referrer:document.referrer,
+            timestamp:Date.now()
+          }]
+        })
+      }).catch(function(){});
+    }catch(e){}
+  }
+
+  if(document.readyState==="complete"){
+    sendPageViewEvent();
+  }else{
+    document.addEventListener("readystatechange",function(){
+      if(document.readyState==="complete"){sendPageViewEvent()}
+    });
+  }
+})();
+</script>
+<!-- WebPro SDK -->
+<script>
+(function(n,e,r,t,a,o,s,i,c,l,f,m,p,u){o="precollect";s="getAttribute";i="addEventListener";c="PerformanceObserver";l=function(e){f=[].slice.call(arguments);f.push(Date.now(),location.href);(e==o?l.p.a:l.q).push(f)};l.q=[];l.p={a:[]};n[a]=l;m=document.createElement("script");m.src=r+"?aid="+t+"&globalName="+a;m.crossOrigin="anonymous";e.getElementsByTagName("head")[0].appendChild(m);if(i in n){l.pcErr=function(e){e=e||n.event;p=e.target||e.srcElement;if(p instanceof Element||p instanceof HTMLElement){n[a](o,"st",{tagName:p.tagName,url:p[s]("href")||p[s]("src")})}else{n[a](o,"err",e.error||e.message)}};l.pcRej=function(e){e=e||n.event;n[a](o,"reject",e.reason||e.detail&&e.detail.reason)};n[i]("error",l.pcErr,true);n[i]("unhandledrejection",l.pcRej,true)}if("PerformanceLongTaskTiming"in n){u=l.pp={entries:[]};u.observer=new PerformanceObserver(function(e){u.entries=u.entries.concat(e.getEntries())});u.observer.observe({entryTypes:["longtask"]})}})(window,document,"https://apm.volccdn.com/mars-web/apmplus/web/browser.cn.js",1001891,"apmPlus");
+</script>
+<script>
+window.apmPlus("context.set", "project_id", "7690843975074414646");
+window.apmPlus("init",{
+  aid: 1001891,
+  token: '26a8704bd4d34b1698085c787d0c95d0'
+});
+window.apmPlus("start");
+</script>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>抗阻训练改善更年期症状 · 循证研究报告</title>
+<style>
+:root {
+  --color-bg: #FAF6F1;
+  --color-surface: #FFFFFF;
+  --color-surface-warm: #F5EDE4;
+  --color-ink: #1C1917;
+  --color-ink-secondary: #57534E;
+  --color-ink-tertiary: #A8A29E;
+  --color-border: #E7E0D8;
+  --color-rose: #C1514A;
+  --color-rose-light: #FDF2F0;
+  --color-rose-dark: #9B3D37;
+  --color-teal: #1A6B65;
+  --color-teal-light: #EDF7F6;
+  --color-amber: #D97706;
+  --color-amber-light: #FFFBEB;
+  --color-green: #15803D;
+  --color-green-light: #F0FDF4;
+  --font-serif: ui-serif, Georgia, "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --leading-relaxed: 1.75;
+  --leading-tight: 1.3;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-ink);
+  line-height: var(--leading-relaxed);
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2.5rem);
+}
+
+/* Typography */
+h1, h2, h3, h4 { font-family: var(--font-serif); line-height: var(--leading-tight); }
+
+h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.25rem, 2.5vw, 1.6rem); font-weight: 600; margin-bottom: var(--space-md); }
+h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: var(--space-sm); }
+h4 { font-size: 1rem; font-weight: 600; margin-bottom: var(--space-xs); }
+
+p { margin-bottom: var(--space-md); max-width: 68ch; }
+p:last-child { margin-bottom: 0; }
+
+strong { font-weight: 600; }
+
+a { color: var(--color-rose); text-decoration: underline; text-underline-offset: 2px; }
+a:hover { color: var(--color-rose-dark); }
+a:focus-visible { outline: 2px solid var(--color-rose); outline-offset: 2px; border-radius: 2px; }
+
+/* Header */
+.report-header {
+  padding: var(--space-2xl) 0 var(--space-xl);
+  border-bottom: 2px solid var(--color-rose);
+  margin-bottom: var(--space-2xl);
+}
+
+.report-header .meta {
+  font-size: 0.85rem;
+  color: var(--color-ink-tertiary);
+  margin-bottom: var(--space-md);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.report-header h1 {
+  margin-bottom: var(--space-md);
+  color: var(--color-ink);
+}
+
+.report-header .subtitle {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--color-ink-secondary);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* Section */
+section { margin-bottom: var(--space-2xl); }
+
+.section-number {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-rose);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+  display: block;
+}
+
+/* Summary table */
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: var(--space-lg) 0;
+}
+
+.summary-table th {
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-surface-warm);
+  border-bottom: 2px solid var(--color-border);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-ink-secondary);
+}
+
+.summary-table td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+.summary-table tr:last-child td { border-bottom: none; }
+
+/* Evidence card */
+.evidence-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.evidence-card .card-title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+  padding-left: var(--space-md);
+  border-left: 3px solid var(--color-rose);
+}
+
+.evidence-card .detail { font-size: 0.9rem; color: var(--color-ink-secondary); }
+.evidence-card .detail p { margin-bottom: var(--space-sm); }
+.evidence-card .source-tag {
+  font-size: 0.8rem;
+  color: var(--color-teal);
+  font-family: var(--font-mono);
+  margin-top: var(--space-sm);
+}
+
+/* Callout */
+.callout {
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+  margin: var(--space-lg) 0;
+  font-size: 0.9rem;
+}
+
+.callout-info { background: var(--color-teal-light); border-left: 3px solid var(--color-teal); }
+.callout-warning { background: var(--color-amber-light); border-left: 3px solid var(--color-amber); }
+.callout-critical { background: var(--color-rose-light); border-left: 3px solid var(--color-rose); }
+
+.callout-title {
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.callout-info .callout-title { color: var(--color-teal); }
+.callout-warning .callout-title { color: var(--color-amber); }
+.callout-critical .callout-title { color: var(--color-rose); }
+
+/* Data visualization */
+.chart-container {
+  margin: var(--space-lg) 0;
+  padding: var(--space-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.chart-container svg { width: 100%; height: auto; display: block; }
+
+.chart-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+
+.chart-caption {
+  font-size: 0.8rem;
+  color: var(--color-ink-tertiary);
+  margin-top: var(--space-md);
+  text-align: center;
+}
+
+/* Evidence nodes */
+.evidence-chain {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+
+.evidence-node {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.evidence-node .node-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-rose);
+  margin-bottom: var(--space-xs);
+}
+
+.evidence-node .node-value {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-bottom: var(--space-xs);
+}
+
+.evidence-node .node-desc {
+  font-size: 0.85rem;
+  color: var(--color-ink-secondary);
+}
+
+/* Protocol table */
+.protocol-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-lg) 0;
+  font-size: 0.9rem;
+}
+
+.protocol-table th {
+  background: var(--color-rose);
+  color: white;
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.protocol-table td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+.protocol-table tr:nth-child(even) { background: var(--color-surface-warm); }
+
+/* Reference list */
+.ref-list { list-style: none; counter-reset: ref; }
+.ref-list li {
+  counter-increment: ref;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.85rem;
+  color: var(--color-ink-secondary);
+  line-height: 1.6;
+}
+
+.ref-list li::before {
+  content: "[" counter(ref) "]";
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--color-rose);
+  margin-right: var(--space-sm);
+}
+
+.ref-list li a { color: var(--color-teal); }
+
+/* TOC */
+.toc {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin: var(--space-xl) 0;
+}
+
+.toc-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+
+.toc ol {
+  list-style: none;
+  counter-reset: toc;
+  padding: 0;
+}
+
+.toc li {
+  counter-increment: toc;
+  margin-bottom: var(--space-xs);
+}
+
+.toc li a {
+  color: var(--color-ink-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.toc li a::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-rose);
+  font-weight: 600;
+}
+
+.toc li a:hover { color: var(--color-rose); }
+
+/* Limitation grid */
+.limitation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+
+.limitation-item {
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--color-amber);
+}
+
+.limitation-item h4 { color: var(--color-amber); font-size: 0.9rem; }
+.limitation-item p { font-size: 0.85rem; color: var(--color-ink-secondary); }
+
+/* Footer */
+.report-footer {
+  margin-top: var(--space-2xl);
+  padding: var(--space-xl) 0;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  color: var(--color-ink-tertiary);
+}
+
+/* Print */
+@media print {
+  body { background: white; color: black; }
+  .container { max-width: 100%; padding: 0; }
+  .report-header { border-bottom-width: 1px; }
+  section { break-inside: avoid; }
+  .evidence-card, .chart-container, .evidence-node { break-inside: avoid; }
+  .summary-table, .protocol-table { font-size: 0.8rem; }
+  a { color: black; text-decoration: underline; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.7em; color: #666; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+@media (max-width: 640px) {
+  .evidence-chain { grid-template-columns: 1fr; }
+  .limitation-grid { grid-template-columns: 1fr; }
+  .summary-table { font-size: 0.8rem; }
+  .summary-table th, .summary-table td { padding: var(--space-xs) var(--space-sm); }
+  .report-header .meta { flex-direction: column; gap: var(--space-xs); }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<header class="report-header">
+  <div class="meta">
+    <span>循证研究报告</span>
+    <span>2026-09-29</span>
+    <span>运动科学 × 女性健康</span>
+  </div>
+  <h1>抗阻训练改善更年期症状：循证研究综述</h1>
+  <p class="subtitle">基于 Alomari et al. (2023) 系统综述（PMID: 36661919）及多项补充文献，系统梳理抗阻训练对更年期女性血管舒缩、骨骼、肌肉、代谢及内分泌五大系统的改善效果与推荐方案。</p>
+</header>
+
+<!-- TOC -->
+<nav class="toc" aria-label="目录">
+  <p class="toc-title">报告结构</p>
+  <ol>
+    <li><a href="#sec-overview">研究概览与核心发现</a></li>
+    <li><a href="#sec-source">核心文献：Alomari et al. 2023 系统综述</a></li>
+    <li><a href="#sec-vasomotor">潮热与血管舒缩症状</a></li>
+    <li><a href="#sec-bone">骨密度改善效应</a></li>
+    <li><a href="#sec-hormone">内分泌与激素水平调节</a></li>
+    <li><a href="#sec-metabolic">代谢健康：体成分、血压与胰岛素敏感性</a></li>
+    <li><a href="#sec-protocol">循证训练方案建议</a></li>
+    <li><a href="#sec-limitation">研究局限与反向证据</a></li>
+    <li><a href="#sec-conclusion">综合结论</a></li>
+    <li><a href="#sec-refs">完整参考文献</a></li>
+  </ol>
+</nav>
+
+<!-- SECTION 1: Overview -->
+<section id="sec-overview">
+  <span class="section-number">01</span>
+  <h2>研究概览与核心发现</h2>
+
+  <p>更年期是女性生命中重要的生理转折期，伴随着雌激素水平下降所引发的一系列症状——潮热盗汗、骨质流失、肌肉减少、代谢紊乱和情绪波动。传统上，激素替代治疗（MHT/HRT）是主要干预手段，但其潜在风险使越来越多研究转向非药物干预。<strong>抗阻训练（Resistance Training, RT）</strong>作为其中最具潜力的方案，近年来获得了越来越多的循证支持。</p>
+
+  <p>本报告以 Alomari et al. (2023) 发表的系统综述为核心，结合多项补充文献，系统梳理抗阻训练对更年期女性各项症状的改善效果。该综述纳入 12 项随机对照试验（RCT），覆盖 817 名更年期女性受试者，是目前针对力量训练与更年期症状最全面的文献综合之一。</p>
+
+  <h3>五大系统改善效果一览</h3>
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th style="width:22%">生理系统</th>
+        <th style="width:38%">关键改善指标</th>
+        <th style="width:18%">效应量 / 关键数据</th>
+        <th style="width:22%">证据来源</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>血管舒缩</strong></td>
+        <td>中度至重度潮热频率</td>
+        <td>减少 43.6%</td>
+        <td>Berin et al. 2019 (RCT, n=58)</td>
+      </tr>
+      <tr>
+        <td><strong>骨骼系统</strong></td>
+        <td>腰椎 (LS)、股骨颈 (FN) 骨密度</td>
+        <td>LS SMD=0.88; FN SMD=0.89</td>
+        <td>Zhao 2025 (网络 Meta, 17 RCT)</td>
+      </tr>
+      <tr>
+        <td><strong>肌肉系统</strong></td>
+        <td>瘦体重、肌肉量、肌力</td>
+        <td>RT 增肌效果优于有氧</td>
+        <td>Kim 2023 (Meta, 101 RCT, 5697人)</td>
+      </tr>
+      <tr>
+        <td><strong>代谢系统</strong></td>
+        <td>血压、体脂率、胰岛素敏感性</td>
+        <td>收缩压↓、体脂↓、胰岛素敏感性↑</td>
+        <td>Son 2020 (RCT); 多项 RCT</td>
+      </tr>
+      <tr>
+        <td><strong>内分泌系统</strong></td>
+        <td>雌二醇、GH、IGF-1、DHEA-S</td>
+        <td>四项激素均显著升高</td>
+        <td>Son 2020; Taipale 2022 (综述)</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SECTION 2: Source Literature -->
+<section id="sec-source">
+  <span class="section-number">02</span>
+  <h2>核心文献：Alomari et al. 2023 系统综述</h2>
+
+  <div class="callout callout-info">
+    <p class="callout-title">文献信息</p>
+    <p><strong>The Efficacy of Strength Exercises for Reducing the Symptoms of Menopause: A Systematic Review</strong><br/>
+    Alomari AH, Al-Omari AM, Bawadi HA, Amre HM, Maharmad M.<br/>
+    <em>Int J Environ Res Public Health.</em> 2023;20(1):733. · PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/36661919/" target="_blank" rel="noopener noreferrer">36661919</a> · PMC: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9864448/" target="_blank" rel="noopener noreferrer">PMC9864448</a></p>
+  </div>
+
+  <h3>研究设计</h3>
+  <p>该研究为系统综述，纳入 12 项随机对照试验（RCT），共 817 名更年期女性受试者。检索范围覆盖 2015–2022 年发表的英文文献，比较力量训练（作为唯一干预）与不活动对照组、安慰剂组或其他干预措施的效果。</p>
+
+  <h3>核心数据</h3>
+  <div class="evidence-chain">
+    <div class="evidence-node">
+      <div class="node-label">纳入研究</div>
+      <div class="node-value">12</div>
+      <div class="node-desc">项随机对照试验（RCT）</div>
+    </div>
+    <div class="evidence-node">
+      <div class="node-label">总样本量</div>
+      <div class="node-value">817</div>
+      <div class="node-desc">名更年期女性受试者</div>
+    </div>
+    <div class="evidence-node">
+      <div class="node-label">平均年龄</div>
+      <div class="node-value">62 岁</div>
+      <div class="node-desc">范围 55.3–67.7 岁</div>
+    </div>
+    <div class="evidence-node">
+      <div class="node-label">证据等级</div>
+      <div class="node-value">中等</div>
+      <div class="node-desc">多项小样本 RCT 一致性支持</div>
+    </div>
+  </div>
+
+  <p>综述报告力量训练在以下方面产生统计学显著改善（与不活动对照组相比）：</p>
+  <ul style="margin-left:1.5rem; margin-bottom: var(--space-md);">
+    <li>腿部及盆底肌力量</li>
+    <li>体力活动水平</li>
+    <li>骨密度（腰椎、股骨颈）</li>
+    <li>代谢和激素指标（雌二醇、GH、IGF-1、DHEA-S）</li>
+    <li>心率与血压</li>
+    <li>潮热频率</li>
+  </ul>
+
+  <div class="callout callout-warning">
+    <p class="callout-title">研究者的审慎表述</p>
+    <p>原文结论措辞为<strong>&#34;力量训练可能是有益的&#34;（can be beneficial）</strong>。作者同时指出，由于纳入研究数量较少且方案高度异质，&#34;力量训练改善更年期症状的疗效<strong>仍不清楚</strong>（is unclear），因为定性分析受到研究数量少的限制&#34;。这提示当前证据虽有积极方向，但确定性仍有提升空间。</p>
+  </div>
+</section>
+
+<!-- SECTION 3: Vasomotor / Hot Flushes -->
+<section id="sec-vasomotor">
+  <span class="section-number">03</span>
+  <h2>潮热与血管舒缩症状</h2>
+
+  <p>潮热（hot flushes）是更年期最常见且最困扰的症状之一，表现为突然的面部、颈部和胸部发热感，伴出汗和心悸，严重影响生活质量。血管舒缩症状的改善是抗阻训练最受关注的效果之一。</p>
+
+  <div class="evidence-card">
+    <p class="card-title">Berin et al. 2019：力量训练减少 43.6% 潮热</p>
+    <div class="detail">
+      <p><strong>研究设计：</strong>15 周 RCT，65 名绝经后女性入组（每天 ≥4 次中度至重度潮热），58 名完成。随机分为抗阻训练组和对照组。</p>
+      <p><strong>干预方案：</strong>RT 组每周 3 次训练，包含 8 个动作（深蹲、硬拉、划船、推举等），每组 8-12 次，渐进负荷。</p>
+      <p><strong>核心结果：</strong></p>
+      <ul style="margin-left:1.5rem; margin-bottom: var(--space-sm);">
+        <li>RT 组潮热减少 <strong>-43.6%</strong>（95% CI: -56.0% ~ -31.3%）</li>
+        <li>对照组仅减少 -2.0%（95% CI: -16.4% ~ 12.4%）</li>
+        <li>组间差异：-2.7 次/天（95% CI: -4.2 ~ -1.3），P&lt;0.001</li>
+        <li>44.8% 的 RT 参与者达到 ≥50% 的临床显著改善</li>
+      </ul>
+      <p><strong>机制假说：</strong>抗阻训练通过激活大肌群诱导中枢 β-内啡肽释放，稳定下丘脑体温调节中枢，降低潮热发生频率。这与低强度运动（如步行、瑜伽）多数未显示潮热改善的结果形成对比——提示潮热改善可能需要较高强度的运动刺激。</p>
+    </div>
+    <p class="source-tag">来源：Berin et al. 2019, Maturitas; 被引于 Alomari 2023 [ref 7]</p>
+  </div>
+
+  <!-- SVG: Hot flush comparison -->
+  <div class="chart-container">
+    <p class="chart-title">潮热改善效果对比：抗阻训练 vs 对照组</p>
+    <svg viewBox="0 0 600 180" role="img" aria-labelledby="chart-hf-title chart-hf-desc">
+      <title id="chart-hf-title">潮热改善效果对比图</title>
+      <desc id="chart-hf-desc">抗阻训练组潮热减少43.6%，对照组仅减少2.0%</desc>
+      <!-- RT group -->
+      <text x="100" y="40" font-size="13" fill="#1C1917" text-anchor="end" font-family="system-ui">抗阻训练组</text>
+      <rect x="110" y="25" width="348" height="30" rx="4" fill="#C1514A" opacity="0.85"></rect>
+      <text x="468" y="45" font-size="13" fill="#1C1917" font-family="ui-monospace" font-weight="700">-43.6%</text>
+      <!-- Control group -->
+      <text x="100" y="100" font-size="13" fill="#1C1917" text-anchor="end" font-family="system-ui">对照组</text>
+      <rect x="110" y="85" width="16" height="30" rx="4" fill="#A8A29E" opacity="0.6"></rect>
+      <text x="136" y="105" font-size="13" fill="#57534E" font-family="ui-monospace" font-weight="600">-2.0%</text>
+      <!-- Annotation -->
+      <line x1="110" y1="140" x2="458" y2="140" stroke="#E7E0D8" stroke-width="1"></line>
+      <text x="280" y="160" font-size="10" fill="#A8A29E" text-anchor="middle" font-family="system-ui">组间差异 -2.7次/天 · P&lt;0.001 · 44.8%参与者达≥50%改善</text>
+    </svg>
+    <p class="chart-caption">数据来源：Berin et al. 2019, Maturitas。仅纳入每日≥4次中度至重度潮热的绝经后女性。</p>
+  </div>
+
+  <div class="callout callout-info">
+    <p class="callout-title">关键解读</p>
+    <p>43.6% 这一数据来自单一 RCT（n=58），而非多项研究的汇总效应量。该研究样本量较小，且对照组未进行任何运动（非&#34;安慰剂对照&#34;），存在安慰剂效应的可能。潮热数据通过日记自报，非客观生理测量。尽管如此，这是目前唯一针对 RT 与潮热的 RCT 数据，方向性结果值得关注。</p>
+  </div>
+</section>
+
+<!-- SECTION 4: Bone Density -->
+<section id="sec-bone">
+  <span class="section-number">04</span>
+  <h2>骨密度改善效应</h2>
+
+  <p>绝经后骨质疏松是更年期女性面临的最严峻健康威胁之一。雌激素下降导致骨吸收超过骨形成，骨密度以每年 2-3% 的速率流失（远快于绝经前）。抗阻训练通过力学负荷刺激成骨细胞活性，是当前非药物干预中证据最强的方案。</p>
+
+  <div class="evidence-card">
+    <p class="card-title">多项研究一致支持：RT 增加腰椎与股骨骨密度</p>
+    <div class="detail">
+      <p><strong>Alomari 2023 综述：</strong>多项纳入研究显示力量训练组腰椎和股骨颈骨密度显著增加，而对照组按更年期预期速率流失，两组差异显著。</p>
+      <p><strong>Watson et al. 2015/2018 (LIFTMOR 试验)：</strong>绝经后骨质疏松女性进行高强度 RT（80-85% 1RM，硬拉/深蹲/过头推举），8 个月后腰椎和股骨颈 BMD 显著增加，对照组下降。该研究证明了高强度 RT 在骨质疏松人群中的安全性和有效性。</p>
+      <p><strong>Zhao et al. 2025（17 RCT，690 人，网络 Meta 分析）：</strong>当前最大规模的 RT 对绝经后 BMD 的网络 Meta 分析。RT 显著改善腰椎（SMD=0.88）、股骨颈（SMD=0.89）和全髋（SMD=0.30）骨密度。</p>
+      <p><strong>Zhang et al. 2024（19 RCT，919 人）：</strong>另一项网络 Meta 分析，确认中等强度 RT 3 次/周为最优方案。</p>
+    </div>
+    <p class="source-tag">来源：Alomari 2023; Watson 2015/2018 (LIFTMOR); Zhao 2025 (PMC12107943); Zhang 2024 (PMC9941565)</p>
+  </div>
+
+  <!-- Chart: BMD effect sizes -->
+  <div class="chart-container">
+    <p class="chart-title">不同骨骼部位 RT 干预效应量（SMD）— Zhao et al. 2025 网络 Meta 分析</p>
+    <svg viewBox="0 0 600 200" role="img" aria-labelledby="chart-bmd-title chart-bmd-desc">
+      <title id="chart-bmd-title">骨密度效应量对比图</title>
+      <desc id="chart-bmd-desc">腰椎SMD=0.88，股骨颈SMD=0.89，全髋SMD=0.30，大转子SMD=0.23（不显著）</desc>
+      <text x="90" y="50" font-size="13" fill="#1C1917" text-anchor="end" font-family="system-ui">腰椎 (LS)</text>
+      <text x="90" y="90" font-size="13" fill="#1C1917" text-anchor="end" font-family="system-ui">股骨颈 (FN)</text>
+      <text x="90" y="130" font-size="13" fill="#1C1917" text-anchor="end" font-family="system-ui">全髋 (TH)</text>
+      <text x="90" y="170" font-size="13" fill="#1C1917" text-anchor="end" font-family="system-ui">大转子 (Troch)</text>
+      <rect x="100" y="35" width="352" height="24" rx="4" fill="#C1514A" opacity="0.85"></rect>
+      <rect x="100" y="75" width="356" height="24" rx="4" fill="#C1514A" opacity="0.85"></rect>
+      <rect x="100" y="115" width="120" height="24" rx="4" fill="#C1514A" opacity="0.55"></rect>
+      <rect x="100" y="155" width="92" height="24" rx="4" fill="#A8A29E" opacity="0.5"></rect>
+      <text x="460" y="52" font-size="12" fill="#1C1917" font-family="ui-monospace" font-weight="600">0.88*</text>
+      <text x="464" y="92" font-size="12" fill="#1C1917" font-family="ui-monospace" font-weight="600">0.89*</text>
+      <text x="228" y="132" font-size="12" fill="#1C1917" font-family="ui-monospace" font-weight="600">0.30*</text>
+      <text x="200" y="172" font-size="12" fill="#57534E" font-family="ui-monospace">0.23 (n.s.)</text>
+      <line x1="100" y1="190" x2="500" y2="190" stroke="#E7E0D8" stroke-width="1"></line>
+      <text x="100" y="198" font-size="10" fill="#A8A29E" font-family="ui-monospace">0</text>
+      <text x="300" y="198" font-size="10" fill="#A8A29E" font-family="ui-monospace">0.5</text>
+      <text x="500" y="198" font-size="10" fill="#A8A29E" font-family="ui-monospace">1.0</text>
+    </svg>
+    <p class="chart-caption">* P&lt;0.05；灰色条表示差异未达统计学显著性（P=0.06）。数据来源：Zhao et al. 2025。</p>
+  </div>
+
+  <h3>最优训练参数（Zhao et al. 2025）</h3>
+  <ul style="margin-left:1.5rem; margin-bottom: var(--space-md);">
+    <li><strong>强度</strong>：高强度（≥70% 1RM）对全髋和股骨颈效果最显著</li>
+    <li><strong>频率</strong>：每周 3 次训练在所有骨骼部位均显著优于其他频率</li>
+    <li><strong>时长</strong>：每次 ≥40 分钟对腰椎有显著效果</li>
+    <li><strong>周期</strong>：干预 ≥48 周后股骨颈和全髋改善更显著</li>
+  </ul>
+
+  <div class="callout callout-info">
+    <p class="callout-title">MHT + RT 联合干预</p>
+    <p>2025 年一项范围综述（20 项研究）发现，MHT 与运动联合改善骨密度优于单一干预。最优方案为 RT 2-3 天/周（中高强度）+ 冲击性活动 ≥3 天/周。这提示 RT 与 MHT 并非互斥，而是互补的干预策略。</p>
+  </div>
+</section>
+
+<!-- SECTION 5: Hormonal -->
+<section id="sec-hormone">
+  <span class="section-number">05</span>
+  <h2>内分泌与激素水平调节</h2>
+
+  <p>更年期雌激素下降是多数症状的核心驱动因素。抗阻训练对内分泌系统的调节效果是近年来研究的重要发现，尽管现有证据的样本量相对有限。</p>
+
+  <div class="evidence-card">
+    <p class="card-title">Son et al. 2020：弹力带训练 12 周显著提升四项激素</p>
+    <div class="detail">
+      <p><strong>研究设计：</strong>韩国 RCT，20 名绝经后女性（平均 67.7 岁），合并 1 期高血压。随机分为弹力带训练组和对照组。</p>
+      <p><strong>干预方案：</strong>12 周弹力带训练，3 次/周，60 分钟/次，渐进负荷（40-70% 1RM），8 个动作。</p>
+      <p><strong>核心结果：</strong></p>
+      <ul style="margin-left:1.5rem; margin-bottom: var(--space-sm);">
+        <li><strong>雌二醇（Estradiol）</strong>：显著升高（p&lt;0.05）</li>
+        <li><strong>生长激素（GH）</strong>：显著升高（p&lt;0.05）</li>
+        <li><strong>胰岛素样生长因子-1（IGF-1）</strong>：显著升高（p&lt;0.05）</li>
+        <li><strong>硫酸脱氢表雄酮（DHEA-S）</strong>：显著升高（p&lt;0.05）</li>
+        <li>同时报告收缩压下降、体脂率降低、去脂体重增加</li>
+      </ul>
+      <p><strong>注意：</strong>该研究样本量仅 20 人（EG=10, CG=10），是所有关键发现中样本最小的一项。</p>
+    </div>
+    <p class="source-tag">来源：Son et al. 2020, Menopause 27:199-207</p>
+  </div>
+
+  <!-- SVG: Hormonal changes -->
+  <div class="chart-container">
+    <p class="chart-title">抗阻训练对激素水平的调节效应（Son et al. 2020）</p>
+    <svg viewBox="0 0 600 200" role="img" aria-labelledby="chart-horm-title chart-horm-desc">
+      <title id="chart-horm-title">激素水平变化图</title>
+      <desc id="chart-horm-desc">12周弹力带RT后，雌二醇、GH、IGF-1、DHEA-S四项激素均显著升高</desc>
+      <!-- Bars for each hormone -->
+      <text x="110" y="40" font-size="12" fill="#1C1917" text-anchor="end" font-family="system-ui">雌二醇</text>
+      <rect x="120" y="28" width="280" height="22" rx="3" fill="#7C3AED" opacity="0.75"></rect>
+      <text x="410" y="44" font-size="11" fill="#7C3AED" font-family="ui-monospace" font-weight="600">显著↑</text>
+      <text x="110" y="80" font-size="12" fill="#1C1917" text-anchor="end" font-family="system-ui">GH</text>
+      <rect x="120" y="68" width="300" height="22" rx="3" fill="#7C3AED" opacity="0.65"></rect>
+      <text x="430" y="84" font-size="11" fill="#7C3AED" font-family="ui-monospace" font-weight="600">显著↑</text>
+      <text x="110" y="120" font-size="12" fill="#1C1917" text-anchor="end" font-family="system-ui">IGF-1</text>
+      <rect x="120" y="108" width="260" height="22" rx="3" fill="#7C3AED" opacity="0.55"></rect>
+      <text x="390" y="124" font-size="11" fill="#7C3AED" font-family="ui-monospace" font-weight="600">显著↑</text>
+      <text x="110" y="160" font-size="12" fill="#1C1917" text-anchor="end" font-family="system-ui">DHEA-S</text>
+      <rect x="120" y="148" width="240" height="22" rx="3" fill="#7C3AED" opacity="0.45"></rect>
+      <text x="370" y="164" font-size="11" fill="#7C3AED" font-family="ui-monospace" font-weight="600">显著↑</text>
+      <text x="300" y="192" font-size="10" fill="#A8A29E" text-anchor="middle" font-family="system-ui">所有指标 p&lt;0.05 · n=20 · 12周弹力带训练</text>
+    </svg>
+    <p class="chart-caption">四项激素均显著升高（p&lt;0.05）。条长度为相对示意，非精确效应量。数据来源：Son et al. 2020。</p>
+  </div>
+
+  <h3>补充支持：Taipale et al. 2022</h3>
+  <p><strong>Taipale et al.</strong> 在 Sports Medicine 发表的一项涵盖 33 项研究的系统综述发现，运动训练可显著提高 40 岁以上人群的基础睾酮、IGF-1、SHBG、GH 和 DHEA 水平，效应量从小到极大不等（d=0.19–3.37），且不受运动类型、时长或强度的显著调节。这一发现为 Son et al. 的小样本结果提供了更广泛的证据基础。</p>
+</section>
+
+<!-- SECTION 6: Metabolic -->
+<section id="sec-metabolic">
+  <span class="section-number">06</span>
+  <h2>代谢健康：体成分、血压与胰岛素敏感性</h2>
+
+  <p>更年期伴随的雌激素下降与代谢综合征风险增加密切相关——腹型肥胖、胰岛素抵抗、血脂异常和高血压的发生率显著上升。抗阻训练对代谢健康的改善具有多维度的证据支持。</p>
+
+  <h3>体成分改善</h3>
+  <p><strong>Kim et al. 2023</strong>（PMC10306117）是目前最大规模的运动与绝经后体成分 Meta 分析——纳入 101 项 RCT，5697 名绝经后女性。核心发现：</p>
+  <ul style="margin-left:1.5rem; margin-bottom: var(--space-md);">
+    <li><strong>RT 对增加肌肉量的效果最显著</strong>（优于有氧和联合训练）</li>
+    <li>有氧训练对减脂效果更优</li>
+    <li>联合训练（有氧+RT）全面改善体成分</li>
+    <li>效果在中长期干预（≥12 周）和中老年人群中更为显著</li>
+  </ul>
+
+  <h3>肌少症预防</h3>
+  <p><strong>Kim et al. 2023</strong>（PMC10647115）：18 项研究，1327 名更年期女性的系统综述和 Meta 分析。结论：RT 每周 3 次、每次 20-90 分钟、至少 6 周，是改善更年期女性肌肉量和肌力最有效的方式。这是目前唯一针对更年期女性肌少症预防的专项 Meta 分析。</p>
+
+  <h3>血压与胰岛素敏感性</h3>
+  <p>Son et al. 2020 报告 12 周 RT 后收缩压下降、胰岛素敏感性改善。但需注意<strong>血压改善未能长期维持</strong>——原文标注停止训练后血压回升。这提示代谢指标的改善依赖于持续的运动习惯。</p>
+</section>
+
+<!-- SECTION 7: Protocol -->
+<section id="sec-protocol">
+  <span class="section-number">07</span>
+  <h2>循证训练方案建议</h2>
+
+  <p>综合以上文献证据，以下是面向绝经后女性的抗阻训练方案建议。这些建议基于当前证据的加权综合，而非来自单一高质量 RCT 的确定性结论。</p>
+
+  <table class="protocol-table">
+    <thead>
+      <tr>
+        <th style="width:25%">训练参数</th>
+        <th style="width:35%">推荐范围</th>
+        <th style="width:40%">证据依据</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>频率</strong></td>
+        <td>2-3 次/周（全身训练）</td>
+        <td>Alomari 综述；Zhao 2025 示 3次/周优于 2次/周</td>
+      </tr>
+      <tr>
+        <td><strong>强度</strong></td>
+        <td>≥70% 1RM（中高强度）</td>
+        <td>Zhao 2025；LIFTMOR 使用 80-85% 1RM</td>
+      </tr>
+      <tr>
+        <td><strong>动作选择</strong></td>
+        <td>复合多关节：深蹲、硬拉、划船、推举、负重行走</td>
+        <td>激活大肌群→多通路生理响应</td>
+      </tr>
+      <tr>
+        <td><strong>组数 × 次数</strong></td>
+        <td>3-5 组 × 5-12 次</td>
+        <td>Alomari 综述各研究范围；渐进超负荷</td>
+      </tr>
+      <tr>
+        <td><strong>每次时长</strong></td>
+        <td>40-60 分钟</td>
+        <td>Zhao 2025 示 ≥40 min 对 LS BMD 显著</td>
+      </tr>
+      <tr>
+        <td><strong>渐进超负荷</strong></td>
+        <td>每 1-2 周递增 1-2.5 kg</td>
+        <td>所有纳入研究均采用渐进方案</td>
+      </tr>
+      <tr>
+        <td><strong>恢复间隔</strong></td>
+        <td>48-72 小时（同肌群）</td>
+        <td>更年期皮质醇敏感性增加，需充分恢复</td>
+      </tr>
+      <tr>
+        <td><strong>见效周期</strong></td>
+        <td>潮热：3-15 周；BMD/肌量：≥12-16 周</td>
+        <td>Berin 2019（潮热）；骨重建周期 3-4 月</td>
+      </tr>
+      <tr>
+        <td><strong>最优周期</strong></td>
+        <td>≥48 周（建议周期内变换强度）</td>
+        <td>Zhao 2025；Zhang 2024</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SVG: Multi-pathway mechanism -->
+  <div class="chart-container">
+    <p class="chart-title">抗阻训练对更年期症状的多通路生理效应</p>
+    <svg viewBox="0 0 600 320" role="img" aria-labelledby="chart-pathway-title chart-pathway-desc">
+      <title id="chart-pathway-title">RT多通路效应示意图</title>
+      <desc id="chart-pathway-desc">抗阻训练通过血管舒缩、骨骼、肌肉、代谢和内分泌五条通路改善更年期症状</desc>
+      <!-- Central node -->
+      <rect x="225" y="130" width="150" height="60" rx="8" fill="#C1514A"></rect>
+      <text x="300" y="155" font-size="13" fill="white" text-anchor="middle" font-weight="700" font-family="system-ui">抗阻训练</text>
+      <text x="300" y="175" font-size="10" fill="rgba(255,255,255,0.8)" text-anchor="middle" font-family="system-ui">Resistance Training</text>
+      <!-- Pathway 1: Vasomotor -->
+      <line x1="225" y1="145" x2="120" y2="50" stroke="#C1514A" stroke-width="2" opacity="0.6"></line>
+      <rect x="20" y="30" width="130" height="45" rx="6" fill="#FDF2F0" stroke="#C1514A" stroke-width="1"></rect>
+      <text x="85" y="50" font-size="11" fill="#C1514A" text-anchor="middle" font-weight="600" font-family="system-ui">血管舒缩</text>
+      <text x="85" y="65" font-size="9" fill="#57534E" text-anchor="middle" font-family="system-ui">潮热 -43.6%</text>
+      <!-- Pathway 2: Skeletal -->
+      <line x1="375" y1="145" x2="490" y2="50" stroke="#1A6B65" stroke-width="2" opacity="0.6"></line>
+      <rect x="440" y="30" width="140" height="45" rx="6" fill="#EDF7F6" stroke="#1A6B65" stroke-width="1"></rect>
+      <text x="510" y="50" font-size="11" fill="#1A6B65" text-anchor="middle" font-weight="600" font-family="system-ui">骨骼系统</text>
+      <text x="510" y="65" font-size="9" fill="#57534E" text-anchor="middle" font-family="system-ui">LS↑0.88 · FN↑0.89</text>
+      <!-- Pathway 3: Muscular -->
+      <line x1="225" y1="175" x2="100" y2="250" stroke="#D97706" stroke-width="2" opacity="0.6"></line>
+      <rect x="15" y="235" width="150" height="45" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1"></rect>
+      <text x="90" y="255" font-size="11" fill="#D97706" text-anchor="middle" font-weight="600" font-family="system-ui">肌肉系统</text>
+      <text x="90" y="270" font-size="9" fill="#57534E" text-anchor="middle" font-family="system-ui">瘦体重↑ · 肌力↑</text>
+      <!-- Pathway 4: Metabolic -->
+      <line x1="375" y1="175" x2="500" y2="250" stroke="#15803D" stroke-width="2" opacity="0.6"></line>
+      <rect x="435" y="235" width="150" height="45" rx="6" fill="#F0FDF4" stroke="#15803D" stroke-width="1"></rect>
+      <text x="510" y="255" font-size="11" fill="#15803D" text-anchor="middle" font-weight="600" font-family="system-ui">代谢系统</text>
+      <text x="510" y="270" font-size="9" fill="#57534E" text-anchor="middle" font-family="system-ui">BP↓ · 胰岛素敏感性↑</text>
+      <!-- Pathway 5: Endocrine -->
+      <line x1="300" y1="190" x2="300" y2="260" stroke="#7C3AED" stroke-width="2" opacity="0.6"></line>
+      <rect x="225" y="265" width="150" height="45" rx="6" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1"></rect>
+      <text x="300" y="283" font-size="11" fill="#7C3AED" text-anchor="middle" font-weight="600" font-family="system-ui">内分泌系统</text>
+      <text x="300" y="298" font-size="9" fill="#57534E" text-anchor="middle" font-family="system-ui">GH↑ IGF-1↑ DHEA-S↑ E2↑</text>
+    </svg>
+    <p class="chart-caption">抗阻训练同时作用于五条生理通路，产生协同改善效果。数据来自 Alomari 2023 综述及其引用的原始研究。</p>
+  </div>
+
+  <div class="callout callout-warning">
+    <p class="callout-title">特殊人群注意事项</p>
+    <ul style="margin-left:1rem;">
+      <li><strong>骨质疏松患者</strong>：避免脊柱负荷屈曲动作。LIFTMOR 方案证明在专业指导下，高强度 RT + 冲击训练安全有效，但仍需个体化评估。</li>
+      <li><strong>盆底功能</strong>：建议先咨询女性健康物理治疗师，评估盆底肌力后再进行大重量训练。</li>
+      <li><strong>过度训练风险</strong>：更年期女性对皮质醇更敏感。过度训练会升高皮质醇、抑制合成激素，反而加重症状。</li>
+      <li><strong>蛋白质配合</strong>：训练日蛋白质摄入建议 1.2-1.6 g/kg/d，每餐 25-35g 分散摄入，配合 RT 可最大化肌肉合成效果。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SECTION 8: Limitations -->
+<section id="sec-limitation">
+  <span class="section-number">08</span>
+  <h2>研究局限与反向证据</h2>
+
+  <p>任何科学结论都需要在其证据边界内理解。以下是当前研究的主要局限性：</p>
+
+  <div class="limitation-grid">
+    <div class="limitation-item">
+      <h4>样本量不足</h4>
+      <p>12 项 RCT 中多数样本极小。Son et al. (n=20) 提供全部激素数据，Berin et al. (n=58) 提供潮热数据。小样本研究的效应量通常高估真实效果（winner&#39;s curse），需大样本独立验证。</p>
+    </div>
+    <div class="limitation-item">
+      <h4>方案高度异质</h4>
+      <p>12 项研究的训练类型（弹力带/杠铃/器械）、频率（2-4 次/周）、强度（40-85% 1RM）和时长（8-24 周）差异巨大，无法进行定量 meta 分析，只能做定性综合。</p>
+    </div>
+    <div class="limitation-item">
+      <h4>缺乏盲法</h4>
+      <p>运动干预研究天然无法对受试者和治疗师设盲。所有研究存在实施偏倚风险，受试者期望效应可能影响主观报告指标（如潮热日记）。</p>
+    </div>
+    <div class="limitation-item">
+      <h4>长期效果未知</h4>
+      <p>Hakestad 2015 的 1 年随访发现：训练组与对照组的差异消失。Son 2020 的血压改善未能长期维持。&#34;如果不持续练习，益处无法维持&#34;。</p>
+    </div>
+    <div class="limitation-item">
+      <h4>反向证据存在</h4>
+      <p>Alomari 自述引用了 5 项研究（refs 39-43），这些研究&#34;未发现足够证据确定运动对潮热和盗汗的效果&#34;。运动对潮热的效果并非所有研究一致支持。</p>
+    </div>
+    <div class="limitation-item">
+      <h4>潮热数据单一来源</h4>
+      <p>43.6% 的精确数字仅来自 Berin et al. 一项 RCT。该对照组未进行任何运动（非&#34;安慰剂对照&#34;），存在安慰剂效应风险。潮热通过日记自报，非客观生理测量。</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: Conclusion -->
+<section id="sec-conclusion">
+  <span class="section-number">09</span>
+  <h2>综合结论</h2>
+
+  <p>基于对 12 项 RCT（817 名受试者）的系统综述以及多项补充文献的分析，<strong>抗阻训练对更年期女性多项症状具有积极改善作用</strong>，这一结论在方向上具有较好的证据一致性。以下是各维度的核心结论：</p>
+
+  <div class="evidence-chain">
+    <div class="evidence-node" style="border-left: 3px solid var(--color-green);">
+      <div class="node-label" style="color: var(--color-green);">证据较强</div>
+      <div class="node-desc">
+        <p style="margin-bottom:4px;"><strong>骨密度改善</strong>：多项 RCT + 网络 Meta 分析（累计 1000+ 人），效应量稳健（SMD 0.88-0.89）</p>
+        <p><strong>肌肉量增加</strong>：101 项 RCT 的大规模 Meta 分析（5697 人）一致支持</p>
+      </div>
+    </div>
+    <div class="evidence-node" style="border-left: 3px solid var(--color-amber);">
+      <div class="node-label" style="color: var(--color-amber);">方向积极但需更多验证</div>
+      <div class="node-desc">
+        <p style="margin-bottom:4px;"><strong>潮热减少</strong>：单一 RCT（n=58）报告 -43.6%，方向明确但需大样本复现</p>
+        <p><strong>激素水平改善</strong>：原始数据来自极小样本（n=20），虽有 Taipale 2022 综述支持，但仍需针对更年期女性的专项大样本研究</p>
+      </div>
+    </div>
+    <div class="evidence-node" style="border-left: 3px solid var(--color-rose);">
+      <div class="node-label" style="color: var(--color-rose);">需谨慎解读</div>
+      <div class="node-desc">
+        <p style="margin-bottom:4px;"><strong>长期效果</strong>：随访研究显示停止训练后效果消退，需持续运动维持</p>
+        <p><strong>代谢指标</strong>：血压改善未能长期维持，胰岛素敏感性的长期数据不足</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-info">
+    <p class="callout-title">实践建议</p>
+    <p>尽管部分证据存在局限，抗阻训练对更年期女性的整体获益方向是明确的。建议将 RT 作为更年期健康管理的<strong>基础干预之一</strong>（而非唯一方案），配合充足蛋白质摄入、必要时与 MHT 联合使用，并持续监测骨密度和体成分变化。核心原则：<strong>开始做，持续做，渐进加重</strong>。</p>
+  </div>
+
+  <!-- Evidence quality pyramid -->
+  <div class="chart-container">
+    <p class="chart-title">各维度证据强度总览</p>
+    <svg viewBox="0 0 500 280" role="img" aria-labelledby="chart-quality-title chart-quality-desc">
+      <title id="chart-quality-title">证据强度金字塔</title>
+      <desc id="chart-quality-desc">从强到弱：骨密度（多RCT+网络Meta）&gt; 体成分/肌肉量（101项RCT Meta）&gt; 潮热（单RCT）&gt; 激素（极小样本）&gt; 长期效果（缺乏）</desc>
+      <!-- Pyramid layers -->
+      <polygon points="250,20 290,80 210,80" fill="#15803D" opacity="0.8"></polygon>
+      <polygon points="210,85 290,85 320,145 180,145" fill="#15803D" opacity="0.6"></polygon>
+      <polygon points="180,150 320,150 360,210 140,210" fill="#D97706" opacity="0.7"></polygon>
+      <polygon points="140,215 360,215 400,275 100,275" fill="#C1514A" opacity="0.6"></polygon>
+      <!-- Labels -->
+      <text x="250" y="52" font-size="9" fill="white" text-anchor="middle" font-weight="600" font-family="system-ui">骨密度</text>
+      <text x="250" y="65" font-size="7" fill="rgba(255,255,255,0.8)" text-anchor="middle" font-family="system-ui">多RCT + 网络Meta</text>
+      <text x="250" y="112" font-size="9" fill="white" text-anchor="middle" font-weight="600" font-family="system-ui">体成分 · 肌肉量</text>
+      <text x="250" y="128" font-size="7" fill="rgba(255,255,255,0.8)" text-anchor="middle" font-family="system-ui">101项RCT Meta (5697人)</text>
+      <text x="250" y="178" font-size="9" fill="white" text-anchor="middle" font-weight="600" font-family="system-ui">潮热 · 代谢 · 激素</text>
+      <text x="250" y="195" font-size="7" fill="rgba(255,255,255,0.8)" text-anchor="middle" font-family="system-ui">单项/小样本RCT</text>
+      <text x="250" y="245" font-size="9" fill="white" text-anchor="middle" font-weight="600" font-family="system-ui">长期维持效果</text>
+      <text x="250" y="262" font-size="7" fill="rgba(255,255,255,0.8)" text-anchor="middle" font-family="system-ui">随访数据不足</text>
+    </svg>
+    <p class="chart-caption">骨密度和体成分的证据最强（大样本 Meta 分析支持），潮热和激素的证据来自小样本研究，长期效果数据不足。</p>
+  </div>
+</section>
+
+<!-- SECTION 10: References -->
+<section id="sec-refs">
+  <span class="section-number">10</span>
+  <h2>完整参考文献</h2>
+
+  <ol class="ref-list">
+    <li>Alomari AH, Al-Omari AM, Bawadi HA, et al. The Efficacy of Strength Exercises for Reducing the Symptoms of Menopause: A Systematic Review. <em>Int J Environ Res Public Health.</em> 2023;20(1):733. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9864448/" target="_blank" rel="noopener noreferrer">PMC9864448</a></li>
+    <li>Berin E, Weman-Henriksson M, Hammar M, et al. Resistance training for hot flushes in postmenopausal women: A randomised controlled trial. <em>Maturitas.</em> 2019;126:55-61.</li>
+    <li>Son W-M, Pekas EJ, Park S-Y. Twelve weeks of resistance band exercise training improves age-associated hormonal decline, blood pressure, and body composition in postmenopausal women with stage 1 hypertension. <em>Menopause.</em> 2020;27:199-207.</li>
+    <li>Watson SL, Weeks C, Wee LJ, et al. Heavy resistance training is safe and improves bone, function, and stature in postmenopausal women with low to very low bone mass: novel early findings from the LIFTMOR trial. <em>Osteoporos Int.</em> 2015;26(11):2889-2894.</li>
+    <li>Watson SL, Weeks C, Wee LJ, et al. Heavy Resistance and Impact Training for Osteoporosis: The LIFTMOR Trial. <em>J Bone Miner Res.</em> 2018;33(6):1049-1058.</li>
+    <li>Zhao W, Su W, Sun Y, et al. Optimal resistance training parameters for improving bone mineral density in postmenopausal women: a systematic review and meta-analysis. <em>J Orthop Surg Res.</em> 2025;20:389. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12107943/" target="_blank" rel="noopener noreferrer">PMC12107943</a></li>
+    <li>Zhang Y, et al. Comparative efficacy different resistance training protocols on bone mineral density in postmenopausal women: A systematic review and network meta-analysis. <em>J Sport Health Sci.</em> 2024. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9941565/" target="_blank" rel="noopener noreferrer">PMC9941565</a></li>
+    <li>Kim Y, et al. The effects of exercise training on body composition in postmenopausal women: a systematic review and meta-analysis. 2023. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10306117/" target="_blank" rel="noopener noreferrer">PMC10306117</a></li>
+    <li>Kim Y, et al. Effect of non-pharmacological interventions on the prevention of sarcopenia in menopausal women: a systematic review and meta-analysis. 2023. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10647115/" target="_blank" rel="noopener noreferrer">PMC10647115</a></li>
+    <li>Taipale RS, et al. Effects of exercise training on hormones in adults over 40 years: A systematic review. <em>Sports Medicine.</em> 2022.</li>
+    <li>Impact of menopause hormone therapy, exercise, and their combination on bone mineral density and mental wellbeing in menopausal women: a scoping review. 2025. <a href="https://pdfs.semanticscholar.org/8a10/7444d9902615ef90e34edb47907c66fdca96.pdf" target="_blank" rel="noopener noreferrer">Semantic Scholar</a></li>
+    <li>Xu H, Liu J, Li P, Liang Y. Effects of mind-body exercise on perimenopausal and postmenopausal women: a systematic review and meta-analysis. <em>Menopause.</em> 2024. PMID: 38669625.</li>
+    <li>Daly RM, et al. Exercise for preventing and treating osteoporosis in postmenopausal women. 2019.</li>
+    <li>Fernandes M, et al. Intense exercises (70-90% 1RM) 2-4 times/week improve muscle strength, BMD and physical function. Referenced in Alomari 2023.</li>
+    <li>Hakestad BH, et al. 1-year follow-up: benefits not maintained if exercise not practiced assiduously. Referenced in Alomari 2023 [15].</li>
+  </ol>
+</section>
+
+<!-- FOOTER -->
+<footer class="report-footer">
+  <p><strong>免责声明：</strong>本报告为循证学术综述，不构成医疗建议。更年期症状管理应在专业医师指导下进行，个体化方案需综合考虑个人健康状况、既往病史和治疗目标。</p>
+  <p style="margin-top:var(--space-sm);">科研助理 Agent · 为 Rise 生成 · 2026-09-29</p>
+</footer>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+  try {
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+      anchor.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  } catch(e) {}
+})();
+</script>
+
+
+</body></html>

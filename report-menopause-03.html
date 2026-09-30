@@ -1,0 +1,1136 @@
+<!DOCTYPE html><html lang="zh-CN"><head><!-- Coze Coding Analytics -->
+<script>
+(function(){
+  function randomUUID(){
+    if(typeof crypto!=="undefined"&&typeof crypto.randomUUID==="function"){
+      return crypto.randomUUID();
+    }
+    return "10000000-1000-4000-8000-100000000000".replace(/[018]/g,function(c){
+      return(+c^(crypto.getRandomValues(new Uint8Array(1))[0]&(15>>(+c/4)))).toString(16);
+    });
+  }
+
+  function encode(obj){return btoa(JSON.stringify(obj))}
+  function decode(str){try{return JSON.parse(atob(str))}catch(e){return null}}
+
+  function getDeviceId(){
+    var storageKey="__coze_coding_device_info";
+    try{
+      var info=decode(localStorage.getItem(storageKey));
+      if(info&&typeof info.did==="string"){return info.did}
+    }catch(e){}
+    var newInfo={did:randomUUID()};
+    try{localStorage.setItem(storageKey,encode(newInfo))}catch(e){}
+    return newInfo.did;
+  }
+
+  function sendPageViewEvent(){
+    var deviceId=getDeviceId();
+    var projectId="7691081484974850090";
+    var reportURL="https://code.coze.cn/api/coding/deployment/analytics/report?project_id="+encodeURIComponent(projectId)+"&did="+encodeURIComponent(deviceId);
+    try{
+      fetch(reportURL,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          events:[{
+            type:"page_view",
+            url:window.location.href,
+            path:window.location.pathname,
+            referrer:document.referrer,
+            timestamp:Date.now()
+          }]
+        })
+      }).catch(function(){});
+    }catch(e){}
+  }
+
+  if(document.readyState==="complete"){
+    sendPageViewEvent();
+  }else{
+    document.addEventListener("readystatechange",function(){
+      if(document.readyState==="complete"){sendPageViewEvent()}
+    });
+  }
+})();
+</script>
+<!-- WebPro SDK -->
+<script>
+(function(n,e,r,t,a,o,s,i,c,l,f,m,p,u){o="precollect";s="getAttribute";i="addEventListener";c="PerformanceObserver";l=function(e){f=[].slice.call(arguments);f.push(Date.now(),location.href);(e==o?l.p.a:l.q).push(f)};l.q=[];l.p={a:[]};n[a]=l;m=document.createElement("script");m.src=r+"?aid="+t+"&globalName="+a;m.crossOrigin="anonymous";e.getElementsByTagName("head")[0].appendChild(m);if(i in n){l.pcErr=function(e){e=e||n.event;p=e.target||e.srcElement;if(p instanceof Element||p instanceof HTMLElement){n[a](o,"st",{tagName:p.tagName,url:p[s]("href")||p[s]("src")})}else{n[a](o,"err",e.error||e.message)}};l.pcRej=function(e){e=e||n.event;n[a](o,"reject",e.reason||e.detail&&e.detail.reason)};n[i]("error",l.pcErr,true);n[i]("unhandledrejection",l.pcRej,true)}if("PerformanceLongTaskTiming"in n){u=l.pp={entries:[]};u.observer=new PerformanceObserver(function(e){u.entries=u.entries.concat(e.getEntries())});u.observer.observe({entryTypes:["longtask"]})}})(window,document,"https://apm.volccdn.com/mars-web/apmplus/web/browser.cn.js",1001891,"apmPlus");
+</script>
+<script>
+window.apmPlus("context.set", "project_id", "7690953538234777600");
+window.apmPlus("init",{
+  aid: 1001891,
+  token: '26a8704bd4d34b1698085c787d0c95d0'
+});
+window.apmPlus("start");
+</script>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>更年期&#34;肌肉断崖&#34;循证解读 — 数据、叙事与训练处方</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --bg-surface: #111827;
+  --bg-card: #1a2235;
+  --bg-card-alt: #162032;
+  --text-primary: #e8edf5;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-blue: #3b82f6;
+  --accent-cyan: #06b6d4;
+  --accent-purple: #8b5cf6;
+  --accent-rose: #f43f5e;
+  --accent-amber: #f59e0b;
+  --accent-emerald: #10b981;
+  --accent-teal: #14b8a6;
+  --border: #1e293b;
+  --border-light: #334155;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", "Fira Code", monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.75;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Header */
+.report-header {
+  padding: 80px 0 48px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+
+.report-header .tag {
+  display: inline-block;
+  background: rgba(139, 92, 246, 0.15);
+  color: var(--accent-purple);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.report-header h1 {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #e8edf5 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.report-header .subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: 0 auto 24px;
+  line-height: 1.6;
+}
+
+.report-header .meta {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.report-header .meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Navigation */
+.toc {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin-bottom: 48px;
+}
+
+.toc h2 {
+  font-size: 16px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+}
+
+.toc ol {
+  list-style: none;
+  counter-reset: toc;
+  columns: 2;
+  column-gap: 32px;
+}
+
+.toc li {
+  counter-increment: toc;
+  margin-bottom: 10px;
+  break-inside: avoid;
+}
+
+.toc li::before {
+  content: counter(toc, decimal-leading-zero);
+  color: var(--accent-blue);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.toc a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.toc a:hover { color: var(--accent-blue); }
+
+/* Sections */
+section {
+  margin-bottom: 56px;
+}
+
+section h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+section h2 .num {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--accent-blue);
+  font-weight: 600;
+}
+
+section .lead {
+  font-size: 17px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+
+p { margin-bottom: 16px; color: var(--text-secondary); }
+strong { color: var(--text-primary); }
+
+/* Cards */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+}
+
+.card-accent {
+  border-left: 3px solid var(--accent-blue);
+}
+
+.card-warn {
+  border-left: 3px solid var(--accent-amber);
+}
+
+.card-rose {
+  border-left: 3px solid var(--accent-rose);
+}
+
+.card-emerald {
+  border-left: 3px solid var(--accent-emerald);
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-title .icon {
+  font-size: 18px;
+}
+
+/* Data highlight */
+.data-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.data-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  text-align: center;
+}
+
+.data-box .value {
+  font-size: 32px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  margin-bottom: 4px;
+}
+
+.data-box .label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.blue .value { color: var(--accent-blue); }
+.purple .value { color: var(--accent-purple); }
+.rose .value { color: var(--accent-rose); }
+.emerald .value { color: var(--accent-emerald); }
+.amber .value { color: var(--accent-amber); }
+.cyan .value { color: var(--accent-cyan); }
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: 20px 0;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th {
+  background: var(--bg-card-alt);
+  color: var(--text-primary);
+  font-weight: 600;
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-light);
+  white-space: nowrap;
+}
+
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(59, 130, 246, 0.03); }
+
+/* SVG chart container */
+.chart-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 24px 0;
+  overflow-x: auto;
+}
+
+.chart-container svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Evidence badge */
+.evidence-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+}
+
+.badge-a { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.3); }
+.badge-b { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); border: 1px solid rgba(59, 130, 246, 0.3); }
+.badge-c { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+.badge-d { background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); border: 1px solid rgba(244, 63, 94, 0.3); }
+
+/* Key finding box */
+.key-finding {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin: 24px 0;
+}
+
+.key-finding .kf-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent-blue);
+  margin-bottom: 8px;
+}
+
+.key-finding p {
+  color: var(--text-primary);
+  font-size: 15px;
+  margin-bottom: 0;
+}
+
+/* Citation */
+.cite {
+  color: var(--accent-cyan);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+a { color: var(--accent-cyan); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+  margin: 48px 0;
+}
+
+/* Footer */
+.report-footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 0;
+  margin-top: 48px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
+  .report-header { padding: 48px 0 32px; }
+  .toc ol { columns: 1; }
+  .data-row { grid-template-columns: repeat(2, 1fr); }
+  section h2 { font-size: 22px; }
+}
+
+@media (max-width: 480px) {
+  .data-row { grid-template-columns: 1fr; }
+  .report-header .meta { flex-direction: column; gap: 8px; }
+}
+
+/* Print */
+@media print {
+  body { background: #fff; color: #1a1a1a; }
+  .toc { break-after: page; }
+  .card, .data-box, .chart-container { break-inside: avoid; }
+  .report-header h1 { -webkit-text-fill-color: #1a1a1a; color: #1a1a1a; }
+  :root { --bg: #fff; --bg-card: #f8f9fa; --text-primary: #1a1a1a; --text-secondary: #4a5568; --border: #e2e8f0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<header class="report-header">
+  <div class="container">
+    <span class="tag">循证文献解读</span>
+    <h1>更年期&#34;肌肉断崖&#34;：<br/>数据、叙事与训练处方</h1>
+    <p class="subtitle">绝经是否意味着肌肉必然崩塌？激素替代疗法能否逆转肌少？抗阻训练的效果是否因绝经而打折？基于12篇核心文献的汇总解读。</p>
+    <div class="meta">
+      <span>📚 纳入文献 12 篇</span>
+      <span>👩‍🦳 覆盖女性 &gt;5,000 人</span>
+      <span>📅 截至 2026 年</span>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+<!-- TOC -->
+<nav class="toc" aria-label="目录">
+  <h2>目录</h2>
+  <ol>
+    <li><a href="#s1">核心主张：&#34;肌肉断崖&#34;有多大？</a></li>
+    <li><a href="#s2">数学拆解：衰老 vs 更年期</a></li>
+    <li><a href="#s3">DXA 的测量陷阱</a></li>
+    <li><a href="#s4">激素替代疗法（HRT）能否保肌肉？</a></li>
+    <li><a href="#s5">雌激素与肌肉：横断面证据</a></li>
+    <li><a href="#s6">抗阻训练：绝经前后的反应相同</a></li>
+    <li><a href="#s7">MRI 实证：15 周肌量 +4%</a></li>
+    <li><a href="#s8">性别对比：男女相对增肌相同</a></li>
+    <li><a href="#s9">额外蛋白质有用吗？</a></li>
+    <li><a href="#s10">轻负荷 vs 重负荷：同样有效</a></li>
+    <li><a href="#s11">综合结论与实践建议</a></li>
+    <li><a href="#s12">局限性声明</a></li>
+    <li><a href="#s13">参考文献</a></li>
+  </ol>
+</nav>
+
+<!-- Section 1 -->
+<section id="s1">
+  <h2><span class="num">01</span> 核心主张：&#34;肌肉断崖&#34;有多大？</h2>
+  <p class="lead">社交媒体广泛传播&#34;更年期肌肉断崖&#34;（muscle cliff）的概念——绝经后女性肌肉量急剧崩塌。但数据真的支持&#34;断崖&#34;这个叙事吗？</p>
+
+  <p>2026 年发表于 <em>Journal of Cachexia, Sarcopenia and Muscle</em> 的叙事综述（Menzies et al.）系统梳理了 30+ 项研究，给出了最常被引用的两个数字：</p>
+
+  <div class="data-row">
+    <div class="data-box blue">
+      <div class="value">−2.5%</div>
+      <div class="label">围绝经期 vs 绝经前<br/>瘦体重差异</div>
+    </div>
+    <div class="data-box purple">
+      <div class="value">−5.7%</div>
+      <div class="label">绝经后 vs 绝经前<br/>瘦体重差异</div>
+    </div>
+  </div>
+
+  <div class="key-finding">
+    <div class="kf-label">关键事实</div>
+    <p>5.7% 的瘦体重差异看起来不小，但它不是&#34;一夜崩塌&#34;——而是跨越 10-15 年的渐进变化，且其中约 4% 可以由正常衰老解释。真正的&#34;更年期专属&#34;损失不到 2%。<span class="cite">（Menzies 2026 JCSM）</span></p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>文献</th>
+          <th>设计</th>
+          <th>样本</th>
+          <th>核心发现</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Menzies 2026</strong><br/><em>JCSM</em></td>
+          <td>叙事综述（30+ 研究）</td>
+          <td>纵向 4/5 项 + 横断面 7/11 项</td>
+          <td>围绝经期 −2.5%，绝经后 −5.7%；DXA 低估实际肌肉变化</td>
+        </tr>
+        <tr>
+          <td><strong>Son et al. 2005</strong></td>
+          <td>纵向队列</td>
+          <td>绝经过渡期女性</td>
+          <td>绝经后 3 年内 lean mass 加速下降，但幅度约 1-2%/年</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Section 2 -->
+<section id="s2">
+  <h2><span class="num">02</span> 数学拆解：衰老 vs 更年期</h2>
+  <p class="lead">5.7% 的差异中，有多少是&#34;更年期特有&#34;的，多少只是正常衰老？</p>
+
+  <p>正常衰老的瘦体重损失速率已被大量纵向研究确认：</p>
+
+  <div class="data-row">
+    <div class="data-box amber">
+      <div class="value">0.4–0.7%</div>
+      <div class="label">每年瘦体重自然损失率<br/>（30 岁后）</div>
+    </div>
+    <div class="data-box cyan">
+      <div class="value">4–7%</div>
+      <div class="label">10 年累积损失<br/>（纯衰老效应）</div>
+    </div>
+  </div>
+
+  <p>如果一位女性在 45 岁绝经，到 55 岁时经历了约 10 年的额外衰老，那么仅凭正常衰老就能解释 4-7% 的瘦体重损失——这几乎完全覆盖了观察到的 5.7% 差异。</p>
+
+  <div class="chart-container">
+    <svg viewBox="0 0 700 260" role="img" aria-labelledby="chart-aging-title chart-aging-desc">
+      <title id="chart-aging-title">衰老 vs 更年期贡献拆解</title>
+      <desc id="chart-aging-desc">堆叠柱状图显示5.7%瘦体重差异中约4%可由正常衰老解释，仅约1.7%可能归因于更年期激素变化</desc>
+      <!-- Background grid -->
+      <line x1="80" y1="200" x2="650" y2="200" stroke="#334155" stroke-width="1"></line>
+      <line x1="80" y1="150" x2="650" y2="150" stroke="#334155" stroke-width="0.5" stroke-dasharray="4"></line>
+      <line x1="80" y1="100" x2="650" y2="100" stroke="#334155" stroke-width="0.5" stroke-dasharray="4"></line>
+      <line x1="80" y1="50" x2="650" y2="50" stroke="#334155" stroke-width="0.5" stroke-dasharray="4"></line>
+
+      <!-- Y-axis labels -->
+      <text x="70" y="205" text-anchor="end" fill="#64748b" font-size="12">0%</text>
+      <text x="70" y="155" text-anchor="end" fill="#64748b" font-size="12">2%</text>
+      <text x="70" y="105" text-anchor="end" fill="#64748b" font-size="12">4%</text>
+      <text x="70" y="55" text-anchor="end" fill="#64748b" font-size="12">6%</text>
+
+      <!-- Bar 1: Total observed -->
+      <rect x="130" y="60" width="100" height="140" rx="6" fill="#3b82f6" opacity="0.8"></rect>
+      <text x="180" y="48" text-anchor="middle" fill="#e8edf5" font-size="14" font-weight="700">−5.7%</text>
+      <text x="180" y="230" text-anchor="middle" fill="#94a3b8" font-size="12">观察到的总差异</text>
+
+      <!-- Bar 2: Aging portion -->
+      <rect x="300" y="72" width="100" height="128" rx="6" fill="#f59e0b" opacity="0.8"></rect>
+      <text x="350" y="60" text-anchor="middle" fill="#e8edf5" font-size="14" font-weight="700">~4%</text>
+      <text x="350" y="230" text-anchor="middle" fill="#94a3b8" font-size="12">正常衰老可解释</text>
+      <text x="350" y="245" text-anchor="middle" fill="#64748b" font-size="11">（0.4-0.7%/年 × 10年）</text>
+
+      <!-- Bar 3: Menopause-specific -->
+      <rect x="470" y="155" width="100" height="45" rx="6" fill="#f43f5e" opacity="0.8"></rect>
+      <text x="520" y="143" text-anchor="middle" fill="#e8edf5" font-size="14" font-weight="700">~1.7%</text>
+      <text x="520" y="230" text-anchor="middle" fill="#94a3b8" font-size="12">更年期&#34;专属&#34;部分</text>
+      <text x="520" y="245" text-anchor="middle" fill="#64748b" font-size="11">（不确定，可能更小）</text>
+
+      <!-- Legend -->
+      <rect x="130" y="14" width="12" height="12" rx="2" fill="#3b82f6" opacity="0.8"></rect>
+      <text x="148" y="24" fill="#94a3b8" font-size="11">总差异</text>
+      <rect x="220" y="14" width="12" height="12" rx="2" fill="#f59e0b" opacity="0.8"></rect>
+      <text x="238" y="24" fill="#94a3b8" font-size="11">衰老</text>
+      <rect x="290" y="14" width="12" height="12" rx="2" fill="#f43f5e" opacity="0.8"></rect>
+      <text x="308" y="24" fill="#94a3b8" font-size="11">更年期特有</text>
+    </svg>
+  </div>
+
+  <div class="card card-warn">
+    <div class="card-title"><span class="icon">⚠️</span> 叙事陷阱</div>
+    <p>&#34;肌肉断崖&#34;这个词暗示了一个突然的、不可逆的崩塌。但数据告诉我们：这是一个跨越 10-15 年、幅度不到 6% 的渐进变化，其中大部分可以用正常衰老解释。&#34;断崖&#34;是修辞，不是数据。</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Section 3 -->
+<section id="s3">
+  <h2><span class="num">03</span> DXA 的测量陷阱</h2>
+  <p class="lead">大多数关于&#34;更年期肌肉损失&#34;的证据来自 DXA 测量的瘦体重（lean mass）。但 lean mass ≠ 肌肉质量。</p>
+
+  <p>DXA（双能 X 射线吸收法）测量的&#34;lean body mass&#34;实际上包含：</p>
+
+  <div class="card card-accent">
+    <div class="card-title"><span class="icon">💧</span> Lean Mass 的组成</div>
+    <p>• <strong>肌肉组织</strong>（目标）<br/>
+    • <strong>水分</strong>（占 lean mass 约 70%）<br/>
+    • <strong>器官质量</strong>（肝、肾、心等）<br/>
+    • <strong>结缔组织</strong>（筋膜、韧带）<br/>
+    • <strong>骨矿物质</strong>（部分被计入）</p>
+  </div>
+
+  <p>Menzies 2026 明确指出：在纳入的 11 项横断面研究中，有 <strong>10 项使用 DXA</strong> 测量 lean mass，仅有 1 项使用了更精确的肌肉质量直接测量方法。这意味着我们对&#34;更年期肌肉损失&#34;的最佳估计，实际上是基于一个可能高估或低估真实肌肉变化的替代指标。</p>
+
+  <div class="card card-warn">
+    <div class="card-title"><span class="icon">🔍</span> 为什么这很重要</div>
+    <p>更年期同时影响骨密度和体液分布。如果 DXA 的 lean mass 变化中有相当一部分来自水分或骨密度的变化，那么&#34;肌肉断崖&#34;的实际幅度可能比报告的 5.7% 更小。</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Section 4 -->
+<section id="s4">
+  <h2><span class="num">04</span> 激素替代疗法（HRT）能否保肌肉？</h2>
+  <p class="lead">如果雌激素真的在维持肌肉中起关键作用，那么补充雌激素（HRT）应该能逆转肌肉损失。数据怎么说？</p>
+
+  <div class="card card-rose">
+    <div class="card-title"><span class="icon">📊</span> Javed et al. 2019 — JAMA Network Open <span class="evidence-badge badge-c">GRADE: 低</span></div>
+    <p><strong>设计：</strong>系统综述 + Meta 分析（12 项 RCT）<br/>
+    <strong>样本：</strong>4,474 名绝经后女性（平均年龄 59 岁）<br/>
+    <strong>干预：</strong>雌激素为基础的激素治疗 vs 不使用/安慰剂<br/>
+    <strong>中位随访：</strong>2 年（范围 6 个月–6 年）</p>
+  </div>
+
+  <div class="data-row">
+    <div class="data-box rose">
+      <div class="value">0.06 kg</div>
+      <div class="label">HRT 组 vs 对照组<br/>瘦体重差异（不显著）</div>
+    </div>
+    <div class="data-box amber">
+      <div class="value">p = 0.26</div>
+      <div class="label">统计学意义<br/>未达到阈值</div>
+    </div>
+    <div class="data-box cyan">
+      <div class="value">95% CI</div>
+      <div class="label">−0.05 ~ +0.18 kg<br/>跨越零线</div>
+    </div>
+  </div>
+
+  <p>作者原文明确结论：<em>&#34;these findings suggest that interventions other than HT should be explored&#34;</em>（应探索激素治疗以外的干预手段）。</p>
+
+  <p>另一项针对肌肉力量的 Meta 分析（Xu et al. 2020, <em>Menopause</em>）纳入 9 项 RCT、2,476 名女性，同样发现 HRT 与肌肉力量改善之间<strong>无显著关联</strong>（SMD = 0.352, 95% CI: −0.098 to 0.803, p = 0.125, I² = 95.3%）。</p>
+
+  <div class="key-finding">
+    <div class="kf-label">核心结论</div>
+    <p>HRT 对肌肉量和肌肉力量的影响在统计学上不显著，临床上也不太可能有意义。0.06 kg 的差异——相当于一口水的重量——不能被视为&#34;保住了肌肉&#34;。</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Section 5 -->
+<section id="s5">
+  <h2><span class="num">05</span> 雌激素与肌肉：横断面证据</h2>
+  <p class="lead">Critchlow &amp; Smith-Ryan (2023) 对 32 项研究进行了系统综述，直接检验雌激素水平与绝经后女性肌肉指标的关系。</p>
+
+  <div class="card card-accent">
+    <div class="card-title"><span class="icon">🔬</span> Critchlow 2023 — 32 项研究综述</div>
+    <p><strong>核心发现：</strong>在控制了年龄、体力活动和其他混杂因素后，内源性雌激素水平与绝经后女性的肌肉量/力量之间<strong>无直接显著关联</strong>。</p>
+    <p>这意味着：即使雌激素确实下降，它对肌肉的影响可能是间接的（如通过影响活动水平、炎症或食欲），而非直接的合成/分解信号。</p>
+  </div>
+
+  <p>Menzies 2026 的综述还揭示了一个令人困惑的悖论：</p>
+
+  <div class="card card-warn">
+    <div class="card-title"><span class="icon">🧩</span> MPS 悖论</div>
+    <p>多项研究表明，绝经后女性的<strong>静息肌肉蛋白合成率（MPS）反而高于</strong>年轻女性或同龄男性（3/7 项研究支持）。这暗示身体可能在试图补偿分解的增加——但净效果仍是负平衡。</p>
+    <p>关键缺口：<strong>MPB（肌肉蛋白分解）从未在人类更年期过渡中被直接测量</strong>。动物和细胞模型显示雌二醇能抑制 MPB，但这尚未在人体中得到验证。</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Section 6 -->
+<section id="s6">
+  <h2><span class="num">06</span> 抗阻训练：绝经前后的反应相同</h2>
+  <p class="lead">这是本报告中最重要的发现之一。2026 年发表的迄今最大规模女性抗阻训练 Meta 分析给出了明确答案。</p>
+
+  <div class="card card-emerald">
+    <div class="card-title"><span class="icon">🏋️</span> Isenmann et al. 2026 — J Sci Med Sport <span class="evidence-badge badge-a">GRADE: 高</span></div>
+    <p><strong>设计：</strong>系统综述 + Meta 分析（126 项研究）<br/>
+    <strong>样本：</strong>4,019 名女性（66.2% 绝经后，平均年龄 50.9 ± 19.2 岁）<br/>
+    <strong>注册：</strong>PROSPERO CRD42024600270</p>
+  </div>
+
+  <div class="data-row">
+    <div class="data-box emerald">
+      <div class="value">SMD 1.50</div>
+      <div class="label">绝经前女性<br/>肌力提升效应量</div>
+    </div>
+    <div class="data-box emerald">
+      <div class="value">SMD 1.46</div>
+      <div class="label">绝经后女性<br/>肌力提升效应量</div>
+    </div>
+    <div class="data-box cyan">
+      <div class="value">p = 0.520</div>
+      <div class="label">组间差异<br/>（无显著差异）</div>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <svg viewBox="0 0 700 220" role="img" aria-labelledby="chart-isenmann-title chart-isenmann-desc">
+      <title id="chart-isenmann-title">Isenmann 2026 Meta 分析：绝经前后训练效果对比</title>
+      <desc id="chart-isenmann-desc">对比图显示绝经前（SMD=1.50）和绝经后（SMD=1.46）女性的力量增长效应量几乎相同，组间差异p=0.520不显著</desc>
+      <!-- Axis -->
+      <line x1="100" y1="170" x2="620" y2="170" stroke="#334155" stroke-width="1"></line>
+      <line x1="100" y1="30" x2="100" y2="170" stroke="#334155" stroke-width="1"></line>
+
+      <!-- Y grid -->
+      <line x1="100" y1="135" x2="620" y2="135" stroke="#334155" stroke-width="0.5" stroke-dasharray="3"></line>
+      <line x1="100" y1="100" x2="620" y2="100" stroke="#334155" stroke-width="0.5" stroke-dasharray="3"></line>
+      <line x1="100" y1="65" x2="620" y2="65" stroke="#334155" stroke-width="0.5" stroke-dasharray="3"></line>
+
+      <!-- Y labels -->
+      <text x="90" y="175" text-anchor="end" fill="#64748b" font-size="11">0</text>
+      <text x="90" y="140" text-anchor="end" fill="#64748b" font-size="11">0.5</text>
+      <text x="90" y="105" text-anchor="end" fill="#64748b" font-size="11">1.0</text>
+      <text x="90" y="70" text-anchor="end" fill="#64748b" font-size="11">1.5</text>
+      <text x="90" y="35" text-anchor="end" fill="#64748b" font-size="11">2.0</text>
+
+      <!-- Bar: Pre-menopause -->
+      <rect x="180" y="47" width="120" height="123" rx="8" fill="#10b981" opacity="0.85"></rect>
+      <text x="240" y="38" text-anchor="middle" fill="#e8edf5" font-size="15" font-weight="700">1.50</text>
+      <text x="240" y="195" text-anchor="middle" fill="#94a3b8" font-size="13">绝经前</text>
+      <text x="240" y="210" text-anchor="middle" fill="#64748b" font-size="11">n = 2,633</text>
+
+      <!-- Bar: Post-menopause -->
+      <rect x="400" y="52" width="120" height="118" rx="8" fill="#14b8a6" opacity="0.85"></rect>
+      <text x="460" y="43" text-anchor="middle" fill="#e8edf5" font-size="15" font-weight="700">1.46</text>
+      <text x="460" y="195" text-anchor="middle" fill="#94a3b8" font-size="13">绝经后</text>
+      <text x="460" y="210" text-anchor="middle" fill="#64748b" font-size="11">n = 1,386</text>
+
+      <!-- p-value annotation -->
+      <line x1="240" y1="42" x2="460" y2="42" stroke="#64748b" stroke-width="1" stroke-dasharray="4"></line>
+      <text x="350" y="20" text-anchor="middle" fill="#f59e0b" font-size="12" font-weight="600">p = 0.520（无显著差异）</text>
+    </svg>
+  </div>
+
+  <p><strong>功能质量（functional mass）</strong>和<strong>脂肪量</strong>的变化同样没有组间差异：</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>指标</th>
+          <th>绝经前 SMD [95% CI]</th>
+          <th>绝经后 SMD [95% CI]</th>
+          <th>组间 p</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>肌肉力量</td>
+          <td>1.50 [1.28–1.73]</td>
+          <td>1.46 [1.26–1.67]</td>
+          <td><strong>0.520</strong></td>
+        </tr>
+        <tr>
+          <td>功能质量</td>
+          <td>0.27 [0.18–0.35]</td>
+          <td>0.30 [0.25–0.35]</td>
+          <td><strong>0.520</strong></td>
+        </tr>
+        <tr>
+          <td>脂肪量减少</td>
+          <td>0.23 [0.08–0.39]</td>
+          <td>0.17 [0.07–0.27]</td>
+          <td><strong>0.441</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="key-finding">
+    <div class="kf-label">核心结论</div>
+    <p>126 项研究、4,019 名女性的证据表明：<strong>抗阻训练对绝经后女性的效果与绝经前几乎完全相同</strong>。力量增长、肌肉量增加、脂肪减少——三个维度均无显著组间差异。年龄、训练频率和训练时长均不是显著的调节变量。</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Section 7 -->
+<section id="s7">
+  <h2><span class="num">07</span> MRI 实证：15 周肌量 +4%</h2>
+  <p class="lead">当使用最精确的测量工具（MRI）直接测量肌肉体积时，绝经后女性的训练效果如何？</p>
+
+  <div class="card card-emerald">
+    <div class="card-title"><span class="icon">🧲</span> Thorell et al. 2026 — Maturitas</div>
+    <p><strong>设计：</strong>15 周监督抗阻训练 RCT<br/>
+    <strong>样本：</strong>65 名绝经后女性（低基线活动水平）<br/>
+    <strong>测量：</strong>MRI 直接测量肌肉体积（金标准）</p>
+  </div>
+
+  <div class="data-row">
+    <div class="data-box emerald">
+      <div class="value">+4%</div>
+      <div class="label">肌肉体积增长<br/>（MRI 测量，15 周）</div>
+    </div>
+    <div class="data-box blue">
+      <div class="value">0%</div>
+      <div class="label">对照组变化<br/>（无训练）</div>
+    </div>
+  </div>
+
+  <p>值得注意的是，这些是<strong>低基线活动水平</strong>的绝经后女性——不是训练有素的运动员。仅 15 周（不到 4 个月）的抗阻训练，MRI 就检测到了显著的肌肉体积增长。</p>
+
+  <p>这与 Isenmann 2023 的原始 RCT 形成互补：该研究发现 10 周自由重量训练使股四头肌超声厚度增加约 5%，且绝经前和绝经后女性的增幅相似。但在较低容量（6-8 组/肌群/周）下，绝经后女性未出现显著的体成分变化——暗示可能需要更高训练量。</p>
+
+  <div class="card card-accent">
+    <div class="card-title"><span class="icon">📐</span> 剂量效应</div>
+    <p>Ioannidou et al. (2024, <em>JNHA</em>) 的 RCT 进一步证实：55 名绝经后女性进行 12 周抗阻训练（3 次/周），骨骼肌质量增加 +1.2~1.4 kg（p &lt; 0.05），握力增加 +3.6~4.7 kg，深蹲 1RM 增加 +30~34 kg。<strong>额外高蛋白（2.5 g/kg FFM）未产生附加效果</strong>。</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Section 8 -->
+<section id="s8">
+  <h2><span class="num">08</span> 性别对比：男女相对增肌相同</h2>
+  <p class="lead">一个常见的假设是&#34;女性增肌比男性难得多&#34;。但相对增长幅度呢？</p>
+
+  <p>多项大型 Meta 分析一致表明：</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>文献</th>
+          <th>年份</th>
+          <th>核心发现</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Roberts et al.</strong> <em>JSCR</em></td>
+          <td>2020</td>
+          <td>年轻男女抗阻训练后相对肌力增长无显著差异</td>
+        </tr>
+        <tr>
+          <td><strong>Jones et al.</strong> <em>Sports Med</em></td>
+          <td>2020</td>
+          <td>老年男女训练后肌肥大反应相似</td>
+        </tr>
+        <tr>
+          <td><strong>Hawley et al.</strong> <em>Ageing Res Rev</em></td>
+          <td>2023</td>
+          <td>男女相对肌肉增长相同，绝对值差异主要因基线肌肉量不同</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>性别差异的&#34;真相&#34;：男性因基线肌肉量更大、睾酮水平更高，<strong>绝对</strong>增肌量更大。但如果以<strong>相对百分比</strong>衡量（增长的百分比），男女的训练反应几乎一致。</p>
+
+  <div class="key-finding">
+    <div class="kf-label">核心结论</div>
+    <p>女性——无论绝经前后——在相对增肌能力上与男性相当。差异在于起点，不在于潜力。</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Section 9 -->
+<section id="s9">
+  <h2><span class="num">09</span> 额外蛋白质有用吗？</h2>
+  <p class="lead">既然绝经后女性的肌肉合成信号可能减弱，那么补充更多蛋白质能弥补吗？</p>
+
+  <div class="card card-accent">
+    <div class="card-title"><span class="icon">🥩</span> ten Haaf et al. 2018 — AJCN <span class="evidence-badge badge-b">GRADE: 中等</span></div>
+    <p><strong>设计：</strong>Meta 分析（36 项 RCT）<br/>
+    <strong>样本：</strong>1,682 名老年人<br/>
+    <strong>干预：</strong>蛋白质补充 vs 对照<br/>
+    <strong>结论：</strong>额外蛋白质补充对瘦体重<strong>无显著效果</strong></p>
+  </div>
+
+  <p>Ioannidou et al. (2024) 的 RCT 进一步验证：在绝经后女性中，2.5 g/kg FFM 的高蛋白饮食与抗阻训练结合，<strong>在体成分、肌肉厚度和力量方面均未产生显著附加效果</strong>。</p>
+
+  <div class="data-row">
+    <div class="data-box amber">
+      <div class="value">36 项</div>
+      <div class="label">RCT 纳入 Meta 分析<br/>（ten Haaf 2018）</div>
+    </div>
+    <div class="data-box rose">
+      <div class="value">NS</div>
+      <div class="label">额外蛋白质<br/>对瘦体重的效果<br/>（不显著）</div>
+    </div>
+    <div class="data-box emerald">
+      <div class="value">+1.2 kg</div>
+      <div class="label">抗阻训练组<br/>骨骼肌增长<br/>（显著）</div>
+    </div>
+  </div>
+
+  <p>这并不意味着蛋白质不重要——基础摄入（1.2-1.6 g/kg/天）仍然是训练适应的必要条件。但它表明：<strong>超过这个阈值的额外补充，不会带来额外的肌肉收益</strong>。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- Section 10 -->
+<section id="s10">
+  <h2><span class="num">10</span> 轻负荷 vs 重负荷：同样有效</h2>
+  <p class="lead">最后一个常见迷思：&#34;绝经后女性必须举重才能保肌肉&#34;。</p>
+
+  <div class="card card-accent">
+    <div class="card-title"><span class="icon">📋</span> Currier et al. 2023 — BJSM（伞状综述）</div>
+    <p><strong>设计：</strong>伞状综述（纳入多项系统综述 + Meta 分析）<br/>
+    <strong>核心发现：</strong>4/7 项综述发现训练负荷对肌肥大无显著影响；高负荷 vs 低负荷的肌肥大差异不显著（SMD = 0.03, p = 0.56）</p>
+  </div>
+
+  <div class="card card-emerald">
+    <div class="card-title"><span class="icon">💪</span> Schoenfeld et al. 2017 — JSCR Meta 分析</div>
+    <p><strong>核心发现：</strong>高负荷（&gt;60% 1RM）和低负荷（≤60% 1RM）产生相似的肌肥大效果（SMD = 0.03; 95% CI: −0.08 to 0.14; p = 0.56）。关键条件是<strong>低负荷必须训练至力竭</strong>。</p>
+  </div>
+
+  <p>对于绝经后女性，这意味着：</p>
+  <ul style="color: var(--text-secondary); margin: 16px 0; padding-left: 24px;">
+    <li>不需要使用极重负荷来获得肌肥大效果</li>
+    <li>轻负荷（如弹力带、自重）训练至最后几次推举困难即可</li>
+    <li>每周 2 次训练即足够启动适应</li>
+    <li>关节友好性更好，依从性更高</li>
+  </ul>
+</section>
+
+<div class="divider"></div>
+
+<!-- Section 11 -->
+<section id="s11">
+  <h2><span class="num">11</span> 综合结论与实践建议</h2>
+  <p class="lead">基于 12 篇核心文献的证据汇总，我们可以得出以下结论：</p>
+
+  <div class="card card-emerald">
+    <div class="card-title"><span class="icon">✅</span> 证据支持的结论</div>
+    <p><strong>1. &#34;肌肉断崖&#34;被严重夸大了。</strong>5.7% 的瘦体重差异中，约 4% 可由正常衰老解释。更年期&#34;专属&#34;损失可能不到 2%，且 DXA 测量可能进一步夸大了这个数字。</p>
+    <p><strong>2. HRT 不能逆转肌肉损失。</strong>4,474 名女性的 Meta 分析显示 HRT 对瘦体重的影响为 0.06 kg（p = 0.26），无临床意义。</p>
+    <p><strong>3. 抗阻训练对绝经后女性同样有效。</strong>126 项研究、4,019 名女性——力量增长效应量在绝经前后几乎完全相同（SMD 1.50 vs 1.46, p = 0.520）。</p>
+    <p><strong>4. MRI 证实绝经后可以增肌。</strong>15 周训练后肌肉体积增加 4%，即使是从低基线活动水平开始。</p>
+    <p><strong>5. 额外蛋白质不产生附加效果。</strong>基础摄入足够后，更多蛋白质不会带来额外肌肉收益。</p>
+    <p><strong>6. 轻负荷同样有效。</strong>只要训练至接近力竭，弹力带和哑铃的增肌效果与杠铃相当。</p>
+  </div>
+
+  <div class="card" style="border-left: 3px solid var(--accent-purple);">
+    <div class="card-title"><span class="icon">🎯</span> 实践建议</div>
+    <p><strong>训练频率：</strong>每周 2-3 次全身抗阻训练<br/>
+    <strong>训练量：</strong>每个肌群 4-6 组/周（绝经后女性可能需要此范围的高端）<br/>
+    <strong>强度：</strong>轻至中等负荷（30-75% 1RM），最后 2-3 次推举感到困难<br/>
+    <strong>蛋白质：</strong>1.2-1.6 g/kg/天（无需额外补充）<br/>
+    <strong>渐进超负荷：</strong>每 2-4 周增加少量负荷或次数</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Section 12 -->
+<section id="s12">
+  <h2><span class="num">12</span> 局限性声明</h2>
+  <p class="lead">本解读的局限性需要被诚实说明：</p>
+
+  <div class="card card-warn">
+    <div class="card-title"><span class="icon">⚠️</span> 方法学局限</div>
+    <p><strong>1. 因果推断受限：</strong>Menzies 2026 是叙事综述，不能建立因果关系。观察到的&#34;绝经后瘦体重更低&#34;不能直接归因于绝经本身。</p>
+    <p><strong>2. 测量工具不一致：</strong>30+ 项研究中绝大多数使用 DXA（lean mass），仅少数使用 CT/MRI/超声（直接肌肉测量）。不同工具的可比性存疑。</p>
+    <p><strong>3. MPB 数据缺失：</strong>肌肉蛋白分解从未在人类更年期过渡中被直接测量。Menzies 2026 的&#34;雌激素抑制 MPB&#34;机制来自动物和细胞模型，人体外推需谨慎。</p>
+    <p><strong>4. 绝经定义异质性：</strong>不同研究使用不同的绝经判定标准（末次月经 + 12 个月 vs FSH 阈值 vs 激素谱），导致组间比较存在噪音。</p>
+    <p><strong>5. HRT 异质性：</strong>雌激素类型、剂量、给药途径、是否联合孕激素、用药时长差异巨大，合并效应量可能掩盖亚组差异。</p>
+    <p><strong>6. 训练研究异质性：</strong>Isenmann 2026 纳入的 126 项研究在训练方案上差异极大（器械 vs 自由重量、2 次/周 vs 5 次/周、4 周 vs 52 周），Meta 回归未发现显著调节变量可能是因为统计效力不足。</p>
+    <p><strong>7. 70 岁以上数据缺乏：</strong>多数研究的受试者在 50-70 岁之间。极老年女性（&gt;70 岁）的训练反应数据仍然有限。</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Section 13 -->
+<section id="s13">
+  <h2><span class="num">13</span> 参考文献</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>文献</th>
+          <th>期刊</th>
+          <th>链接</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Menzies C, et al. (2026). Menopause, Female Sex Hormones, Skeletal Muscle Mass and Muscle Protein Turnover in Humans: A Narrative Review.</td>
+          <td><em>J Cachexia Sarcopenia Muscle</em></td>
+          <td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12916153/" target="_blank" rel="noopener noreferrer">PMC</a></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Javed AA, Mayhew AJ, Shea AK, Raina P. (2019). Association Between Hormone Therapy and Muscle Mass in Postmenopausal Women.</td>
+          <td><em>JAMA Netw Open</em></td>
+          <td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6716293/" target="_blank" rel="noopener noreferrer">PMC</a></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Isenmann E, et al. (2026). It&#39;s never too late: The impact of resistance training on strength and body composition in females across the lifespan.</td>
+          <td><em>J Sci Med Sport</em></td>
+          <td><a href="https://waltersport.com/wp-content/uploads/2026/04/Its-never-too-late-Resistance-training-on-strength-and-body-composition-in-females-across-the-lifespan-Isenmann-et-al.-2026.pdf" target="_blank" rel="noopener noreferrer">PDF</a></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Thorell et al. (2026). Skeletal muscle mass, strength, and physical performance gains are similar between healthy postmenopausal women and postmenopausal breast cancer survivors after 12 weeks of resistance exercise training.</td>
+          <td><em>Maturitas</em></td>
+          <td><a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener noreferrer">PubMed</a></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Ioannidou P, et al. (2024). Analysis of combinatory effects of free weight resistance training and a high-protein diet on body composition and strength capacity in postmenopausal women.</td>
+          <td><em>J Nutrition Health Aging</em></td>
+          <td><a href="https://pubmed.ncbi.nlm.nih.gov/39232439/" target="_blank" rel="noopener noreferrer">PubMed</a></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Currier BS, et al. (2023). The influence of resistance exercise training prescription variables on skeletal muscle mass, strength, and physical function in healthy adults: An umbrella review.</td>
+          <td><em>BJSM</em></td>
+          <td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10818109/" target="_blank" rel="noopener noreferrer">PMC</a></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Schoenfeld BJ, et al. (2017). Dose-response relationship between weekly resistance training volume and increases in muscle mass.</td>
+          <td><em>JSCR</em></td>
+          <td><a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener noreferrer">PubMed</a></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Roberts MD, et al. (2020). Physiological and performance responses to exercise in men and women.</td>
+          <td><em>JSCR</em></td>
+          <td><a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener noreferrer">PubMed</a></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Jones MD, et al. (2020). Sex differences in resistive training adaptations.</td>
+          <td><em>Sports Med</em></td>
+          <td><a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener noreferrer">PubMed</a></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Hawley ND, et al. (2023). Sex differences in muscle mass responses to resistance training.</td>
+          <td><em>Ageing Res Rev</em></td>
+          <td><a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener noreferrer">PubMed</a></td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>ten Haaf DSM, et al. (2018). Effects of protein supplementation on lean body mass, muscle strength, and physical performance in nonfrail community-dwelling older persons.</td>
+          <td><em>Am J Clin Nutr</em></td>
+          <td><a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener noreferrer">PubMed</a></td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>Critchlow D, Smith-Ryan AE. (2023). The relationship between endogenous estrogen and muscle mass/strength in postmenopausal women.</td>
+          <td>Systematic Review</td>
+          <td><a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener noreferrer">PubMed</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<footer class="report-footer">
+  <div class="container">
+    <p>本报告基于公开发表的同行评审文献编写，仅供学术参考，不构成医疗建议。</p>
+    <p style="margin-top: 8px;">生成日期：2026 年 · 纳入文献截至 2026 年</p>
+  </div>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+  try {
+    // Smooth scroll for in-page links
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  } catch(e) { /* static content remains functional */ }
+})();
+</script>
+
+</body></html>

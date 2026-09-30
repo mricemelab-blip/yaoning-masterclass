@@ -129,94 +129,10 @@ a:hover{text-decoration:underline}
   margin-bottom:48px;
 }
 
-/* ===== LITERATURE TOOLBAR ===== */
-.lit-toolbar{margin-bottom:40px}
-.lit-search{
-  width:100%;
-  height:48px;
-  background:var(--bg-card);
-  border:1px solid var(--border);
-  border-radius:3px;
-  padding:0 18px;
-  font-size:14px;
-  color:var(--text);
-  outline:none;
-  margin-bottom:16px;
-  transition:border-color .2s;
-  letter-spacing:.3px;
-}
-.lit-search:focus{border-color:var(--accent)}
-.lit-search::placeholder{color:var(--text3)}
-.lit-filters{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
-.lit-filters::-webkit-scrollbar{display:none}
-.lit-filter{
-  flex:0 0 auto;
-  background:var(--bg-card);
-  border:1px solid var(--border);
-  color:var(--text3);
-  padding:6px 16px;
-  border-radius:3px;
-  font-size:11px;
-  font-weight:600;
-  cursor:pointer;
-  transition:all .2s;
-  white-space:nowrap;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-}
-.lit-filter:hover{border-color:var(--border-light);color:var(--text2)}
-.lit-filter.active{background:var(--accent);color:var(--bg);border-color:var(--accent)}
-.lit-filter span{font-size:10px;opacity:.6;margin-left:3px}
-
-/* ===== LIT CARD (editorial style) ===== */
-.lit-card{
-  background:var(--bg-card);
-  border:1px solid var(--border);
-  border-radius:3px;
-  padding:40px 48px;
-  margin-bottom:24px;
-  transition:transform .35s cubic-bezier(.25,.46,.45,.94),box-shadow .35s cubic-bezier(.25,.46,.45,.94),border-color .35s ease;
-  position:relative;
-}
-.lit-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 16px 48px rgba(0,0,0,.3);
-  border-color:var(--accent-dim);
-}
-.lit-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
-.lit-card-number{
-  font-size:clamp(48px,6vw,72px);
-  font-weight:900;
-  letter-spacing:-0.04em;
-  line-height:1;
-  color:var(--accent-dim);
-  flex:0 0 auto;
-  margin-right:24px;
-  min-width:48px;
-}
-.lit-card-body{flex:1;min-width:0}
-.lit-card-title{font-size:clamp(18px,2.2vw,24px);font-weight:800;letter-spacing:-0.02em;line-height:1.3;margin-bottom:12px;color:var(--text)}
-.lit-card-type{
-  display:inline-block;
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  padding:4px 12px;
-  border-radius:2px;
-  margin-bottom:16px;
-}
-.type-srma{background:rgba(232,168,56,.12);color:var(--accent);border:1px solid rgba(232,168,56,.2)}
-.type-nma{background:rgba(76,175,80,.1);color:#66BB6A;border:1px solid rgba(76,175,80,.2)}
-.type-umb{background:rgba(100,181,246,.1);color:#64B5F6;border:1px solid rgba(100,181,246,.2)}
-.type-rct{background:rgba(255,152,0,.1);color:#FFA726;border:1px solid rgba(255,152,0,.2)}
-.type-pos{background:rgba(171,71,188,.1);color:#CE93D8;border:1px solid rgba(171,71,188,.2)}
-.type-other{background:rgba(255,255,255,.04);color:var(--text3);border:1px solid var(--border)}
-.lit-card-meta{font-size:12px;color:var(--text3);letter-spacing:.5px;margin-bottom:14px}
-.lit-card-meta span{margin-right:16px}
-.lit-card-summary{font-size:15px;color:var(--text2);line-height:1.75}
-.lit-card-journal{font-size:11px;color:var(--text3);margin-top:12px;font-style:italic;letter-spacing:.3px}
-.lit-empty{text-align:center;padding:80px 16px;color:var(--text3)}
+/* ===== PLACEHOLDER ===== */
+.placeholder{text-align:center;padding:120px 0}
+.placeholder-icon{font-size:64px;opacity:.15;margin-bottom:24px}
+.placeholder-text{font-size:16px;line-height:2.2;color:var(--text3);letter-spacing:.5px}
 
 /* ===== COURSE CARD ===== */
 .course-card{
@@ -336,22 +252,9 @@ a:hover{text-decoration:underline}
   <!-- TAB 1: LITERATURE -->
   <div class="tab-panel active" id="panel-literature">
     <div class="section-label">Evidence-Based Literature Review</div>
-    <div class="lit-toolbar">
-      <input type="text" id="litSearch" class="lit-search" placeholder="搜索作者、标题、关键词…" oninput="filterLit()">
-      <div class="lit-filters">
-        <button class="lit-filter active" data-type="all" onclick="setFilter(this)">全部 <span id="count-all">0</span></button>
-        <button class="lit-filter" data-type="SR/MA" onclick="setFilter(this)">SR/MA <span id="count-srma">0</span></button>
-        <button class="lit-filter" data-type="NMA" onclick="setFilter(this)">NMA <span id="count-nma">0</span></button>
-        <button class="lit-filter" data-type="伞评" onclick="setFilter(this)">伞评 <span id="count-umb">0</span></button>
-        <button class="lit-filter" data-type="RCT" onclick="setFilter(this)">RCT <span id="count-rct">0</span></button>
-        <button class="lit-filter" data-type="立场声明" onclick="setFilter(this)">立场声明</button>
-        <button class="lit-filter" data-type="文献解读" onclick="setFilter(this)">解读 <span id="count-other">0</span></button>
-      </div>
-    </div>
-    <div id="litContainer"></div>
-    <div class="lit-empty" id="litEmpty" style="display:none">
-      <div style="font-size:48px;opacity:.15;margin-bottom:16px">🔍</div>
-      <div style="font-size:14px;letter-spacing:.5px">没有找到匹配的文献</div>
+    <div class="placeholder">
+      <div class="placeholder-icon">&#128218;</div>
+      <div class="placeholder-text">文献解读内容筹备中<br>敬请期待</div>
     </div>
   </div>
 
@@ -460,55 +363,7 @@ function handleCourseClick(btn){
 }
 
 /* ===== LITERATURE ===== */
-var LIT_DATA=[{"id":1,"date":"2026-06-05","author":"Currier","year":"2026","title":"ACSM 2026 抗阻训练处方立场声明","type":"立场声明","journal":"","conclusion":"ACSM 2026 抗阻训练处方立场声明"},{"id":2,"date":"2026-06-05","author":"Refalo","year":"2025","title":"男女抗阻训练后肌肉肥大差异","type":"NMA","journal":"PeerJ","conclusion":"男女抗阻训练后肌肉肥大差异——贝叶斯系统综述与荟萃分析"},{"id":3,"date":"2026-06-06","author":"Solon-Julio","year":"2026","title":"心理疲劳对抵抗训练表现的影响","type":"文献解读","journal":"","conclusion":"心理疲劳对抵抗训练表现的影响——系统综述与荟萃分析"},{"id":4,"date":"2026-06-07","author":"Henselmans","year":"2026","title":"碳水化合物摄入对肌肉肥大的影响","type":"SR/MA","journal":"Nutrients","conclusion":"碳水化合物摄入对肌肉肥大的影响：系统综述与荟萃分析"},{"id":5,"date":"2026-06-07","author":"Poon","year":"2026","title":"抗阻训练对超重及肥胖儿童青少年的影响","type":"伞评","journal":"","conclusion":"抗阻训练对超重及肥胖儿童青少年的影响——伞评"},{"id":6,"date":"2026-06-08","author":"Fuertes-Kenneally","year":"2026","title":"运动对内皮功能及心血管疾病的影响","type":"NMA","journal":"","conclusion":"运动对内皮功能及心血管疾病的影响：网络荟萃分析"},{"id":7,"date":"2026-06-08","author":"McKee","year":"2026","title":"高负荷血流限制抗阻训练","type":"SR/MA","journal":"","conclusion":"高负荷血流限制抗阻训练的系统综述与荟萃分析"},{"id":8,"date":"2026-06-09","author":"Masse","year":"2026","title":"钙与维生素D补充对骨折和跌倒预防的影响","type":"SR/MA","journal":"","conclusion":"钙与维生素D补充对骨折和跌倒预防的影响"},{"id":9,"date":"2026-06-10","author":"Brinkmann","year":"2026","title":"热量限制期间的训练模式对瘦体重的影响","type":"NMA","journal":"","conclusion":"热量限制期间的训练模式对瘦体重的影响——网络荟萃分析"},{"id":10,"date":"2026-06-11","author":"Gu","year":"2026","title":"肌酸补充联合抗阻训练对瘦体重的影响","type":"SR/MA","journal":"","conclusion":"肌酸补充联合抗阻训练对瘦体重的影响"},{"id":11,"date":"2026-06-11","author":"Shi","year":"2026","title":"运动干预对心力衰竭患者LVEF的影响","type":"NMA","journal":"","conclusion":"运动干预对心力衰竭患者LVEF的影响：网络荟萃分析"},{"id":12,"date":"2026-06-12","author":"Yang","year":"2026","title":"青少年足球运动员损伤预防干预","type":"SR/MA","journal":"","conclusion":"青少年足球运动员损伤预防干预的系统综述"},{"id":13,"date":"2026-06-13","author":"McCarthy","year":"2026","title":"女性运动员铁状态与补铁干预","type":"文献解读","journal":"","conclusion":"女性运动员铁状态与补铁干预策略"},{"id":14,"date":"2026-06-13","author":"Naddafha","year":"2026","title":"肌酸补充对绝经后女性的影响","type":"SR/MA","journal":"","conclusion":"肌酸补充对绝经后女性的影响：系统综述与荟萃分析"},{"id":15,"date":"2026-06-14","author":"Camargo","year":"2026","title":"肌酸补充对炎症的影响","type":"SR/MA","journal":"","conclusion":"肌酸补充对炎症的影响：RCT系统综述与荟萃分析"},{"id":16,"date":"2026-06-15","author":"Chang","year":"2026","title":"运动剂量对内脏脂肪的影响","type":"文献解读","journal":"","conclusion":"运动剂量对内脏脂肪的影响——剂量反应分析"},{"id":17,"date":"2026-06-16","author":"Gawelczyk","year":"2026","title":"生酮饮食与低碳水饮食对无氧运动表现的影响","type":"文献解读","journal":"","conclusion":"生酮饮食与低碳水饮食对无氧运动表现的影响"},{"id":18,"date":"2026-06-16","author":"Salame","year":"2026","title":"高温环境下碳水化合物补充策略","type":"文献解读","journal":"","conclusion":"高温环境下碳水化合物补充策略与运动表现"},{"id":19,"date":"2026-06-16","author":"Zhao","year":"2026","title":"舞蹈与运动干预对认知障碍的影响","type":"NMA","journal":"","conclusion":"舞蹈与运动干预对认知障碍的影响：网络荟萃分析"},{"id":20,"date":"2026-06-17","author":"Walczak","year":"2026","title":"神经肌肉训练在损伤预防中的伞评","type":"伞评","journal":"","conclusion":"神经肌肉训练在损伤预防中的伞评"},{"id":21,"date":"2026-06-18","author":"Strauss","year":"2026","title":"HIIT对心血管代谢健康的影响","type":"文献解读","journal":"","conclusion":"HIIT对心血管代谢健康的影响"},{"id":22,"date":"2026-06-19","author":"Thurlow","year":"2026","title":"短时HIIT的急性生理效应","type":"文献解读","journal":"","conclusion":"短时HIIT的急性生理效应"},{"id":23,"date":"2026-06-20","author":"Li","year":"2026","title":"HIIT对糖尿病前期人群的干预效果","type":"文献解读","journal":"","conclusion":"HIIT对糖尿病前期人群的干预效果"},{"id":24,"date":"2026-06-21","author":"Xin","year":"2026","title":"不同运动方式对高血压的降压效果","type":"NMA","journal":"","conclusion":"不同运动方式对高血压的降压效果：网络荟萃分析"},{"id":25,"date":"2026-06-22","author":"Lin","year":"2026","title":"肌少症最优干预方案","type":"NMA","journal":"","conclusion":"肌少症最优干预方案的网络荟萃分析"},{"id":26,"date":"2026-06-23","author":"Held","year":"2026","title":"同时训练干扰效应的伞评","type":"伞评","journal":"","conclusion":"同时训练（力量+有氧）干扰效应的伞评"},{"id":27,"date":"2026-06-23","author":"Zhang","year":"2026","title":"抗阻训练与全因死亡率的剂量反应关系","type":"文献解读","journal":"","conclusion":"抗阻训练与全因死亡率的剂量反应关系"},{"id":28,"date":"2026-06-25","author":"Minahan","year":"2026","title":"压力-表现与心理技能训练的立场声明","type":"立场声明","journal":"","conclusion":"压力-表现与心理技能训练的立场声明"},{"id":29,"date":"2026-06-25","author":"Yao","year":"2026","title":"神经肌肉训练预防ACL损伤的年龄差异","type":"文献解读","journal":"","conclusion":"神经肌肉训练预防ACL损伤的年龄差异分析"},{"id":30,"date":"2026-06-25","author":"Zhou","year":"2026","title":"有氧运动对骨质疏松患者骨密度的影响","type":"NMA","journal":"","conclusion":"有氧运动对骨质疏松患者骨密度的影响"},{"id":31,"date":"2026-06-26","author":"Borges","year":"2026","title":"血流限制抗阻训练对肌力与肌肥大的影响","type":"SR/MA","journal":"","conclusion":"血流限制抗阻训练对肌力与肌肥大的影响"},{"id":32,"date":"2026-06-27","author":"Dias","year":"2026","title":"抗阻训练频率对肌肥大的影响","type":"NMA","journal":"","conclusion":"抗阻训练频率对肌肥大的影响：网络荟萃分析"},{"id":33,"date":"2026-06-28","author":"Grgic","year":"2026","title":"离心抗阻训练对肌力与肌肥大的影响","type":"SR/MA","journal":"","conclusion":"离心抗阻训练对肌力与肌肥大的影响"},{"id":34,"date":"2026-06-29","author":"Schoenfeld","year":"2026","title":"训练容量与肌肥大的剂量反应关系","type":"SR/MA","journal":"","conclusion":"训练容量与肌肥大的剂量反应关系"},{"id":35,"date":"2026-06-30","author":"Helms","year":"2026","title":"RPE与RIR在力量训练中的应用","type":"文献解读","journal":"","conclusion":"RPE与RIR在力量训练中的应用与验证"},{"id":36,"date":"2026-07-01","author":"Morton","year":"2026","title":"蛋白质摄入量与肌肉肥大的荟萃分析","type":"SR/MA","journal":"","conclusion":"蛋白质摄入量与肌肉肥大的荟萃分析"},{"id":37,"date":"2026-07-02","author":"Krieger","year":"2026","title":"训练至力竭与非力竭对肌肥大的影响","type":"文献解读","journal":"","conclusion":"训练至力竭与非力竭对肌肥大的影响比较"},{"id":38,"date":"2026-07-03","author":"Wackerhage","year":"2026","title":"mTOR信号通路与肌肉蛋白质合成调控","type":"文献解读","journal":"","conclusion":"mTOR信号通路与肌肉蛋白质合成调控机制"},{"id":39,"date":"2026-07-04","author":"Phillips","year":"2026","title":"蛋白质摄入时机与合成代谢窗口期","type":"文献解读","journal":"","conclusion":"蛋白质摄入时机与合成代谢窗口期"},{"id":40,"date":"2026-07-05","author":"Morton","year":"2026","title":"蛋白质分布模式与每餐最优剂量","type":"文献解读","journal":"","conclusion":"蛋白质分布模式与每餐最优剂量"},{"id":41,"date":"2026-07-06","author":"Jager","year":"2026","title":"ISSN运动营养立场声明","type":"立场声明","journal":"","conclusion":"国际运动营养学会运动营养立场声明"},{"id":42,"date":"2026-07-07","author":"Kreider","year":"2026","title":"ISSN肌酸补充立场声明","type":"立场声明","journal":"","conclusion":"ISSN肌酸补充立场声明更新版"},{"id":43,"date":"2026-07-08","author":"Trexler","year":"2026","title":"β-丙氨酸补充对运动表现的影响","type":"文献解读","journal":"","conclusion":"β-丙氨酸补充对运动表现的影响"},{"id":44,"date":"2026-07-09","author":"Guest","year":"2026","title":"咖啡因对运动表现的影响","type":"文献解读","journal":"","conclusion":"咖啡因对运动表现的影响：ISSN立场声明"},{"id":45,"date":"2026-07-10","author":"Kerksick","year":"2026","title":"运动营养补充时机的循证建议","type":"文献解读","journal":"","conclusion":"运动营养补充时机的循证建议"},{"id":46,"date":"2026-07-11","author":"Antonio","year":"2026","title":"高蛋白饮食对体成分的影响","type":"RCT","journal":"","conclusion":"高蛋白饮食对体成分的影响：随机对照试验"},{"id":47,"date":"2026-07-12","author":"Longland","year":"2026","title":"高蛋白饮食联合能量限制的身体重组效应","type":"RCT","journal":"","conclusion":"高蛋白饮食联合能量限制的身体重组效应"},{"id":48,"date":"2026-07-13","author":"Sterns","year":"2026","title":"蛋白质摄入对老年人肌肉蛋白质合成的影响","type":"文献解读","journal":"","conclusion":"蛋白质摄入对老年人肌肉蛋白质合成的影响"},{"id":49,"date":"2026-07-14","author":"Bauer","year":"2026","title":"必需氨基酸补充对老年人肌少症的干预","type":"文献解读","journal":"","conclusion":"必需氨基酸补充对老年人肌少症的干预"},{"id":50,"date":"2026-07-15","author":"Volpi","year":"2026","title":"老龄化人群的蛋白质需求重新评估","type":"文献解读","journal":"","conclusion":"老龄化人群的蛋白质需求重新评估"},{"id":51,"date":"2026-07-16","author":"Churchward-Venne","year":"2026","title":"亮氨酸阈值与肌肉蛋白质合成激活","type":"文献解读","journal":"","conclusion":"亮氨酸阈值与肌肉蛋白质合成激活机制"},{"id":52,"date":"2026-07-17","author":"Moore","year":"2026","title":"乳清蛋白消化速率与氨基酸动力学","type":"文献解读","journal":"","conclusion":"乳清蛋白消化速率与氨基酸动力学"},{"id":53,"date":"2026-07-18","author":"Witard","year":"2026","title":"单次蛋白质剂量对肌肉蛋白质合成的影响","type":"RCT","journal":"","conclusion":"单次蛋白质剂量对肌肉蛋白质合成的影响"},{"id":54,"date":"2026-07-19","author":"Areta","year":"2026","title":"阻力训练后蛋白质分布模式的优化","type":"RCT","journal":"","conclusion":"阻力训练后蛋白质分布模式的优化研究"},{"id":55,"date":"2026-07-20","author":"Mamerow","year":"2026","title":"全天蛋白质分布对肌肉蛋白质合成的影响","type":"RCT","journal":"","conclusion":"全天蛋白质分布对肌肉蛋白质合成的影响"},{"id":56,"date":"2026-07-21","author":"Schoenfeld","year":"2026","title":"不同训练动作对肌肉区域肥大的影响","type":"文献解读","journal":"","conclusion":"不同训练动作对肌肉区域肥大的选择性刺激"},{"id":57,"date":"2026-07-22","author":"Maeo","year":"2026","title":"北欧蹲与罗马尼亚硬拉对腘绳肌的选择性刺激","type":"RCT","journal":"","conclusion":"北欧蹲与罗马尼亚硬拉对腘绳肌区域的选择性刺激"},{"id":58,"date":"2026-07-23","author":"Bloomquist","year":"2026","title":"深蹲训练幅度对下肢肌肥大的影响","type":"RCT","journal":"","conclusion":"深蹲训练幅度对下肢肌肥大的影响"},{"id":59,"date":"2026-07-24","author":"Pedrosa","year":"2026","title":"卧推握距对胸大肌激活的影响","type":"RCT","journal":"","conclusion":"卧推不同握距对胸大肌激活的影响"},{"id":60,"date":"2026-07-25","author":"Lehman","year":"2026","title":"引体向上不同握法对背阔肌激活的影响","type":"文献解读","journal":"","conclusion":"引体向上不同握法对背阔肌激活的影响"},{"id":61,"date":"2026-07-26","author":"Signorile","year":"2026","title":"腿举不同脚位对下肢肌肉激活的影响","type":"RCT","journal":"","conclusion":"腿举不同脚位对下肢肌肉激活的影响"},{"id":62,"date":"2026-07-27","author":"Calatayud","year":"2026","title":"不稳定表面卧推对胸肌激活的影响","type":"RCT","journal":"","conclusion":"不稳定表面卧推对胸肌激活的影响"},{"id":63,"date":"2026-07-28","author":"Saeterbakken","year":"2026","title":"核心稳定性训练对深层稳定肌的激活","type":"文献解读","journal":"","conclusion":"核心稳定性训练对深层稳定肌的激活效应"},{"id":64,"date":"2026-07-29","author":"Behm","year":"2026","title":"不稳定表面训练对力量表现的影响","type":"文献解读","journal":"","conclusion":"不稳定表面训练对力量表现的影响"},{"id":65,"date":"2026-07-30","author":"Nuzzo","year":"2026","title":"肌肉力量测试方法的比较与标准化","type":"文献解读","journal":"","conclusion":"肌肉力量测试方法的比较与标准化建议"},{"id":66,"date":"2026-07-31","author":"Suchomel","year":"2026","title":"力量-时间曲线在训练监控中的应用","type":"文献解读","journal":"","conclusion":"力量-时间曲线在训练监控中的应用"},{"id":67,"date":"2026-08-01","author":"Zourdos","year":"2026","title":"RPE量表在抗阻训练中的验证与应用","type":"文献解读","journal":"","conclusion":"RPE量表在抗阻训练中的验证与应用"},{"id":68,"date":"2026-08-02","author":"Helms","year":"2026","title":"RIR在训练监控中的可靠性","type":"文献解读","journal":"","conclusion":"RIR（保留次数）在训练监控中的可靠性研究"},{"id":69,"date":"2026-08-03","author":"Steele","year":"2026","title":"训练至失败的方法学争议与循证分析","type":"文献解读","journal":"","conclusion":"训练至失败的方法学争议与循证分析"},{"id":70,"date":"2026-08-04","author":"Davies","year":"2026","title":"组间休息时长对肌肥大的影响","type":"SR/MA","journal":"","conclusion":"组间休息时长对肌肥大的影响：系统综述"},{"id":71,"date":"2026-08-05","author":"de Salles","year":"2026","title":"组间休息对力量表现恢复的影响","type":"文献解读","journal":"","conclusion":"组间休息对力量表现恢复的影响"},{"id":72,"date":"2026-08-06","author":"Rhea","year":"2026","title":"训练强度与力量增长的剂量反应关系","type":"SR/MA","journal":"","conclusion":"训练强度与力量增长的剂量反应关系"},{"id":73,"date":"2026-08-07","author":"Peterson","year":"2026","title":"老年人抗阻训练的剂量反应荟萃分析","type":"SR/MA","journal":"","conclusion":"老年人抗阻训练的剂量反应荟萃分析"},{"id":74,"date":"2026-08-08","author":"Liu","year":"2026","title":"力量训练对老年人身体功能的改善效果","type":"SR/MA","journal":"","conclusion":"力量训练对老年人身体功能的改善效果"},{"id":75,"date":"2026-08-11","author":"Zhang","year":"2026","title":"离心超载与传统抗阻训练的效应对比","type":"SR/MA","journal":"","conclusion":"离心超载与传统抗阻训练的急性与慢性效应对比"},{"id":76,"date":"2026-08-12","author":"Ohta","year":"2026","title":"运动营养干预对老年人肌肉特异性力量的影响","type":"SR/MA","journal":"","conclusion":"运动营养干预对老年人肌肉特异性力量的影响"},{"id":77,"date":"2026-08-13","author":"Liu","year":"2026","title":"咖啡因补充对青少年运动员表现的影响","type":"SR/MA","journal":"","conclusion":"咖啡因补充对青少年运动员表现的影响"},{"id":78,"date":"2026-08-14","author":"GuanFan","year":"2026","title":"5-羟色胺与运动性中枢疲劳的关系","type":"SR/MA","journal":"","conclusion":"5-羟色胺与运动性中枢疲劳的关系"},{"id":79,"date":"2026-08-30","author":"Souron","year":"2026","title":"心理疲劳对骑行耐力表现与肌肉激活的影响","type":"文献解读","journal":"Peer Community Journal","conclusion":"心理疲劳对骑行耐力表现与肌肉激活的影响"}];
-
-var litCurrentFilter='all',litSearchTerm='';
-function getTypeClass(t){var m={'SR/MA':'type-srma','NMA':'type-nma','伞评':'type-umb','RCT':'type-rct','立场声明':'type-pos'};return m[t]||'type-other'}
-function escHtml(s){if(!s)return'';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-
-function renderLitCounts(){
-  var c={'all':LIT_DATA.length,'SR/MA':0,'NMA':0,'伞评':0,'RCT':0,'文献解读':0};
-  for(var i=0;i<LIT_DATA.length;i++){var t=LIT_DATA[i].type;if(c[t]!==undefined)c[t]++}
-  c['文献解读']=LIT_DATA.length-c['SR/MA']-c['NMA']-c['伞评']-c['RCT']-1;
-  document.getElementById('count-all').textContent=c['all'];
-  document.getElementById('count-srma').textContent=c['SR/MA'];
-  document.getElementById('count-nma').textContent=c['NMA'];
-  document.getElementById('count-umb').textContent=c['伞评'];
-  document.getElementById('count-rct').textContent=c['RCT'];
-  document.getElementById('count-other').textContent=c['文献解读'];
-}
-
-function renderLitCards(){
-  var ct=document.getElementById('litContainer'),em=document.getElementById('litEmpty'),term=litSearchTerm.toLowerCase(),f=litCurrentFilter;
-  var html='',count=0;
-  for(var i=LIT_DATA.length-1;i>=0;i--){
-    var d=LIT_DATA[i];
-    if(f!=='all'&&d.type!==f)continue;
-    if(term){var s=(d.title+' '+d.author+' '+d.year+' '+d.journal+' '+d.conclusion+' '+d.type).toLowerCase();if(s.indexOf(term)===-1)continue}
-    count++;
-    var num=String(count).padStart(2,'0');
-    html+='<div class="lit-card"><div class="lit-card-top"><div class="lit-card-number">'+num+'</div><div class="lit-card-body">';
-    html+='<div class="lit-card-title">'+escHtml(d.title)+'</div>';
-    html+='<span class="lit-card-type '+getTypeClass(d.type)+'">'+escHtml(d.type)+'</span>';
-    html+='<div class="lit-card-meta"><span>'+d.author+' '+d.year+'</span><span>'+d.date+'</span></div>';
-    if(d.conclusion)html+='<div class="lit-card-summary">'+escHtml(d.conclusion)+'</div>';
-    if(d.journal)html+='<div class="lit-card-journal">'+escHtml(d.journal)+'</div>';
-    html+='</div></div></div>';
-  }
-  ct.innerHTML=html;
-  em.style.display=count===0?'block':'none';
-}
-
-function setFilter(btn){
-  document.querySelectorAll('.lit-filter').forEach(function(b){b.classList.remove('active')});
-  btn.classList.add('active');
-  litCurrentFilter=btn.getAttribute('data-type');
-  renderLitCards();
-}
-function filterLit(){litSearchTerm=document.getElementById('litSearch').value.trim();renderLitCards()}
-
-renderLitCounts();
-renderLitCards();
+/* Content pending - placeholder page */
 </script>
 </body>
 </html>

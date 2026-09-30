@@ -115,6 +115,12 @@ a:hover{text-decoration:underline}
   width:100%;
   margin:0 auto;
 }
+/* ===== HERO ===== */
+.hero{text-align:center;padding:80px 24px 60px;border-bottom:1px solid var(--border)}
+.hero-title{font-size:clamp(36px,6vw,56px);font-weight:900;letter-spacing:-.02em;line-height:1.1;color:var(--text);font-family:var(--font-sans);margin-bottom:20px}
+.hero-title br{display:block}
+.hero-tagline{font-size:clamp(12px,1.4vw,14px);font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--accent);font-family:var(--font-sans)}
+
 @media(max-width:600px){.main{padding:40px 6vw 80px}.nav{padding:0 6vw}.tab-bar{padding:0 6vw}}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
@@ -237,6 +243,12 @@ a:hover{text-decoration:underline}
     <button class="nav-logout" onclick="handleLogout()">退出</button>
   </div>
 </nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-title">发生俱乐部<br>ARISE CLUB</div>
+  <div class="hero-tagline">Where Strength Meets Science</div>
+</div>
 
 <!-- TABS -->
 <div class="tab-bar">

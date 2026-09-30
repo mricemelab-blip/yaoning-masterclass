@@ -124,13 +124,14 @@ a:hover{text-decoration:underline}
 }
 .hero-title{
   font-family:var(--font-display);
-  font-size:clamp(44px,8vw,80px);
   font-weight:900;
   letter-spacing:-.03em;
-  line-height:1.05;
+  line-height:1.1;
   color:var(--text);
   margin-bottom:24px;
 }
+.hero-title .en-line{font-size:clamp(36px,7vw,64px);display:block;margin-bottom:8px}
+.hero-title .cn-line{font-size:clamp(24px,4.5vw,44px);display:block;letter-spacing:.02em}
 .hero-title .accent{color:var(--accent)}
 
 /* ===== SECTION LABEL ===== */
@@ -250,7 +251,7 @@ a:hover{text-decoration:underline}
   <!-- HERO -->
   <div class="hero">
     <div class="hero-number">//01</div>
-    <div class="hero-title">Where Strength Meets <span class="accent">Science</span><br>ARISE CLUB 发生俱乐部</div>
+    <div class="hero-title"><span class="en-line">Where Strength Meets <span class="accent">Science</span></span><span class="cn-line">ARISE CLUB 发生俱乐部</span></div>
   </div>
 
   <!-- TAB 1: LITERATURE -->

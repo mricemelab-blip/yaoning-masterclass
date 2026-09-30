@@ -8,25 +8,25 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --bg:#000;
-  --accent:#C8F230;
-  --accent-dim:rgba(200,242,48,.1);
-  --text:#fff;
-  --text2:#999;
-  --text3:#555;
-  --border:#1A1A1A;
+  --bg:#F5F2ED;
+  --bg-card:#F5F2ED;
+  --text:#1A1A1A;
+  --text2:#6B6560;
+  --text3:#9A9590;
+  --border:#D5D0CA;
+  --accent:#1A1A1A;
 }
 
 html{scroll-behavior:smooth}
 body{
-  font-family:'Helvetica Neue','Arial Black',Arial,'PingFang SC','Noto Sans SC',sans-serif;
+  font-family:'Georgia','Times New Roman','Noto Serif SC','PingFang SC',serif;
   background:var(--bg);
   color:var(--text);
   line-height:1.6;
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
 }
-a{color:var(--accent);text-decoration:none}
+a{color:var(--text);text-decoration:none}
 a:hover{text-decoration:underline}
 
 /* ===== NAV ===== */
@@ -34,7 +34,7 @@ a:hover{text-decoration:underline}
   background:var(--bg);
   border-bottom:1px solid var(--border);
   padding:0 8vw;
-  height:56px;
+  height:60px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -43,53 +43,71 @@ a:hover{text-decoration:underline}
   z-index:100;
 }
 .nav-logo{
-  font-size:13px;
-  font-weight:900;
-  letter-spacing:4px;
-  color:var(--accent);
+  font-family:'Georgia',serif;
+  font-size:16px;
+  font-weight:400;
+  letter-spacing:6px;
+  color:var(--text);
   text-transform:uppercase;
 }
 .nav-right{display:flex;align-items:center;gap:16px}
-.nav-user{font-size:12px;color:var(--text2)}
+.nav-user{font-size:13px;color:var(--text2);font-family:'Helvetica Neue',sans-serif}
 .nav-logout{
   background:none;
-  border:1px solid var(--accent);
-  color:var(--accent);
+  border:1px solid var(--border);
+  color:var(--text2);
   padding:5px 14px;
   font-size:10px;
-  font-weight:700;
+  font-weight:600;
   cursor:pointer;
   letter-spacing:2px;
   text-transform:uppercase;
+  font-family:'Helvetica Neue',sans-serif;
   transition:all .2s;
 }
-.nav-logout:hover{background:var(--accent);color:var(--bg)}
+.nav-logout:hover{border-color:var(--text);color:var(--text)}
 
 /* ===== HERO ===== */
 .hero{
   padding:120px 8vw 80px;
-  text-align:left;
   border-bottom:1px solid var(--border);
 }
+.hero-lines{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  margin-bottom:40px;
+}
 .hero-line{
-  font-size:clamp(64px,12vw,140px);
+  font-family:'Helvetica Neue','Arial Black',sans-serif;
+  font-size:clamp(56px,11vw,130px);
   font-weight:900;
   letter-spacing:-.04em;
   line-height:1;
   color:var(--text);
-  margin-bottom:4px;
 }
-.hero-line.accent{color:var(--accent)}
-.hero-sub{
+.hero-tagline{
+  font-family:'Georgia',serif;
+  font-size:14px;
+  font-style:italic;
+  color:var(--text2);
+  letter-spacing:1px;
+  margin-top:32px;
+  padding-top:24px;
+  border-top:1px solid var(--border);
+  display:inline-block;
+}
+.hero-values{
   margin-top:24px;
-  font-size:13px;
-  font-weight:400;
-  letter-spacing:2px;
-  color:var(--text3);
+  font-family:'Helvetica Neue',sans-serif;
+  font-size:12px;
+  letter-spacing:3px;
   text-transform:uppercase;
+  color:var(--text3);
+  line-height:2.2;
 }
 
-/* ===== SERIES CARDS ===== */
+/* ===== SERIES ===== */
 .series{
   max-width:1080px;
   margin:0 auto;
@@ -105,30 +123,33 @@ a:hover{text-decoration:underline}
   cursor:pointer;
   transition:opacity .3s;
 }
-.series-card:hover{opacity:.7}
+.series-card:hover{opacity:.6}
 .series-number{
+  font-family:'Helvetica Neue','Arial Black',sans-serif;
   font-size:clamp(64px,10vw,120px);
   font-weight:900;
   letter-spacing:-.04em;
   line-height:1;
-  color:var(--accent-dim);
+  color:var(--border);
 }
 .series-body{padding-top:12px}
 .series-title{
-  font-size:clamp(24px,3.5vw,36px);
+  font-family:'Helvetica Neue','Arial Black',sans-serif;
+  font-size:clamp(22px,3vw,32px);
   font-weight:800;
   letter-spacing:-.02em;
   line-height:1.2;
   margin-bottom:8px;
 }
 .series-title-en{
-  font-size:clamp(14px,1.8vw,18px);
-  font-weight:400;
+  font-family:'Georgia',serif;
+  font-size:clamp(13px,1.6vw,16px);
+  font-style:italic;
   color:var(--text2);
   margin-bottom:16px;
-  letter-spacing:.3px;
 }
 .series-desc{
+  font-family:'Helvetica Neue',sans-serif;
   font-size:14px;
   font-weight:300;
   line-height:1.8;
@@ -140,12 +161,21 @@ a:hover{text-decoration:underline}
   border-top:1px solid var(--border);
   padding:40px 8vw;
   text-align:center;
-  font-size:10px;
-  color:var(--text3);
-  letter-spacing:2px;
-  text-transform:uppercase;
 }
-.footer span{color:var(--accent)}
+.footer-logo{
+  font-family:'Georgia',serif;
+  font-size:14px;
+  letter-spacing:6px;
+  text-transform:uppercase;
+  color:var(--text);
+  margin-bottom:4px;
+}
+.footer-sub{
+  font-family:'Georgia',serif;
+  font-size:11px;
+  font-style:italic;
+  color:var(--text3);
+}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
@@ -153,6 +183,7 @@ a:hover{text-decoration:underline}
   .series{padding:0 6vw}
   .series-card{grid-template-columns:1fr;gap:12px;padding:48px 0}
   .series-number{font-size:64px}
+  .nav{padding:0 6vw}
 }
 </style>
 </head>
@@ -169,17 +200,23 @@ a:hover{text-decoration:underline}
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-line">Where Strength</div>
-  <div class="hero-line">Meets <span class="accent">Science</span></div>
-  <div class="hero-line accent">ARISE CLUB</div>
-  <div class="hero-line">发生俱乐部</div>
-  <div class="hero-sub">Evidence-Based Strength &amp; Performance</div>
+  <div class="hero-lines">
+    <div class="hero-line">Where Strength</div>
+    <div class="hero-line">Meets Science</div>
+  </div>
+  <div class="hero-tagline">发生俱乐部 · ARISE CLUB</div>
+  <div class="hero-values">
+    Fit body<br>
+    Kind heart<br>
+    Focused mind<br>
+    Unbreakable spirit
+  </div>
 </div>
 
 <!-- SERIES -->
 <div class="series">
 
-  <div class="series-card" data-tab="literature">
+  <div class="series-card">
     <div class="series-number">01</div>
     <div class="series-body">
       <div class="series-title">文献解读</div>
@@ -188,7 +225,7 @@ a:hover{text-decoration:underline}
     </div>
   </div>
 
-  <div class="series-card" data-tab="courses">
+  <div class="series-card">
     <div class="series-number">02</div>
     <div class="series-body">
       <div class="series-title">在线课程</div>
@@ -197,7 +234,7 @@ a:hover{text-decoration:underline}
     </div>
   </div>
 
-  <div class="series-card" data-tab="replays">
+  <div class="series-card">
     <div class="series-number">03</div>
     <div class="series-body">
       <div class="series-title">直播回放</div>
@@ -206,7 +243,7 @@ a:hover{text-decoration:underline}
     </div>
   </div>
 
-  <div class="series-card" data-tab="training">
+  <div class="series-card">
     <div class="series-number">04</div>
     <div class="series-body">
       <div class="series-title">训练计划</div>
@@ -219,7 +256,8 @@ a:hover{text-decoration:underline}
 
 <!-- FOOTER -->
 <footer class="footer">
-  &copy; 2026 ARISE <span>CLUB</span> &middot; Where Strength Meets Science
+  <div class="footer-logo">ARISE CLUB</div>
+  <div class="footer-sub">Where Strength Meets Science</div>
 </footer>
 
 <script>
@@ -233,7 +271,6 @@ function handleLogout(){['vc_name','vc_user_id','vc_role','vc_invite_code'].forE
 (function(){
   document.querySelectorAll('.series-card').forEach(function(card){
     card.addEventListener('click',function(){
-      var tab=card.getAttribute('data-tab');
       alert('「'+card.querySelector('.series-title').textContent+'」内容筹备中');
     });
   });

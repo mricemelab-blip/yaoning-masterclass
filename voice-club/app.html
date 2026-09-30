@@ -8,22 +8,18 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --bg:#000000;
-  --bg-card:#0A0A0A;
+  --bg:#000;
   --accent:#C8F230;
-  --accent-dim:rgba(200,242,48,.12);
-  --text:#FFFFFF;
-  --text2:#999999;
-  --text3:#666666;
+  --accent-dim:rgba(200,242,48,.1);
+  --text:#fff;
+  --text2:#999;
+  --text3:#555;
   --border:#1A1A1A;
-  --border-light:#2A2A2A;
-  --font-display:'Helvetica Neue','Arial Black',Arial,sans-serif;
-  --font-body:'Helvetica Neue',Arial,'PingFang SC','Noto Sans SC',sans-serif;
 }
 
 html{scroll-behavior:smooth}
 body{
-  font-family:var(--font-body);
+  font-family:'Helvetica Neue','Arial Black',Arial,'PingFang SC','Noto Sans SC',sans-serif;
   background:var(--bg);
   color:var(--text);
   line-height:1.6;
@@ -47,16 +43,14 @@ a:hover{text-decoration:underline}
   z-index:100;
 }
 .nav-logo{
-  font-family:var(--font-display);
   font-size:13px;
   font-weight:900;
   letter-spacing:4px;
-  color:var(--text);
+  color:var(--accent);
   text-transform:uppercase;
 }
-.nav-logo span{color:var(--accent)}
 .nav-right{display:flex;align-items:center;gap:16px}
-.nav-user{font-size:12px;color:var(--text2);letter-spacing:.5px}
+.nav-user{font-size:12px;color:var(--text2)}
 .nav-logout{
   background:none;
   border:1px solid var(--accent);
@@ -65,142 +59,80 @@ a:hover{text-decoration:underline}
   font-size:10px;
   font-weight:700;
   cursor:pointer;
-  transition:all .2s;
   letter-spacing:2px;
   text-transform:uppercase;
+  transition:all .2s;
 }
 .nav-logout:hover{background:var(--accent);color:var(--bg)}
 
-/* ===== TABS ===== */
-.tab-bar{
-  display:flex;
-  gap:0;
+/* ===== HERO ===== */
+.hero{
+  padding:120px 8vw 80px;
+  text-align:left;
   border-bottom:1px solid var(--border);
-  background:var(--bg);
-  position:sticky;
-  top:56px;
-  z-index:99;
-  overflow-x:auto;
-  -webkit-overflow-scrolling:touch;
-  padding:0 8vw;
 }
-.tab-bar::-webkit-scrollbar{display:none}
-.tab-btn{
-  flex:0 0 auto;
-  padding:14px 20px;
-  font-family:var(--font-display);
-  font-size:11px;
-  font-weight:700;
+.hero-line{
+  font-size:clamp(64px,12vw,140px);
+  font-weight:900;
+  letter-spacing:-.04em;
+  line-height:1;
+  color:var(--text);
+  margin-bottom:4px;
+}
+.hero-line.accent{color:var(--accent)}
+.hero-sub{
+  margin-top:24px;
+  font-size:13px;
+  font-weight:400;
   letter-spacing:2px;
   color:var(--text3);
-  background:none;
-  border:none;
-  border-bottom:2px solid transparent;
-  cursor:pointer;
-  transition:color .2s,border-color .2s;
-  white-space:nowrap;
   text-transform:uppercase;
 }
-.tab-btn:hover{color:var(--text2)}
-.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
 
-/* ===== MAIN ===== */
-.main{
-  padding:80px 8vw 120px;
+/* ===== SERIES CARDS ===== */
+.series{
   max-width:1080px;
-  width:100%;
   margin:0 auto;
+  padding:0 8vw;
 }
-
-/* ===== HERO ===== */
-.hero{padding:100px 0 80px;border-bottom:1px solid var(--border)}
-.hero-number{
-  font-family:var(--font-display);
-  font-size:14px;
-  font-weight:700;
-  letter-spacing:1px;
-  color:var(--accent);
-  margin-bottom:32px;
-}
-.hero-title{
-  font-family:var(--font-display);
-  font-weight:900;
-  letter-spacing:-.03em;
-  line-height:1.1;
-  color:var(--text);
-  margin-bottom:24px;
-}
-.hero-title .en-line{font-size:clamp(36px,7vw,64px);display:block;margin-bottom:8px}
-.hero-title .cn-line{font-size:clamp(24px,4.5vw,44px);display:block;letter-spacing:.02em}
-.hero-title .accent{color:var(--accent)}
-
-/* ===== SECTION LABEL ===== */
-.section-label{
-  font-family:var(--font-display);
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:48px;
-  padding-bottom:16px;
-  border-bottom:1px solid var(--border);
-}
-
-/* ===== TAB PANELS ===== */
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-
-/* ===== SERIES CARD ===== */
 .series-card{
-  border-bottom:1px solid var(--border);
-  padding:56px 0;
   display:grid;
   grid-template-columns:100px 1fr;
-  gap:48px;
+  gap:40px;
   align-items:start;
-  transition:opacity .3s ease;
+  padding:64px 0;
+  border-bottom:1px solid var(--border);
+  cursor:pointer;
+  transition:opacity .3s;
 }
-.series-card:hover{opacity:.8}
+.series-card:hover{opacity:.7}
 .series-number{
-  font-family:var(--font-display);
-  font-size:clamp(48px,6vw,72px);
+  font-size:clamp(64px,10vw,120px);
   font-weight:900;
   letter-spacing:-.04em;
   line-height:1;
   color:var(--accent-dim);
 }
-.series-body{padding-top:8px}
+.series-body{padding-top:12px}
 .series-title{
-  font-family:var(--font-display);
-  font-size:clamp(22px,3vw,32px);
+  font-size:clamp(24px,3.5vw,36px);
   font-weight:800;
   letter-spacing:-.02em;
   line-height:1.2;
   margin-bottom:8px;
 }
-.series-subtitle{
-  font-size:13px;
+.series-title-en{
+  font-size:clamp(14px,1.8vw,18px);
   font-weight:400;
   color:var(--text2);
-  letter-spacing:.5px;
   margin-bottom:16px;
+  letter-spacing:.3px;
 }
 .series-desc{
   font-size:14px;
   font-weight:300;
   line-height:1.8;
   color:var(--text3);
-}
-
-/* ===== PLACEHOLDER ===== */
-.placeholder{padding:120px 0;text-align:center}
-.placeholder-text{
-  font-size:14px;
-  font-weight:300;
-  color:var(--text3);
-  line-height:2.2;
-  letter-spacing:.5px;
 }
 
 /* ===== FOOTER ===== */
@@ -217,12 +149,10 @@ a:hover{text-decoration:underline}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
-  .main{padding:48px 6vw 80px}
-  .nav{padding:0 6vw}
-  .tab-bar{padding:0 6vw}
-  .hero{padding:60px 0 48px}
-  .series-card{grid-template-columns:1fr;gap:16px;padding:40px 0}
-  .series-number{font-size:48px}
+  .hero{padding:80px 6vw 60px}
+  .series{padding:0 6vw}
+  .series-card{grid-template-columns:1fr;gap:12px;padding:48px 0}
+  .series-number{font-size:64px}
 }
 </style>
 </head>
@@ -230,59 +160,58 @@ a:hover{text-decoration:underline}
 
 <!-- NAV -->
 <nav class="nav">
-  <div class="nav-logo">ARISE <span>CLUB</span></div>
+  <div class="nav-logo">ARISE CLUB</div>
   <div class="nav-right">
     <span class="nav-user" id="navUser"></span>
     <button class="nav-logout" onclick="handleLogout()">退出</button>
   </div>
 </nav>
 
-<!-- TABS -->
-<div class="tab-bar">
-  <button class="tab-btn active" data-tab="literature">文献解读</button>
-  <button class="tab-btn" data-tab="courses">在线课程</button>
-  <button class="tab-btn" data-tab="replays">直播回放</button>
-  <button class="tab-btn" data-tab="training">训练计划</button>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-line">Where Strength</div>
+  <div class="hero-line">Meets <span class="accent">Science</span></div>
+  <div class="hero-line accent">ARISE CLUB</div>
+  <div class="hero-line">发生俱乐部</div>
+  <div class="hero-sub">Evidence-Based Strength &amp; Performance</div>
 </div>
 
-<!-- MAIN -->
-<div class="main">
+<!-- SERIES -->
+<div class="series">
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-number">//01</div>
-    <div class="hero-title"><span class="en-line">Where Strength Meets <span class="accent">Science</span></span><span class="cn-line">ARISE CLUB 发生俱乐部</span></div>
-  </div>
-
-  <!-- TAB 1: LITERATURE -->
-  <div class="tab-panel active" id="panel-literature">
-    <div class="section-label">Evidence-Based Literature Review</div>
-    <div class="placeholder">
-      <div class="placeholder-text">文献解读内容筹备中<br>敬请期待</div>
+  <div class="series-card" data-tab="literature">
+    <div class="series-number">01</div>
+    <div class="series-body">
+      <div class="series-title">文献解读</div>
+      <div class="series-title-en">Evidence-Based Literature Review</div>
+      <div class="series-desc">内容筹备中，敬请期待</div>
     </div>
   </div>
 
-  <!-- TAB 2: COURSES -->
-  <div class="tab-panel" id="panel-courses">
-    <div class="section-label">Online Courses</div>
-    <div class="placeholder">
-      <div class="placeholder-text">在线课程内容筹备中<br>敬请期待</div>
+  <div class="series-card" data-tab="courses">
+    <div class="series-number">02</div>
+    <div class="series-body">
+      <div class="series-title">在线课程</div>
+      <div class="series-title-en">Online Courses</div>
+      <div class="series-desc">内容筹备中，敬请期待</div>
     </div>
   </div>
 
-  <!-- TAB 3: REPLAYS -->
-  <div class="tab-panel" id="panel-replays">
-    <div class="section-label">Live Session Replays</div>
-    <div class="placeholder">
-      <div class="placeholder-text">直播回放内容筹备中<br>敬请期待</div>
+  <div class="series-card" data-tab="replays">
+    <div class="series-number">03</div>
+    <div class="series-body">
+      <div class="series-title">直播回放</div>
+      <div class="series-title-en">Live Session Replays</div>
+      <div class="series-desc">内容筹备中，敬请期待</div>
     </div>
   </div>
 
-  <!-- TAB 4: TRAINING -->
-  <div class="tab-panel" id="panel-training">
-    <div class="section-label">Training Program</div>
-    <div class="placeholder">
-      <div class="placeholder-text">训练计划正在制作中<br>敬请期待</div>
+  <div class="series-card" data-tab="training">
+    <div class="series-number">04</div>
+    <div class="series-body">
+      <div class="series-title">训练计划</div>
+      <div class="series-title-en">Training Program</div>
+      <div class="series-desc">内容筹备中，敬请期待</div>
     </div>
   </div>
 
@@ -302,14 +231,12 @@ a:hover{text-decoration:underline}
 function handleLogout(){['vc_name','vc_user_id','vc_role','vc_invite_code'].forEach(function(k){localStorage.removeItem(k)});window.location.href='login.html'}
 
 (function(){
-  var btns=document.querySelectorAll('.tab-btn'),panels=document.querySelectorAll('.tab-panel');
-  btns.forEach(function(btn){btn.addEventListener('click',function(){
-    btns.forEach(function(b){b.classList.remove('active')});
-    panels.forEach(function(p){p.classList.remove('active')});
-    btn.classList.add('active');
-    var t=document.getElementById('panel-'+btn.getAttribute('data-tab'));
-    if(t)t.classList.add('active');
-  })});
+  document.querySelectorAll('.series-card').forEach(function(card){
+    card.addEventListener('click',function(){
+      var tab=card.getAttribute('data-tab');
+      alert('「'+card.querySelector('.series-title').textContent+'」内容筹备中');
+    });
+  });
 })();
 </script>
 </body>

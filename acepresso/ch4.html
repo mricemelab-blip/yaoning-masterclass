@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch4 — ACEpresso</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-brand" onclick="location.href='index.html'">
+    <div class="nav-logo">ACEpresso</div>
+    <div class="nav-sub">ACE-CPT 系统精读</div>
+  </div>
+  <div class="nav-links">
+    <a href="ch1.html">第1章</a>
+    <a href="ch2.html">第2章</a>
+    <a href="ch3.html">第3章</a>
+    <a href="ch4.html">第4章</a>
+    <a href="ch5.html">第5章</a>
+    <a href="ch6.html">第6章</a>
+  </div>
+</nav>
+<section class="ch-hero">
+  <div class="ch-badge">Chapter Four</div>
+  <div class="ch-num">04</div>
+  <h1 class="ch-title">运动前健康筛查</h1>
+  <div class="ch-title-en">Pre-Participation Health Screening</div>
+  <p class="ch-desc">识别谁需要先看医生，确保安全运动。掌握 ACSM 三轴决策算法、PAR-Q+ 三色判定、ACE ABC 沟通法，以及药物对心率的影响。</p>
+</section>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('lecture')">📖 讲义</button>
+  <button class="tab-btn" onclick="switchTab('cards')">🃏 知识要点</button>
+  <button class="tab-btn" onclick="switchTab('quiz')">✍️ 自测</button>
+  <button class="tab-btn" onclick="switchTab('sop')">📋 SOP工作单</button>
+</div>
+
+<!-- ==================== 讲义 ==================== -->
+<section id="lecture" class="section active"><div class="lecture-block">
+
+<h3>板块一 运动的固有健康风险</h3>
+<p>规律运动可降低心血管疾病（CVD）、肺部疾病、代谢性疾病、某些癌症、焦虑抑郁和过早死亡风险。但运动存在固有风险：对健康个体，中等强度运动不会引发心血管或肌肉骨骼危险事件。</p>
+
+<p><strong>风险升高的三类人群（风险三角）：</strong></p>
+<ol>
+<li>运动习惯不佳</li>
+<li>已患病个体（已诊断 CVD / 代谢 / 肾脏疾病）</li>
+<li>计划进行接近极限强度运动的个体</li>
+</ol>
+
+<p>有潜在 CVD 的个体进行不习惯的剧烈身体活动时，运动相关的急性心肌梗死（AMI）和心源性猝死（SCD）风险最高。无症状个体即使高强度运动，心血管不良事件风险仍极低。</p>
+
+<blockquote>运动整体有益，但"不习惯的剧烈运动 + 已患病/有症状个体"这个组合确实存在风险。筛查用于识别风险，不用于拒绝客户。</blockquote>
+
+<div class="memory-tip"><div class="memory-tip-label">💡 记忆技巧</div>风险三角：不习惯 + 已患病 + 接近极限，三者齐备才高危。最高风险场景 = 有潜在 CVD + 突然进行不习惯的剧烈运动（如久坐多年的中年人突然参加篮球比赛）。</div>
+
+<h3>板块二 ACSM 运动前筛查算法</h3>
+<p>筛查基于三个风险调节因素（ACSM 2018 更新版）：①个人目前身体活动水平 ②是否确诊 CVD/代谢/肾脏疾病 ③有无相关体征/症状。</p>
+
+<p><strong>"定期运动"的定义</strong>：过去 <strong>3 个月</strong>内，每周至少 <strong>3 天</strong>，至少 <strong>30 分钟</strong>有计划、有组织的中等强度身体活动。口诀："3-3-30"。</p>
+
+<h4>不参加定期运动者的筛查决策</h4>
+<table class="data-table">
+<thead><tr><th>条件</th><th>是否需要医学许可</th><th>建议运动强度</th></tr></thead>
+<tbody>
+<tr><td>无 CVD/代谢/肾脏疾病 + 无体征/症状</td><td>不需要</td><td>轻度→中等→逐步提高到高强度</td></tr>
+<tr><td>已知患有 CVD/代谢/肾脏疾病但无症状</td><td>需要</td><td>轻度→中等→根据许可逐步提高</td></tr>
+<tr><td>有 CVD/代谢/肾脏疾病的体征/症状</td><td>需要</td><td>先获许可，再轻度→中等→逐步提高</td></tr>
+</tbody>
+</table>
+
+<h4>参加定期运动者的筛查决策</h4>
+<table class="data-table">
+<thead><tr><th>条件</th><th>是否需要医学许可</th><th>建议运动强度</th></tr></thead>
+<tbody>
+<tr><td>无 CVD/代谢/肾脏疾病 + 无体征/症状</td><td>不需要</td><td>继续中等或高强度</td></tr>
+<tr><td>已知患有 CVD/代谢/肾脏疾病但无症状</td><td>中等强度不需要；高强度需要</td><td>中等强度继续；获许可后逐步提高</td></tr>
+<tr><td>有 CVD/代谢/肾脏疾病的体征/症状</td><td>中断运动，需要医学许可</td><td>获许可后继续</td></tr>
+</tbody>
+</table>
+
+<div class="memory-tip"><div class="memory-tip-label">💡 记忆技巧</div>口诀："症状是老大，有病看强度，无病随便动"。定期运动 + 有疾病无症状 + 中等强度 = 可考虑免除许可（ACSM 原文 "may consider"，注意不是"不需要"）。</div>
+
+<h4>需警惕的体征/症状（必背）</h4>
+<ul>
+<li>可能因心肌缺血导致的胸、颈、颌、手臂等部位疼痛/不适</li>
+<li>休息或轻度用力时呼吸急促（呼吸困难）</li>
+<li>端坐呼吸 / 阵发性夜间呼吸困难</li>
+<li>眩晕或晕厥</li>
+<li>踝水肿</li>
+<li>心悸或心动过速</li>
+<li>间歇性跛行</li>
+<li>已知的心杂音</li>
+<li>日常活动时异常疲劳或呼吸急促</li>
+</ul>
+
+<div class="memory-tip"><div class="memory-tip-label">💡 记忆技巧</div>口诀："胸颈颌臂疼、呼吸休息急、晕眩踝肿悸、跛行杂音疲"。心脏缺血样疼痛 + 呼吸困难 + 晕眩 = 立刻停，三大红灯。</div>
+
+<h4>运动强度分级</h4>
+<table class="data-table">
+<thead><tr><th>强度</th><th>%HRR / %VO₂R</th><th>MET</th><th>RPE（经典）</th></tr></thead>
+<tbody>
+<tr><td>低</td><td>&lt;40%</td><td>2-2.9</td><td>9-11</td></tr>
+<tr><td>中</td><td>40-59%</td><td>3-5.9</td><td>12-13</td></tr>
+<tr><td>高</td><td>≥60%</td><td>≥6</td><td>14-17</td></tr>
+</tbody>
+</table>
+
+<div class="memory-tip"><div class="memory-tip-label">💡 记忆技巧</div>口诀："低39中59高60"——记住三个关键百分数。RPE 12-13 = 中等强度 = 说话测试能说句子但不能唱歌。</div>
+
+<div class="coach-tip"><div class="coach-tip-label">🎯 教练贴士</div>
+ACSM 筛查算法关键区分点：<strong>①</strong> "有无疾病"和"有无症状"是两件事，有症状不论疾病状态都要医学许可；<strong>②</strong> 定期运动者比不定期运动者门槛低；<strong>③</strong> "体征/症状"是最强触发器，有症状就停。不要诊断，转介优先——不要跟客户辩论症状原因。
+</div>
+
+<h3>板块三 运动前健康筛查问卷</h3>
+<p>问卷分 <strong>3 步</strong>：①症状（6项）→ ②目前活动（是否定期运动）→ ③身体状况（9项疾病勾选）。</p>
+<ul>
+<li><strong>第1步</strong>有任何勾选 = 停止，需医学许可</li>
+<li><strong>第2步</strong>：是否满足定期运动定义</li>
+<li><strong>第3步</strong>：心脏病发作/心脏手术/起搏器/心脏瓣膜疾病/心力衰竭/心脏移植/先天性心脏病/糖尿病/肾脏疾病</li>
+</ul>
+
+<blockquote>问卷三步对应筛查算法三个关键信息：症状触发许可（第一步）、运动史调节门槛（第二步）、疾病状态决定强度限制（第三步）。三步环环相扣，缺一不可。</blockquote>
+
+<h3>板块四 ACE ABC 沟通法</h3>
+<p>当筛查结果指向需要医学许可时，用 <strong>ABC Approach</strong>（对话式，非面试式）与客户沟通：</p>
+<ul>
+<li><strong>A — 提问（Ask）</strong>：开放性问题了解客户目标与需求</li>
+<li><strong>B — 打破障碍（Break Barriers）</strong>：发现阻碍客户参与计划的潜在问题</li>
+<li><strong>C — 协作（Collaborate）</strong>：共同努力实现目标</li>
+</ul>
+
+<p>关键原则：医学许可不是拒绝帮助，是为了提供正确的帮助。不能让医学许可要求成为运动的障碍。许可等待期间可以鼓励客户做低强度活动（走路、拉伸等），保持运动势头。</p>
+
+<div class="coach-tip"><div class="coach-tip-label">🎯 教练贴士</div>
+核心心态：把客户当队友，把医生当顾问。医学许可是起点，不是终点。提供医学许可表格模板，写清楚计划的运动类型，让医生有据可依。避免"全有或全无"思维。
+</div>
+
+<h3>板块五 抗阻训练筛查</h3>
+<p>目前尚没有充分证据证实低到中等强度抗阻训练需要进行正式的预先筛查（ACSM, 2018）。现有资料有限，但并发症风险似乎较低。</p>
+
+<div class="coach-tip"><div class="coach-tip-label">🎯 教练贴士</div>
+<strong>关键区分</strong>："不额外要求筛查" ≠ "不需要筛查"。所有客户仍应完成通用的运动前健康筛查。抗阻训练筛查宽松是因其固有风险低，通用健康筛查仍适用于所有客户。
+</div>
+
+<h3>板块六 PAR-Q+ 自我筛查</h3>
+<p><strong>PAR-Q+</strong>（Physical Activity Readiness Questionnaire-Plus）= 身体活动准备程度问卷。既是客户的自我筛查工具，又是私教获取更多信息的额外筛查要素。编制目的：<strong>减少不必要的运动障碍</strong>（循证方式）。</p>
+
+<p>分4页：第1页7个一般健康问题 → 第2-3页后续深入问题（按疾病类别分支）→ 第4页结果判定。</p>
+
+<table class="data-table">
+<thead><tr><th>结果</th><th>含义</th><th>行动</th></tr></thead>
+<tbody>
+<tr><td>绿色（全否）</td><td>可以进行更多身体活动</td><td>建议慢慢开始，逐步加强，目标每周150分钟中等强度</td></tr>
+<tr><td>红色（有是）</td><td>需进一步评估</td><td>完成 ePARmed-X+ 和/或咨询运动专业人员</td></tr>
+<tr><td>黄色（延迟）</td><td>暂时不宜增加活动</td><td>感冒/发烧→等好转；怀孕→告知医生；暂时性健康问题→先咨询医生</td></tr>
+</tbody>
+</table>
+
+<div class="memory-tip"><div class="memory-tip-label">💡 记忆技巧</div>口诀："绿 = 放行 / 红 = 深入 / 黄 = 等等"。PAR-Q+ 设计哲学是"默认安全，例外排除"，假设大多数人是安全的，只排除明确有问题的少数人。PAR-Q+ 由加拿大开发，当前版本2020，可在 www.eparmedx.com 获取。</div>
+
+<h3>板块七 心脏康复与健康机构中的患者</h3>
+<p>在心脏康复等临床环境中，应使用比通用筛查更深入的工具。建议使用 <strong>AACVPR</strong>（美国心血管和肺康复协会）的风险分层标准，基于运动能力（MET水平）、左室射血分数（LVEF）、心律失常类型等多维度评估。</p>
+
+<table class="data-table">
+<thead><tr><th>场景</th><th>筛查工具</th></tr></thead>
+<tbody>
+<tr><td>普通健身房</td><td>ACSM 算法 + PAR-Q+</td></tr>
+<tr><td>心脏康复中心</td><td>AACVPR 风险分层（更深，基于运动能力、心功能、心律失常等多维度）</td></tr>
+</tbody>
+</table>
+
+<blockquote>筛查深度与风险环境匹配。普通场所用通用工具，高风险场所用专业工具。临床环境中的任何异常体征/症状都必须通报客户医生。</blockquote>
+
+</div></section>
+
+<!-- ==================== 知识要点卡片 ==================== -->
+<section id="cards" class="section"><div class="cards-grid">
+
+<div class="k-card">
+  <div class="k-card-num">KEY 01</div>
+  <div class="k-card-title">运动风险三角</div>
+  <div class="k-card-summary">不习惯 + 已患病 + 接近极限 = 高风险</div>
+  <div class="k-card-detail">运动相关心血管事件风险最高的场景：有潜在 CVD 的个体进行不习惯的剧烈身体活动。无症状个体即使高强度运动，风险仍极低。筛查用于识别风险，不用于拒绝客户。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 02</div>
+  <div class="k-card-title">"定期运动"定义（3-3-30）</div>
+  <div class="k-card-summary">3个月 × 每周3天 × 每次30分钟中等强度</div>
+  <div class="k-card-detail">过去3个月内，每周至少3天，至少30分钟有计划、有组织的中等强度（40-59% HRR / RPE 12-13）身体活动。不满足此定义 = 不定期运动，筛查门槛更高。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 03</div>
+  <div class="k-card-title">ACSM 三轴决策算法</div>
+  <div class="k-card-summary">运动史 × 疾病状态 × 体征/症状</div>
+  <div class="k-card-detail">三个出口：无需许可 / 需要许可 / 中断+需要许可。关键规则：①有症状不论疾病状态都要医学许可；②定期运动者门槛更低（同等条件下多了"中等强度自由行"）；③症状是最强触发器，有症状就停。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 04</div>
+  <div class="k-card-title">九大警惕体征/症状</div>
+  <div class="k-card-summary">心脏缺血样疼痛 + 呼吸困难 + 晕眩 = 立刻停</div>
+  <div class="k-card-detail">口诀："胸颈颌臂疼、呼吸休息急、晕眩踝肿悸、跛行杂音疲"。包括：心肌缺血样疼痛、休息或轻度用力时呼吸困难、端坐呼吸/阵发性夜间呼吸困难、眩晕/晕厥、踝水肿、心悸/心动过速、间歇性跛行、心杂音、日常异常疲劳。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 05</div>
+  <div class="k-card-title">运动强度分级标准</div>
+  <div class="k-card-summary">低&lt;40% / 中40-59% / 高≥60% HRR</div>
+  <div class="k-card-detail">低强度：&lt;40% HRR，MET 2-2.9，RPE 9-11。中等强度：40-59% HRR，MET 3-5.9，RPE 12-13（说话测试能说句子但不能唱歌）。高强度：≥60% HRR，MET ≥6，RPE 14-17。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 06</div>
+  <div class="k-card-title">筛查问卷三步法</div>
+  <div class="k-card-summary">症状→活动→疾病，一步阳性就停</div>
+  <div class="k-card-detail">第1步（6项症状）有任何勾选 = 停止，需医学许可。第2步：是否满足定期运动定义。第3步（9项疾病）：心脏病发作/手术/起搏器/瓣膜疾病/心衰/移植/先天心脏病/糖尿病/肾脏疾病。三步对应算法三个输入。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 07</div>
+  <div class="k-card-title">ACE ABC 沟通法</div>
+  <div class="k-card-summary">问需求→解障碍→一起干</div>
+  <div class="k-card-detail">A（Ask）：开放性问题了解客户目标与需求。B（Break Barriers）：发现阻碍参与的潜在问题。C（Collaborate）：共同努力实现目标。核心心态：把客户当队友，把医生当顾问。医学许可是起点，不是终点。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 08</div>
+  <div class="k-card-title">PAR-Q+ 三色判定</div>
+  <div class="k-card-summary">绿=放行 / 红=深入 / 黄=等等</div>
+  <div class="k-card-detail">绿色（全否）：可进行更多活动，建议逐步至每周150分钟中等强度。红色（有是）：需完成 ePARmed-X+ 和/或咨询专业人员。黄色（延迟）：暂时性健康问题（感冒/发烧/怀孕）先处理再运动。设计理念："默认安全，例外排除"。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 09</div>
+  <div class="k-card-title">临床 vs 通用筛查</div>
+  <div class="k-card-summary">筛查深度匹配风险环境</div>
+  <div class="k-card-detail">普通健身房：ACSM 算法 + PAR-Q+。心脏康复中心：AACVPR 风险分层（基于运动能力 MET、左室射血分数 LVEF、心律失常等多维度评估），更深更严格。临床环境中任何异常体征/症状必须通报客户医生。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 10</div>
+  <div class="k-card-title">抗阻训练筛查要点</div>
+  <div class="k-card-summary">不额外要求筛查 ≠ 不需要筛查</div>
+  <div class="k-card-detail">低到中等强度抗阻训练的并发症风险较低，目前证据不足以支持额外筛查要求（ACSM 2018 原文 "insufficient evidence"）。但通用运动前健康筛查仍适用于所有客户。证据不足≠不需要。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+</div></section>
+
+<!-- ==================== 自测 ==================== -->
+<section id="quiz" class="section"><div class="quiz-block">
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">1</span>运动相关心血管事件风险最高的人群是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 长期规律运动的无症状个体</li>
+    <li data-correct="true">B. 有潜在 CVD、进行不习惯剧烈运动的个体</li>
+    <li data-correct="false">C. 每周运动5次的健康个体</li>
+    <li data-correct="false">D. 已诊断 CVD 但规律运动且无症状的个体</li>
+  </ul>
+  <div class="quiz-answer">风险三角：不习惯 + 已患病 + 接近极限。有潜在 CVD 的个体进行不习惯的剧烈身体活动时，AMI 和 SCD 风险最高。规律运动的无症状个体即使高强度，风险仍极低。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">2</span>关于"定期运动"的定义，以下哪项是正确的？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 过去1个月每周跑2次，每次20分钟</li>
+    <li data-correct="true">B. 过去3个月每周游泳3次，每次45分钟</li>
+    <li data-correct="false">C. 每天走路上班，加起来超过30分钟</li>
+    <li data-correct="false">D. 每周打1次羽毛球，每次2小时</li>
+  </ul>
+  <div class="quiz-answer">"定期运动"定义：过去3个月内，每周至少3天，至少30分钟有计划、有组织的中等强度身体活动（3-3-30）。A时间窗口不够，C缺乏"有计划的"组织性，D频率不足。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">3</span>一位客户过去6个月每周跑步4天、每次40分钟，有高血压但控制良好、无症状，想做中等强度有氧。需要医学许可吗？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 需要，因为有高血压必须获得许可</li>
+    <li data-correct="true">B. 可考虑免除，因为定期运动 + 有疾病无症状 + 中等强度</li>
+    <li data-correct="false">C. 不需要，因为高血压不是 CVD</li>
+    <li data-correct="false">D. 需要，因为定期运动者反而要求更严格</li>
+  </ul>
+  <div class="quiz-answer">定期运动 + 有疾病（高血压属代谢/心血管疾病）但无症状 + 中等强度 = ACSM 建议"可考虑免除"医学许可（原文 "may consider"）。注意是"可考虑"而非"不需要"。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">4</span>参前问卷第1步全部没有勾选，第2步客户回答"否"（不定期运动），第3步勾选了糖尿病。应该怎么做？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 可以直接开始中等强度训练</li>
+    <li data-correct="false">B. 无需任何处理，因为症状筛查全部通过</li>
+    <li data-correct="true">C. 需要医学许可，建议轻度至中等强度运动，根据许可逐步提高</li>
+    <li data-correct="false">D. 需要立即转诊到心脏康复中心</li>
+  </ul>
+  <div class="quiz-answer">不定期运动 + 有代谢性疾病（糖尿病）+ 无症状 = 需要医学许可。建议轻度至中等强度运动，根据许可逐步提高。所有客户都要填问卷，问卷是标准流程。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">5</span>以下哪种回应最符合 ACE ABC 沟通法的精神？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. "不看不行，这是规定。"</li>
+    <li data-correct="true">B. "我理解您忙，不过我们可以在等待期间先从低强度开始，同时预约医生。"</li>
+    <li data-correct="false">C. "那就算了，等您有时间再说。"</li>
+    <li data-correct="false">D. "您不去看医生的话，出了问题我不负责。"</li>
+  </ul>
+  <div class="quiz-answer">ABC 沟通法强调"对话而非面试"：A（提问了解需求）→ B（打破障碍）→ C（协作解决）。B 选项同时体现了打破障碍和协作精神，且提供等待期间的替代方案。医学许可不是拒绝，不能成为运动的障碍。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">6</span>关于抗阻训练筛查，以下说法正确的是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 抗阻训练客户完全不需要任何筛查</li>
+    <li data-correct="true">B. 抗阻训练不额外要求筛查，但通用筛查仍要做</li>
+    <li data-correct="false">C. 力量训练客户可以跳过 PAR-Q+</li>
+    <li data-correct="false">D. 抗阻训练风险很高，必须医学许可</li>
+  </ul>
+  <div class="quiz-answer">ACSM 2018 原文："currently there is insufficient evidence"——证据不足以支持额外筛查要求，因为低到中等强度抗阻训练并发症风险较低。但这不等于"不需要筛查"，通用运动前健康筛查仍适用于所有客户。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">7</span>以下哪种情况应该判定为 PAR-Q+ 的"黄色"（延迟）？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 客户有高血压病史</li>
+    <li data-correct="true">B. 客户最近感冒发烧</li>
+    <li data-correct="false">C. 客户曾做过心脏手术</li>
+    <li data-correct="false">D. 客户正在服用降压药</li>
+  </ul>
+  <div class="quiz-answer">黄色（延迟）= 暂时性健康问题需先处理。感冒/发烧→等好转后再增加活动量。怀孕→告知医生。A/C/D 属于慢性状况，应进入红色（需进一步评估）路径。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">8</span>在心脏康复机构工作的私教，应该使用哪种筛查工具？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 与普通健身房相同的 ACSM 算法即可</li>
+    <li data-correct="true">B. AACVPR 风险分层标准，比通用筛查更深入</li>
+    <li data-correct="false">C. PAR-Q+ 即可，无需其他工具</li>
+    <li data-correct="false">D. 不需要筛查，由医生全权负责</li>
+  </ul>
+  <div class="quiz-answer">临床环境（心脏康复等）需要比通用筛查更深入的工具。AACVPR 风险分层基于运动能力（MET）、左室射血分数（LVEF）、心律失常类型等多维度评估，比普通健身房的 ACSM + PAR-Q+ 更专业更严格。客户私人医生必须参与。</div>
+</div>
+
+</div></section>
+
+<!-- ==================== SOP 工作单 ==================== -->
+<section id="sop" class="section"><div class="sop-block">
+
+<div class="sop-item">
+  <h3>ACSM 运动前筛查决策流程</h3>
+  <div class="sop-item-sub">适用场景：所有新客户首次训练前必须完成的筛查流程</div>
+  <div class="sop-step"><div class="sop-check"></div><div class="sop-step-text"><strong>发放筛查问卷</strong>：所有客户必须填写运动前健康筛查问卷（或 PAR-Q+），不可跳过</div></div>
+  <div class="sop-step"><div class="sop-check"></div><div class="sop-step-text"><strong>第一步：症状筛查</strong>：检查6项症状（胸痛、呼吸困难、眩晕等），任何一项阳性 = 停止，需医学许可</div></div>
+  <div class="sop-step"><div class="sop-check"></div><div class="sop-step-text"><strong>第二步：运动史判定</strong>：是否满足"3-3-30"定义（过去3个月、每周≥3天、每次≥30分钟中等强度）</div></div>
+  <div class="sop-step"><div class="sop-check"></div><div class="sop-step-text"><strong>第三步：疾病状态确认</strong>：检查9项疾病（心脏病发作/手术/起搏器/瓣膜疾病/心衰/移植/先天心脏病/糖尿病/肾脏疾病）</div></div>
+  <div class="sop-step"><div class="sop-check"></div><div class="sop-step-text"><strong>交叉决策</strong>：运动史 × 疾病 × 症状 三轴判定，参照筛查算法表格确定是否需要医学许可</div></div>
+  <div class="sop-step"><div class="sop-check"></div><div class="sop-step-text"><strong>记录归档</strong>：保存问卷原件，记录判定结果和后续建议</div></div>
+</div>
+
+<div class="sop-item">
+  <h3>医学许可沟通流程（ABC 法）</h3>
+  <div class="sop-item-sub">适用场景：筛查结果显示客户需要医学许可时</div>
+  <div class="sop-step"><div class="sop-check"></div><div class="sop-step-text"><strong>A — 提问（Ask）</strong>：用开放性问题了解客户的运动目标和期望，如"您希望通过训练达到什么效果？"</div></div>
+  <div class="sop-step"><div class="sop-check"></div><div class="sop-step-text"><strong>B — 打破障碍（Break Barriers）</strong>：发现并处理阻碍因素，如客户担心"医生会说不能运动"——解释许可是为了更安全地运动</div></div>
+  <div class="sop-step"><div class="sop-check"></div><div class="sop-step-text"><strong>C — 协作（Collaborate）</strong>：与客户共同制定过渡方案，提供医学许可表格（写清计划运动类型），让医生有据可依</div></div>
+  <div class="sop-step"><div class="sop-check"></div><div class="sop-step-text"><strong>等待期安排</strong>：告知客户在等待医生签字期间，可以从低强度活动开始（走路、拉伸等），保持运动势头</div></div>
+  <div class="sop-step"><div class="sop-check"></div><div class="sop-step-text"><strong>获取许可后</strong>：客户获医生签字同意后，根据许可内容制定正式训练计划，开始训练</div></div>
+</div>
+
+<div class="sop-item">
+  <h3>PAR-Q+ 使用与管理流程</h3>
+  <div class="sop-item-sub">适用场景：作为通用筛查的补充工具或客户自我筛查</div>
+  <div class="sop-step"><div class="sop-check"></div><div class="sop-step-text"><strong>发放 PAR-Q+</strong>：客户填写第1页7个一般健康问题</div></div>
+  <div class="sop-step"><div class="sop-check"></div><div class="sop-step-text"><strong>判定分支</strong>：全否→绿色放行；有是→进入第2-3页按疾病类别分支的深入问题</div></div>
+  <div class="sop-step"><div class="sop-check"></div><div class="sop-step-text"><strong>三色结果处理</strong>：绿色=建议逐步增加至每周150分钟中等强度；红色=完成 ePARmed-X+ 或咨询专业人员；黄色=暂时延迟（感冒/发烧/怀孕等先处理）</div></div>
+  <div class="sop-step"><div class="sop-check"></div><div class="sop-step-text"><strong>重要提醒</strong>：PAR-Q+ 全绿 ≠ 零风险，只是目前不需要进一步评估。PAR-Q+ 不能替代医学检查</div></div>
+  <div class="sop-step"><div class="sop-check"></div><div class="sop-step-text"><strong>定期更新</strong>：客户健康状况变化时必须重新填写。当前版本2020，可在 www.eparmedx.com 获取</div></div>
+</div>
+
+</div></section>
+
+<footer class="footer"><div class="footer-text">ACEpresso · ACE-CPT 系统精读 · 3HFIT 教培中心</div></footer>
+
+<script>
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top: document.querySelector('.tabs').offsetTop - 60, behavior: 'smooth'});
+}
+document.addEventListener('click', function(e) {
+  const card = e.target.closest('.k-card');
+  if (card) card.classList.toggle('expanded');
+  const opt = e.target.closest('.quiz-options li');
+  if (opt) {
+    const item = opt.closest('.quiz-item');
+    if (item.dataset.answered) return;
+    item.dataset.answered = '1';
+    const correct = opt.dataset.correct === 'true';
+    opt.classList.add(correct ? 'correct' : 'wrong');
+    if (!correct) item.querySelector('[data-correct="true"]').classList.add('correct');
+    item.querySelectorAll('.quiz-options li').forEach(li => li.classList.add('disabled'));
+    item.querySelector('.quiz-answer').classList.add('show');
+  }
+  const check = e.target.closest('.sop-check');
+  if (check) check.classList.toggle('checked');
+});
+</script>
+</body>
+</html>

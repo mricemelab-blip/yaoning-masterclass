@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch5 — ACEpresso</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-brand" onclick="location.href='index.html'">
+    <div class="nav-logo">ACEpresso</div>
+    <div class="nav-sub">ACE-CPT 系统精读</div>
+  </div>
+  <div class="nav-links">
+    <a href="ch1.html">第1章</a>
+    <a href="ch2.html">第2章</a>
+    <a href="ch3.html">第3章</a>
+    <a href="ch4.html">第4章</a>
+    <a href="ch5.html" class="active">第5章</a>
+    <a href="ch6.html">第6章</a>
+  </div>
+</nav>
+<section class="ch-hero">
+  <div class="ch-badge">Chapter 05</div>
+  <div class="ch-num">05</div>
+  <h1 class="ch-title">心肺训练：生理机能、评估和计划</h1>
+  <div class="ch-title-en">Cardiorespiratory Training: Physiology, Assessment & Programming</div>
+  <p class="ch-desc">心肺训练的核心是改善人体携氧、输氧和摄取氧的整体能力。IFT模式通过三期进阶设计，从习惯养成到运动表现，循序渐进地提高心肺适能。</p>
+</section>
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('lecture')">📖 讲义</button>
+  <button class="tab-btn" onclick="switchTab('cards')">🃏 知识要点</button>
+  <button class="tab-btn" onclick="switchTab('quiz')">✍️ 自测</button>
+  <button class="tab-btn" onclick="switchTab('sop')">📋 SOP工作单</button>
+</div>
+
+<!-- ========== 讲义 ========== -->
+<section id="lecture" class="section active">
+<div class="lecture-block">
+
+<h3>5.1 心肺训练解剖学基础</h3>
+
+<h4>1.1.1 心血管系统</h4>
+<p>心血管循环系统为闭合循环系统，分为大循环（体循环）与小循环（肺循环）。</p>
+<ul>
+  <li><strong>大循环（体循环）</strong>：左心室 → 大动脉 → 小动脉 → 毛细血管（物质交换）→ 静脉 → 右心房</li>
+  <li><strong>小循环（肺循环）</strong>：右心室 → 肺部（气体交换）→ 左心房</li>
+</ul>
+
+<table class="data-table">
+<thead><tr><th>循环类型</th><th>起点</th><th>终点</th><th>主要功能</th></tr></thead>
+<tbody>
+<tr><td>大循环（体循环）</td><td>左心室</td><td>右心房</td><td>全身供氧、营养输送</td></tr>
+<tr><td>小循环（肺循环）</td><td>右心室</td><td>左心房</td><td>肺部充氧、CO₂排出</td></tr>
+</tbody>
+</table>
+
+<blockquote>动脉血 ≠ 动脉里的血。动脉血是含氧量高的血液；静脉血是含氧量低、富含CO₂的血液。唯一例外：肺动脉流缺氧血，肺静脉流富氧血。</blockquote>
+
+<p>心脏四腔室功能：上方心房接收血液（中转站），下方心室泵出血液（发动机）。左心系统服务全身供氧，右心系统服务肺部充氧。血流方向为心房→心室→动脉，单向不逆流。</p>
+
+<div class="memory-tip">
+  <div class="memory-tip-label">💡 记忆技巧</div>
+  口诀"上房下室，左富右贫"：左心室出发→全身→右心房回来（大循环）；右心室出发→肺部→左心房回来（小循环）。"左出右回，环环相扣"。
+</div>
+
+<h4>1.1.2 呼吸系统</h4>
+<p>呼吸系统由鼻腔、咽、喉、气管、支气管和肺组成。核心重点：<strong>膈肌是全身骨骼肌中唯一对生命至关重要的骨骼肌</strong>。</p>
+<ul>
+  <li>吸气：膈肌下降 → 胸腔容积增大 → 气压降低 → 空气被吸入</li>
+  <li>呼气：膈肌上升 → 胸腔容积减小 → 气压升高 → 气体被挤出</li>
+</ul>
+<p>膈肌运动原理类似注射器活塞：下拉抽药、上推给药。</p>
+
+<div class="coach-tip">
+  <div class="coach-tip-label">🎯 教练贴士</div>
+  客户力量训练时呼吸紊乱，错误做法是让客户憋气发力。正确做法：强调发力时呼气、还原时吸气，保持膈肌正常工作节奏。
+</div>
+
+<h3>5.2 心肺系统生理机能</h3>
+
+<p>心肺生理机能归纳为三大核心过程：摄氧（Intake）→ 输氧（Delivery）→ 用氧（Usage），构成完整的"氧气物流链"。</p>
+
+<h4>2.2.1 摄氧能力</h4>
+<p>摄氧能力由<strong>肺部通气量</strong>与<strong>血液血红蛋白</strong>两大要素构成：</p>
+<table class="data-table">
+<thead><tr><th>要素</th><th>负责器官</th><th>功能</th><th>影响因素</th></tr></thead>
+<tbody>
+<tr><td>肺部通气量</td><td>肺、呼吸道</td><td>空气进入血液的入口</td><td>呼吸道/肺部疾病</td></tr>
+<tr><td>血红蛋白</td><td>血液</td><td>氧气运输载体</td><td>贫血、血红蛋白偏低</td></tr>
+</tbody>
+</table>
+<p>运动强度超过摄氧极限时，CO₂堆积，身体强制"停机保护"，产生明显缺氧憋闷感。血红蛋白浓度偏低或贫血人群摄氧受限，运动中极易产生疲劳。</p>
+
+<h4>2.2.2 输氧能力（氧输送）</h4>
+<p>输氧能力核心公式：</p>
+<blockquote><strong>心输出量（CO）= 心率（HR）× 每搏输出量（SV）</strong></blockquote>
+<p>心脏功能越强、每搏输出量越高，同等负荷下心率越低。训练有素的心脏如同大排量发动机，每次喷油多，转速可以低。</p>
+
+<table class="data-table">
+<thead><tr><th>心脏状态</th><th>SV</th><th>HR</th><th>CO</th></tr></thead>
+<tbody>
+<tr><td>训练有素</td><td>高</td><td>低</td><td>正常</td></tr>
+<tr><td>心脏较弱</td><td>低</td><td>高（代偿）</td><td>正常</td></tr>
+</tbody>
+</table>
+
+<h4>2.2.3 用氧能力（氧摄取）</h4>
+<p>组织用氧能力是身体利用氧气合成ATP供能的能力。影响该能力最关键的因素为<strong>线粒体的密度与体积</strong>。</p>
+<blockquote>葡萄糖 + 氧气 → 线粒体燃烧 → ATP（能量）+ CO₂ + H₂O</blockquote>
+<p>线粒体密度越高、体积越大，有氧氧化供能能力上限越高。长期心肺训练可增加线粒体数量与体积。</p>
+
+<h3>5.3 运动心肺适应机制</h3>
+
+<h4>2.3.1 适应的时间维度</h4>
+<table class="data-table">
+<thead><tr><th>类型</th><th>时间线</th><th>特点</th></tr></thead>
+<tbody>
+<tr><td>短期适应</td><td>即刻～数小时</td><td>可逆，停止训练即消失</td></tr>
+<tr><td>长期适应</td><td>数周～数月</td><td>结构改变，需持续刺激维持</td></tr>
+</tbody>
+</table>
+<p>最大摄氧量随运动负荷增加逐步提升，最初数月改善较快，随后改善速率可能逐渐减慢。进程取决于起始体能、训练刺激、恢复、健康状态和个体差异。</p>
+
+<h4>2.3.2 三大适应性改变</h4>
+<table class="data-table">
+<thead><tr><th>适应类型</th><th>具体变化</th><th>训练效果</th></tr></thead>
+<tbody>
+<tr><td>毛细血管密度↑</td><td>物流网络更密集</td><td>氧气配送更快</td></tr>
+<tr><td>线粒体↑</td><td>数量+体积增加</td><td>有氧供能增强</td></tr>
+<tr><td>糖原储存↑</td><td>肌肉糖原库更大</td><td>耐力提升</td></tr>
+</tbody>
+</table>
+
+<h4>2.3.3 HIIT vs 稳态训练</h4>
+<table class="data-table">
+<thead><tr><th>训练类型</th><th>效果</th><th>适用人群</th></tr></thead>
+<tbody>
+<tr><td>HIIT</td><td>效率高、省时间</td><td>体能良好者</td></tr>
+<tr><td>稳态有氧</td><td>稳定、安全</td><td>所有人，尤其体弱/慢病</td></tr>
+</tbody>
+</table>
+
+<div class="coach-tip">
+  <div class="coach-tip-label">🎯 教练贴士</div>
+  HIIT风靡不代表适合所有人。为体弱客户设计训练时，应从稳态有氧开始，逐步评估后再考虑HIIT。安全第一。
+</div>
+
+<h4>2.3.4 渐进超负荷原则</h4>
+<p>所有心肺训练必须遵循渐进超负荷原则：逐步增加训练强度，不可长期维持同一负荷（停滞），亦不可骤然加量（受伤）。10%法则可作为部分情境下的参考增量上限，但不适用所有客户。</p>
+
+<h3>5.4 环境与安全处置</h3>
+
+<h4>2.4.1 高温环境与热急症</h4>
+<p>体温调节中枢位于大脑下丘脑。散热方式包括辐射、传导、对流和蒸发四种。</p>
+
+<table class="data-table">
+<thead><tr><th>类型</th><th>核心体温</th><th>出汗</th><th>皮肤</th><th>处理</th></tr></thead>
+<tbody>
+<tr><td>热衰竭</td><td>&lt; 40℃</td><td>大汗淋漓</td><td>湿冷、苍白</td><td>降温 + 补液</td></tr>
+<tr><td>中暑</td><td>≥ 40℃</td><td>无汗</td><td>干燥、潮红</td><td>立即物理降温 + 急救</td></tr>
+</tbody>
+</table>
+
+<blockquote>口诀："衰竭40下，中暑40上"。40℃是生命警戒线。无论热衰竭还是中暑，现场急救同时必须拨打急救电话。</blockquote>
+
+<p>高温运动三大防线：①设置9～14天热适应期；②穿着透气通风服饰；③遵循科学补水方案（运动前4h补充5～7ml/kg，运动后每丢失1kg体重补充1.5L水）。</p>
+
+<h4>2.4.2 低温、高海拔与空气污染</h4>
+<ul>
+  <li><strong>低温环境</strong>：注意保温层着装，防止低体温症。热身时间延长。</li>
+  <li><strong>中高海拔（1500～4300m）</strong>：抵达首日禁止训练。高海拔空气稀薄，摄氧能力下降。</li>
+  <li><strong>空气污染</strong>：关注AQI指数，污染日避免户外高强度训练。</li>
+</ul>
+
+<h3>5.5 大众心肺通用指南</h3>
+
+<h4>2.5.1 FITTVP原则</h4>
+<table class="data-table">
+<thead><tr><th>要素</th><th>英文</th><th>标准</th></tr></thead>
+<tbody>
+<tr><td>频率（F）</td><td>Frequency</td><td>中等强度≥5天/周 或 高强度≥3天/周</td></tr>
+<tr><td>强度（I）</td><td>Intensity</td><td>中等（3～5.9 MET）或 高强度（≥6 MET）</td></tr>
+<tr><td>时间（T）</td><td>Time</td><td>中等30～60min，高强度20～60min</td></tr>
+<tr><td>类型（T）</td><td>Type</td><td>节律性、大肌群有氧活动</td></tr>
+<tr><td>总量（V）</td><td>Volume</td><td>≥150 min/周中等 或 ≥75 min/周高强度</td></tr>
+<tr><td>进阶（P）</td><td>Progression</td><td>循序渐进，10%参考上限</td></tr>
+</tbody>
+</table>
+
+<h4>2.5.2 六种强度判定方式</h4>
+<ul>
+  <li>最大心率百分比法（%HRmax）：220 - 年龄 = HRmax（存在±12 BPM误差）</li>
+  <li>储备心率法（HRR）：HRR = HRmax - HRrest；靶心率 = HRR × 强度% + HRrest</li>
+  <li>RPE自觉用力程度量表</li>
+  <li>MET代谢当量法：<strong>&lt;3 MET为低强度，3～5.9 MET为中等，≥6 MET为高强度</strong></li>
+  <li>Talk Test（说话测试）：能说不能唱=中等；说几个词就要换气=高强度</li>
+  <li>VT1/VT2通气阈法：VT1以下=低-中等；VT1-VT2=中等-高强度；VT2以上=高强度</li>
+</ul>
+
+<div class="memory-tip">
+  <div class="memory-tip-label">💡 记忆技巧</div>
+  储备心率法计算示例：35岁客户，HRmax=185，HRrest=72，HRR=113。目标60%～80%：靶心率 = 113×0.60+72=140 至 113×0.80+72=162 BPM。
+</div>
+
+<h4>2.5.3 运动零食</h4>
+<p>运动零食（Exercise Snacks）指短时间（&lt;3 MET强度为低强度的碎片化活动）、多频次的身体活动，适合久坐人群作为心肺训练的入门方式。核心在于"动起来比动多久更重要"。</p>
+
+<h3>5.6 IFT模式三期架构</h3>
+
+<h4>2.6.1 第一期：基础训练（Base Training）</h4>
+<p><strong>目标人群</strong>：久坐少动、刚开始运动的新手。</p>
+<p><strong>核心策略</strong>：建立运动习惯。使用低强度（RPE 3～4，Talk Test能轻松对话），每次10～30分钟，每周3～5天。重点在于让客户"愿意再来"。</p>
+
+<h4>2.6.2 第二期：健身训练（Fitness Training）</h4>
+<p><strong>目标人群</strong>：已建立运动习惯，需要提升心肺适能的客户。</p>
+<p><strong>核心策略</strong>：引入VT1概念。在VT1以下进行稳态训练提升有氧基础；在VT1附近引入间歇训练提升效率。每周150分钟中等强度或75分钟高强度。</p>
+
+<h4>2.6.3 第三期：表现训练（Performance Training）</h4>
+<p><strong>目标人群</strong>：有良好心肺基础，追求运动表现提升的客户。</p>
+<p><strong>核心策略</strong>：基于VT2进行高强度间歇训练。时间分配参考：一区（VT1以下）70～80%、二区（VT1-VT2之间）&lt;10%、三区（VT2以上）10～20%。</p>
+
+<div class="coach-tip">
+  <div class="coach-tip-label">🎯 教练贴士</div>
+  三期不是"等级标签"，而是"能力匹配"。教练应根据VT1/VT2测试结果和客户当前体能水平选择起点，而非按经验或主观意愿跳级。
+</div>
+
+</div>
+</section>
+
+<!-- ========== 知识要点卡片 ========== -->
+<section id="cards" class="section">
+<div class="cards-grid">
+
+<div class="k-card">
+  <div class="k-card-num">KEY 01</div>
+  <div class="k-card-title">体循环与肺循环</div>
+  <div class="k-card-summary">闭合循环系统，左出右回</div>
+  <div class="k-card-detail">大循环（体循环）从左心室出发，经全身毛细血管回流至右心房，负责全身供氧。小循环（肺循环）从右心室出发，经肺部气体交换回流至左心房。口诀"左出右回，环环相扣"。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 02</div>
+  <div class="k-card-title">动脉血≠动脉里的血</div>
+  <div class="k-card-summary">按含氧量区分，非按血管名</div>
+  <div class="k-card-detail">动脉血是刚充完氧的富氧血液，静脉血是耗尽氧气的"废血"。肺动脉流的是缺氧血，肺静脉流的是富氧血，这是唯一例外。向客户解释时必须强调含氧量区分标准。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 03</div>
+  <div class="k-card-title">膈肌：唯一生命骨骼肌</div>
+  <div class="k-card-summary">膈肌是唯一，没有之一</div>
+  <div class="k-card-detail">膈肌是呼吸的主发动机，吸气时下降、呼气时上升，原理类似注射器活塞。其他骨骼肌"罢工"人还能活，膈肌停止工作≈生命终止。力量训练中应强调发力呼气、还原吸气。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 04</div>
+  <div class="k-card-title">心肺生理三环节</div>
+  <div class="k-card-summary">摄氧→输氧→用氧，缺一不可</div>
+  <div class="k-card-detail">摄氧由肺部通气量+血红蛋白决定；输氧由心输出量（CO=HR×SV）决定；用氧由线粒体密度与体积决定。三者构成完整"氧气物流链"，任一环节断裂都会限制运动能力。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 05</div>
+  <div class="k-card-title">心输出量公式 CO=HR×SV</div>
+  <div class="k-card-summary">SV高则HR低，训练让心脏省力</div>
+  <div class="k-card-detail">训练有素的心脏每搏输出量高，同等泵血量下心率更低。这就是运动员静息心率低于常人的原因。较弱的心脏需代偿性升高心率来维持总泵血量。马拉松运动员低静息心率是心脏健康的信号。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 06</div>
+  <div class="k-card-title">三大长期适应</div>
+  <div class="k-card-summary">血管密、线粒体多、糖原满</div>
+  <div class="k-card-detail">长期心肺训练带来三大结构改变：①毛细血管密度↑（物流网点加密）；②线粒体数量+体积↑（发电厂扩容）；③肌糖原储存↑（油箱加大）。初期改善较快，随体能提高逐渐减慢。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 07</div>
+  <div class="k-card-title">热衰竭 vs 中暑</div>
+  <div class="k-card-summary">40℃是生命警戒线</div>
+  <div class="k-card-detail">热衰竭：体温&lt;40℃，大汗淋漓，皮肤湿冷→补液为主。中暑：体温≥40℃，无汗，皮肤干燥潮红→立即全身物理降温。两者均须拨打急救电话。口诀"衰竭会出汗，中暑反而干"。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 08</div>
+  <div class="k-card-title">FITTVP六要素</div>
+  <div class="k-card-summary">每周150分钟中等或75分钟高强度</div>
+  <div class="k-card-detail">F频率、I强度、T时间、T类型、V总量、P进阶。中等强度30～60min/次，高强度20～60min/次。强度判定可用MET（3～5.9=中等，≥6=高强度）、Talk Test、RPE、储备心率法等多种方式。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 09</div>
+  <div class="k-card-title">储备心率法计算</div>
+  <div class="k-card-summary">靶心率=HRR×强度%+HRrest</div>
+  <div class="k-card-detail">HRR = HRmax - HRrest。HRmax=220-年龄（存在±12BPM误差）。靶心率区间 = HRR × 目标强度% + HRrest。强度区间通常为60%～89%。该方法同时考虑了静息心率个体差异，比单纯%HRmax更精确。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 10</div>
+  <div class="k-card-title">IFT模式三期架构</div>
+  <div class="k-card-summary">习惯→耐力→表现，循序渐进</div>
+  <div class="k-card-detail">第一期基础训练：建习惯，低强度RPE 3-4，10-30min/次。第二期健身训练：引入VT1，稳态+间歇结合。第三期表现训练：基于VT2的高强度间歇，时间分配一区70-80%、二区&lt;10%、三区10-20%。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+</div>
+</section>
+
+<!-- ========== 自测 ========== -->
+<section id="quiz" class="section">
+<div class="quiz-block">
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">1</span>关于心血管系统，以下说法正确的是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 肺动脉中流的是动脉血</li>
+    <li data-correct="true">B. 体循环从左心室出发，回流至右心房</li>
+    <li data-correct="false">C. 动脉血一定是动脉血管中的血液</li>
+    <li data-correct="false">D. 肺循环从右心房出发，进入肺部</li>
+  </ul>
+  <div class="quiz-answer">体循环路径为左心室→全身→右心房。肺动脉流的是缺氧血（静脉血），肺静脉流的才是富氧血（动脉血）。体循环起点是左心室而非右心房。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">2</span>心输出量（CO）的计算公式是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. CO = HR + SV</li>
+    <li data-correct="true">B. CO = HR × SV</li>
+    <li data-correct="false">C. CO = SV ÷ HR</li>
+    <li data-correct="false">D. CO = HRmax - HRrest</li>
+  </ul>
+  <div class="quiz-answer">心输出量 = 心率（HR）× 每搏输出量（SV）。训练有素者SV高，因此同等CO下HR更低，这就是运动员静息心率低的原因。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">3</span>影响组织用氧能力最关键的因素是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 肺部通气量</li>
+    <li data-correct="false">B. 血红蛋白浓度</li>
+    <li data-correct="true">C. 线粒体的密度与体积</li>
+    <li data-correct="false">D. 心输出量</li>
+  </ul>
+  <div class="quiz-answer">摄氧由肺部通气量+血红蛋白决定，输氧由心输出量决定，用氧由线粒体密度与体积决定。线粒体是细胞的"微型发电厂"，其密度和体积决定了有氧氧化供能能力上限。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">4</span>区分热衰竭与中暑的关键指标是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 心率是否超过150BPM</li>
+    <li data-correct="false">B. 是否出现肌肉痉挛</li>
+    <li data-correct="true">C. 核心体温是否≥40℃以及是否有汗</li>
+    <li data-correct="false">D. 血压是否骤降</li>
+  </ul>
+  <div class="quiz-answer">热衰竭核心体温&lt;40℃，大汗淋漓、皮肤湿冷；中暑核心体温≥40℃，无汗、皮肤干燥潮红。40℃是生命警戒线。两者均需立即处置并拨打急救电话。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">5</span>根据大众心肺指南，成年人每周最低心肺训练量是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 75分钟中等强度</li>
+    <li data-correct="true">B. 150分钟中等强度或75分钟高强度</li>
+    <li data-correct="false">C. 150分钟高强度</li>
+    <li data-correct="false">D. 每天30分钟任何强度</li>
+  </ul>
+  <div class="quiz-answer">ACE推荐成年人每周至少150分钟中等强度（30-60min/次×5天）或75分钟高强度（20-60min/次×3天）的心肺训练。这是维持心肺健康的最低底线。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">6</span>一名35岁客户，静息心率72BPM，使用储备心率法计算60%强度的靶心率是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 111 BPM</li>
+    <li data-correct="false">B. 132 BPM</li>
+    <li data-correct="true">C. 140 BPM</li>
+    <li data-correct="false">D. 155 BPM</li>
+  </ul>
+  <div class="quiz-answer">HRmax=220-35=185。HRR=185-72=113。靶心率=113×0.60+72=67.8+72≈140 BPM。储备心率法同时考虑了静息心率差异，比单纯%HRmax更精确。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">7</span>IFT模式第三期（表现训练）的时间分配建议是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 一区50%、二区30%、三区20%</li>
+    <li data-correct="true">B. 一区70-80%、二区<10%、三区10-20%</li>
+    <li data-correct="false">C. 一区30%、二区40%、三区30%</li>
+    <li data-correct="false">D. 全部在三区进行</li>
+  </ul>
+  <div class="quiz-answer">IFT第三期时间分配：一区（VT1以下）70-80%为有氧基础，二区（VT1-VT2之间）&lt;10%作为过渡，三区（VT2以上）10-20%为高强度间歇。大部分训练时间仍应放在低强度有氧基础训练上。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">8</span>关于高温环境运动，以下做法错误的是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 设置9-14天热适应期</li>
+    <li data-correct="false">B. 运动前4小时补充5-7ml/kg水</li>
+    <li data-correct="true">C. 客户出现中暑迹象时让其继续运动"出出汗就好"</li>
+    <li data-correct="false">D. 中暑时脱去多余衣物，全力物理降温</li>
+  </ul>
+  <div class="quiz-answer">中暑是散热系统崩溃的表现，继续运动会加重病情甚至危及生命。正确做法是立即停止训练、转移至阴凉处、全力物理降温并拨打急救电话。</div>
+</div>
+
+</div>
+</section>
+
+<!-- ========== SOP ========== -->
+<section id="sop" class="section">
+<div class="sop-block">
+
+<div class="sop-item">
+  <h3>高温急症现场急救SOP</h3>
+  <div class="sop-item-sub">适用场景：客户在高温环境中出现体温异常升高、大量出汗或无汗等热急症症状</div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>立即停止运动</strong>，将客户转移至阴凉通风处</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>评估意识状态与体温</strong>：判断是热衰竭（<40℃，有汗，皮肤湿冷）还是中暑（≥40℃，无汗，皮肤干燥潮红）</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>热衰竭处理</strong>：抬高下肢，适量补充水分和电解质，扇风降温</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>中暑处理</strong>：脱去多余衣物，用湿毛巾、冰袋、风扇等全力全身物理降温</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>无论热衰竭还是中暑，同时拨打急救电话</strong>，持续监测生命体征直到救援到达</div>
+  </div>
+</div>
+
+<div class="sop-item">
+  <h3>储备心率法制定靶心率区间SOP</h3>
+  <div class="sop-item-sub">适用场景：为新客户设计心肺训练强度目标</div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>获取基础数据</strong>：年龄、静息心率（HRrest，早晨清醒仰卧测量最佳）</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>计算最大心率</strong>：HRmax = 220 - 年龄（注意存在±12 BPM误差，仅作参考）</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>计算储备心率</strong>：HRR = HRmax - HRrest</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>计算靶心率区间</strong>：下限 = HRR × 低强度%（如60%）+ HRrest；上限 = HRR × 高强度%（如80%）+ HRrest</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>结合Talk Test和RPE验证</strong>：确保客户在靶心率区间内的主观感受与计算强度匹配</div>
+  </div>
+</div>
+
+<div class="sop-item">
+  <h3>心肺训练计划设计SOP（IFT分期）</h3>
+  <div class="sop-item-sub">适用场景：根据客户体能水平选择IFT对应阶段并设计训练方案</div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>健康筛查与体能评估</strong>：确认PAR-Q+结果、当前运动习惯、有无心血管风险因素</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>确定IFT阶段</strong>：久坐新手→第一期；已建立习惯→第二期；追求表现→第三期</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>第一期方案</strong>：RPE 3-4，Talk Test能轻松对话，10-30min/次，每周3-5天，以建立习惯为核心</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>第二期方案</strong>：引入VT1概念，VT1以下稳态训练+VT1附近间歇训练，每周150min中等或75min高强度</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>第三期方案</strong>：基于VT2的HIIT，时间分配一区70-80%、二区<10%、三区10-20%，注意恢复</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>进阶原则</strong>：遵循渐进超负荷，10%法则作为参考增量上限，每周评估一次适应性</div>
+  </div>
+</div>
+
+</div>
+</section>
+
+<footer class="footer"><div class="footer-text">ACEpresso · ACE-CPT 系统精读 · 3HFIT 教培中心</div></footer>
+<script>
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top: document.querySelector('.tabs').offsetTop - 60, behavior: 'smooth'});
+}
+document.addEventListener('click', function(e) {
+  const card = e.target.closest('.k-card');
+  if (card) card.classList.toggle('expanded');
+  const opt = e.target.closest('.quiz-options li');
+  if (opt) {
+    const item = opt.closest('.quiz-item');
+    if (item.dataset.answered) return;
+    item.dataset.answered = '1';
+    const correct = opt.dataset.correct === 'true';
+    opt.classList.add(correct ? 'correct' : 'wrong');
+    if (!correct) item.querySelector('[data-correct="true"]').classList.add('correct');
+    item.querySelectorAll('.quiz-options li').forEach(li => li.classList.add('disabled'));
+    item.querySelector('.quiz-answer').classList.add('show');
+  }
+  const check = e.target.closest('.sop-check');
+  if (check) check.classList.toggle('checked');
+});
+</script>
+</body>
+</html>

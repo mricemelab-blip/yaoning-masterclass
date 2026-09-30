@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch2 — ACEpresso</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-brand" onclick="location.href='index.html'">
+    <div class="nav-logo">ACEpresso</div>
+    <div class="nav-sub">ACE-CPT 系统精读</div>
+  </div>
+  <div class="nav-links">
+    <a href="ch1.html">第1章</a>
+    <a href="ch2.html" class="active">第2章</a>
+    <a href="ch3.html">第3章</a>
+    <a href="ch4.html">第4章</a>
+    <a href="ch5.html">第5章</a>
+    <a href="ch6.html">第6章</a>
+  </div>
+</nav>
+
+<section class="ch-hero">
+  <div class="ch-badge">Chapter 02</div>
+  <div class="ch-num">02</div>
+  <h1 class="ch-title">行为改变的基础</h1>
+  <div class="ch-title-en">Foundations of Behavior Change</div>
+  <p class="ch-desc">行为改变不能只归因于意志力。私人教练需要结合行为理论模型、学习与认知原理，以及影响运动坚持的个人、环境和训练因素，为客户提供适合当前状态的支持。</p>
+</section>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('lecture')">📖 讲义</button>
+  <button class="tab-btn" onclick="switchTab('cards')">🃏 知识要点</button>
+  <button class="tab-btn" onclick="switchTab('quiz')">✍️ 自测</button>
+  <button class="tab-btn" onclick="switchTab('sop')">📋 SOP工作单</button>
+</div>
+
+<!-- SECTION 1: 讲义 -->
+<section id="lecture" class="section active">
+<div class="lecture-block">
+
+<h3>1 行为理论模型</h3>
+
+<h4>1.1 行为理论模型的存在原因</h4>
+<p>私人教练不能只设计训练计划，更要帮客户养成终身运动的习惯。行为理论模型的诞生基于三个关键原因：</p>
+<ul>
+  <li><strong>环境影响</strong>是健康行为改变的重大因素——外界身体环境、社会环境都是推动行为改变的重要力量</li>
+  <li><strong>行为改变是持续过程</strong>，而非单一过程——短暂的改变没有任何意义</li>
+  <li><strong>人的行为意向和行为通常不统一</strong>——客户可能真诚地想要运动，却因环境障碍、能力感不足、动机质量或计划不适配而未能持续行动</li>
+</ul>
+
+<h4>1.2 健康信念模型（HBM）</h4>
+<p>核心定义：人们对疾病预防、治疗的看法和潜在情绪，会直接影响自身的健康行为。一个人对自身健康状况的认知，决定了他要不要运动。</p>
+
+<p><strong>变量一：健康威胁性</strong>（改变的前提）</p>
+<ul>
+  <li>自觉罹患性：自己感觉患上疾病的可能性大小</li>
+  <li>自觉严重性：自己感觉疾病的严重程度</li>
+</ul>
+
+<p><strong>变量二：健康行为的益处与障碍</strong></p>
+<ul>
+  <li>自觉益处：认为运动、调整饮食等健康行为是有效的</li>
+  <li>自觉障碍：认为执行健康行为会遇到的困难（如"太忙没时间"）</li>
+</ul>
+
+<p>教练的核心作用：帮客户树立健康行为的信念与信心，放大健康行为的益处，降低客户对执行障碍的感知。</p>
+
+<div class="memory-tip">
+  <div class="memory-tip-label">💡 记忆技巧</div>
+  威胁大 + 益处多 + 障碍少 = 改变自然来。想象一个天平：左边是"健康威胁感"，右边是"运动利弊"。只有左边够重、右边够轻，天平才会倾斜，客户才会行动。
+</div>
+
+<div class="coach-tip">
+  <div class="coach-tip-label">🎯 教练贴士</div>
+  常见误区：过度夸大健康威胁（用极端案例吓唬客户），短期可能有效，但容易引发焦虑抵抗，长期适得其反。
+</div>
+
+<h4>1.3 自我决定理论（SDT）</h4>
+<p>核心定义：人们通常只愿意做自己感兴趣、自身认同的事。这一理论核心围绕动机展开。</p>
+
+<p><strong>两种核心动机：</strong></p>
+<ul>
+  <li><strong>自主动机（内在动力）</strong>：出于自身自由意愿，因为运动本身的体验、愉悦感去运动</li>
+  <li><strong>受控动机</strong>：行为主要由外部要求、奖励、惩罚或内在压力驱动，个人感到"不得不做"</li>
+</ul>
+
+<p><strong>提升内在动力的三大核心需求：</strong></p>
+<ul>
+  <li><strong>能力感知</strong>：客户自我感觉能成功完成训练任务（注意：是自我感知能力，非真实能力）</li>
+  <li><strong>自主性</strong>：客户感觉运动行为是自己决定的，"我觉得"而非"你觉得"</li>
+  <li><strong>社群性（归属感）</strong>：在运动群体中找到归属感，不感到孤单</li>
+</ul>
+
+<div class="memory-tip">
+  <div class="memory-tip-label">💡 记忆技巧</div>
+  内在动机三件套：我能（能力感知）、我选（自主性）、我归属（社群性）。自主动机体现为"我选择做"，受控动机体现为"要我做"。
+</div>
+
+<p><strong>任务相关氛围 vs 自我相关氛围：</strong></p>
+<p>教练要营造任务相关氛围（强调过程目标、不与他人比较、及时庆祝成就），而非自我相关氛围（易引发竞争和尴尬，降低坚持度）。</p>
+
+<p><strong>社会支持的五种做法：</strong></p>
+<ol>
+  <li>邀请客户的朋友、家人一同加入运动计划</li>
+  <li>让亲友提醒训练目标、预约训练</li>
+  <li>和朋友开展趣味良性竞赛</li>
+  <li>训练计划中加入社交元素，定期开展社交互动</li>
+  <li>开展小团体私教、成立运动俱乐部或团体活动</li>
+</ol>
+
+<div class="coach-tip">
+  <div class="coach-tip-label">🎯 教练贴士</div>
+  客户热情两周后消退时，先排查原因：能力感知受挫（太难了）？自主性被剥夺（被教练逼着练）？缺乏社群支持（一个人练无聊）？然后针对性干预。过度依赖外在奖励短期有效但会削弱内在动机，奖励应聚焦在体验感而非物质上。
+</div>
+
+<h4>1.4 行为改变的跨理论模型（TTM）</h4>
+<p>TTM 由四个核心部分组成：改变阶段（客户当下状态）、改变过程（阶段进阶方法）、自我效能（改变的核心信念）、决策平衡（利弊权衡）。</p>
+
+<h4>一、改变阶段（5个核心阶段）</h4>
+<table class="data-table">
+  <tr><th>阶段</th><th>想法状态</th><th>行动状态</th></tr>
+  <tr><td>思考前阶段</td><td>无</td><td>无行动，完全未准备好</td></tr>
+  <tr><td>思考阶段</td><td>有</td><td>无行动，计划 6 个月内运动</td></tr>
+  <tr><td>准备阶段</td><td>有</td><td>不定期行动，偶尔运动</td></tr>
+  <tr><td>行动阶段</td><td>有</td><td>规律运动 &lt; 6 个月</td></tr>
+  <tr><td>维持阶段</td><td>有</td><td>规律运动 ≥ 6 个月</td></tr>
+</table>
+
+<div class="memory-tip">
+  <div class="memory-tip-label">💡 记忆技巧</div>
+  唯一没想法的只有思考前阶段。从思考阶段开始，客户对运动益处都有意识，核心区别在行动的规律度和持续时长。只有维持阶段，运动才成为固定长期的习惯。
+</div>
+
+<h4>二、改变过程（阶段进阶的核心）</h4>
+<p>改变并非线性过程，客户可能向前进展、停留，也可能退回早期阶段。教练应通过开放式提问和倾听识别客户当前阶段，再选择匹配策略。</p>
+
+<p><strong>不同阶段的干预策略：</strong></p>
+<ul>
+  <li><strong>思考前 → 思考</strong>：唤醒改变意识，用低压力沟通传递事实，探索个人价值关联运动好处</li>
+  <li><strong>思考 → 准备</strong>：降低改变顾虑，梳理利弊，提供超简单的行动选项</li>
+  <li><strong>准备 → 行动</strong>：建立信心，拆解目标，识别障碍并解决，建立支持系统</li>
+  <li><strong>行动 → 维持</strong>：固化习惯，建立"倒退预案"，自我监督，增加社会支持</li>
+  <li><strong>维持</strong>：巩固长期习惯，加入趣味元素，强化内在动机，建立"终身运动"思维</li>
+</ul>
+
+<p><strong>十大改变过程（认知过程 + 行为过程）：</strong></p>
+<table class="data-table">
+  <tr><th>改变过程</th><th>类型</th><th>核心机制</th></tr>
+  <tr><td>意识提高</td><td>认知</td><td>增加信息摄入，打破知识盲区</td></tr>
+  <tr><td>情感唤起</td><td>认知</td><td>利用情绪作为行动催化剂</td></tr>
+  <tr><td>自我重新评价</td><td>认知</td><td>评估旧习惯与核心价值观的冲突</td></tr>
+  <tr><td>环境重新评价</td><td>认知</td><td>评估行为对社会环境的影响</td></tr>
+  <tr><td>自我解放</td><td>认知</td><td>相信改变能力并做出承诺</td></tr>
+  <tr><td>辅助性关系</td><td>行为</td><td>利用社会支持系统辅助坚持</td></tr>
+  <tr><td>反向调节</td><td>行为</td><td>用健康行为替代旧习惯</td></tr>
+  <tr><td>强化管理</td><td>行为</td><td>正向奖励巩固目标行为</td></tr>
+  <tr><td>刺激控制</td><td>行为</td><td>移除旧习惯提示物，增加新行为提示</td></tr>
+  <tr><td>社会解放</td><td>行为</td><td>利用社会规范和环境变化降低改变阻力</td></tr>
+</table>
+
+<h4>三、自我效能（改变的核心信念）</h4>
+<p>自我效能是一个人对自己能成功完成某项健康任务的信念，与行为改变双向影响。自我效能低的客户容易选轻松任务、轻易放弃。</p>
+
+<p><strong>自我效能的 6 个来源：</strong></p>
+<ol>
+  <li><strong>过往经验</strong>（既往运动经历，影响最大）</li>
+  <li><strong>替代性经验</strong>（看到和自己相似的人成功运动）</li>
+  <li><strong>口头说服</strong>（专业人士的鼓励与引导）</li>
+  <li><strong>生理评价</strong>（身体疲劳度、身体状态）</li>
+  <li><strong>情感/情绪评价</strong>（运动时的情绪是积极还是焦虑沮丧）</li>
+  <li><strong>想象经验</strong>（预想坚持运动后全新的自己）</li>
+</ol>
+
+<blockquote>优秀的教练不应注重在教学中展示自己的优秀，而应聚焦挖掘客户潜能、提升客户的能力与信心。</blockquote>
+
+<h4>四、决策平衡（利弊权衡）</h4>
+<p>客户决定是否运动，核心是权衡利与弊。利大于弊才会主动改变。决策平衡是动态变化的：</p>
+<ul>
+  <li>思考前、思考阶段客户：通常认为弊大于利，所以迟迟不开始</li>
+  <li>行动、维持阶段客户：普遍认为利大于弊，所以能坚持</li>
+</ul>
+
+<p>教练实操方法：用开放式提问了解客户心中的自觉收益和自觉损失；帮客户放大收益、降低损失；结合短期 + 长期益处引导，避免只强调长期益处。</p>
+
+<h3>2 行为改变原理</h3>
+
+<h4>2.1 操作性条件反射</h4>
+<p>人的行为出现，要么被前因刺激产生（刺激控制法），要么被结果反馈影响。操作性条件反射的四种类型：</p>
+<ul>
+  <li><strong>正强化</strong>：给予好的刺激，增加行为频率</li>
+  <li><strong>负强化</strong>：移除不好的刺激，增加行为频率</li>
+  <li><strong>消退</strong>：不给予任何反馈，行为频率逐渐降低</li>
+  <li><strong>惩罚</strong>：给予不好的刺激，减少行为频率</li>
+</ul>
+
+<h4>2.2 认知与行为</h4>
+<p>教练要引导客户看清自己的想法。首先要帮客户找出非理性想法（如自我责备、妄下结论），其次要教客户正确设定目标。目标设定（SMART 原则）是最常用、最直接的行为改变方法。</p>
+
+<h4>2.3 自我监测</h4>
+<p>自我监测是对目标相关的行为、情境和反应进行系统记录与观察。客户可通过训练日志、步数、运动时间、主观用力程度或情绪反应等信息了解行为模式，为后续目标调整提供依据。自我监测是自我调节的一部分，但不等同于单纯依靠自律。</p>
+
+<h3>3 影响运动坚持的三大因素</h3>
+
+<h4>3.1 个人特质</h4>
+<p>影响运动坚持的个人因素包括：动机质量（自主动机 vs 受控动机）、自我效能水平、对运动的归因方式、既往运动经历、个人目标与价值观。</p>
+
+<h4>3.2 环境因素</h4>
+<p>影响运动坚持的环境因素包括：物理环境（设施便利性、天气、距离）、社会环境（家人支持、同伴影响、教练关系）、制度环境（工作时间、社区资源）。</p>
+
+<h4>3.3 身体活动因素</h4>
+<p>训练强度和类型直接影响坚持度。过高强度增加损伤风险和倦怠感，降低坚持度。教练应根据客户的当前能力和目标，选择适当的运动类型和强度，确保运动体验积极。</p>
+
+<blockquote>HBM 解决"为什么变"，SDT 解决"怎么变才能持续"，TTM 解决"在哪个阶段用什么方法"。三大模型共同构成行为改变的方法论体系。</blockquote>
+
+</div>
+</section>
+
+<!-- SECTION 2: 知识要点卡片 -->
+<section id="cards" class="section">
+<div class="cards-grid">
+
+<div class="k-card">
+  <div class="k-card-num">KEY 01</div>
+  <div class="k-card-title">健康信念模型（HBM）</div>
+  <div class="k-card-summary">威胁感知 + 益处障碍判断驱动改变</div>
+  <div class="k-card-detail">HBM 包含两大变量：健康威胁性（自觉罹患性 + 自觉严重性）和健康行为益处与障碍（自觉益处 + 自觉障碍）。当威胁感足够大、益处感知超过障碍感知时，行为改变的可能性提高。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 02</div>
+  <div class="k-card-title">自我决定理论（SDT）三需求</div>
+  <div class="k-card-summary">能力感知 + 自主性 + 社群性</div>
+  <div class="k-card-detail">满足三大需求时内在动力大幅提升：能力感知（自我感觉能完成）、自主性（感觉是自己在决定）、社群性（归属感）。教练应营造任务相关氛围，强调过程目标，不与他人比较。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 03</div>
+  <div class="k-card-title">TTM 五个改变阶段</div>
+  <div class="k-card-summary">思考前 → 思考 → 准备 → 行动 → 维持</div>
+  <div class="k-card-detail">思考前（无想法无行动）、思考（有想法无行动，6个月内计划）、准备（有想法不定期行动）、行动（规律运动 &lt; 6个月）、维持（规律运动 ≥ 6个月）。唯一没想法的只有思考前阶段。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 04</div>
+  <div class="k-card-title">TTM 十大改变过程</div>
+  <div class="k-card-summary">5个认知过程 + 5个行为过程</div>
+  <div class="k-card-detail">认知过程：意识提高、情感唤起、自我重新评价、环境重新评价、自我解放。行为过程：辅助性关系、反向调节、强化管理、刺激控制、社会解放。两者共同推动阶段进阶。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 05</div>
+  <div class="k-card-title">自我效能的 6 个来源</div>
+  <div class="k-card-summary">过往经验影响最大</div>
+  <div class="k-card-detail">①过往经验（影响最大）②替代性经验③口头说服④生理评价⑤情感/情绪评价⑥想象经验。自我效能与行为改变双向影响，低效能客户易选轻松任务、轻易放弃。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 06</div>
+  <div class="k-card-title">自主动机 vs 受控动机</div>
+  <div class="k-card-summary">"我想要" vs "要我做"</div>
+  <div class="k-card-detail">自主动机出于自由意愿和运动本身的愉悦感，是长期坚持的关键。受控动机由外部要求、奖励、惩罚驱动。外部奖励若让客户感到被控制，可能削弱自主动机。奖励应聚焦体验感而非物质。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 07</div>
+  <div class="k-card-title">决策平衡</div>
+  <div class="k-card-summary">利大于弊才会主动改变</div>
+  <div class="k-card-detail">思考前/思考阶段客户通常认为弊大于利（迟迟不开始），行动/维持阶段客户认为利大于弊（能坚持）。教练应用开放式提问了解客户的自觉收益和自觉损失，放大收益、降低损失。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 08</div>
+  <div class="k-card-title">操作性条件反射四类型</div>
+  <div class="k-card-summary">正强化/负强化/消退/惩罚</div>
+  <div class="k-card-detail">正强化（给予好刺激增加行为）、负强化（移除坏刺激增加行为）、消退（不给反馈行为降低）、惩罚（给予坏刺激减少行为）。教练应善用正强化巩固客户的运动行为。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 09</div>
+  <div class="k-card-title">认知扭曲六类型</div>
+  <div class="k-card-summary">极/放/偏/断/标/责</div>
+  <div class="k-card-detail">教练需帮客户识别非理性想法：极端化思维、放大化、偏执化、妄下结论、贴标签、自我责备。识别后用正确的认知替代，这是认知行为干预的基础。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 10</div>
+  <div class="k-card-title">社会支持五种做法</div>
+  <div class="k-card-summary">让客户"不是一个人在战斗"</div>
+  <div class="k-card-detail">①邀请家人朋友加入运动计划②让亲友提醒训练目标和预约③和朋友开展良性竞赛④训练中加社交元素⑤开展小团体私教或运动俱乐部。社会支持是提升运动坚持度的重要因素。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 11</div>
+  <div class="k-card-title">自我监测</div>
+  <div class="k-card-summary">系统记录行为模式，辅助目标调整</div>
+  <div class="k-card-detail">自我监测是对目标相关行为、情境和反应的系统记录。可通过训练日志、步数、运动时间、主观用力程度或情绪反应进行。自我监测是自我调节的一部分，但不等同于单纯依靠自律。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+</div>
+</section>
+
+<!-- SECTION 3: 自测 -->
+<section id="quiz" class="section">
+<div class="quiz-block">
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">1</span>一名客户知道自己血压偏高，也清楚运动能改善，但总觉得"太忙了没时间运动"。根据健康信念模型，该客户最需要干预的变量是：</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 自觉严重性</li>
+    <li data-correct="false">B. 自觉罹患性</li>
+    <li data-correct="true">C. 自觉障碍</li>
+    <li data-correct="false">D. 自觉益处</li>
+  </ul>
+  <div class="quiz-answer">客户已知道血压偏高（罹患性已有认知）且运动能改善（益处已有认知），核心障碍在于"太忙没时间"——这是对执行健康行为的障碍感知过高。教练应帮助降低障碍感知。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">2</span>根据自我决定理论，以下哪项策略最能提升客户的内在动力？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 承诺减重10斤奖励5节私教课</li>
+    <li data-correct="true">B. 强调其在深蹲动作控制上的进步</li>
+    <li data-correct="false">C. 在社交平台发布其训练视频并对比他人</li>
+    <li data-correct="false">D. 强制要求客户执行标准化的训练饮食计划</li>
+  </ul>
+  <div class="quiz-answer">B 选项通过正面反馈提升能力感知（SDT 三需求之一），促进自主动机内化。A 是外在物质奖励可能削弱内在动机；C 是自我相关氛围易引发尴尬；D 剥夺了自主性。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">3</span>根据 TTM 模型，一位客户已经开始每周运动 3 次，持续了 4 个月。该客户处于哪个阶段？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 思考前阶段</li>
+    <li data-correct="false">B. 准备阶段</li>
+    <li data-correct="true">C. 行动阶段</li>
+    <li data-correct="false">D. 维持阶段</li>
+  </ul>
+  <div class="quiz-answer">行动阶段的定义是"有想法、有规律行动，规律运动时长 &lt; 6 个月"。该客户规律运动 4 个月，尚未达到 6 个月的维持阶段门槛。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">4</span>自我效能的 6 个来源中，对自我效能影响最大的是：</div>
+  <ul class="quiz-options">
+    <li data-correct="true">A. 过往经验（既往运动经历）</li>
+    <li data-correct="false">B. 替代性经验</li>
+    <li data-correct="false">C. 口头说服</li>
+    <li data-correct="false">D. 想象经验</li>
+  </ul>
+  <div class="quiz-answer">过往经验（Performance Accomplments）是自我效能最有力的来源。成功的运动经历直接增强"我能做到"的信念，失败的經歷则削弱。教练应为客户设计可成功的任务以积累正面经验。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">5</span>一位客户在开营仪式上公开签署健康行为契约并公布训练目标。这属于 TTM 十大改变过程中的哪一个？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 意识提高</li>
+    <li data-correct="false">B. 环境重新评价</li>
+    <li data-correct="true">C. 自我解放</li>
+    <li data-correct="false">D. 刺激控制</li>
+  </ul>
+  <div class="quiz-answer">自我解放属于认知过程，核心是相信自己具备改变能力并做出坚定承诺。公开签署契约、公布目标是通过增加背弃成本来强化意志力承诺，属于自我解放的典型表现。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">6</span>教练发现客户每次完成训练后都感到很有成就感，但两周后因工作忙想放弃。根据 SDT 理论，最可能的原因是：</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 能力感知不足</li>
+    <li data-correct="false">B. 健康威胁感知不足</li>
+    <li data-correct="true">C. 自主性不足（感觉运动是被安排的，不是自己决定的）</li>
+    <li data-correct="false">D. 自我效能过高</li>
+  </ul>
+  <div class="quiz-answer">客户训练后有成就感说明能力感知不低。因工作忙想放弃，可能感觉运动行为是被教练安排的（"你觉得"而非"我觉得"），自主性不足。教练应把部分决定权交还给客户，共同设计训练计划。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">7</span>以下哪种做法属于"刺激控制"改变过程？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 向客户讲解久坐行为与死亡率的研究文献</li>
+    <li data-correct="false">B. 帮客户建立运动小组互相监督</li>
+    <li data-correct="true">C. 睡前将运动服放在床头，卸载外卖 APP</li>
+    <li data-correct="false">D. 达成月度目标后奖励自己训练装备</li>
+  </ul>
+  <div class="quiz-answer">刺激控制属于行为过程，核心是移除诱发旧习惯的提示物，增加能触发新行为的环境提示。将运动服放在床头（增加新行为提示）和卸载外卖 APP（移除旧习惯提示）是典型的刺激控制策略。</div>
+</div>
+
+</div>
+</section>
+
+<!-- SECTION 4: SOP 工作单 -->
+<section id="sop" class="section">
+<div class="sop-block">
+
+<div class="sop-item">
+  <h3>客户改变阶段识别与干预匹配</h3>
+  <div class="sop-item-sub">适用场景：初次接触客户或定期评估时判断行为改变阶段</div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>评估想法维度</strong>：询问客户对运动的看法——"您目前有没有在考虑开始规律运动？"判断是否有改变意愿</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>评估行动维度</strong>：询问运动历史和频率——"过去一个月您有几次规律运动？持续了多长时间？"判断行动规律度</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>判定阶段</strong>：根据想法 × 行动矩阵定位阶段（思考前/思考/准备/行动/维持）</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>匹配干预策略</strong>：思考前→传递事实+探索价值；思考→梳理利弊+降低顾虑；准备→拆解目标+扫除障碍；行动→固化习惯+倒退预案；维持→增加趣味+强化内在动机</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>记录与复评</strong>：记录客户当前阶段和干预计划，4-6 周后重新评估阶段变化</div>
+  </div>
+</div>
+
+<div class="sop-item">
+  <h3>自主动机支持性训练环境设计</h3>
+  <div class="sop-item-sub">适用场景：设计训练计划时同步考虑 SDT 三需求的支持</div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>能力感知支持</strong>：为每个训练环节设计"可成功完成"的难度梯度，确保客户有成功体验；训练后给予具体的正面反馈（如"这次深蹲的膝盖轨迹比上次稳定了"）</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>自主性支持</strong>：与客户共同制定训练目标（"你觉得这周练什么？"）；提供选项而非指令（"今天你想先做有氧还是力量？"）；强调过程目标而非结果目标</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>社群性支持</strong>：介绍客户认识同期训练伙伴；建立训练群或打卡机制；定期组织社交性团体活动</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>氛围检查</strong>：确保训练环境是任务相关氛围（关注进步和努力），而非自我相关氛围（关注比较和竞争）</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>奖励审查</strong>：检查激励方式是否聚焦体验感（如庆祝进步），避免过度依赖物质奖励削弱内在动机</div>
+  </div>
+</div>
+
+<div class="sop-item">
+  <h3>认知扭曲识别与纠正引导</h3>
+  <div class="sop-item-sub">适用场景：客户表达消极想法时，识别认知扭曲并进行引导</div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>倾听并捕捉</strong>：注意客户的绝对化表述（"我永远做不到""这次全完了"）、过度概括、妄下结论等非理性想法</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>温和标记</strong>：用非评判性语言指出认知模式——"你刚才说'永远做不到'，这是不是有点绝对了？"</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>引导重构</strong>：用具体事实帮助客户重新评估——"上周你完成了 3 次训练，这周虽然只有 1 次，但总量仍然是正的"</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>关联目标</strong>：帮助客户将注意力从结果目标（体重数字）转向过程目标（训练频率、动作质量）</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>必要时转介</strong>：若客户的非理性想法涉及临床心理问题（如进食障碍、严重焦虑），应转介给持证心理咨询师</div>
+  </div>
+</div>
+
+</div>
+</section>
+
+<footer class="footer">
+  <div class="footer-text">ACEpresso · ACE-CPT 系统精读 · 3HFIT 教培中心</div>
+</footer>
+
+<script>
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top: document.querySelector('.tabs').offsetTop - 60, behavior: 'smooth'});
+}
+document.addEventListener('click', function(e) {
+  const card = e.target.closest('.k-card');
+  if (card) card.classList.toggle('expanded');
+  const opt = e.target.closest('.quiz-options li');
+  if (opt) {
+    const item = opt.closest('.quiz-item');
+    if (item.dataset.answered) return;
+    item.dataset.answered = '1';
+    const correct = opt.dataset.correct === 'true';
+    opt.classList.add(correct ? 'correct' : 'wrong');
+    if (!correct) item.querySelector('[data-correct="true"]').classList.add('correct');
+    item.querySelectorAll('.quiz-options li').forEach(li => li.classList.add('disabled'));
+    item.querySelector('.quiz-answer').classList.add('show');
+  }
+  const check = e.target.closest('.sop-check');
+  if (check) check.classList.toggle('checked');
+});
+</script>
+</body>
+</html>

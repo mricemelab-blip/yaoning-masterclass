@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch6 — ACEpresso</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-brand" onclick="location.href='index.html'">
+    <div class="nav-logo">ACEpresso</div>
+    <div class="nav-sub">ACE-CPT 系统精读</div>
+  </div>
+  <div class="nav-links">
+    <a href="ch1.html">第1章</a>
+    <a href="ch2.html">第2章</a>
+    <a href="ch3.html">第3章</a>
+    <a href="ch4.html">第4章</a>
+    <a href="ch5.html">第5章</a>
+    <a href="ch6.html" class="active">第6章</a>
+  </div>
+</nav>
+<section class="ch-hero">
+  <div class="ch-badge">Chapter 06</div>
+  <div class="ch-num">06</div>
+  <h1 class="ch-title">肌肉训练：基础和计划设计</h1>
+  <div class="ch-title-en">Resistance Training: Fundamentals & Program Design</div>
+  <p class="ch-desc">肌肉训练的核心是在安全前提下，通过渐进超负荷和专项化设计，改善神经肌肉功能、优化身体成分、提升功能性运动能力。本章系统拆解抗阻训练的解剖基础、生理适应、训练原则、变量控制和计划设计全流程。</p>
+</section>
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('lecture')">📖 讲义</button>
+  <button class="tab-btn" onclick="switchTab('cards')">🃏 知识要点</button>
+  <button class="tab-btn" onclick="switchTab('quiz')">✍️ 自测</button>
+  <button class="tab-btn" onclick="switchTab('sop')">📋 SOP工作单</button>
+</div>
+
+<!-- ========== 讲义 ========== -->
+<section id="lecture" class="section active">
+<div class="lecture-block">
+
+<h3>6.1 肌肉训练解剖学基础</h3>
+
+<h4>3.1.1 骨骼系统</h4>
+<p>人体骨骼系统是肌肉训练的核心功能结构，不仅构成身体支架、保护重要脏器，还是运动的杠杆系统和力量传导基础。骨骼系统由206块骨骼组成，分为中轴骨骼和四肢骨骼两大部分：</p>
+
+<table class="data-table">
+<thead><tr><th>分类</th><th>组成</th><th>与训练的核心关系</th></tr></thead>
+<tbody>
+<tr><td>中轴骨骼</td><td>颅骨、脊柱（颈/胸/腰）、胸骨、肋骨</td><td>核心稳定、姿态控制、力量传导中枢</td></tr>
+<tr><td>四肢骨骼</td><td>上肢：肩胛骨、锁骨、肱骨、尺骨、桡骨、手骨<br>下肢：骨盆、股骨、髌骨、胫骨、腓骨、足骨</td><td>动作执行、力量输出、器械操控</td></tr>
+</tbody>
+</table>
+
+<p>骨骼作为杠杆系统，是力量传导的基础。关节是杠杆系统的支点，肌肉附着于骨骼并跨越关节，通过收缩产生力量、带动骨骼围绕关节转动，完成各类动作。</p>
+
+<h4>3.1.2 神经系统</h4>
+<p>神经系统是人体运动控制和动作执行的核心，分为中枢神经系统和周围神经系统：</p>
+
+<table class="data-table">
+<thead><tr><th>分类</th><th>核心组成</th><th>与训练的关系</th></tr></thead>
+<tbody>
+<tr><td>中枢神经系统</td><td>脑、脊髓</td><td>动作规划、运动指令生成、运动控制核心</td></tr>
+<tr><td>周围神经系统</td><td>运动神经元、感觉神经元</td><td>指令传导、肌肉收缩触发、本体感觉反馈</td></tr>
+</tbody>
+</table>
+
+<p>每个肌纤维只连接一条运动神经元，一条运动神经元可支配多条肌纤维。核心运动控制原理：<strong>大脑只下达"收缩某块肌肉"的指令，不能决定该肌肉执行向心、等长还是离心收缩；收缩模式由外界阻力与发力大小的关系决定。</strong></p>
+
+<div class="coach-tip">
+  <div class="coach-tip-label">🎯 教练贴士</div>
+  新手训练初期力量快速增长，主因是神经适应能力增强——运动单位募集能力提升、放电频率优化、肌肉间协调改善。女性新手初期力量提升往往比男性更明显，因为神经适应空间更大。
+</div>
+
+<h4>3.1.3 肌肉系统</h4>
+<p>人体肌肉系统由骨骼肌、心肌、平滑肌三类组成。骨骼肌是唯一受意识支配的肌肉类型，是人体运动的动力源，也是肌肉训练的直接改造对象。</p>
+
+<table class="data-table">
+<thead><tr><th>肌肉类型</th><th>是否受意识支配</th><th>核心特点</th><th>与训练的关系</th></tr></thead>
+<tbody>
+<tr><td>骨骼肌</td><td>是</td><td>附着骨骼，产生躯体运动</td><td>训练直接改造对象</td></tr>
+<tr><td>心肌</td><td>否</td><td>心脏特有，抗疲劳性极强</td><td>心肺训练改造对象</td></tr>
+<tr><td>平滑肌</td><td>否</td><td>内脏和血管壁，控制内脏活动</td><td>不直接参与躯体运动</td></tr>
+</tbody>
+</table>
+
+<h4>3.1.4 结缔组织</h4>
+<p>结缔组织是包裹和连接肌肉、骨骼、关节的结构体系，主要类型包括肌外膜、肌束膜、肌内膜、肌腱和筋膜。</p>
+
+<table class="data-table">
+<thead><tr><th>结缔组织类型</th><th>位置与功能</th><th>与训练的核心关系</th></tr></thead>
+<tbody>
+<tr><td>肌外膜</td><td>包裹整块肌肉</td><td>力量传导、保护肌肉整体</td></tr>
+<tr><td>肌束膜</td><td>包裹肌纤维束</td><td>分隔肌束、辅助力量传递</td></tr>
+<tr><td>肌内膜</td><td>包裹单条肌纤维</td><td>维持肌纤维结构完整性</td></tr>
+<tr><td>肌腱</td><td>连接肌肉与骨骼，高刚性</td><td>力量传导关键，损伤风险高</td></tr>
+<tr><td>筋膜</td><td>遍布全身的结缔组织网络</td><td>支撑稳定、力量整体传导</td></tr>
+</tbody>
+</table>
+
+<blockquote>肌腱是肌肉-骨骼力量传导的关键枢纽，弹性足、刚性高。若训练负荷超出肌腱承受能力，易引发肌腱炎或肌腱损伤。</blockquote>
+
+<h4>3.1.5 运动术语</h4>
+
+<p><strong>关节运动平面</strong>：</p>
+<table class="data-table">
+<thead><tr><th>运动平面</th><th>特征</th><th>示例动作</th></tr></thead>
+<tbody>
+<tr><td>矢状面</td><td>前后方向，分左右</td><td>步行、深蹲、弯举</td></tr>
+<tr><td>额状面</td><td>左右方向，分前后</td><td>侧步走、侧平举</td></tr>
+<tr><td>水平面</td><td>横向旋转，分上下</td><td>转体、投掷</td></tr>
+</tbody>
+</table>
+
+<p><strong>关节运动类型</strong>：屈曲/伸展（矢状面）；外展/内收（额状面）；内旋/外旋（水平面）；环转（多平面复合）。</p>
+
+<p><strong>肌肉收缩类型</strong>：</p>
+<table class="data-table">
+<thead><tr><th>收缩类型</th><th>定义</th><th>训练场景</th></tr></thead>
+<tbody>
+<tr><td>等张收缩（向心+离心）</td><td>肌肉长度改变，张力基本恒定</td><td>传统力量训练</td></tr>
+<tr><td>等长收缩</td><td>肌肉长度不变，产生张力</td><td>平板支撑、靠墙静蹲</td></tr>
+<tr><td>等动收缩</td><td>全程恒定速度，需专用设备</td><td>康复训练</td></tr>
+</tbody>
+</table>
+
+<div class="memory-tip">
+  <div class="memory-tip-label">💡 记忆技巧</div>
+  关节运动平面速记：矢状面="前后切"（屈伸）；额状面="左右切"（外展内收）；水平面="上下切"（旋转）。深蹲在矢状面，侧平举在额状面，转体在水平面。
+</div>
+
+<h3>6.2 肌肉训练益处</h3>
+
+<h4>3.2.1 健康与体适能益处</h4>
+<ul>
+  <li>改善身体成分：增加肌肉质量、降低体脂率，提高基础代谢率（BMR）</li>
+  <li>增强心血管健康：降低血压、改善血脂水平、降低心血管疾病风险</li>
+  <li>提高胰岛素敏感性：改善血糖控制，降低2型糖尿病风险</li>
+  <li>增强骨骼强度：增加骨密度，降低骨质疏松风险</li>
+  <li>改善心理健康：减少焦虑抑郁，提升自尊和认知功能</li>
+</ul>
+
+<h4>3.2.2 功能性益处</h4>
+<ul>
+  <li>提升日常活动能力：搬重物、爬楼梯、从椅子起身等</li>
+  <li>改善平衡与协调能力：降低跌倒风险（老年人尤其重要）</li>
+  <li>增强关节稳定性：保护关节，降低损伤风险</li>
+  <li>提高运动表现：力量、速度、爆发力、耐力全面提升</li>
+  <li>预防运动损伤：强化薄弱环节，纠正肌肉不平衡</li>
+</ul>
+
+<h3>6.3 急性和慢性肌肉训练生理适应</h3>
+
+<h4>3.3.1 急性适应（运动过程中和运动后即刻）</h4>
+<table class="data-table">
+<thead><tr><th>急性反应</th><th>表现</th><th>训练意义</th></tr></thead>
+<tbody>
+<tr><td>心率↑、血压↑</td><td>心肌收缩力增强，心输出量增加</td><td>满足工作肌肉供血需求</td></tr>
+<tr><td>局部血流重新分配</td><td>工作肌肉血流量增加，非工作肌肉减少</td><td>优化氧气和营养供给</td></tr>
+<tr><td>摄氧量↑</td><td>氧气消耗增加，产生氧债</td><td>恢复期需补充氧债</td></tr>
+<tr><td>乳酸积累</td><td>无氧代谢产物，导致肌肉酸胀</td><td>高强度训练的正常反应</td></tr>
+<tr><td>体温↑、出汗</td><td>肌肉产热增加，体温调节启动</td><td>需注意散热和补水</td></tr>
+<tr><td>肌肉疲劳</td><td>肌纤维微损伤，能量物质消耗</td><td>恢复后产生超量恢复</td></tr>
+</tbody>
+</table>
+
+<h4>3.3.2 慢性适应（长期训练后的结构性改变）</h4>
+<table class="data-table">
+<thead><tr><th>适应类型</th><th>具体变化</th><th>训练意义</th></tr></thead>
+<tbody>
+<tr><td>肌肉肥大</td><td>肌纤维横截面积增大</td><td>肌肉体积和力量增加</td></tr>
+<tr><td>神经适应</td><td>运动单位募集↑、放电频率↑、协调性↑</td><td>力量提升（初期主因）</td></tr>
+<tr><td>肌腱强度↑</td><td>肌腱变粗，抗拉能力增强</td><td>力量传导效率提高</td></tr>
+<tr><td>骨密度↑</td><td>骨骼承受负荷后适应性增粗</td><td>降低骨折和骨质疏松风险</td></tr>
+<tr><td>能量储备↑</td><td>肌糖原、ATP、CP储备增加</td><td>运动耐力提升</td></tr>
+<tr><td>毛细血管密度↑</td><td>肌肉微血管网络扩展</td><td>氧气和营养供给改善</td></tr>
+</tbody>
+</table>
+
+<blockquote>新手训练初期（6-8周）力量快速增长主要源于神经适应，而非肌肉肥大。女性新手初期力量提升往往比男性更明显，因为神经适应空间更大。</blockquote>
+
+<h3>6.4 训练原则</h3>
+
+<h4>3.4.1 渐进超负荷原则</h4>
+<p>渐进超负荷是抗阻训练最重要的原则。身体持续暴露在渐进递增的负荷刺激下，会产生结构性和功能性适应，进而提升运动能力。若训练负荷停滞不变，身体不会产生新的适应，运动能力也不会持续提升。</p>
+
+<table class="data-table">
+<thead><tr><th>进阶变量</th><th>调整方式</th><th>注意事项</th></tr></thead>
+<tbody>
+<tr><td>负荷（重量）</td><td>逐步增加阻力</td><td>优先保证动作质量</td></tr>
+<tr><td>训练量</td><td>增加组数、次数</td><td>避免增量过快</td></tr>
+<tr><td>训练频率</td><td>增加训练次数/周</td><td>注意恢复能力</td></tr>
+<tr><td>组间休息</td><td>缩短休息时间</td><td>影响代谢压力</td></tr>
+</tbody>
+</table>
+
+<h4>3.4.2 专项性原则</h4>
+<p>训练适应具有高度特异性。身体只会针对具体的训练刺激产生特定适应，即"练什么，适应什么"。专项性体现在三个维度：</p>
+<ul>
+  <li><strong>能量系统</strong>：高强度短时长训练主要发展磷酸原系统和糖酵解系统，中低强度长时长训练主要发展有氧氧化系统</li>
+  <li><strong>收缩类型</strong>：向心训练主要提升向心力量和肌肉收缩速度，离心训练主要提升离心力量和肌肉控制能力</li>
+  <li><strong>关节角度</strong>：在特定关节角度下训练，力量增长主要发生在该角度附近（±10°~15°范围）</li>
+</ul>
+
+<div class="coach-tip">
+  <div class="coach-tip-label">🎯 教练贴士</div>
+  专项性要求训练设计必须贴合客户的真实需求。若客户目标是改善日常功能性活动（如搬运重物、爬楼梯），训练应包含多关节复合动作、核心稳定性训练，而非孤立器械训练。
+</div>
+
+<h4>3.4.3 可逆性原则</h4>
+<p>训练获得的适应会因停止训练而逐步消退，即"用进废退"。停止训练后，心肺适能消退较快（2-4周明显下降），力量消退较慢（8-12周开始明显下降），柔韧性消退居中。</p>
+
+<h4>3.4.4 边际递减效应</h4>
+<p>随着训练水平提升，每单位训练投入带来的收益逐步递减。新手进步空间大、进步速度快；中高级训练者进步空间小、进步速度慢，需要更精细的训练设计才能突破平台期。</p>
+
+<h3>6.5 训练变量</h3>
+
+<h4>3.5.1 抗阻训练核心变量</h4>
+
+<p><strong>训练负荷与重复次数</strong>——决定训练效果的核心：</p>
+<table class="data-table">
+<thead><tr><th>训练目标</th><th>推荐负荷</th><th>推荐次数</th><th>主要适应</th></tr></thead>
+<tbody>
+<tr><td>肌肉耐力</td><td>低负荷（<67% 1-RM）</td><td>≥12次</td><td>慢肌纤维适应</td></tr>
+<tr><td>肌肉肥大</td><td>中等负荷（67-85% 1-RM）</td><td>6-12次</td><td>快肌纤维肥大</td></tr>
+<tr><td>最大力量</td><td>高负荷（≥85% 1-RM）</td><td>≤6次</td><td>神经适应+快肌募集</td></tr>
+<tr><td>爆发力</td><td>低-中负荷（30-60% 1-RM）</td><td>3-5次（快速）</td><td>功率输出提升</td></tr>
+</tbody>
+</table>
+
+<p><strong>训练量</strong>——影响训练效果的关键变量。训练量通常指单次训练的总负荷量（重量×次数×组数）。高级训练者需要更大训练量才能持续进步，但过高的训练量可能导致过度训练。</p>
+
+<p><strong>组间休息</strong>——决定恢复程度：</p>
+<table class="data-table">
+<thead><tr><th>训练目标</th><th>推荐休息时间</th><th>恢复特点</th></tr></thead>
+<tbody>
+<tr><td>肌肉耐力</td><td>短（≤30秒）</td><td>不完全恢复，维持代谢压力</td></tr>
+<tr><td>肌肉肥大</td><td>中等（30-90秒）</td><td>部分恢复，平衡代谢与机械张力</td></tr>
+<tr><td>最大力量</td><td>长（2-5分钟）</td><td>充分恢复，保证每组输出</td></tr>
+<tr><td>爆发力</td><td>长（2-5分钟）</td><td>充分恢复，保证功率输出</td></tr>
+</tbody>
+</table>
+
+<p><strong>训练频率</strong>——每周训练次数。ACE推荐：新手2-3次/周（全身训练）；中级3-4次/周（分化训练）；高级4-6次/周（高度分化）。</p>
+
+<p><strong>动作速度</strong>——影响训练效果：</p>
+<table class="data-table">
+<thead><tr><th>速度类型</th><th>训练效果</th><th>适用目标</th></tr></thead>
+<tbody>
+<tr><td>慢速（4-6秒/次）</td><td>增加肌肉张力时间</td><td>肌肉耐力、动作控制</td></tr>
+<tr><td>中速（2-3秒/次）</td><td>平衡力量与速度</td><td>肌肉肥大、基础力量</td></tr>
+<tr><td>快速（<2秒/次）</td><td>提升功率输出</td><td>爆发力、运动表现</td></tr>
+</tbody>
+</table>
+
+<p><strong>动作选择</strong>——影响训练范围和效果：</p>
+<table class="data-table">
+<thead><tr><th>动作类型</th><th>特点</th><th>适用场景</th></tr></thead>
+<tbody>
+<tr><td>多关节（复合）动作</td><td>涉及多个关节、多个肌群</td><td>功能性训练、力量提升</td></tr>
+<tr><td>单关节（孤立）动作</td><td>涉及单一关节、单一肌群</td><td>肌肉塑形、弱点强化</td></tr>
+<tr><td> bilateral（双侧）动作</td><td>两侧肢体同时发力</td><td>大重量训练、力量基础</td></tr>
+<tr><td>unilateral（单侧）动作</td><td>单侧肢体发力</td><td>纠正不平衡、功能性提升</td></tr>
+</tbody>
+</table>
+
+<h4>3.5.2 抗阻训练单次课程组成</h4>
+<ul>
+  <li><strong>热身（5-10分钟）</strong>：低强度有氧+动态拉伸+专项准备活动，提升体温和关节活动度</li>
+  <li><strong>主体训练（20-60分钟）</strong>：根据训练目标选择动作、负荷、组数、次数和休息时间</li>
+  <li><strong>整理活动（5-10分钟）</strong>：低强度有氧+静态拉伸，促进恢复和柔韧性</li>
+</ul>
+
+<h3>6.6 ACE IFT模式中的肌肉训练</h3>
+
+<p>ACE IFT模式将肌肉训练分为三个层级，从基础功能到高级表现循序渐进：</p>
+
+<h4>3.6.1 功能训练（Functional Training）</h4>
+<p><strong>目标</strong>：改善基础运动模式、增强核心稳定性、纠正动作代偿。</p>
+<p><strong>内容</strong>：核心训练（抗伸展、抗侧屈、抗旋转）；平衡训练（单腿站立、不稳定平面训练）；灵活性训练（关节活动度改善）。</p>
+
+<h4>3.6.2 运动表现训练（Movement Training）</h4>
+<p><strong>目标</strong>：提升五大基本动作模式的质量和力量：深蹲模式（蹲）、弓步模式（弓箭步）、推模式（上肢推）、拉模式（上肢拉）、旋转模式（躯干旋转）。</p>
+<p><strong>内容</strong>：动作模式优化、负荷递增、多平面训练。</p>
+
+<h4>3.6.3 负荷/速度训练（Load/Speed Training）</h4>
+<p><strong>目标</strong>：针对特定目标（肌肉耐力、肥大、最大力量、爆发力）进行专项化训练。</p>
+<p><strong>内容</strong>：根据训练目标精确设计负荷、次数、组数、速度和休息时间。</p>
+
+<h3>6.7 肌肉训练评估</h3>
+
+<h4>3.7.1 静态姿态评估</h4>
+<p>从前面、侧面、后面观察客户自然站立姿态，识别肌肉不平衡、关节错位和姿态问题。常见问题包括头前伸、圆肩、骨盆前倾/后倾、膝关节内外翻等。</p>
+
+<h4>3.7.2 平衡能力评估</h4>
+<p>单腿站立测试（Stork Test）：睁眼单腿站立，记录保持时间。正常成年人应能保持30秒以上。平衡能力差提示核心稳定性和本体感觉需要强化。</p>
+
+<h4>3.7.3 核心功能评估</h4>
+<p>核心功能评估是肌肉训练评估的重要组成部分。McGill核心耐力测试是常用的标准化评估方法，包含四个测试：</p>
+<table class="data-table">
+<thead><tr><th>测试名称</th><th>测试内容</th><th>正常标准</th></tr></thead>
+<tbody>
+<tr><td>躯干屈曲耐力测试</td><td>仰卧，双手放于胸前，抬起上身至45°</td><td>男性≥133秒，女性≥107秒</td></tr>
+<tr><td>躯干伸展耐力测试</td><td>俯卧，上半身悬空于床沿，保持水平</td><td>男性≥150秒，女性≥120秒</td></tr>
+<tr><td>侧桥测试（左/右）</td><td>侧卧，肘支撑，抬起臀部保持直线</td><td>男性≥95秒（每侧），女性≥75秒（每侧）</td></tr>
+<tr><td>侧桥测试比值</td><td>左右侧桥时间比值</td><td>左:右比值应≤1.05</td></tr>
+</tbody>
+</table>
+
+<blockquote>McGill核心耐力测试的左右侧桥比值可预测腰痛风险。若左右侧差异过大（比值>1.05），提示侧链肌力不平衡，腰痛风险增加。</blockquote>
+
+<h4>3.7.4 关节活动度评估</h4>
+<p>使用量角器（Goniometer）测量主要关节的活动范围，识别柔韧性不足或关节活动受限。常见评估关节包括肩关节、髋关节、膝关节、踝关节。</p>
+
+<h4>3.7.5 基础动作模式评估</h4>
+<p>评估五大基本动作模式（蹲、弓步、推、拉、旋转）的质量，识别动作代偿和运动控制问题。常用评估工具包括FMS（功能性动作筛查）、过头深蹲测试等。</p>
+
+<h4>3.7.6 力量评估</h4>
+<p>1-RM（单次最大重复重量）测试是评估最大力量的金标准。对于新手或特殊人群，可使用预测1-RM的方法（如通过5-RM或10-RM推算）。</p>
+
+<table class="data-table">
+<thead><tr><th>评估方法</th><th>适用人群</th><th>测试流程</th></tr></thead>
+<tbody>
+<tr><td>1-RM直接测试</td><td>有训练经验的中级/高级训练者</td><td>充分热身后，尝试单次最大重量</td></tr>
+<tr><td>预测1-RM（5-RM）</td><td>新手、女性、老年人</td><td>完成5次最大重量，代入公式推算</td></tr>
+<tr><td>预测1-RM（10-RM）</td><td>体弱人群、康复期客户</td><td>完成10次最大重量，代入公式推算</td></tr>
+</tbody>
+</table>
+
+</div>
+</section>
+
+<!-- ========== 知识要点卡片 ========== -->
+<section id="cards" class="section">
+<div class="cards-grid">
+
+<div class="k-card">
+  <div class="k-card-num">KEY 01</div>
+  <div class="k-card-title">骨骼肌是唯一受意识支配的肌肉</div>
+  <div class="k-card-summary">抗阻训练直接改造骨骼肌</div>
+  <div class="k-card-detail">三类肌肉中只有骨骼肌受意识支配。心肌和平滑肌不受意识控制。骨骼肌附着于骨骼，产生躯体运动，是肌肉训练的直接目标组织。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 02</div>
+  <div class="k-card-title">大脑不决定收缩类型</div>
+  <div class="k-card-summary">收缩模式由阻力决定</div>
+  <div class="k-card-detail">大脑只下达"收缩某块肌肉"的指令，不能决定该肌肉执行向心、等长还是离心收缩。收缩模式由外界阻力与发力大小的关系决定——这是核心运动控制原理。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 03</div>
+  <div class="k-card-title">神经适应是初期力量主因</div>
+  <div class="k-card-summary">前6-8周靠神经不靠肌肉</div>
+  <div class="k-card-detail">新手训练初期力量快速增长主因是神经适应：运动单位募集↑、放电频率↑、肌肉间协调↑。女性新手初期力量提升往往比男性更明显，因为神经适应空间更大。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 04</div>
+  <div class="k-card-title">三大训练原则</div>
+  <div class="k-card-summary">超负荷+专项性+可逆性</div>
+  <div class="k-card-detail">渐进超负荷：负荷递增才能持续适应。专项性：练什么适应什么，训练设计须贴合目标。可逆性：停训后适应消退，心肺消退最快（2-4周），力量消退较慢（8-12周）。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 05</div>
+  <div class="k-card-title">训练目标决定负荷与次数</div>
+  <div class="k-card-summary">耐力≥12次，肥大6-12次，力量≤6次</div>
+  <div class="k-card-detail">肌肉耐力：<67% 1-RM，≥12次。肌肉肥大：67-85% 1-RM，6-12次。最大力量：≥85% 1-RM，≤6次。爆发力：30-60% 1-RM，3-5次快速。负荷与次数是决定训练效果的核心变量。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 06</div>
+  <div class="k-card-title">组间休息因目标而异</div>
+  <div class="k-card-summary">耐力≤30s，肥大30-90s，力量2-5min</div>
+  <div class="k-card-detail">肌肉耐力：短休息≤30秒，维持代谢压力。肌肉肥大：中等休息30-90秒，平衡代谢与机械张力。最大力量和爆发力：长休息2-5分钟，充分恢复保证每组输出。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 07</div>
+  <div class="k-card-title">IFT肌肉训练三层级</div>
+  <div class="k-card-summary">功能→运动模式→负荷/速度</div>
+  <div class="k-card-detail">功能训练：核心稳定+平衡+灵活性。运动表现训练：五大动作模式（蹲/弓步/推/拉/旋转）优化。负荷/速度训练：针对特定目标的专项化设计。从基础功能到高级表现循序渐进。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 08</div>
+  <div class="k-card-title">McGill核心耐力测试</div>
+  <div class="k-card-summary">左右侧桥比值预测腰痛风险</div>
+  <div class="k-card-detail">四项测试：躯干屈曲耐力、躯干伸展耐力、左右侧桥。关键指标：左右侧桥时间比值应≤1.05，若差异过大提示侧链肌力不平衡，腰痛风险增加。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 09</div>
+  <div class="k-card-title">三大运动平面</div>
+  <div class="k-card-summary">矢状面屈伸、额状面展收、水平面旋转</div>
+  <div class="k-card-detail">矢状面=前后切（屈伸），如深蹲、弯举。额状面=左右切（外展内收），如侧平举。水平面=上下切（旋转），如转体、投掷。多关节复合动作往往涉及多平面协同。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+<div class="k-card">
+  <div class="k-card-num">KEY 10</div>
+  <div class="k-card-title">边际递减效应</div>
+  <div class="k-card-summary">水平越高进步越慢</div>
+  <div class="k-card-detail">随着训练水平提升，每单位训练投入带来的收益逐步递减。新手进步空间大、速度快；中高级训练者需要更精细的训练设计（周期化、变量调整）才能突破平台期。</div>
+  <div class="k-card-toggle">展开详情</div>
+</div>
+
+</div>
+</section>
+
+<!-- ========== 自测 ========== -->
+<section id="quiz" class="section">
+<div class="quiz-block">
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">1</span>关于骨骼肌的特征，以下说法正确的是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 骨骼肌不受意识支配</li>
+    <li data-correct="true">B. 骨骼肌是唯一受意识支配的肌肉类型</li>
+    <li data-correct="false">C. 心肌也受意识支配</li>
+    <li data-correct="false">D. 平滑肌附着于骨骼</li>
+  </ul>
+  <div class="quiz-answer">三类肌肉中只有骨骼肌受意识支配，附着于骨骼，产生躯体运动，是抗阻训练的直接改造对象。心肌和平滑肌不受意识支配。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">2</span>核心运动控制原理指出：大脑对肌肉收缩的控制方式是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 大脑决定向心、离心或等长收缩</li>
+    <li data-correct="true">B. 大脑只下达"收缩"指令，收缩模式由阻力与发力的关系决定</li>
+    <li data-correct="false">C. 大脑只控制向心收缩</li>
+    <li data-correct="false">D. 大脑通过意识直接控制收缩类型</li>
+  </ul>
+  <div class="quiz-answer">大脑只下达"收缩某块肌肉"的指令，不能决定该肌肉执行向心、等长还是离心收缩。收缩模式由外界阻力与发力大小的关系决定。这是理解动作控制的核心原理。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">3</span>新手训练初期（6-8周）力量快速增长的主要原因是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 肌肉肥大</li>
+    <li data-correct="false">B. 肌腱变粗</li>
+    <li data-correct="true">C. 神经适应（运动单位募集↑、放电频率↑）</li>
+    <li data-correct="false">D. 骨密度增加</li>
+  </ul>
+  <div class="quiz-answer">新手初期力量增长主因是神经适应：运动单位募集能力提升、放电频率优化、肌肉间协调改善。肌肉肥大通常在8-12周后才成为主要贡献因素。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">4</span>以提升最大力量为目标的训练，推荐的负荷与次数是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. <67% 1-RM，≥12次</li>
+    <li data-correct="false">B. 67-85% 1-RM，6-12次</li>
+    <li data-correct="true">C. ≥85% 1-RM，≤6次</li>
+    <li data-correct="false">D. 30-60% 1-RM，3-5次快速</li>
+  </ul>
+  <div class="quiz-answer">最大力量训练需高负荷（≥85% 1-RM）、低次数（≤6次），主要促进神经适应和快肌纤维募集。≥12次针对肌耐力，6-12次针对肌肥大，3-5次快速针对爆发力。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">5</span>关于专项性原则，以下说法错误的是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 训练适应具有高度特异性</li>
+    <li data-correct="false">B. 在特定关节角度训练，力量增长主要在该角度附近</li>
+    <li data-correct="true">C. 专项性要求所有客户都使用相同的训练方案</li>
+    <li data-correct="false">D. 训练设计应贴合客户的真实目标需求</li>
+  </ul>
+  <div class="quiz-answer">专项性强调"练什么适应什么"，要求训练设计贴合客户目标，而非使用统一方案。不同目标的客户需要不同的能量系统、收缩类型和关节角度组合。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">6</span>关于组间休息，以下搭配正确的是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 肌肉肥大：2-5分钟</li>
+    <li data-correct="false">B. 最大力量：30-90秒</li>
+    <li data-correct="true">C. 肌肉耐力：≤30秒</li>
+    <li data-correct="false">D. 爆发力：≤30秒</li>
+  </ul>
+  <div class="quiz-answer">肌肉耐力短休息≤30秒（维持代谢压力）；肌肉肥大中等休息30-90秒（平衡代谢与张力）；最大力量和爆发力长休息2-5分钟（充分恢复保证输出）。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">7</span>McGill核心耐力测试中，左右侧桥时间比值大于1.05提示什么？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 核心力量优秀</li>
+    <li data-correct="false">B. 柔韧性不足</li>
+    <li data-correct="true">C. 侧链肌力不平衡，腰痛风险增加</li>
+    <li data-correct="false">D. 关节活动度受限</li>
+  </ul>
+  <div class="quiz-answer">McGill测试中左右侧桥比值>1.05提示侧链肌力不平衡，是腰痛的预测指标。训练计划应针对性强化较弱一侧，恢复左右平衡。</div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q"><span class="quiz-q-num">8</span>关于可逆性原则，以下说法正确的是？</div>
+  <ul class="quiz-options">
+    <li data-correct="false">A. 停训后力量消退最快</li>
+    <li data-correct="true">B. 心肺适能在停训后2-4周明显下降</li>
+    <li data-correct="false">C. 所有训练适应消退速度相同</li>
+    <li data-correct="false">D. 停训后肌肉完全恢复原始状态</li>
+  </ul>
+  <div class="quiz-answer">可逆性原则即"用进废退"。心肺适能消退最快（2-4周），力量消退较慢（8-12周），柔韧性居中。不同适应消退速度不同，但不会完全恢复到训练前状态。</div>
+</div>
+
+</div>
+</section>
+
+<!-- ========== SOP ========== -->
+<section id="sop" class="section">
+<div class="sop-block">
+
+<div class="sop-item">
+  <h3>McGill核心耐力测试SOP</h3>
+  <div class="sop-item-sub">适用场景：评估客户核心耐力水平和左右侧链平衡状况</div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>躯干屈曲耐力测试</strong>：客户仰卧，双手放于胸前，双腿伸直。抬起上身至45°并保持，计时至力竭。正常标准：男性≥133秒，女性≥107秒。</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>躯干伸展耐力测试</strong>：客户俯卧，上半身悬空于床沿，双手抱胸。保持躯干水平，计时至力竭。正常标准：男性≥150秒，女性≥120秒。</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>左侧桥测试</strong>：客户左侧卧，左肘支撑，抬起臀部保持身体直线。计时至力竭。正常标准：男性≥95秒，女性≥75秒。</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>右侧桥测试</strong>：同法测试右侧。</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>计算左右比值</strong>：左侧时间÷右侧时间。比值应≤1.05。若差异过大，需针对性强化较弱一侧。</div>
+  </div>
+</div>
+
+<div class="sop-item">
+  <h3>1-RM力量评估SOP</h3>
+  <div class="sop-item-sub">适用场景：评估客户最大力量水平，为训练计划设计提供依据</div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>健康筛查</strong>：确认PAR-Q+结果、有无 musculoskeletal 伤病、血压是否正常</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>选择评估方式</strong>：有经验者→直接1-RM测试；新手/特殊人群→预测1-RM（5-RM或10-RM）</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>热身流程</strong>：5-10分钟低强度有氧 + 目标动作轻负荷热身组（8-10次） + 中等负荷热身组（3-5次）</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>测试执行</strong>：直接1-RM从预估60-70% 1-RM开始，每次增加5-10%，间隔3-5分钟尝试，直至找到最大重量。预测1-RM则完成5次或10次最大重量。</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>记录与计划</strong>：记录测试结果，代入训练目标对应百分比，计算各目标（耐力/肥大/力量）的训练负荷</div>
+  </div>
+</div>
+
+<div class="sop-item">
+  <h3>抗阻训练计划设计SOP</h3>
+  <div class="sop-item-sub">适用场景：根据客户评估结果和目标设计系统性抗阻训练方案</div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>明确训练目标</strong>：肌肉耐力、肌肉肥大、最大力量、爆发力——目标决定负荷、次数和休息时间</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>选择IFT层级</strong>：功能训练（核心/平衡/灵活性）→ 运动表现训练（五大动作模式）→ 负荷/速度训练</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>确定训练频率</strong>：新手2-3次/周（全身），中级3-4次/周（分化），高级4-6次/周（高度分化）</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>设计训练变量</strong>：根据目标设定负荷（%1-RM）、次数、组数、休息时间、动作速度和动作选择</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>动作编排</strong>：多关节复合动作优先→单关节孤立动作补充；双侧动作→单侧动作纠正不平衡</div>
+  </div>
+  <div class="sop-step">
+    <div class="sop-check"></div>
+    <div class="sop-step-text"><strong>进阶计划</strong>：遵循渐进超负荷原则，每2-4周评估一次，调整负荷/次数/组数。注意边际递减效应——水平越高进阶越谨慎</div>
+  </div>
+</div>
+
+</div>
+</section>
+
+<footer class="footer"><div class="footer-text">ACEpresso · ACE-CPT 系统精读 · 3HFIT 教培中心</div></footer>
+<script>
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top: document.querySelector('.tabs').offsetTop - 60, behavior: 'smooth'});
+}
+document.addEventListener('click', function(e) {
+  const card = e.target.closest('.k-card');
+  if (card) card.classList.toggle('expanded');
+  const opt = e.target.closest('.quiz-options li');
+  if (opt) {
+    const item = opt.closest('.quiz-item');
+    if (item.dataset.answered) return;
+    item.dataset.answered = '1';
+    const correct = opt.dataset.correct === 'true';
+    opt.classList.add(correct ? 'correct' : 'wrong');
+    if (!correct) item.querySelector('[data-correct="true"]').classList.add('correct');
+    item.querySelectorAll('.quiz-options li').forEach(li => li.classList.add('disabled'));
+    item.querySelector('.quiz-answer').classList.add('show');
+  }
+  const check = e.target.closest('.sop-check');
+  if (check) check.classList.toggle('checked');
+});
+</script>
+</body>
+</html>

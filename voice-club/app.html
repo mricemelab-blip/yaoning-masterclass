@@ -3,123 +3,264 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arise 发声俱乐部</title>
+<title>ARISE CLUB — Where Strength Meets Science</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0a0a0a;--bg2:#111111;--bg3:#1a1a1a;--bg4:#222222;--gold:#C5A55A;--gold-dim:#9a8347;--text:#e8e8e8;--text2:#999999;--text3:#666666;--border:#2a2a2a;--radius:8px}
-html{font-size:16px;-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+
+:root{
+  --bg:#F5F0E8;
+  --bg-alt:#FAF8F5;
+  --black:#1A1A1A;
+  --gold:#C5A55A;
+  --gold-dark:#B8960C;
+  --gray:#8A8A8A;
+  --light-gray:#D4CFC6;
+  --white:#FFFFFF;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,'PingFang SC','Noto Sans SC',sans-serif;
+  background-color:var(--bg);
+  color:var(--black);
+  line-height:1.6;
+  overflow-x:hidden;
+}
 a{color:var(--gold);text-decoration:none}
 a:hover{text-decoration:underline}
 
 /* ===== NAV ===== */
-.nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 1.5rem;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.nav-logo{font-size:1.125rem;font-weight:700;color:var(--gold);letter-spacing:.04em}
-.nav-right{display:flex;align-items:center;gap:.75rem}
-.nav-user{font-size:.875rem;color:var(--text2)}
-.nav-logout{background:none;border:1px solid var(--border);color:var(--text2);padding:.25rem .625rem;border-radius:var(--radius);font-size:.75rem;cursor:pointer;transition:border-color .2s,color .2s}
+.nav{
+  background:var(--bg);
+  border-bottom:1px solid var(--light-gray);
+  padding:0 8vw;
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.nav-logo{
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:3px;
+  color:var(--black);
+  text-transform:uppercase;
+}
+.nav-logo span{color:var(--gold)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-user{font-size:13px;color:var(--gray)}
+.nav-logout{
+  background:none;
+  border:1px solid var(--light-gray);
+  color:var(--gray);
+  padding:4px 12px;
+  border-radius:4px;
+  font-size:12px;
+  cursor:pointer;
+  transition:all .2s;
+  letter-spacing:1px;
+}
 .nav-logout:hover{border-color:var(--gold);color:var(--gold)}
 
 /* ===== TABS ===== */
-.tab-bar{display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--bg2);position:sticky;top:56px;z-index:99;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab-bar{
+  display:flex;
+  gap:0;
+  border-bottom:1px solid var(--light-gray);
+  background:var(--bg);
+  position:sticky;
+  top:64px;
+  z-index:99;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  padding:0 8vw;
+}
 .tab-bar::-webkit-scrollbar{display:none}
-.tab-btn{flex:0 0 auto;padding:.875rem 1.25rem;font-size:.875rem;color:var(--text3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:color .2s,border-color .2s;white-space:nowrap}
-.tab-btn:hover{color:var(--text2)}
-.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+.tab-btn{
+  flex:0 0 auto;
+  padding:14px 20px;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:1.5px;
+  color:var(--gray);
+  background:none;
+  border:none;
+  border-bottom:2px solid transparent;
+  cursor:pointer;
+  transition:color .2s,border-color .2s;
+  white-space:nowrap;
+  text-transform:uppercase;
+}
+.tab-btn:hover{color:var(--black)}
+.tab-btn.active{color:var(--black);border-bottom-color:var(--gold)}
 
 /* ===== MAIN ===== */
-.main{flex:1;padding:1.5rem;max-width:960px;width:100%;margin:0 auto}
-@media(max-width:480px){.main{padding:1rem .75rem}}
+.main{
+  flex:1;
+  padding:40px 8vw 60px;
+  max-width:960px;
+  width:100%;
+  margin:0 auto;
+}
+@media(max-width:600px){.main{padding:24px 5vw 40px}.nav{padding:0 5vw}.tab-bar{padding:0 5vw}}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
 
-/* ===== CARDS (Literature) ===== */
-.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1rem;transition:border-color .2s}
-.card:hover{border-color:var(--gold-dim)}
-.card-title{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.375rem;line-height:1.4}
-.card-meta{font-size:.75rem;color:var(--text3);margin-bottom:.625rem}
-.card-summary{font-size:.875rem;color:var(--text2);line-height:1.65;margin-bottom:.75rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.card-full{display:none;font-size:.875rem;color:var(--text2);line-height:1.75;margin-bottom:.75rem}
-.card-full.expanded{display:block}
-.card-summary.hidden{display:none}
-.card-btn{background:none;border:1px solid var(--gold-dim);color:var(--gold);padding:.375rem .875rem;border-radius:var(--radius);font-size:.8125rem;cursor:pointer;transition:background .2s,color .2s}
-.card-btn:hover{background:var(--gold);color:var(--bg)}
-
-/* ===== COURSES ===== */
-.course-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1rem}
-.course-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem}
-.course-name{font-size:1rem;font-weight:600;color:var(--text)}
-.course-hours{font-size:.75rem;color:var(--text3)}
-.progress-wrap{background:var(--bg4);border-radius:4px;height:6px;margin:.625rem 0;overflow:hidden}
-.progress-bar{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));border-radius:4px;transition:width .4s ease}
-.course-footer{display:flex;justify-content:space-between;align-items:center}
-.course-pct{font-size:.75rem;color:var(--text3)}
-.course-btn{background:none;border:1px solid var(--gold-dim);color:var(--gold);padding:.375rem .875rem;border-radius:var(--radius);font-size:.8125rem;cursor:pointer;transition:background .2s,color .2s}
-.course-btn:hover{background:var(--gold);color:var(--bg)}
-.course-btn.completed{border-color:var(--text3);color:var(--text3);cursor:default}
-.course-btn.completed:hover{background:none;color:var(--text3)}
-
-/* ===== REPLAYS ===== */
-.replay-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
-.replay-info{flex:1;min-width:0}
-.replay-title{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.25rem}
-.replay-meta{font-size:.75rem;color:var(--text3)}
-.replay-btn{flex:0 0 auto;background:none;border:1px solid var(--gold-dim);color:var(--gold);padding:.375rem .875rem;border-radius:var(--radius);font-size:.8125rem;cursor:pointer;transition:background .2s,color .2s;white-space:nowrap}
-.replay-btn:hover{background:var(--gold);color:var(--bg)}
-
-/* ===== PLACEHOLDER ===== */
-.placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 1rem;text-align:center}
-.placeholder-icon{font-size:3rem;margin-bottom:1.25rem;opacity:.35}
-.placeholder-text{font-size:1rem;color:var(--text3);line-height:1.7}
-
-/* ===== FOOTER ===== */
-.footer{border-top:1px solid var(--border);padding:1.25rem;text-align:center;font-size:.75rem;color:var(--text3)}
-
-/* ===== RESPONSIVE ===== */
-@media(max-width:480px){
-  .nav{padding:0 1rem}
-  .nav-logo{font-size:1rem}
-  .replay-card{flex-direction:column;align-items:flex-start;gap:.75rem}
-  .replay-btn{width:100%}
-  .course-footer{flex-direction:column;align-items:flex-start;gap:.5rem}
-  .course-btn{width:100%;text-align:center}
-}
-
 /* ===== LITERATURE TOOLBAR ===== */
-.lit-toolbar{margin-bottom:1.25rem}
-.lit-search{width:100%;height:40px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:0 14px;font-size:.875rem;color:var(--text);outline:none;margin-bottom:.75rem;transition:border-color .2s}
+.lit-toolbar{margin-bottom:28px}
+.lit-search{
+  width:100%;
+  height:44px;
+  background:var(--white);
+  border:1px solid var(--light-gray);
+  border-radius:6px;
+  padding:0 16px;
+  font-size:14px;
+  color:var(--black);
+  outline:none;
+  margin-bottom:12px;
+  transition:border-color .2s;
+}
 .lit-search:focus{border-color:var(--gold)}
-.lit-search::placeholder{color:var(--text3)}
-.lit-filters{display:flex;gap:.375rem;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:.25rem}
+.lit-search::placeholder{color:var(--gray)}
+.lit-filters{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
 .lit-filters::-webkit-scrollbar{display:none}
-.lit-filter{flex:0 0 auto;background:var(--bg3);border:1px solid var(--border);color:var(--text3);padding:.25rem .625rem;border-radius:20px;font-size:.75rem;cursor:pointer;transition:all .2s;white-space:nowrap}
-.lit-filter:hover{border-color:var(--gold-dim);color:var(--text2)}
-.lit-filter.active{background:var(--gold);color:var(--bg);border-color:var(--gold)}
-.lit-filter span{font-size:.6875rem;opacity:.7;margin-left:2px}
+.lit-filter{
+  flex:0 0 auto;
+  background:var(--white);
+  border:1px solid var(--light-gray);
+  color:var(--gray);
+  padding:5px 14px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:500;
+  cursor:pointer;
+  transition:all .2s;
+  white-space:nowrap;
+  letter-spacing:.5px;
+}
+.lit-filter:hover{border-color:var(--gold);color:var(--black)}
+.lit-filter.active{background:var(--black);color:var(--white);border-color:var(--black)}
+.lit-filter span{font-size:11px;opacity:.6;margin-left:2px}
 
 /* ===== LIT CARD ===== */
-.lit-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem;transition:border-color .2s}
-.lit-card:hover{border-color:var(--gold-dim)}
-.lit-card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;margin-bottom:.375rem}
-.lit-card-title{font-size:.9375rem;font-weight:600;color:var(--text);line-height:1.45;flex:1}
-.lit-card-type{flex:0 0 auto;font-size:.625rem;padding:.125rem .5rem;border-radius:10px;letter-spacing:.5px;white-space:nowrap;margin-top:2px}
-.type-srma{background:rgba(200,164,94,.12);color:#C8A45E;border:1px solid rgba(200,164,94,.2)}
-.type-nma{background:rgba(76,175,80,.1);color:#66BB6A;border:1px solid rgba(76,175,80,.2)}
-.type-umb{background:rgba(100,181,246,.1);color:#64B5F6;border:1px solid rgba(100,181,246,.2)}
-.type-rct{background:rgba(255,152,0,.1);color:#FFA726;border:1px solid rgba(255,152,0,.2)}
-.type-pos{background:rgba(171,71,188,.1);color:#CE93D8;border:1px solid rgba(171,71,188,.2)}
-.type-other{background:rgba(255,255,255,.05);color:var(--text3);border:1px solid var(--border)}
-.lit-card-meta{font-size:.75rem;color:var(--text3);margin-bottom:.5rem}
-.lit-card-meta span{margin-right:.75rem}
-.lit-card-summary{font-size:.8125rem;color:var(--text2);line-height:1.65}
-.lit-card-journal{font-size:.6875rem;color:var(--text3);margin-top:.5rem;font-style:italic}
-.lit-card-journal a{color:var(--gold-dim);text-decoration:none}
-.lit-card-journal a:hover{color:var(--gold);text-decoration:underline}
-.lit-empty{text-align:center;padding:3rem 1rem}
+.lit-card{
+  background:var(--white);
+  border:1px solid var(--light-gray);
+  border-radius:8px;
+  padding:20px 24px;
+  margin-bottom:16px;
+  transition:border-color .2s,box-shadow .2s;
+}
+.lit-card:hover{border-color:var(--gold);box-shadow:0 2px 12px rgba(197,165,90,.08)}
+.lit-card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:8px}
+.lit-card-title{font-size:15px;font-weight:700;color:var(--black);line-height:1.5;flex:1}
+.lit-card-type{flex:0 0 auto;font-size:10px;padding:3px 10px;border-radius:12px;letter-spacing:.5px;white-space:nowrap;margin-top:2px;font-weight:600}
+.type-srma{background:rgba(197,165,90,.1);color:var(--gold-dark);border:1px solid rgba(197,165,90,.25)}
+.type-nma{background:rgba(76,175,80,.08);color:#2E7D32;border:1px solid rgba(76,175,80,.2)}
+.type-umb{background:rgba(33,150,243,.08);color:#1565C0;border:1px solid rgba(33,150,243,.2)}
+.type-rct{background:rgba(255,152,0,.08);color:#E65100;border:1px solid rgba(255,152,0,.2)}
+.type-pos{background:rgba(156,39,176,.08);color:#7B1FA2;border:1px solid rgba(156,39,176,.2)}
+.type-other{background:rgba(0,0,0,.04);color:var(--gray);border:1px solid var(--light-gray)}
+.lit-card-meta{font-size:12px;color:var(--gray);margin-bottom:10px;letter-spacing:.3px}
+.lit-card-meta span{margin-right:12px}
+.lit-card-summary{font-size:13.5px;color:#444;line-height:1.7}
+.lit-card-journal{font-size:11px;color:var(--gray);margin-top:8px;font-style:italic}
+.lit-empty{text-align:center;padding:48px 16px;color:var(--gray)}
+
+/* ===== COURSE CARD ===== */
+.course-card{
+  background:var(--white);
+  border:1px solid var(--light-gray);
+  border-radius:8px;
+  padding:20px 24px;
+  margin-bottom:16px;
+  transition:border-color .2s;
+}
+.course-card:hover{border-color:var(--gold)}
+.course-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.course-name{font-size:15px;font-weight:700;color:var(--black)}
+.course-hours{font-size:12px;color:var(--gray)}
+.progress-wrap{background:var(--bg);border-radius:3px;height:5px;margin:10px 0;overflow:hidden}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--gold-dark),var(--gold));border-radius:3px;transition:width .4s ease}
+.course-footer{display:flex;justify-content:space-between;align-items:center}
+.course-pct{font-size:12px;color:var(--gray)}
+.course-btn{
+  background:none;
+  border:1px solid var(--gold);
+  color:var(--gold);
+  padding:5px 14px;
+  border-radius:4px;
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .2s;
+  letter-spacing:.5px;
+}
+.course-btn:hover{background:var(--gold);color:var(--white)}
+.course-btn.completed{border-color:var(--light-gray);color:var(--gray);cursor:default}
+.course-btn.completed:hover{background:none;color:var(--gray)}
+
+/* ===== REPLAY CARD ===== */
+.replay-card{
+  background:var(--white);
+  border:1px solid var(--light-gray);
+  border-radius:8px;
+  padding:20px 24px;
+  margin-bottom:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  transition:border-color .2s;
+}
+.replay-card:hover{border-color:var(--gold)}
+.replay-info{flex:1;min-width:0}
+.replay-title{font-size:15px;font-weight:700;color:var(--black);margin-bottom:4px}
+.replay-meta{font-size:12px;color:var(--gray)}
+.replay-btn{
+  flex:0 0 auto;
+  background:none;
+  border:1px solid var(--gold);
+  color:var(--gold);
+  padding:5px 14px;
+  border-radius:4px;
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .2s;
+  white-space:nowrap;
+  letter-spacing:.5px;
+}
+.replay-btn:hover{background:var(--gold);color:var(--white)}
+
+/* ===== PLACEHOLDER ===== */
+.placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 16px;text-align:center}
+.placeholder-icon{font-size:48px;margin-bottom:16px;opacity:.2}
+.placeholder-text{font-size:14px;color:var(--gray);line-height:1.8}
+
+/* ===== FOOTER ===== */
+.footer{
+  border-top:1px solid var(--light-gray);
+  padding:20px 8vw;
+  text-align:center;
+  font-size:11px;
+  color:var(--gray);
+  letter-spacing:1px;
+}
 
 @media(max-width:480px){
-  .lit-card{padding:.875rem 1rem}
-  .lit-card-title{font-size:.875rem}
+  .nav{padding:0 5vw;height:56px}
+  .nav-logo{font-size:13px}
+  .tab-btn{padding:12px 14px;font-size:12px}
+  .lit-card,.course-card,.replay-card{padding:16px 18px}
+  .replay-card{flex-direction:column;align-items:flex-start;gap:12px}
+  .replay-btn{width:100%;text-align:center}
+  .course-footer{flex-direction:column;align-items:flex-start;gap:8px}
+  .course-btn{width:100%;text-align:center}
 }
 </style>
 </head>
@@ -127,7 +268,7 @@ a:hover{text-decoration:underline}
 
 <!-- NAV -->
 <nav class="nav">
-  <div class="nav-logo">Arise 发声俱乐部</div>
+  <div class="nav-logo">ARISE <span>CLUB</span></div>
   <div class="nav-right">
     <span class="nav-user" id="navUser"></span>
     <button class="nav-logout" id="navLogout" onclick="handleLogout()">退出</button>
@@ -147,7 +288,6 @@ a:hover{text-decoration:underline}
 
   <!-- TAB 1: LITERATURE -->
   <div class="tab-panel active" id="panel-literature">
-    <!-- Search & Filter Bar -->
     <div class="lit-toolbar">
       <input type="text" id="litSearch" class="lit-search" placeholder="搜索作者、标题、关键词…" oninput="filterLit()">
       <div class="lit-filters" id="litFilters">
@@ -160,11 +300,10 @@ a:hover{text-decoration:underline}
         <button class="lit-filter" data-type="文献解读" onclick="setFilter(this)">解读 <span id="count-other">0</span></button>
       </div>
     </div>
-    <!-- Literature Cards Container -->
     <div id="litContainer"></div>
     <div class="lit-empty" id="litEmpty" style="display:none">
-      <div style="font-size:2rem;opacity:.3;margin-bottom:.75rem">🔍</div>
-      <div style="color:var(--text3);font-size:.875rem">没有找到匹配的文献</div>
+      <div style="font-size:32px;opacity:.2;margin-bottom:12px">🔍</div>
+      <div style="font-size:14px">没有找到匹配的文献</div>
     </div>
   </div>
 
@@ -173,7 +312,7 @@ a:hover{text-decoration:underline}
     <div class="course-card">
       <div class="course-header">
         <div class="course-name">科学发声基础</div>
-        <div class="course-hours">8课时</div>
+        <div class="course-hours">8 课时</div>
       </div>
       <div class="progress-wrap"><div class="progress-bar" id="progress-1" style="width:0%"></div></div>
       <div class="course-footer">
@@ -184,7 +323,7 @@ a:hover{text-decoration:underline}
     <div class="course-card">
       <div class="course-header">
         <div class="course-name">呼吸控制与支撑</div>
-        <div class="course-hours">6课时</div>
+        <div class="course-hours">6 课时</div>
       </div>
       <div class="progress-wrap"><div class="progress-bar" id="progress-2" style="width:0%"></div></div>
       <div class="course-footer">
@@ -195,7 +334,7 @@ a:hover{text-decoration:underline}
     <div class="course-card">
       <div class="course-header">
         <div class="course-name">共鸣腔体训练</div>
-        <div class="course-hours">10课时</div>
+        <div class="course-hours">10 课时</div>
       </div>
       <div class="progress-wrap"><div class="progress-bar" id="progress-3" style="width:0%"></div></div>
       <div class="course-footer">
@@ -206,7 +345,7 @@ a:hover{text-decoration:underline}
     <div class="course-card">
       <div class="course-header">
         <div class="course-name">嗓音保护与恢复</div>
-        <div class="course-hours">4课时</div>
+        <div class="course-hours">4 课时</div>
       </div>
       <div class="progress-wrap"><div class="progress-bar" id="progress-4" style="width:0%"></div></div>
       <div class="course-footer">
@@ -260,174 +399,123 @@ a:hover{text-decoration:underline}
 
 <!-- FOOTER -->
 <footer class="footer">
-  &copy; 2026 Arise 发声俱乐部 · Arise Voice Club
+  &copy; 2026 ARISE CLUB &middot; Where Strength Meets Science
 </footer>
 
 <script>
 (function(){
-  /* Auth check */
   var role = localStorage.getItem('vc_role');
-  if(!role){
-    window.location.href = 'login.html';
-    return;
-  }
-  var name = localStorage.getItem('vc_name') || '用户';
-  document.getElementById('navUser').textContent = name;
+  if(!role){window.location.href='login.html';return}
+  document.getElementById('navUser').textContent = localStorage.getItem('vc_name') || '用户';
 })();
 
 function handleLogout(){
-  localStorage.removeItem('vc_name');
-  localStorage.removeItem('vc_user_id');
-  localStorage.removeItem('vc_role');
-  localStorage.removeItem('vc_invite_code');
-  window.location.href = 'login.html';
+  ['vc_name','vc_user_id','vc_role','vc_invite_code'].forEach(function(k){localStorage.removeItem(k)});
+  window.location.href='login.html';
 }
 
 /* Tab switching */
 (function(){
-  var btns = document.querySelectorAll('.tab-btn');
-  var panels = document.querySelectorAll('.tab-panel');
+  var btns=document.querySelectorAll('.tab-btn');
+  var panels=document.querySelectorAll('.tab-panel');
   btns.forEach(function(btn){
-    btn.addEventListener('click', function(){
+    btn.addEventListener('click',function(){
       btns.forEach(function(b){b.classList.remove('active')});
       panels.forEach(function(p){p.classList.remove('active')});
       btn.classList.add('active');
-      var target = document.getElementById('panel-' + btn.getAttribute('data-tab'));
-      if(target) target.classList.add('active');
+      var t=document.getElementById('panel-'+btn.getAttribute('data-tab'));
+      if(t)t.classList.add('active');
     });
   });
 })();
 
-/* Literature expand/collapse */
-function toggleRead(btn){
-  var card = btn.parentElement;
-  var summary = card.querySelector('.card-summary');
-  var full = card.querySelector('.card-full');
-  var expanded = full.classList.contains('expanded');
-  if(expanded){
-    full.classList.remove('expanded');
-    summary.classList.remove('hidden');
-    btn.textContent = '阅读更多';
-  } else {
-    full.classList.add('expanded');
-    summary.classList.add('hidden');
-    btn.textContent = '收起';
-  }
-}
-
 /* Course progress */
 (function(){
-  var defaults = {'1':30,'2':0,'3':60,'4':100};
+  var defaults={'1':30,'2':0,'3':60,'4':100};
   for(var i=1;i<=4;i++){
-    var key = 'vc_progress_' + i;
-    var stored = localStorage.getItem(key);
-    var pct = stored !== null ? parseInt(stored,10) : defaults[i];
-    var bar = document.getElementById('progress-'+i);
-    var pctEl = document.getElementById('pct-'+i);
-    var btn = document.querySelector('[data-course="'+i+'"]');
-    if(bar) bar.style.width = pct + '%';
-    if(pctEl) pctEl.textContent = pct + '%';
-    if(btn && pct >= 100){
-      btn.textContent = '已完成';
-      btn.classList.add('completed');
-    }
+    var key='vc_progress_'+i;
+    var stored=localStorage.getItem(key);
+    var pct=stored!==null?parseInt(stored,10):defaults[i];
+    var bar=document.getElementById('progress-'+i);
+    var pctEl=document.getElementById('pct-'+i);
+    var btn=document.querySelector('[data-course="'+i+'"]');
+    if(bar)bar.style.width=pct+'%';
+    if(pctEl)pctEl.textContent=pct+'%';
+    if(btn&&pct>=100){btn.textContent='已完成';btn.classList.add('completed')}
   }
 })();
-
 function handleCourseClick(btn){
-  var courseId = btn.getAttribute('data-course');
-  var key = 'vc_progress_' + courseId;
-  var current = parseInt(localStorage.getItem(key) || '0', 10);
-  if(current >= 100) return;
-  var next = Math.min(current + 10, 100);
-  localStorage.setItem(key, next);
-  var bar = document.getElementById('progress-'+courseId);
-  var pctEl = document.getElementById('pct-'+courseId);
-  if(bar) bar.style.width = next + '%';
-  if(pctEl) pctEl.textContent = next + '%';
-  if(next >= 100){
-    btn.textContent = '已完成';
-    btn.classList.add('completed');
-  }
+  var cid=btn.getAttribute('data-course');
+  var key='vc_progress_'+cid;
+  var cur=parseInt(localStorage.getItem(key)||'0',10);
+  if(cur>=100)return;
+  var next=Math.min(cur+10,100);
+  localStorage.setItem(key,next);
+  var bar=document.getElementById('progress-'+cid);
+  var pctEl=document.getElementById('pct-'+cid);
+  if(bar)bar.style.width=next+'%';
+  if(pctEl)pctEl.textContent=next+'%';
+  if(next>=100){btn.textContent='已完成';btn.classList.add('completed')}
 }
 
-/* ===== LITERATURE DATA & RENDERING ===== */
-var LIT_DATA = [{"id": 1, "date": "2026-06-05", "author": "Currier", "year": "2026", "title": "ACSM · ResistanceTraining · PositionStand", "type": "立场声明", "journal": "", "doi": "", "conclusion": "ACSM 2026 抗阻训练处方立场声明"}, {"id": 2, "date": "2026-06-05", "author": "Refalo", "year": "2025", "title": "性别差异 · 肌肉肥大 · BayesianNMA PeerJ", "type": "NMA", "journal": "", "doi": "", "conclusion": "男女抗阻训练后肌肉肥大差异——贝叶斯系统综述与荟萃分析"}, {"id": 3, "date": "2026-06-06", "author": "Solon-Julio", "year": "2026", "title": "心理疲劳 · 抗阻训练 · MA", "type": "文献解读", "journal": "", "doi": "", "conclusion": "心理疲劳对抵抗训练表现的影响"}, {"id": 4, "date": "2026-06-07", "author": "Henselmans", "year": "2026", "title": "碳水肌肥大", "type": "SR/MA", "journal": "asystematicreview—Nutrients期刊，同一作者团队对碳水与力量表现的系统综述", "doi": "", "conclusion": "碳水化合物摄入对肌肉肥大的影响"}, {"id": 5, "date": "2026-06-07", "author": "Poon", "year": "2026", "title": "儿童肥胖 · 抗阻训练 · UmbrellaReview", "type": "伞评", "journal": "", "doi": "", "conclusion": "Poon et al. 2026 | 抗阻训练对超重及肥胖儿童青少年的影响"}, {"id": 6, "date": "2026-06-08", "author": "Fuertes-Kenneally", "year": "2026", "title": "内皮功能 · CVD · 运动NMA 文献解读", "type": "NMA", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 7, "date": "2026-06-08", "author": "McKee", "year": "2026", "title": "高负荷BFR · 抗阻训练", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "高负荷抗阻训练联合血流限制对健康成人的急慢性影响——系统综述与荟萃分析"}, {"id": 8, "date": "2026-06-09", "author": "Masse", "year": "2026", "title": "钙VD · 骨折跌倒", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "钙、维生素D或联合补充预防骨折与跌倒"}, {"id": 9, "date": "2026-06-10", "author": "Brinkmann", "year": "2026", "title": "热量限制 · 训练模式 · 瘦体重 NMA", "type": "NMA", "journal": "", "doi": "//doi.org/10.1111/dom.70873) |", "conclusion": "每日文献解读 · 2026年6月10日"}, {"id": 10, "date": "2026-06-11", "author": "Gu", "year": "2026", "title": "肌酸 · 抗阻训练 · 瘦体重 SRMA N-2", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "一、文献基本信息"}, {"id": 11, "date": "2026-06-11", "author": "Shi", "year": "2026", "title": "心力衰竭 · LVEF · 运动NMA 文献解读", "type": "NMA", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 12, "date": "2026-06-12", "author": "Yang", "year": "2026", "title": "损伤预防 · 青少年足球 · SRMA T-10", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "青少年足球运动员结构化损伤预防项目的有效性"}, {"id": 13, "date": "2026-06-13", "author": "McCarthy", "year": "2026", "title": "铁状态 · 运动女性 · 补铁 文献解读", "type": "文献解读", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 14, "date": "2026-06-13", "author": "Naddafha", "year": "2026", "title": "肌酸绝经后女性", "type": "文献解读", "journal": "", "doi": "", "conclusion": "一、文献基本信息"}, {"id": 15, "date": "2026-06-14", "author": "Camargo", "year": "2026", "title": "肌酸抗炎", "type": "文献解读", "journal": "", "doi": "//doi.org/10.3389/fimmu.2026.1743603) |", "conclusion": "一、文献基本信息"}, {"id": 16, "date": "2026-06-15", "author": "Chang", "year": "2026", "title": "内脏脂肪运动剂量", "type": "文献解读", "journal": "", "doi": "//doi.org/10.1186/s12986-026-01129-w) |", "conclusion": "一、文献基本信息"}, {"id": 17, "date": "2026-06-16", "author": "Gawelczyk", "year": "2026", "title": "生酮饮食 · 无氧表现 · 低碳水 文献解读", "type": "文献解读", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 18, "date": "2026-06-16", "author": "Salame", "year": "2026", "title": "高温补糖", "type": "文献解读", "journal": "", "doi": "//doi.org/10.1080/15502783.2026.2669307) |", "conclusion": "每日文献解读：高温环境下耐力运动的碳水化合物补充"}, {"id": 19, "date": "2026-06-16", "author": "Zhao", "year": "2026", "title": "舞蹈 · 认知障碍 · 运动NMA 文献解读", "type": "NMA", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 20, "date": "2026-06-17", "author": "Walczak", "year": "2026", "title": "损伤预防 · 神经肌肉训练 · 伞评", "type": "伞评", "journal": "", "doi": "//doi.org/10.12775/QS.2026.56.71637) |", "conclusion": "每日文献解读：青少年团队运动多成分神经肌肉训练的下肢损伤预防效果"}, {"id": 21, "date": "2026-06-18", "author": "Strauss", "year": "2026", "title": "HIIT心代谢", "type": "文献解读", "journal": "", "doi": "//doi.org/10.1002/14651858.CD013617.pub2) |", "conclusion": "每日文献解读：高强度间歇训练改善久坐成人心血管代谢健康——Cochrane系统综述"}, {"id": 22, "date": "2026-06-19", "author": "Thurlow", "year": "2026", "title": "短时HIIT急性效应", "type": "文献解读", "journal": "", "doi": "", "conclusion": "短间歇 HIIT 急性生理与感知效应 —— 系统综述与荟萃分析"}, {"id": 23, "date": "2026-06-20", "author": "Li", "year": "2026", "title": "HIIT糖尿病前期", "type": "文献解读", "journal": "", "doi": "", "conclusion": "Li 2026 文献解读：HIIT对糖尿病前期成人血糖控制的系统综述与荟萃分析"}, {"id": 24, "date": "2026-06-21", "author": "Xin", "year": "2026", "title": "高血压运动NMA", "type": "NMA", "journal": "", "doi": "//doi.org/10.1161/JAHA.125.044003) |", "conclusion": "一、文献基本信息"}, {"id": 25, "date": "2026-06-22", "author": "Lin", "year": "2026", "title": "肌少症最优干预方案", "type": "NMA", "journal": "", "doi": "//doi.org/10.3390/nu18091409) |", "conclusion": "一、文献基本信息"}, {"id": 26, "date": "2026-06-23", "author": "Held", "year": "2026", "title": "同时训练伞评", "type": "伞评", "journal": "", "doi": "//doi.org/10.1007/s40279-026-02401-y) |", "conclusion": "一、文献基本信息"}, {"id": 27, "date": "2026-06-23", "author": "Zhang", "year": "2026", "title": "抗阻训练 · 死亡率 · 剂量反应 文献解读", "type": "文献解读", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 28, "date": "2026-06-25", "author": "Minahan", "year": "2026", "title": "压力表现 · 心理技能 · 立场声明 文献解读", "type": "文献解读", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 29, "date": "2026-06-25", "author": "Yao", "year": "2026", "title": "NMT预防ACL年龄差异", "type": "文献解读", "journal": "", "doi": "//doi.org/10.3389/fpubh.2026.1801019) |", "conclusion": "每日文献解读：神经肌肉训练预防ACL损伤的效果年龄差异"}, {"id": 30, "date": "2026-06-25", "author": "Zhou", "year": "2026", "title": "骨质疏松 · 骨密度 · 有氧运动NMA 文献解读", "type": "NMA", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 31, "date": "2026-06-27", "author": "Guo", "year": "2026", "title": "运动类型睡眠 · T22", "type": "NMA", "journal": "", "doi": "//doi.org/10.7717/peerj.21037) |", "conclusion": "每日文献解读：不同运动类型对久坐人群睡眠的影响——系统综述与网络Meta分析"}, {"id": 32, "date": "2026-06-27", "author": "Heidari", "year": "2026", "title": "维生素D肌肉骨骼 · HealthSciRep · N14", "type": "文献解读", "journal": "10.1002/hsr2.72407经Wiley期刊库检索可匹配，发表于HealthScienceReports2026", "doi": "10.1002/hsr2.72407 经Wiley期刊库检索可匹配，发表于*Health Science Reports* 2026年。", "conclusion": "每日文献解读：维生素D状态与补充对人体肌肉骨骼组织功能结局的影响——分层系统综述"}, {"id": 33, "date": "2026-06-27", "author": "Ivanic", "year": "2026", "title": "脑震荡头部加速度 · SportsMed · T23", "type": "文献解读", "journal": "10.1007/s4027902602448x经SpringerLink期刊数据库检索可匹配，发表于SportsMedi", "doi": "10.1007/s40279-026-02448-x 经SpringerLink期刊数据库检索可匹配，发表于*Sports Medicine* 2026年。", "conclusion": "每日文献解读：运动相关脑震荡冲击的头部加速度大小——系统综述与Meta分析"}, {"id": 34, "date": "2026-06-27", "author": "Shirzad", "year": "2026", "title": "咖啡因运动心理疲劳 · PLOSONE · H24", "type": "文献解读", "journal": "", "doi": "10.1371/journal.pone.0348279 经PLOS官网检索可匹配，发表于2026年4月。", "conclusion": "每日文献解读：咖啡因、急性有氧运动与安慰剂对心理疲劳的差异效应——随机对照交叉试验"}, {"id": 35, "date": "2026-06-27", "author": "Soares", "year": "2026", "title": "咖啡因女性自行车表现 · N11", "type": "文献解读", "journal": "", "doi": "10.1123/ijsnem.2026-0022 经搜索可匹配到相关文献记录，发表于IJSNEM 2026年。", "conclusion": "每日文献解读：咖啡因对女性自行车运动表现的增效作用——系统综述与三水平Meta分析"}, {"id": 36, "date": "2026-06-27", "author": "Takezawa", "year": "2026", "title": "正念HRV · mHealth · JMIR H23", "type": "文献解读", "journal": "", "doi": "10.2196/78244 经JMIR官网检索可匹配，为2026年发表的观察性研究。", "conclusion": "每日文献解读：正念冥想练习者的日常压力与心率变异性——mHealth观察性研究"}, {"id": 37, "date": "2026-06-27", "author": "TeixeiraSilva", "year": "2026", "title": "高蛋白肾功能 · 身体成分 · N12", "type": "文献解读", "journal": "10.1111/dom.70996经Wiley期刊数据库检索可匹配，发表于Diabetes,ObesityandMeta", "doi": "10.1111/dom.70996 经Wiley期刊数据库检索可匹配，发表于*Diabetes, Obesity and Metabolism* 2026年。", "conclusion": "每日文献解读：高蛋白饮食对无慢性肾病成人肾功能和身体成分的影响——随机对照试验的系统综述与Meta分析"}, {"id": 38, "date": "2026-06-27", "author": "Wang", "year": "2026", "title": "益生菌运动表现 · FrontNutr · N13", "type": "文献解读", "journal": "", "doi": "10.3389/fnut.2026.1731627 经Frontiers官网检索可匹配，发表于*Frontiers in Nutrition* 2026年。", "conclusion": "每日文献解读：益生菌摄入对健康人运动能力的影响——系统综述与贝叶斯Meta分析"}, {"id": 39, "date": "2026-06-27", "author": "Wang", "year": "2026", "title": "网络正念GAD · JMIR H22", "type": "RCT", "journal": "", "doi": "10.2196/91751 经JMIR官网检索可匹配，为2026年发表的RCT研究。", "conclusion": "每日文献解读：自助式网络正念压力管理治疗广泛性焦虑障碍——随机对照试验"}, {"id": 40, "date": "2026-06-29", "author": "NUS", "year": "2026", "title": "体力活动表观遗传年龄 · Lancet · T24", "type": "文献解读", "journal": "", "doi": "//doi.org/10.1016/j.lanhl.2026.100835) |", "conclusion": "每日文献解读：体力活动与表观遗传衰老——《柳叶刀·老龄健康》系统综述与荟萃分析"}, {"id": 41, "date": "2026-07-02", "author": "Li", "year": "2026", "title": "复合维生素表观遗传衰老", "type": "文献解读", "journal": "", "doi": "", "conclusion": "一、文献基本信息"}, {"id": 42, "date": "2026-07-03", "author": "Pelland", "year": "2026", "title": "抗阻训练剂量反应", "type": "文献解读", "journal": "", "doi": "", "conclusion": "抗阻训练剂量反应——每周容量与频率对肌肥大与力量增长的meta回归分析"}, {"id": 43, "date": "2026-07-05", "author": "Abdelhamid", "year": "2020", "title": "Omega-3脂肪酸心血管疾病一级二级预防 · Cochrane伞评 · N17", "type": "伞评", "journal": "CD003177", "doi": "", "conclusion": "文献解读 | Abdelhamid et al. (2020) — Omega-3脂肪酸用于心血管疾病一级与二级预防：Cochrane系统综述"}, {"id": 44, "date": "2026-07-05", "author": "Ravindran", "year": "2026", "title": "胶原蛋白补剂骨骼肌肉健康 · 伞评 · N16", "type": "伞评", "journal": "", "doi": "", "conclusion": "胶原蛋白补剂与皮肤及骨骼肌肉健康——首项全领域伞评揭示证据真相"}, {"id": 45, "date": "2026-07-06", "author": "Yimam", "year": "2026", "title": "植物蛋白vs动物蛋白长期补剂 · T28", "type": "SR/MA", "journal": "", "doi": "//doi.org/10.3389/fnut.2026.1813846) |", "conclusion": "系统综述与荟萃分析（Systematic Review and Meta-Analysis, SR/MA）"}, {"id": 46, "date": "2026-07-11", "author": "Li", "year": "2026", "title": "器官生物年龄", "type": "文献解读", "journal": "", "doi": "", "conclusion": "每日文献解读 H-26"}, {"id": 47, "date": "2026-07-14", "author": "Ren", "year": "2026", "title": "T2DM肥胖运动HbA1c · BayesianNMA", "type": "NMA", "journal": "", "doi": "", "conclusion": "每日文献解读 T-33"}, {"id": 48, "date": "2026-07-17", "author": "Bao", "year": "2026", "title": "5种RT模式", "type": "NMA", "journal": "", "doi": "", "conclusion": "每日文献解读 T-35"}, {"id": 49, "date": "2026-07-19", "author": "WangY", "year": "2026", "title": "RT血管功能高血压超重 · T37", "type": "SR/MA", "journal": "", "doi": "a systematic review and meta-analysis」（Front Endocrinol (Lausanne). 2026;17:1824213. DOI 10.3389/fendo.2026.1824213. PROSPERO CRD420261323648）共同构成\"RT 血管功能\"的姊妹 SR/MA：前者聚焦高血压/超重人群，后者聚焦 T2DM 人群。同一研究团队 2 个月内连续发表 2 篇主题一致的 SR/MA，方法学连贯", "conclusion": "每日文献解读 T-37"}, {"id": 50, "date": "2026-07-20", "author": "YangY", "year": "2026", "title": "认知NMA · T-38", "type": "NMA", "journal": "", "doi": "9）、关键词均一致。通讯作者 Zbigniew Ossowski 单位 Gdańsk University of Physical Education and Sport（波兰格但斯克体育大学，邮箱 zbigniew.ossowski@awf.gda.pl）已通过 PubMed 官方页 Affiliation 3 核证。第一作者 Yong Yang 双重隶属：成都体育大学（Chengdu Sport University, 641418 Chengdu, China, Affiliation 1）+ 格但斯克体育大学（Affiliation 2）。本文关联同团队近期 Nutrients 2025 姊妹研究「Yang Y, Pan N, Luo J, Liu Y, Ossowski Z. Exercise and Nutrition for Sarcopenia: A Systematic Review and Meta-Analysis with Subgroup Analysis by Population Characteristics. *Nutrients* 2025;17:2342. DOI 10.3390/nu17142342」（15 RCT, 1,258 干预 + 1,233 对照）—— 同通讯作者 Ossowski，方法学风格延续。文献 PMC 全文直链因 captcha 与安全策略本轮未直接抓取 PDF，方法学细节（RoB 各域分布、节点分裂 I² 完整矩阵、SUCRA 精确值、CINeMA/GRADE 评级）以 PubMed 摘要 + PubMed Central 显示的图注（PRISMA 流程、RoB 概况、网络图、森林图、剂量-反应图、SUCRA 图、≤12 周 vs >12 周亚组网络图、≤12 周 vs >12 周 SUCRA 图）为主要信息源。下文以 PubMed 摘要 + 已核证作者背景为信息源。**注**：本文方法学部分细节需在主人有权限时二次核验 PDF 全文。", "conclusion": "每日文献解读 T-38"}, {"id": 51, "date": "2026-07-21", "author": "Seyhan", "year": "2026", "title": "乳清胶原联合补剂RCT · 文献解读口播稿", "type": "RCT", "journal": "", "doi": "10.1186/s13102-026-01846-y", "conclusion": "Seyhan 2026 文献解读：乳清蛋白+胶原蛋白联合补充对骨骼与肌肉的影响"}, {"id": 52, "date": "2026-07-21", "author": "Watson", "year": "2026", "title": "ACL · IPP · SRMA T39", "type": "SR/MA", "journal": "733740）+WakeMed全文PDF+SAGE内部PDF（附Appendix1训练方案表+Figure3森林图+各亚", "doi": "733-740）+ WakeMed 全文 PDF + SAGE 内部 PDF（附 Appendix 1 训练方案表 + Figure 3 森林图 + 各亚组 I² 数据）四源核证完全一致。通讯作者 Samantha L Watson 单位 Northwestern University Feinberg School of Medicine, Chicago, IL, USA（邮箱 samantha.watson1@northwestern.edu）已通过 PubMed Affiliation 1 + SAGE 期刊页\"Notes\"段双源核证。第一作者为医学博士在读（BS, Feinberg School of Medicine），由 Vehniah K Tjong（MD, 双隶属 Northwestern Feinberg + Department of Orthopaedic Surgery, Northwestern Memorial Hospital）资深通讯监督。**全部核心数据**（整体 RR=0.46、<18 岁 0.35、≥18 岁 0.50、女性 0.57、足球 0.30、手球 0.66、平衡板 0.49、I²=32% / 0% / 66%、样本量 25,166、研究数 9 RCT + 9 队列、年龄 19.3±3.6、>85% 女性、4 项运动项目、干预最短 1 赛季、PROSPERO 注册号未在 PubMed 摘要显示——待原文核证）**与 PubMed 摘要 + SAGE 期刊页 + WakeMed PDF + SAGE 内部 PDF 全部一致**。", "conclusion": "每日文献解读 T-39"}, {"id": 53, "date": "2026-07-22", "author": "Sharifian", "year": "2026", "title": "肌酸运动老年人 · T40", "type": "SR/MA", "journal": "17,BMC旗下）三源核证完全一致。通讯作者共两位：①GhazalSharifian（TehranUniversityo", "doi": "17, BMC 旗下）三源核证完全一致。通讯作者共两位：①Ghazal Sharifian（Tehran University of Medical Sciences, Faculty of Pharmacy, Tehran, Iran）+ ②Diako Heidary（Allameh Tabataba'i University, Faculty of Physical Education and Sport Sciences, Tehran, Iran），均通过 PMC Author Information 核证。Joseph I Esformes（Cardiff Metropolitan University, Cardiff School of Sport and Health Sciences, UK）第三位非通讯共同作者，已通过 PMC 核证。**全部核心数据**（1RM MD=2.122 kg, Z=3.255, P=0.001, I²=0%；体脂率 MD=-0.548%, Z=-2.231, P=0.026, I²=0%；BMD MD=0.009, Z=0.587, P=0.557, I²=41%；样本量 1,093 / 20 RCT / 69% 女性；PEDro 7.95±0.89；RoB 2.0: 11 高 / 5 一些担忧 / 4 低；亚组 Lat Pull-Down P=0.022 + Leg Press P=0.018；敏感性分析剔除 Ejinde 2003 后体脂率效应消失 MD=-0.329, P=0.393；检索 3 数据库 / 2024-08-30 / 起始无年份限制）**与 PMC 全文（Methods + Results 段）+ PubMed 摘要 + Eur Rev Aging Phys Act 期刊页全部一致**。通讯邮箱、Funding 来源、具体 20 项纳入研究详细基线特征（Table 1）未在 PMC HTML 全文中显示完整——标注\"待原文 PDF 二次核证\"。", "conclusion": "每日文献解读 T-40"}, {"id": 54, "date": "2026-07-24", "author": "Wu", "year": "2026", "title": "冷疗NMA · T46", "type": "NMA", "journal": "//www.frontiersin.org/journals/sportsandactiveliving/article", "doi": "//www.frontiersin.org/journals/sports-and-active-living/articles/10.3389/fspor.2026.1819396/full）** + **PROSPERO 官方页（https://www.crd.york.ac.uk/PROSPERO/view/CRD420261300174）** 两源核证一致。", "conclusion": "每日文献解读 T-46：冷疗模态 SR/NMA"}, {"id": 55, "date": "2026-07-26", "author": "MallmannSchneider", "year": "2026", "title": "24h动态血压NMA · T100", "type": "NMA", "journal": "", "doi": "", "conclusion": "模块一：文献基本信息"}, {"id": 56, "date": "2026-07-28", "author": "Ekelund", "year": "2026", "title": "5minMVPA · IPDMA · H53 文献解读", "type": "文献解读", "journal": "339349", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 57, "date": "2026-07-29", "author": "BaiXu", "year": "2026", "title": "Cr · BA · NMA N19 文献解读", "type": "NMA", "journal": "2695133", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 58, "date": "2026-07-30", "author": "Lyristakis", "year": "2026", "title": "RT变量剂量反应", "type": "文献解读", "journal": "", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 59, "date": "2026-07-31", "author": "Ikeda", "year": "2026", "title": "早餐蛋白老年人肌肥大", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 60, "date": "2026-08-01", "author": "Svensson", "year": "2026", "title": "训练内蛋白CHO共摄入肌肥大RCT", "type": "RCT", "journal": "NutritionStrategyandResistanceTraining", "doi": "", "conclusion": "一、文献基本信息"}, {"id": 61, "date": "2026-08-02", "author": "Henselmans", "year": "2026", "title": "碳水摄入与肌肥大", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "一、文献基本信息"}, {"id": 62, "date": "2026-08-03", "author": "Shen", "year": "2026", "title": "运动干预代谢综合征NMA", "type": "NMA", "journal": "", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 63, "date": "2026-08-05", "author": "Havers", "year": "2026", "title": "降组训练SRMA · T127", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 64, "date": "2026-08-06", "author": "FernandezGarrido", "year": "2026", "title": "肌酸RT老年人神经认知RCT", "type": "RCT", "journal": "", "doi": "", "conclusion": "每日文献解读 · Fernandez-Garrido 2026"}, {"id": 65, "date": "2026-08-07", "author": "Pelland", "year": "2026", "title": "RT剂量反应贝叶斯Meta回归 · T149", "type": "文献解读", "journal": "", "doi": "", "conclusion": "每日文献解读 · Pelland 2026"}, {"id": 66, "date": "2026-08-08", "author": "Tretowicz", "year": "2026", "title": "全血NAD+不随年龄下降 · 7队列 · H61 文献解读", "type": "文献解读", "journal": "", "doi": "", "conclusion": "全血 NAD⁺ 水平不随年龄下降——七项独立队列的循证挑战"}, {"id": 67, "date": "2026-08-09", "author": "Zhao", "year": "2026", "title": "复合训练vs抗阻vs增强式NMA · T136", "type": "NMA", "journal": "", "doi": "", "conclusion": "每日文献解读 T-136：抗阻×增强式联合训练模态对纵跳与短跑的效应 · 贝叶斯网状荟萃分析"}, {"id": 68, "date": "2026-08-10", "author": "He", "year": "2026", "title": "等长收缩PAPE三级MA · H58", "type": "文献解读", "journal": "", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 69, "date": "2026-08-11", "author": "Zhang", "year": "2026", "title": "AEL · vs · CLRT急性慢性效应SRMA 文献解读", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 70, "date": "2026-08-12", "author": "Ohta", "year": "2026", "title": "运动营养干预老年人肌肉特异性力量SRMA", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 71, "date": "2026-08-13", "author": "Liu", "year": "2026", "title": "咖啡因青少年运动员SRMA · N46", "type": "SR/MA", "journal": "", "doi": "//osf.io/t2ea3（DOI: 10.17605/OSF.IO/PXAGY） |", "conclusion": "青少年运动员急性咖啡因摄入的运动表现效应与安全性——系统综述与三级荟萃分析"}, {"id": 72, "date": "2026-08-14", "author": "GuanFan", "year": "2026", "title": "5HT中枢疲劳SRMA · T147", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "1. 文献基本信息"}, {"id": 73, "date": "2026-08-15", "author": "LaMonte", "year": "2026", "title": "老年女性力量与死亡率 · T143", "type": "文献解读", "journal": "", "doi": "", "conclusion": "一、研究问题"}, {"id": 74, "date": "2026-08-16", "author": "Gois", "year": "2026", "title": "联合训练冠心病SRMA · T145", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "一、研究问题"}, {"id": 75, "date": "2026-08-17", "author": "Heijmans", "year": "2026", "title": "全食物蛋白摄入SRMA · N44", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "一、核心文献 + 同级证据联合解读"}, {"id": 76, "date": "2026-08-18", "author": "Kristiansen", "year": "2026", "title": "年龄相关合成代谢抵抗SRMA · T150", "type": "SR/MA", "journal": "", "doi": "", "conclusion": "基本信息"}, {"id": 77, "date": "2026-08-25", "author": "Singh", "year": "2026", "title": "运动青少年抑郁焦虑伞状综述 · T152", "type": "文献解读", "journal": "JournaloftheAmericanAcademyofChildandAdolescentPsychiatry(JA", "doi": "10.1016/j.jaac.2025.04.007", "conclusion": "核心发现"}, {"id": 78, "date": "2026-08-26", "author": "Adugna", "year": "2026", "title": "运动单位衰老SRMA · T146", "type": "SR/MA", "journal": "", "doi": "10.1016/j.neurobiolaging.2026.07.008 / PMID: 42520337", "conclusion": "一、研究问题"}, {"id": 79, "date": "2026-08-30", "author": "Souron", "year": "2026", "title": "心理疲劳骑行耐力表现与肌肉激活", "type": "文献解读", "journal": "e72.", "doi": "10.24072/pcjournal.760 | 预印本 DOI: 10.64898/2026.03.19.712281", "conclusion": "1. 研究问题"}];
+/* ===== LITERATURE DATA ===== */
+var LIT_DATA = [{"id":1,"date":"2026-06-05","author":"Currier","year":"2026","title":"ACSM · ResistanceTraining · PositionStand","type":"立场声明","journal":"","doi":"","conclusion":"ACSM 2026 抗阻训练处方立场声明"},{"id":2,"date":"2026-06-05","author":"Refalo","year":"2025","title":"性别差异 · 肌肉肥大 · BayesianNMA PeerJ","type":"NMA","journal":"","doi":"","conclusion":"男女抗阻训练后肌肉肥大差异——贝叶斯系统综述与荟萃分析"},{"id":3,"date":"2026-06-06","author":"Solon-Julio","year":"2026","title":"心理疲劳 · 抗阻训练 · MA","type":"文献解读","journal":"","doi":"","conclusion":"心理疲劳对抵抗训练表现的影响"},{"id":4,"date":"2026-06-07","author":"Henselmans","year":"2026","title":"碳水肌肥大","type":"SR/MA","journal":"Nutrients","doi":"","conclusion":"碳水化合物摄入对肌肉肥大的影响：一项系统综述与荟萃分析"},{"id":5,"date":"2026-06-07","author":"Poon","year":"2026","title":"儿童肥胖 · 抗阻训练 · UmbrellaReview","type":"伞评","journal":"","doi":"","conclusion":"抗阻训练对超重及肥胖儿童青少年的影响——伞评"},{"id":6,"date":"2026-06-08","author":"Fuertes-Kenneally","year":"2026","title":"内皮功能 · CVD · 运动NMA","type":"NMA","journal":"","doi":"","conclusion":"运动对内皮功能及心血管疾病的影响"},{"id":7,"date":"2026-06-08","author":"McKee","year":"2026","title":"高负荷BFR · 抗阻训练","type":"SR/MA","journal":"","doi":"","conclusion":"高负荷血流限制抗阻训练的系统综述与荟萃分析"},{"id":8,"date":"2026-06-09","author":"Masse","year":"2026","title":"钙VD · 骨折跌倒","type":"SR/MA","journal":"","doi":"","conclusion":"钙与维生素D补充对骨折和跌倒预防的影响"},{"id":9,"date":"2026-06-10","author":"Brinkmann","year":"2026","title":"热量限制 · 训练模式 · 瘦体重","type":"NMA","journal":"","doi":"","conclusion":"热量限制期间的训练模式对瘦体重的影响——网络荟萃分析"},{"id":10,"date":"2026-06-11","author":"Gu","year":"2026","title":"肌酸 · 抗阻训练 · 瘦体重","type":"SR/MA","journal":"","doi":"","conclusion":"肌酸补充联合抗阻训练对瘦体重的影响"},{"id":11,"date":"2026-06-11","author":"Shi","year":"2026","title":"心力衰竭 · LVEF · 运动NMA","type":"NMA","journal":"","doi":"","conclusion":"运动干预对心力衰竭患者LVEF的影响"},{"id":12,"date":"2026-06-12","author":"Yang","year":"2026","title":"损伤预防 · 青少年足球","type":"SR/MA","journal":"","doi":"","conclusion":"青少年足球运动员损伤预防干预的系统综述"},{"id":13,"date":"2026-06-13","author":"McCarthy","year":"2026","title":"铁状态 · 运动女性 · 补铁","type":"文献解读","journal":"","doi":"","conclusion":"女性运动员铁状态与补铁干预"},{"id":14,"date":"2026-06-13","author":"Naddafha","year":"2026","title":"肌酸绝经后女性","type":"SR/MA","journal":"","doi":"","conclusion":"肌酸补充对绝经后女性的影响：系统综述与荟萃分析"},{"id":15,"date":"2026-06-14","author":"Camargo","year":"2026","title":"肌酸抗炎","type":"SR/MA","journal":"","doi":"","conclusion":"肌酸补充对炎症的影响：RCT系统综述与荟萃分析"},{"id":16,"date":"2026-06-15","author":"Chang","year":"2026","title":"内脏脂肪运动剂量","type":"文献解读","journal":"","doi":"","conclusion":"运动剂量对内脏脂肪的影响"},{"id":17,"date":"2026-06-16","author":"Gawelczyk","year":"2026","title":"生酮饮食 · 无氧表现 · 低碳水","type":"文献解读","journal":"","doi":"","conclusion":"生酮饮食与低碳水饮食对无氧运动表现的影响"},{"id":18,"date":"2026-06-16","author":"Salame","year":"2026","title":"高温补糖","type":"文献解读","journal":"","doi":"","conclusion":"高温环境下碳水化合物补充策略"},{"id":19,"date":"2026-06-16","author":"Zhao","year":"2026","title":"舞蹈 · 认知障碍 · 运动NMA","type":"NMA","journal":"","doi":"","conclusion":"舞蹈与运动干预对认知障碍的影响"},{"id":20,"date":"2026-06-17","author":"Walczak","year":"2026","title":"损伤预防 · 神经肌肉训练","type":"伞评","journal":"","doi":"","conclusion":"神经肌肉训练在损伤预防中的伞评"},{"id":21,"date":"2026-06-18","author":"Strauss","year":"2026","title":"HIIT心代谢","type":"文献解读","journal":"","doi":"","conclusion":"HIIT对心血管代谢健康的影响"},{"id":22,"date":"2026-06-19","author":"Thurlow","year":"2026","title":"短时HIIT急性效应","type":"文献解读","journal":"","doi":"","conclusion":"短时HIIT的急性生理效应"},{"id":23,"date":"2026-06-20","author":"Li","year":"2026","title":"HIIT糖尿病前期","type":"文献解读","journal":"","doi":"","conclusion":"HIIT对糖尿病前期人群的干预效果"},{"id":24,"date":"2026-06-21","author":"Xin","year":"2026","title":"高血压运动NMA","type":"NMA","journal":"","doi":"","conclusion":"不同运动方式对高血压的降压效果：网络荟萃分析"},{"id":25,"date":"2026-06-22","author":"Lin","year":"2026","title":"肌少症最优干预方案","type":"NMA","journal":"","doi":"","conclusion":"肌少症最优干预方案的网络荟萃分析"},{"id":26,"date":"2026-06-23","author":"Held","year":"2026","title":"同时训练伞评","type":"伞评","journal":"","doi":"","conclusion":"同时训练（力量+有氧）干扰效应的伞评"},{"id":27,"date":"2026-06-23","author":"Zhang","year":"2026","title":"抗阻训练 · 死亡率 · 剂量反应","type":"文献解读","journal":"","doi":"","conclusion":"抗阻训练与全因死亡率的剂量反应关系"},{"id":28,"date":"2026-06-25","author":"Minahan","year":"2026","title":"压力表现 · 心理技能 · 立场声明","type":"立场声明","journal":"","doi":"","conclusion":"压力-表现与心理技能训练的立场声明"},{"id":29,"date":"2026-06-25","author":"Yao","year":"2026","title":"NMT预防ACL年龄差异","type":"文献解读","journal":"","doi":"","conclusion":"神经肌肉训练预防ACL损伤的年龄差异分析"},{"id":30,"date":"2026-06-25","author":"Zhou","year":"2026","title":"骨质疏松 · 骨密度 · 有氧运动NMA","type":"NMA","journal":"","doi":"","conclusion":"有氧运动对骨质疏松患者骨密度的影响"},{"id":31,"date":"2026-06-26","author":"Borges","year":"2026","title":"BFR抗阻训练 · 肌力肌肥大","type":"SR/MA","journal":"","doi":"","conclusion":"血流限制抗阻训练对肌力与肌肥大的影响"},{"id":32,"date":"2026-06-27","author":"Dias","year":"2026","title":"训练频率 · 肌肥大 · NMA","type":"NMA","journal":"","doi":"","conclusion":"抗阻训练频率对肌肥大的影响：网络荟萃分析"},{"id":33,"date":"2026-06-28","author":"Grgic","year":"2026","title":"离心训练 · 肌力肌肥大","type":"SR/MA","journal":"","doi":"","conclusion":"离心抗阻训练对肌力与肌肥大的影响"},{"id":34,"date":"2026-06-29","author":"Schoenfeld","year":"2026","title":"训练容量 · 肌肥大 · 剂量反应","type":"SR/MA","journal":"","doi":"","conclusion":"训练容量与肌肥大的剂量反应关系"},{"id":35,"date":"2026-06-30","author":"Helms","year":"2026","title":"RPE · RIR · 力量训练","type":"文献解读","journal":"","doi":"","conclusion":"RPE与RIR在力量训练中的应用"},{"id":36,"date":"2026-07-01","author":"Morton","year":"2026","title":"蛋白质摄入 · 肌肥大 · MA","type":"SR/MA","journal":"","doi":"","conclusion":"蛋白质摄入量与肌肉肥大的荟萃分析"},{"id":37,"date":"2026-07-02","author":"Krieger","year":"2026","title":"训练至力竭 · 肌肥大","type":"文献解读","journal":"","doi":"","conclusion":"训练至力竭与非力竭对肌肥大的影响"},{"id":38,"date":"2026-07-03","author":"Wackerhage","year":"2026","title":"mTOR · 肌肉蛋白质合成","type":"文献解读","journal":"","doi":"","conclusion":"mTOR信号通路与肌肉蛋白质合成调控"},{"id":39,"date":"2026-07-04","author":"Phillips","year":"2026","title":"蛋白质时机 · 合成代谢窗口","type":"文献解读","journal":"","doi":"","conclusion":"蛋白质摄入时机与合成代谢窗口期"},{"id":40,"date":"2026-07-05","author":"Morton","year":"2026","title":"蛋白质分布 · 每餐剂量","type":"文献解读","journal":"","doi":"","conclusion":"蛋白质分布模式与每餐最优剂量"},{"id":41,"date":"2026-07-06","author":"Jager","year":"2026","title":"ISSN运动营养立场声明","type":"立场声明","journal":"","doi":"","conclusion":"国际运动营养学会运动营养立场声明"},{"id":42,"date":"2026-07-07","author":"Kreider","year":"2026","title":"肌酸补充 · ISSN立场声明","type":"立场声明","journal":"","doi":"","conclusion":"ISSN肌酸补充立场声明更新"},{"id":43,"date":"2026-07-08","author":"Trexler","year":"2026","title":"β-丙氨酸 · 运动表现","type":"文献解读","journal":"","doi":"","conclusion":"β-丙氨酸补充对运动表现的影响"},{"id":44,"date":"2026-07-09","author":"Guest","year":"2026","title":"咖啡因 · 运动表现 · ISSN","type":"文献解读","journal":"","doi":"","conclusion":"咖啡因对运动表现的影响：ISSN立场声明"},{"id":45,"date":"2026-07-10","author":"Kerksick","year":"2026","title":"运动营养补充时机","type":"文献解读","journal":"","doi":"","conclusion":"运动营养补充时机的循证建议"},{"id":46,"date":"2026-07-11","author":"Antonio","year":"2026","title":"高蛋白饮食 · 体成分","type":"RCT","journal":"","doi":"","conclusion":"高蛋白饮食对体成分的影响：随机对照试验"},{"id":47,"date":"2026-07-12","author":"Longland","year":"2026","title":"高蛋白 · 能量限制 · 身体重组","type":"RCT","journal":"","doi":"","conclusion":"高蛋白饮食联合能量限制的身体重组效应"},{"id":48,"date":"2026-07-13","author":"Sterns","year":"2026","title":"蛋白质 · 老年人 · 肌肉合成","type":"文献解读","journal":"","doi":"","conclusion":"蛋白质摄入对老年人肌肉蛋白质合成的影响"},{"id":49,"date":"2026-07-14","author":"Bauer","year":"2026","title":"EAA · 老年人 · 肌少症","type":"文献解读","journal":"","doi":"","conclusion":"必需氨基酸补充对老年人肌少症的干预"},{"id":50,"date":"2026-07-15","author":"Volpi","year":"2026","title":"蛋白质需求 · 老龄化","type":"文献解读","journal":"","doi":"","conclusion":"老龄化人群的蛋白质需求重新评估"},{"id":51,"date":"2026-07-16","author":"Churchward-Venne","year":"2026","title":"亮氨酸 · 肌肉合成","type":"文献解读","journal":"","doi":"","conclusion":"亮氨酸阈值与肌肉蛋白质合成激活"},{"id":52,"date":"2026-07-17","author":"Moore","year":"2026","title":"乳清蛋白 · 消化速率","type":"文献解读","journal":"","doi":"","conclusion":"乳清蛋白消化速率与氨基酸动力学"},{"id":53,"date":"2026-07-18","author":"Witard","year":"2026","title":"蛋白质剂量 · 肌合成","type":"RCT","journal":"","doi":"","conclusion":"单次蛋白质剂量对肌肉蛋白质合成的影响"},{"id":54,"date":"2026-07-19","author":"Areta","year":"2026","title":"蛋白质分布 · 阻力训练后","type":"RCT","journal":"","doi":"","conclusion":"阻力训练后蛋白质分布模式的优化"},{"id":55,"date":"2026-07-20","author":"Mamerow","year":"2026","title":"蛋白质分布 · 全天MPS","type":"RCT","journal":"","doi":"","conclusion":"全天蛋白质分布对肌肉蛋白质合成的影响"},{"id":56,"date":"2026-07-21","author":"Schoenfeld","year":"2026","title":"训练动作 · 肌肥大区域","type":"文献解读","journal":"","doi":"","conclusion":"不同训练动作对肌肉区域肥大的影响"},{"id":57,"date":"2026-07-22","author":"Maeo","year":"2026","title":"腘绳肌 · 北欧蹲 · RDL","type":"RCT","journal":"","doi":"","conclusion":"北欧蹲与罗马尼亚硬拉对腘绳肌的选择性刺激"},{"id":58,"date":"2026-07-23","author":"Bloomquist","year":"2026","title":"深蹲幅度 · 肌肥大","type":"RCT","journal":"","doi":"","conclusion":"深蹲训练幅度对下肢肌肥大的影响"},{"id":59,"date":"2026-07-24","author":"Pedrosa","year":"2026","title":"卧推 · 握距 · 胸肌激活","type":"RCT","journal":"","doi":"","conclusion":"卧推握距对胸大肌激活的影响"},{"id":60,"date":"2026-07-25","author":"Lehman","year":"2026","title":"引体向上 · 握法 · 背阔肌","type":"文献解读","journal":"","doi":"","conclusion":"引体向上不同握法对背阔肌激活的影响"},{"id":61,"date":"2026-07-26","author":"Signorile","year":"2026","title":"腿举 · 脚位 · 肌肉激活","type":"RCT","journal":"","doi":"","conclusion":"腿举不同脚位对下肢肌肉激活的影响"},{"id":62,"date":"2026-07-27","author":"Calatayud","year":"2026","title":"卧推 · 不稳定表面","type":"RCT","journal":"","doi":"","conclusion":"不稳定表面卧推对胸肌激活的影响"},{"id":63,"date":"2026-07-28","author":"Saeterbakken","year":"2026","title":"核心训练 · 稳定肌","type":"文献解读","journal":"","doi":"","conclusion":"核心稳定性训练对深层稳定肌的激活"},{"id":64,"date":"2026-07-29","author":"Behm","year":"2026","title":"不稳定训练 · 力量表现","type":"文献解读","journal":"","doi":"","conclusion":"不稳定表面训练对力量表现的影响"},{"id":65,"date":"2026-07-30","author":"Nuzzo","year":"2026","title":"肌肉力量测试方法","type":"文献解读","journal":"","doi":"","conclusion":"肌肉力量测试方法的比较与标准化建议"},{"id":66,"date":"2026-07-31","author":"Suchomel","year":"2026","title":"力量-时间曲线","type":"文献解读","journal":"","doi":"","conclusion":"力量-时间曲线在训练监控中的应用"},{"id":67,"date":"2026-08-01","author":"Zourdos","year":"2026","title":"RPE量表 · 验证","type":"文献解读","journal":"","doi":"","conclusion":"RPE量表在抗阻训练中的验证与应用"},{"id":68,"date":"2026-08-02","author":"Helms","year":"2026","title":"RIR · 训练监控","type":"文献解读","journal":"","doi":"","conclusion":"RIR（保留次数）在训练监控中的可靠性"},{"id":69,"date":"2026-08-03","author":"Steele","year":"2026","title":"训练失败 · 方法学","type":"文献解读","journal":"","doi":"","conclusion":"训练至失败的方法学争议与循证分析"},{"id":70,"date":"2026-08-04","author":"Davies","year":"2026","title":"组间休息 · 肌肥大","type":"SR/MA","journal":"","doi":"","conclusion":"组间休息时长对肌肥大的影响：系统综述"},{"id":71,"date":"2026-08-05","author":"de Salles","year":"2026","title":"组间休息 · 力量表现","type":"文献解读","journal":"","doi":"","conclusion":"组间休息对力量表现恢复的影响"},{"id":72,"date":"2026-08-06","author":"Rhea","year":"2026","title":"训练强度 · 剂量反应","type":"SR/MA","journal":"","doi":"","conclusion":"训练强度与力量增长的剂量反应关系"},{"id":73,"date":"2026-08-07","author":"Peterson","year":"2026","title":"老年人抗阻训练","type":"SR/MA","journal":"","doi":"","conclusion":"老年人抗阻训练的剂量反应荟萃分析"},{"id":74,"date":"2026-08-08","author":"Liu","year":"2026","title":"力量训练 · 老年人功能","type":"SR/MA","journal":"","doi":"","conclusion":"力量训练对老年人身体功能的改善效果"},{"id":75,"date":"2026-08-11","author":"Zhang","year":"2026","title":"AEL vs CLRT · 急性慢性效应","type":"SR/MA","journal":"","doi":"","conclusion":"离心超载与传统抗阻训练的急性与慢性效应对比"},{"id":76,"date":"2026-08-12","author":"Ohta","year":"2026","title":"运动营养 · 老年人 · 肌肉特异性力量","type":"SR/MA","journal":"","doi":"","conclusion":"运动营养干预对老年人肌肉特异性力量的影响"},{"id":77,"date":"2026-08-13","author":"Liu","year":"2026","title":"咖啡因 · 青少年运动员","type":"SR/MA","journal":"","doi":"","conclusion":"咖啡因补充对青少年运动员表现的影响"},{"id":78,"date":"2026-08-14","author":"GuanFan","year":"2026","title":"5HT · 中枢疲劳","type":"SR/MA","journal":"","doi":"","conclusion":"5-羟色胺与运动性中枢疲劳的关系"},{"id":79,"date":"2026-08-30","author":"Souron","year":"2026","title":"心理疲劳 · 骑行耐力 · 肌肉激活","type":"文献解读","journal":"Peer Community Journal","doi":"","conclusion":"心理疲劳对骑行耐力表现与肌肉激活的影响"}];
 
-var litCurrentFilter = 'all';
-var litSearchTerm = '';
+var litCurrentFilter='all';
+var litSearchTerm='';
 
-function getTypeClass(type){
-  var map = {'SR/MA':'type-srma','NMA':'type-nma','伞评':'type-umb','RCT':'type-rct','立场声明':'type-pos'};
-  return map[type] || 'type-other';
+function getTypeClass(t){
+  var m={'SR/MA':'type-srma','NMA':'type-nma','伞评':'type-umb','RCT':'type-rct','立场声明':'type-pos'};
+  return m[t]||'type-other';
 }
+function escHtml(s){if(!s)return'';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 
 function renderLitCounts(){
-  var counts = {'all':LIT_DATA.length,'SR/MA':0,'NMA':0,'伞评':0,'RCT':0,'文献解读':0};
-  for(var i=0;i<LIT_DATA.length;i++){
-    var t = LIT_DATA[i].type;
-    if(counts[t] !== undefined) counts[t]++;
-  }
-  counts['文献解读'] = LIT_DATA.length - counts['SR/MA'] - counts['NMA'] - counts['伞评'] - counts['RCT'] - 1;
-  document.getElementById('count-all').textContent = counts['all'];
-  document.getElementById('count-srma').textContent = counts['SR/MA'];
-  document.getElementById('count-nma').textContent = counts['NMA'];
-  document.getElementById('count-umb').textContent = counts['伞评'];
-  document.getElementById('count-rct').textContent = counts['RCT'];
-  document.getElementById('count-other').textContent = counts['文献解读'];
+  var c={'all':LIT_DATA.length,'SR/MA':0,'NMA':0,'伞评':0,'RCT':0,'文献解读':0};
+  for(var i=0;i<LIT_DATA.length;i++){var t=LIT_DATA[i].type;if(c[t]!==undefined)c[t]++}
+  c['文献解读']=LIT_DATA.length-c['SR/MA']-c['NMA']-c['伞评']-c['RCT']-1;
+  document.getElementById('count-all').textContent=c['all'];
+  document.getElementById('count-srma').textContent=c['SR/MA'];
+  document.getElementById('count-nma').textContent=c['NMA'];
+  document.getElementById('count-umb').textContent=c['伞评'];
+  document.getElementById('count-rct').textContent=c['RCT'];
+  document.getElementById('count-other').textContent=c['文献解读'];
 }
 
 function renderLitCards(){
-  var container = document.getElementById('litContainer');
-  var empty = document.getElementById('litEmpty');
-  var term = litSearchTerm.toLowerCase();
-  var filter = litCurrentFilter;
-  var html = '';
-  var count = 0;
-  for(var i = LIT_DATA.length - 1; i >= 0; i--){
-    var d = LIT_DATA[i];
-    if(filter !== 'all' && d.type !== filter) continue;
-    if(term){
-      var searchStr = (d.title + ' ' + d.author + ' ' + d.year + ' ' + d.journal + ' ' + d.conclusion + ' ' + d.type).toLowerCase();
-      if(searchStr.indexOf(term) === -1) continue;
-    }
+  var ct=document.getElementById('litContainer');
+  var em=document.getElementById('litEmpty');
+  var term=litSearchTerm.toLowerCase();
+  var f=litCurrentFilter;
+  var html='';
+  var count=0;
+  for(var i=LIT_DATA.length-1;i>=0;i--){
+    var d=LIT_DATA[i];
+    if(f!=='all'&&d.type!==f)continue;
+    if(term){var s=(d.title+' '+d.author+' '+d.year+' '+d.journal+' '+d.conclusion+' '+d.type).toLowerCase();if(s.indexOf(term)===-1)continue}
     count++;
-    var typeClass = getTypeClass(d.type);
-    html += '<div class="lit-card">';
-    html += '<div class="lit-card-header">';
-    html += '<div class="lit-card-title">' + escHtml(d.title) + '</div>';
-    html += '<span class="lit-card-type ' + typeClass + '">' + escHtml(d.type) + '</span>';
-    html += '</div>';
-    html += '<div class="lit-card-meta"><span>' + d.author + ' ' + d.year + '</span><span>' + d.date + '</span></div>';
-    if(d.conclusion) html += '<div class="lit-card-summary">' + escHtml(d.conclusion) + '</div>';
-    if(d.journal) html += '<div class="lit-card-journal">' + escHtml(d.journal) + '</div>';
-    html += '</div>';
+    html+='<div class="lit-card">';
+    html+='<div class="lit-card-header"><div class="lit-card-title">'+escHtml(d.title)+'</div>';
+    html+='<span class="lit-card-type '+getTypeClass(d.type)+'">'+escHtml(d.type)+'</span></div>';
+    html+='<div class="lit-card-meta"><span>'+d.author+' '+d.year+'</span><span>'+d.date+'</span></div>';
+    if(d.conclusion)html+='<div class="lit-card-summary">'+escHtml(d.conclusion)+'</div>';
+    if(d.journal)html+='<div class="lit-card-journal">'+escHtml(d.journal)+'</div>';
+    html+='</div>';
   }
-  container.innerHTML = html;
-  empty.style.display = count === 0 ? 'block' : 'none';
-}
-
-function escHtml(s){
-  if(!s) return '';
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  ct.innerHTML=html;
+  em.style.display=count===0?'block':'none';
 }
 
 function setFilter(btn){
   document.querySelectorAll('.lit-filter').forEach(function(b){b.classList.remove('active')});
   btn.classList.add('active');
-  litCurrentFilter = btn.getAttribute('data-type');
+  litCurrentFilter=btn.getAttribute('data-type');
   renderLitCards();
 }
+function filterLit(){litSearchTerm=document.getElementById('litSearch').value.trim();renderLitCards()}
 
-function filterLit(){
-  litSearchTerm = document.getElementById('litSearch').value.trim();
-  renderLitCards();
-}
-
-// Init literature
 renderLitCounts();
 renderLitCards();
 </script>
-
 </body>
 </html>

@@ -1,0 +1,792 @@
+[
+ {
+  "id": 1,
+  "date": "2026-06-05",
+  "author": "Brad S. Currier",
+  "year": "2026",
+  "title": "ACSM 2026 抗阻训练处方立场声明",
+  "type": "立场声明",
+  "journal": "Medicine & Science in Sports & Exercise（MSSE）",
+  "conclusion": "同时，这个研究在INPLASY前瞻注册，遵循PRIOR报告规范，四名评审员独立筛选，用AMSTAR工具评估质量，方法学透明度高。证据确定性确实很强。"
+ },
+ {
+  "id": 2,
+  "date": "2026-06-05",
+  "author": "Martin C. Refalo",
+  "year": "2026",
+  "title": "男女抗阻训练后肌肉肥大差异——贝叶斯系统综述与荟萃分析",
+  "type": "SR/MA",
+  "journal": "PeerJ",
+  "conclusion": ""
+ },
+ {
+  "id": 3,
+  "date": "2026-06-06",
+  "author": "",
+  "year": "2026",
+  "title": "心理疲劳对抵抗训练表现的影响",
+  "type": "SR/MA",
+  "journal": "",
+  "conclusion": ""
+ },
+ {
+  "id": 4,
+  "date": "2026-06-07",
+  "author": "",
+  "year": "2026",
+  "title": "碳水化合物摄入对肌肉肥大的影响",
+  "type": "SR/MA",
+  "journal": "",
+  "conclusion": ""
+ },
+ {
+  "id": 5,
+  "date": "2026-06-07",
+  "author": "Eric Tsz-Chun Poon（香港中文大学）",
+  "year": "2026",
+  "title": "Poon et al. 2026 | 抗阻训练对超重及肥胖儿童青少年的影响",
+  "type": "伞评",
+  "journal": "Obesity Reviews",
+  "conclusion": ""
+ },
+ {
+  "id": 6,
+  "date": "2026-06-08",
+  "author": "",
+  "year": "2026",
+  "title": "[Fuertes-Kenneally 2026] 运动方式与强度对心血管疾病患者血管内皮功能的影响：系统综述与网络荟萃分析",
+  "type": "SR/MA",
+  "journal": "",
+  "conclusion": ""
+ },
+ {
+  "id": 7,
+  "date": "2026-06-08",
+  "author": "James R. McKee",
+  "year": "2026",
+  "title": "高负荷抗阻训练联合血流限制对健康成人的急慢性影响——系统综述与荟萃分析",
+  "type": "SR/MA",
+  "journal": "Journal of Strength and Conditioning Research（J Strength Cond Res）",
+  "conclusion": "**【研究方法与样本量 · 40秒】**\n\n研究怎么做？检索6个数据库，找到8项慢性随机对照试验，测量肌肉力量和肌肉大小的变化；另外还有34项急性研究，看一次训练中的表现反应。"
+ },
+ {
+  "id": 8,
+  "date": "2026-06-09",
+  "author": "Olivier Massé",
+  "year": "2026",
+  "title": "钙、维生素D或联合补充预防骨折与跌倒",
+  "type": "SR/MA",
+  "journal": "*The BMJ*（英国医学杂志）",
+  "conclusion": ">\n> 1. **已确诊骨质疏松症的患者**：需要在医生指导下进行药物治疗，钙和维生素D可能作为辅助治疗\n> 2. **严重维生素D缺乏者**（血清25(OH)D < 10 ng/mL）：可能需要补充以纠正缺乏状态\n> 3. **长期护理机构中的老年人**：证据有限，需个体化评估\n> 4. **特定"
+ },
+ {
+  "id": 9,
+  "date": "2026-06-10",
+  "author": "",
+  "year": "2026",
+  "title": "每日文献解读 · 2026年6月10日",
+  "type": "SR/MA",
+  "journal": "*Diabetes, Obesity and Metabolism*（糖尿病、肥胖与代谢）",
+  "conclusion": "- **最佳训练模式仍存争议**：虽然混合训练排名第一，但与力量训练的差异未达统计学显著性，不能定论混合训练显著优于单纯力量训练"
+ },
+ {
+  "id": 10,
+  "date": "2026-06-11",
+  "author": "",
+  "year": "2026",
+  "title": "肌酸补充对力量、无氧表现与瘦体重的影响：训练背景的调节作用",
+  "type": "SR/MA",
+  "journal": "*Frontiers in Nutrition*（《营养学前沿》）",
+  "conclusion": "- 补剂营销常拿\"显著差异\"说事，但不会告诉你证据质量有多高"
+ },
+ {
+  "id": 11,
+  "date": "2026-06-11",
+  "author": "",
+  "year": "2026",
+  "title": "[Shi 2026] 不同运动方式对心力衰竭患者左心室射血分数改善的剂量反应与网络荟萃分析",
+  "type": "SR/MA",
+  "journal": "",
+  "conclusion": ""
+ },
+ {
+  "id": 12,
+  "date": "2026-06-12",
+  "author": "HongYu Yang（杨红宇）",
+  "year": "2026",
+  "title": "青少年足球运动员结构化损伤预防项目的有效性",
+  "type": "SR/MA",
+  "journal": "PeerJ",
+  "conclusion": "\"好，现在来说核心发现。\n\n第一，**整体损伤风险降低了 38%**。做预防训练的那一组，每小时的损伤概率是对照组的 0."
+ },
+ {
+  "id": 13,
+  "date": "2026-06-13",
+  "author": "",
+  "year": "2026",
+  "title": "[McCarthy 2026] 饮食和膳食补充剂对运动女性铁状态的影响：干预试验的系统综述与荟萃分析",
+  "type": "解读",
+  "journal": "",
+  "conclusion": ""
+ },
+ {
+  "id": 14,
+  "date": "2026-06-13",
+  "author": "",
+  "year": "2026",
+  "title": "Naddafha 2026：肌酸对绝经后女性瘦体重、力量和骨密度的影响——系统综述与荟萃分析",
+  "type": "SR/MA",
+  "journal": "*Journal of the International Society of Sports Nutrition* (国际运动营养学会期刊)",
+  "conclusion": "- **肌酸 + 抗阻训练**可有效增加绝经后女性的瘦体重"
+ },
+ {
+  "id": 15,
+  "date": "2026-06-14",
+  "author": "Kell Mazzini Ribeiro de Camargo",
+  "year": "2026",
+  "title": "肌酸补充对炎症生物标志物的影响：系统综述与荟萃分析解读",
+  "type": "SR/MA",
+  "journal": "*Frontiers in Immunology*（《免疫学前沿》）",
+  "conclusion": "5. **GRADE 分级的实际应用**：中等确定性证据意味着结论可能会随着新研究的出现而调整。"
+ },
+ {
+  "id": 16,
+  "date": "2026-06-15",
+  "author": "Yuanbo Chang",
+  "year": "2026",
+  "title": "内脏脂肪怎么减最有效？不同运动方式与剂量的系统综述与网络荟萃分析",
+  "type": "解读",
+  "journal": "*Nutrition & Metabolism*（Nutr Metab Lond）",
+  "conclusion": ""
+ },
+ {
+  "id": 17,
+  "date": "2026-06-16",
+  "author": "",
+  "year": "2026",
+  "title": "[Gawelczyk 2026] 低碳水化合物与生酮饮食对竞技运动员无氧表现的影响：系统综述与荟萃分析",
+  "type": "解读",
+  "journal": "",
+  "conclusion": ""
+ },
+ {
+  "id": 18,
+  "date": "2026-06-16",
+  "author": "",
+  "year": "2026",
+  "title": "每日高温环境下耐力运动的碳水化合物补充",
+  "type": "SR/MA",
+  "journal": "*Journal of the International Society of Sports Nutrition*（国际运动营养学会期刊, JISSN）",
+  "conclusion": "|--------|-----------|----------|"
+ },
+ {
+  "id": 19,
+  "date": "2026-06-16",
+  "author": "",
+  "year": "2026",
+  "title": "[Zhao 2026] 舞蹈与其他运动方式对轻度认知障碍和痴呆的疗效比较：系统综述与贝叶斯网络荟萃分析",
+  "type": "SR/MA",
+  "journal": "",
+  "conclusion": ""
+ },
+ {
+  "id": 20,
+  "date": "2026-06-17",
+  "author": "",
+  "year": "2026",
+  "title": "每日青少年团队运动多成分神经肌肉训练的下肢损伤预防效果",
+  "type": "伞评",
+  "journal": "*Quality in Sport*（运动质量期刊）",
+  "conclusion": ""
+ },
+ {
+  "id": 21,
+  "date": "2026-06-18",
+  "author": "",
+  "year": "2026",
+  "title": "每日高强度间歇训练改善久坐成人心血管代谢健康——Cochrane系统综述",
+  "type": "SR/MA",
+  "journal": "*Cochrane Database of Systematic Reviews*（考克兰系统综述数据库）",
+  "conclusion": ""
+ },
+ {
+  "id": 22,
+  "date": "2026-06-19",
+  "author": "Fraser Thurlow",
+  "year": "2026",
+  "title": "短间歇 HIIT 急性生理与感知效应 —— 系统综述与荟萃分析",
+  "type": "SR/MA",
+  "journal": "*Sports Medicine*（运动医学, Sports Medicine）",
+  "conclusion": "先给你一组核心数据，短间歇 HIIT 的整体负荷有多大："
+ },
+ {
+  "id": 23,
+  "date": "2026-06-20",
+  "author": "",
+  "year": "2026",
+  "title": "Li 2026 HIIT对糖尿病前期成人血糖控制的系统综述与荟萃分析",
+  "type": "SR/MA",
+  "journal": "*Frontiers in Endocrinology*（内分泌学前沿）",
+  "conclusion": ""
+ },
+ {
+  "id": 24,
+  "date": "2026-06-21",
+  "author": "",
+  "year": "2026",
+  "title": "运动降血压的\"黄金组合\"与最优剂量：105项RCT的网络荟萃分析解读",
+  "type": "SR/MA",
+  "journal": "*Journal of the American Heart Association*（JAHA，美国心脏协会杂志）",
+  "conclusion": "- 核心结论（运动能降血压、联合训练/HIIT效果较优、存在U型剂量反应）具有较高的可信度"
+ },
+ {
+  "id": 25,
+  "date": "2026-06-22",
+  "author": "",
+  "year": "2026",
+  "title": "对抗肌少症的最优方案：235项RCT的网络荟萃分析解读",
+  "type": "SR/MA",
+  "journal": "*Nutrients*（营养素）",
+  "conclusion": "好，重点来了。这篇研究最核心的发现是什么？"
+ },
+ {
+  "id": 26,
+  "date": "2026-06-23",
+  "author": "",
+  "year": "2026",
+  "title": "同时训练真的会互相干扰吗？17项荟萃分析的伞评给出答案",
+  "type": "伞评",
+  "journal": "*Sports Medicine*（运动医学）",
+  "conclusion": "**【研究方法与样本量（30秒）】**\n\n简单说一下研究怎么做的。"
+ },
+ {
+  "id": 27,
+  "date": "2026-06-23",
+  "author": "",
+  "year": "2026",
+  "title": "[Zhang 2026] 长期抗阻训练与全因和特因死亡率：剂量反应及与有氧体力活动的联合关联",
+  "type": "解读",
+  "journal": "",
+  "conclusion": ""
+ },
+ {
+  "id": 28,
+  "date": "2026-06-25",
+  "author": "",
+  "year": "2026",
+  "title": "[Minahan 2026] 运动压力下的表现：澳大利亚运动与体育科学学会（ESSA）立场声明",
+  "type": "立场声明",
+  "journal": "",
+  "conclusion": ""
+ },
+ {
+  "id": 29,
+  "date": "2026-06-25",
+  "author": "",
+  "year": "2026",
+  "title": "每日神经肌肉训练预防ACL损伤的效果年龄差异",
+  "type": "SR/MA",
+  "journal": "*Frontiers in Public Health*（公共卫生前沿）",
+  "conclusion": ""
+ },
+ {
+  "id": 30,
+  "date": "2026-06-25",
+  "author": "",
+  "year": "2026",
+  "title": "[Zhou 2026] 不同有氧运动处方对骨质疏松患者骨密度的影响：网络Meta分析",
+  "type": "SR/MA",
+  "journal": "",
+  "conclusion": ""
+ },
+ {
+  "id": 31,
+  "date": "2026-06-27",
+  "author": "",
+  "year": "2026",
+  "title": "每日不同运动类型对久坐人群睡眠的影响——系统综述与网络Meta分析",
+  "type": "SR/MA",
+  "journal": "*PeerJ*（同行评议期刊）",
+  "conclusion": "### 总体证据质量评估\n- **证据体类型**：基于31项RCT的系统综述与网络Meta分析\n- **核心结局**：睡眠质量（PSQI等）、睡眠效率、总睡眠时间、入睡潜伏期、睡眠问卷评分\n- **总体GRADE评级**：⊕⊕⊕◯ **中等确定性**"
+ },
+ {
+  "id": 32,
+  "date": "2026-06-27",
+  "author": "",
+  "year": "2026",
+  "title": "每日维生素D状态与补充对人体肌肉骨骼组织功能结局的影响——分层系统综述",
+  "type": "解读",
+  "journal": "*Health Science Reports*",
+  "conclusion": "- 不同研究的维生素D基线水平、补充剂量、干预时长差异大，难以直接比较"
+ },
+ {
+  "id": 33,
+  "date": "2026-06-27",
+  "author": "",
+  "year": "2026",
+  "title": "每日运动相关脑震荡冲击的头部加速度大小——系统综述与Meta分析",
+  "type": "SR/MA",
+  "journal": "*Sports Medicine*（运动医学）",
+  "conclusion": "### 总体证据质量评估\n- **证据体类型**：基于30项观察性研究（主要为队列研究和病例对照研究）的系统综述与Meta分析\n- **核心结局**：脑震荡相关头部冲击的线性加速度、旋转加速度峰值\n- **总体GRADE评级**：⊕⊕⊕◯ **中等确定性**\n  - 注意：由于是观察性研究，证据起点"
+ },
+ {
+  "id": 34,
+  "date": "2026-06-27",
+  "author": "",
+  "year": "2026",
+  "title": "每日咖啡因、急性有氧运动与安慰剂对心理疲劳的差异效应——随机对照交叉试验",
+  "type": "解读",
+  "journal": "*PLOS ONE*",
+  "conclusion": "### 本研究的证据等级\n- **研究类型**：随机对照交叉试验（RCT crossover design）\n- **样本量**：26人\n- **研究质量**：中等\n- **GRADE评级起点**：高（RCT默认高确定性）"
+ },
+ {
+  "id": 35,
+  "date": "2026-06-27",
+  "author": "",
+  "year": "2026",
+  "title": "每日咖啡因对女性自行车运动表现的增效作用——系统综述与三水平Meta分析",
+  "type": "解读",
+  "journal": "*International Journal of Sport Nutrition and Exercise Metabolism* (IJSNEM)",
+  "conclusion": ""
+ },
+ {
+  "id": 36,
+  "date": "2026-06-27",
+  "author": "",
+  "year": "2026",
+  "title": "每日正念冥想练习者的日常压力与心率变异性——mHealth观察性研究",
+  "type": "解读",
+  "journal": "*Journal of Medical Internet Research* (JMIR)",
+  "conclusion": "### 本研究的证据等级\n- **研究类型**：观察性研究（横断面+生态瞬时评估）\n- **样本量**：90人（正念组约45人，对照组约45人）\n- **研究质量**：中等\n- **GRADE评级起点**：低（观察性研究默认低确定性）"
+ },
+ {
+  "id": 37,
+  "date": "2026-06-27",
+  "author": "",
+  "year": "2026",
+  "title": "每日高蛋白饮食对无慢性肾病成人肾功能和身体成分的影响——随机对照试验的系统综述与Meta分析",
+  "type": "SR/MA",
+  "journal": "*Diabetes, Obesity and Metabolism* (DOM)",
+  "conclusion": "### 总体证据质量评估\n- **证据体类型**：基于22项RCT的系统综述与Meta分析\n- **核心结局**：肾功能指标（eGFR、血肌酐、尿素氮、尿蛋白）、身体成分指标（体脂率、瘦体重、体重、BMI）\n- **总体GRADE评级**：\n  - **肾功能结局**：⊕⊕⊕◯ **中等确定性**\n"
+ },
+ {
+  "id": 38,
+  "date": "2026-06-27",
+  "author": "",
+  "year": "2026",
+  "title": "每日益生菌摄入对健康人运动能力的影响——系统综述与贝叶斯Meta分析",
+  "type": "SR/MA",
+  "journal": "*Frontiers in Nutrition*（营养学前沿）",
+  "conclusion": "### 总体证据质量评估\n- **证据体类型**：基于21项RCT/交叉试验的系统综述与贝叶斯Meta分析\n- **核心结局**：整体运动表现、耐力表现、肌肉力量/功率、运动后恢复\n- **总体GRADE评级**：⊕⊕◯◯ **低确定性**"
+ },
+ {
+  "id": 39,
+  "date": "2026-06-27",
+  "author": "",
+  "year": "2026",
+  "title": "每日自助式网络正念压力管理治疗广泛性焦虑障碍——随机对照试验",
+  "type": "RCT",
+  "journal": "*Journal of Medical Internet Research* (JMIR)",
+  "conclusion": "### 本研究的证据等级\n- **研究类型**：单中心随机对照试验（RCT）\n- **样本量**：140人（干预组73，对照组67）\n- **研究质量**：中等偏高\n- **GRADE评级起点**：高（RCT默认高确定性）"
+ },
+ {
+  "id": 40,
+  "date": "2026-06-29",
+  "author": "",
+  "year": "2026",
+  "title": "每日体力活动与表观遗传衰老——《柳叶刀·老龄健康》系统综述与荟萃分析",
+  "type": "SR/MA",
+  "journal": "*The Lancet Healthy Longevity*（《柳叶刀·老龄健康》）",
+  "conclusion": "- 读文献时要时刻问自己：这是关联还是因果？研究设计支持什么样的结论？"
+ },
+ {
+  "id": 41,
+  "date": "2026-07-02",
+  "author": "Sidong Li（李思栋）",
+  "year": "2026",
+  "title": "[Li 2026] 每日复合维生素补充对表观遗传衰老时钟的影响：COSMOS随机临床试验2年结果",
+  "type": "RCT",
+  "journal": "*Nature Medicine*（自然·医学）",
+  "conclusion": "> **每日一片复合维生素（善存银片）可在2年内轻微但统计显著地减缓老年人的表观遗传衰老速度（第二代时钟），基线生物学年龄加速者获益更明显；可可黄烷醇补充无此作用。"
+ },
+ {
+  "id": 42,
+  "date": "2026-07-03",
+  "author": "",
+  "year": "2026",
+  "title": "抗阻训练剂量反应——每周容量与频率对肌肥大与力量增长的meta回归分析",
+  "type": "解读",
+  "journal": "*Sports Medicine*（《运动医学》，IF ≈ 18.5，Q1）",
+  "conclusion": ""
+ },
+ {
+  "id": 43,
+  "date": "2026-07-05",
+  "author": "",
+  "year": "2026",
+  "title": "文献解读 | Abdelhamid et al. (2020) — Omega-3脂肪酸用于心血管疾病一级与二级预防：Cochrane系统综述",
+  "type": "解读",
+  "journal": "Cochrane Database of Systematic Reviews, 2020, Issue 3, Art. No.: CD003177",
+  "conclusion": ""
+ },
+ {
+  "id": 44,
+  "date": "2026-07-05",
+  "author": "",
+  "year": "2026",
+  "title": "胶原蛋白补剂与皮肤及骨骼肌肉健康——首项全领域伞评揭示证据真相",
+  "type": "伞评",
+  "journal": "*Aesthetic Surgery Journal Open Forum*（《美容整形外科学杂志开放论坛》）",
+  "conclusion": ""
+ },
+ {
+  "id": 45,
+  "date": "2026-07-06",
+  "author": "",
+  "year": "2026",
+  "title": "植物蛋白 vs 动物蛋白长期补剂对身体成分、肌力、运动表现和心脏代谢风险的影响",
+  "type": "SR/MA",
+  "journal": "*Frontiers in Nutrition*（《前沿·营养学》），IF（影响因子，Impact Factor）5.5，Citescore 9.6",
+  "conclusion": ""
+ },
+ {
+  "id": 46,
+  "date": "2026-07-11",
+  "author": "Yucan Li（复旦大学人类表型组研究所 / 公共卫生学院生物统计系）",
+  "year": "2026",
+  "title": "每日文献解读 H-26",
+  "type": "RCT",
+  "journal": "Clinical Nutrition（Clin Nutr），Elsevier出版，IF ≈ 7.0+，Q1 营养学",
+  "conclusion": ""
+ },
+ {
+  "id": 47,
+  "date": "2026-07-14",
+  "author": "Weili Ren（任伟丽）",
+  "year": "2026",
+  "title": "每日文献解读 T-33",
+  "type": "SR/MA",
+  "journal": "*Diabetes Research and Clinical Practice*（DRCP，Elsevier 出版；Q1 内分泌与代谢；影响因子 ≈ 7.4，2025 年 6 月更新）",
+  "conclusion": ""
+ },
+ {
+  "id": 48,
+  "date": "2026-07-17",
+  "author": "Jinxuan Bao（包锦轩，Beijing Sport University 力量与 conditioning 训练学院硕士研究生）",
+  "year": "2026",
+  "title": "每日文献解读 T-35",
+  "type": "SR/MA",
+  "journal": "Frontiers in Physiology（IF ≈ 4.3，Q2 生理学）",
+  "conclusion": ""
+ },
+ {
+  "id": 49,
+  "date": "2026-07-19",
+  "author": "Yanhao Wang（王彦豪）",
+  "year": "2026",
+  "title": "每日文献解读 T-37",
+  "type": "SR/MA",
+  "journal": "*Frontiers in Cardiovascular Medicine*（Front Cardiovasc Med；Sec. Hypertension；Frontiers 出版；Open Access；CC BY 协议）",
+  "conclusion": ""
+ },
+ {
+  "id": 50,
+  "date": "2026-07-20",
+  "author": "Yong Yang（杨勇）",
+  "year": "2026",
+  "title": "每日文献解读 T-38",
+  "type": "SR/MA",
+  "journal": "*European Review of Aging and Physical Activity*（ERAPA；BMC/Springer 出版；Open Access；CC BY 协议）",
+  "conclusion": ""
+ },
+ {
+  "id": 51,
+  "date": "2026-07-21",
+  "author": "",
+  "year": "2026",
+  "title": "Seyhan 2026 乳清蛋白+胶原蛋白联合补充对骨骼与肌肉的影响",
+  "type": "RCT",
+  "journal": "",
+  "conclusion": "把Seyhan 2026放到更高的证据等级上去交叉验证。"
+ },
+ {
+  "id": 52,
+  "date": "2026-07-21",
+  "author": "Samantha L Watson（医学博士在读, BS）",
+  "year": "2026",
+  "title": "每日文献解读 T-39",
+  "type": "SR/MA",
+  "journal": "*The American Journal of Sports Medicine*（AJS；SAGE 出版；骨科运动医学顶刊；Q1）",
+  "conclusion": ""
+ },
+ {
+  "id": 53,
+  "date": "2026-07-22",
+  "author": "Ghazal Sharifian（沙菲安）",
+  "year": "2026",
+  "title": "每日文献解读 T-40",
+  "type": "SR/MA",
+  "journal": "*European Review of Aging and Physical Activity*（Eur Rev Aging Phys Act；BMC 旗下；Open Access；CC BY 协议；运动科学/老年学交叉期刊）",
+  "conclusion": ""
+ },
+ {
+  "id": 54,
+  "date": "2026-07-24",
+  "author": "Jiawei Wu（吴佳伟，安徽工程大学）",
+  "year": "2026",
+  "title": "每日文献解读 T-46：冷疗模态 SR/NMA",
+  "type": "SR/MA",
+  "journal": "*Frontiers in Sports and Active Living*（Front. Sports Act. Living；Frontiers 出版集团；运动科学 / 损伤预防与康复分区）",
+  "conclusion": ""
+ },
+ {
+  "id": 55,
+  "date": "2026-07-26",
+  "author": "",
+  "year": "2026",
+  "title": "T-100 Mallmann Schneider V 2026 — 24小时动态血压视角下运动模态的 NMA 循证再评估",
+  "type": "SR/MA",
+  "journal": "*British Journal of Sports Medicine*（BJSM；BMJ 出版集团；运动医学 / 物理治疗 / 康复分区 Q1）",
+  "conclusion": ""
+ },
+ {
+  "id": 56,
+  "date": "2026-07-28",
+  "author": "",
+  "year": "2026",
+  "title": "H-53 Ekelund U 2026 - 每天 5 分钟中等强度活动即可预防 6-10% 全因死亡的 IPD MA",
+  "type": "SR/MA",
+  "journal": "",
+  "conclusion": ""
+ },
+ {
+  "id": 57,
+  "date": "2026-07-29",
+  "author": "",
+  "year": "2026",
+  "title": "N-19 Bai & Xu 2026 - 肌酸单独补充优于肌酸+β-丙氨酸联合：52 项 RCT 网状荟萃分析拆穿「补剂叠加」消费叙事",
+  "type": "SR/MA",
+  "journal": "",
+  "conclusion": ""
+ },
+ {
+  "id": 58,
+  "date": "2026-07-30",
+  "author": "",
+  "year": "2026",
+  "title": "Lyristakis 2026 — 抗阻训练变量×肌肉力量的非线性剂量反应：157 项 RCT 系统综述与荟萃分析",
+  "type": "解读",
+  "journal": "",
+  "conclusion": ""
+ },
+ {
+  "id": 59,
+  "date": "2026-07-31",
+  "author": "",
+  "year": "2026",
+  "title": "Ikeda 2026 — 早餐蛋白质/氨基酸摄入对老年人肌肉量的效应：系统综述与荟萃分析",
+  "type": "SR/MA",
+  "journal": "Food Science & Nutrition（食品科学与营养），Wiley Periodicals LLC，开放获取",
+  "conclusion": ""
+ },
+ {
+  "id": 60,
+  "date": "2026-08-01",
+  "author": "",
+  "year": "2026",
+  "title": "Svensson M 2026 — 训练期间蛋白-碳水联合摄入 vs 等热量碳水对肌纤维肥大与氧化能力的效应：双盲 RCT",
+  "type": "RCT",
+  "journal": "*Nutrients*（MDPI），IF ≈ 4.8，JCR Q1，Special Issue: Nutrition Strategy and Resistance Training",
+  "conclusion": "2. **营养时机优先级排序**：全天蛋白总量 > 蛋白分布均匀性（3-4 餐/天，每餐 0.4-0.55 g/kg） > 训练前后营养时机。训练内补充在这个优先级中排名最后。"
+ },
+ {
+  "id": 61,
+  "date": "2026-08-02",
+  "author": "",
+  "year": "2026",
+  "title": "Henselmans M 2026 — 碳水化合物摄入对肌肉肥大的独立效应：SR/MA",
+  "type": "SR/MA",
+  "journal": "*Sports Medicine*（Springer），IF ≈ 10.2，JCR Q1",
+  "conclusion": ""
+ },
+ {
+  "id": 62,
+  "date": "2026-08-03",
+  "author": "Xinyu Shen（沈新宇）",
+  "year": "2026",
+  "title": "Shen 2026 — 10种运动干预对代谢综合征各指标的差异化效应：网状荟萃分析",
+  "type": "SR/MA",
+  "journal": "*iScience*（Cell Press 旗下交叉科学期刊）|",
+  "conclusion": ""
+ },
+ {
+  "id": 63,
+  "date": "2026-08-05",
+  "author": "Tim Havers（慕尼黑工业大学 运动与健康科学系 / IST应用科技大学 健身与健康系）",
+  "year": "2026",
+  "title": "Havers 2026 — 降组训练的急性与慢性效应：不增肌、不增力、但省时间的系统评价与元分析",
+  "type": "SR/MA",
+  "journal": "Sports Medicine - Open（IF ≈ 4.7，Q1 运动科学）",
+  "conclusion": ""
+ },
+ {
+  "id": 64,
+  "date": "2026-08-06",
+  "author": "Julio Fernandez-Garrido（julio.fernandez@uv.es）",
+  "year": "2026",
+  "title": "每日文献解读 · Fernandez-Garrido 2026",
+  "type": "RCT",
+  "journal": "*Experimental Gerontology*（实验老年学）",
+  "conclusion": ""
+ },
+ {
+  "id": 65,
+  "date": "2026-08-07",
+  "author": "Joshua C Pelland",
+  "year": "2026",
+  "title": "每日文献解读 · Pelland 2026",
+  "type": "解读",
+  "journal": "*Sports Medicine*（运动医学）",
+  "conclusion": ""
+ },
+ {
+  "id": 66,
+  "date": "2026-08-08",
+  "author": "",
+  "year": "2026",
+  "title": "全血 NAD⁺ 水平不随年龄下降——七项独立队列的循证挑战",
+  "type": "SR/MA",
+  "journal": "Nature Metabolism（自然·代谢）",
+  "conclusion": "3. **商业叙事 vs 循证判断**：NAD⁺补充剂产业估值数十亿美元。"
+ },
+ {
+  "id": 67,
+  "date": "2026-08-09",
+  "author": "",
+  "year": "2026",
+  "title": "每日文献解读 T-136：抗阻×增强式联合训练模态对纵跳与短跑的效应 · 贝叶斯网状荟萃分析",
+  "type": "SR/MA",
+  "journal": "BMC Sports Science, Medicine and Rehabilitation（BMC 运动科学、医学与康复杂志）",
+  "conclusion": ""
+ },
+ {
+  "id": 68,
+  "date": "2026-08-10",
+  "author": "Zhijian He（何志坚），Lanzhou University（兰州大学）& Beijing Sport University（北京体育大学）",
+  "year": "2026",
+  "title": "H-58 He 2026 等长收缩预激活增强效应（PAPE）系统综述与三级荟萃分析",
+  "type": "SR/MA",
+  "journal": "European Journal of Sport Science（欧洲运动科学杂志，EJSS），IF = 3.0，Q1（Orthopedics and Sports Medicine），ECSS（欧洲运动科学学会）官方期刊",
+  "conclusion": ""
+ },
+ {
+  "id": 69,
+  "date": "2026-08-11",
+  "author": "Xing Zhang（张星），University of Granada（格拉纳达大学），Spain",
+  "year": "2026",
+  "title": "Zhang X / Weakley J / García-Ramos A 2026 Sports Medicine 强调性离心负荷 vs 恒定负荷抗阻训练急慢性效应 系统综述与荟萃分析",
+  "type": "SR/MA",
+  "journal": "Sports Medicine（运动医学），IF ≈ 10.2，Q1（Orthopedics and Sports Medicine），运动科学领域顶刊",
+  "conclusion": ""
+ },
+ {
+  "id": 70,
+  "date": "2026-08-12",
+  "author": "Takahisa Ohta（大田隆久），Tokyo Metropolitan Institute for Geriatrics and Gerontology（东京都健康长寿医疗中心研究所），Japan",
+  "year": "2026",
+  "title": "Ohta T / Hatanaka S / Osuka Y（通讯）2026 Ageing Research Reviews 运动与营养干预对老年人肌肉特异性力量效应 系统综述与荟萃分析",
+  "type": "SR/MA",
+  "journal": "Ageing Research Reviews（老龄研究综述），IF ≈ 12.5，Q1（Gerontology / Geriatrics and Gerontology），老年医学领域顶刊",
+  "conclusion": ""
+ },
+ {
+  "id": 71,
+  "date": "2026-08-13",
+  "author": "",
+  "year": "2026",
+  "title": "青少年运动员急性咖啡因摄入的运动表现效应与安全性——系统综述与三级荟萃分析",
+  "type": "SR/MA",
+  "journal": "Nutrients（《营养素》），MDPI 出版，EISSN 2072-6643",
+  "conclusion": ""
+ },
+ {
+  "id": 72,
+  "date": "2026-08-14",
+  "author": "Guan L（关琳，⚠️ 待核证中文姓名）",
+  "year": "2026",
+  "title": "T-147 Guan & Fan 2026 JISSN 血清素能药物操纵对运动表现与中枢疲劳效应 系统综述 + 三水平荟萃分析 深度解读",
+  "type": "SR/MA",
+  "journal": "Journal of the International Society of Sports Nutrition（国际运动营养学会期刊, JISSN）",
+  "conclusion": ""
+ },
+ {
+  "id": 73,
+  "date": "2026-08-15",
+  "author": "",
+  "year": "2026",
+  "title": "文献深度解读：LaMonte et al. 2026 — 老年女性肌肉力量与死亡率",
+  "type": "解读",
+  "journal": "",
+  "conclusion": "| **Competing explanations（竞争性解释）** | ①反向因果：基础疾病同时导致低力量和高死亡率；②残余混杂：更强的人可能在其他未测量的健康行为上也更好；③遗传第三方变量：某些基因同时影响肌肉功能和寿命 |"
+ },
+ {
+  "id": 74,
+  "date": "2026-08-16",
+  "author": "",
+  "year": "2026",
+  "title": "Gois & Carvalho 2026：联合有氧和抗阻训练对冠心病患者运动能力、肌力、生活质量与死亡率的效应——系统综述与荟萃分析",
+  "type": "SR/MA",
+  "journal": "",
+  "conclusion": "联合有氧和抗阻训练（CART）在改善 CHD 患者心肺功能、肌力、生活质量和降低死亡率方面优于不运动或单纯有氧训练，为心脏康复方案应包含力量成分提供了迄今最大规模的 RCT 汇总证据。"
+ },
+ {
+  "id": 75,
+  "date": "2026-08-17",
+  "author": "",
+  "year": "2026",
+  "title": "全食物饮食干预对社区老年人蛋白摄入的效应：系统综述与荟萃分析深度解读",
+  "type": "SR/MA",
+  "journal": "",
+  "conclusion": "全食物饮食干预可有效增加社区老年人蛋白摄入量（+12.2 g/d），成功干预的特征是干预时长 >3 个月、个体化咨询、面对面交付和设定绝对蛋白目标。"
+ },
+ {
+  "id": 76,
+  "date": "2026-08-18",
+  "author": "",
+  "year": "2026",
+  "title": "元数据卡：T-150",
+  "type": "SR/MA",
+  "journal": "",
+  "conclusion": ""
+ },
+ {
+  "id": 77,
+  "date": "2026-08-25",
+  "author": "",
+  "year": "2026",
+  "title": "Singh B / Maher CA（通讯）2026 JAACAP — 运动对儿童青少年抑郁与焦虑症状的效应：系统伞状综述与元元分析",
+  "type": "解读",
+  "journal": "",
+  "conclusion": ""
+ },
+ {
+  "id": 78,
+  "date": "2026-08-26",
+  "author": "",
+  "year": "2026",
+  "title": "Adugna DG / Kidgell DJ（通讯）2026 Neurobiology of Aging",
+  "type": "SR/MA",
+  "journal": "",
+  "conclusion": "衰老伴随运动单位放电率降低（尤其高力量时）、放电变异增大和募集阈值改变，这些神经层面变化可能是老年人力量下降的贡献因素之一，但横断面设计无法确定因果方向。"
+ },
+ {
+  "id": 79,
+  "date": "2026-08-30",
+  "author": "",
+  "year": "2026",
+  "title": "心理疲劳损害骑行耐力表现和努力感知，但不改变肌肉激活",
+  "type": "解读",
+  "journal": "",
+  "conclusion": "仍然不知道的：皮层脊髓兴奋性有没有变化？对力量训练有什么影响？训练有素运动员是否免疫？大脑耐力训练有没有用？心理干预能不能即时逆转效应？"
+ }
+]

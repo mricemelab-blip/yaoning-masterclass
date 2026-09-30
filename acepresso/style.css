@@ -124,6 +124,7 @@ a{color:#1A1A1A;text-decoration:none}
 
 /* LECTURE */
 .lecture-block{max-width:780px}
+.lecture-block img{max-width:480px!important;height:auto;border-radius:8px;margin:16px 0}
 .lecture-block h3{
   font-size:20px;font-weight:700;margin:40px 0 16px;
   padding-bottom:8px;

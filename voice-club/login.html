@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ARISE CLUB</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{
   background:#000;
   color:#fff;
@@ -15,38 +15,52 @@ body{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  padding:24px;
+  padding:40px 24px;
   overflow:hidden;
   -webkit-font-smoothing:antialiased;
 }
 
-.login-number{
-  font-size:13px;
+/* ── Tag ── */
+.tag{
+  font-size:11px;
   font-weight:700;
-  letter-spacing:1px;
+  letter-spacing:6px;
+  text-transform:uppercase;
   color:#C8F230;
   margin-bottom:48px;
 }
 
-.headline{
-  text-align:center;
-  margin-bottom:64px;
-  max-width:600px;
-}
-.headline-title{
+/* ── Headline ── */
+.headline{text-align:center;margin-bottom:64px}
+.headline-slogan{
+  font-size:clamp(28px,5vw,48px);
   font-weight:900;
-  line-height:1.1;
-  letter-spacing:-.03em;
-  color:#fff;
+  letter-spacing:-.02em;
+  line-height:1.2;
+  color:#C8F230;
+  margin-bottom:24px;
 }
-.headline-title .en-line{font-size:clamp(36px,7vw,64px);display:block;margin-bottom:8px}
-.headline-title .cn-line{font-size:clamp(24px,4.5vw,44px);display:block;letter-spacing:.02em}
-.headline-title .accent{color:#C8F230}
+.headline-cn{
+  font-size:clamp(32px,6vw,56px);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.15;
+  color:#fff;
+  margin-bottom:8px;
+}
+.headline-en{
+  font-size:clamp(18px,3vw,28px);
+  font-weight:400;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.4);
+}
 
+/* ── Login card ── */
 .login-box{
   width:100%;
-  max-width:360px;
-  background:#0A0A0A;
+  max-width:380px;
+  background:#080808;
   border:1px solid #1A1A1A;
   padding:36px 32px 32px;
 }
@@ -55,73 +69,76 @@ body{
   display:block;
   font-size:10px;
   font-weight:700;
-  letter-spacing:2.5px;
+  letter-spacing:3px;
   text-transform:uppercase;
-  color:#666;
-  margin-bottom:8px;
+  color:#555;
+  margin-bottom:10px;
 }
 .login-box input{
   width:100%;
-  height:46px;
+  height:48px;
   background:#000;
   border:1px solid #1A1A1A;
-  padding:0 14px;
+  padding:0 16px;
   font-size:15px;
   color:#fff;
   outline:none;
-  transition:border-color .2s;
+  transition:border-color .25s;
   -webkit-appearance:none;
 }
 .login-box input:focus{border-color:#C8F230}
 .login-box input::placeholder{color:#444}
 .login-box .btn{
   width:100%;
-  height:50px;
+  height:52px;
   background:#C8F230;
   color:#000;
   font-size:13px;
   font-weight:800;
-  letter-spacing:3px;
+  letter-spacing:4px;
   text-transform:uppercase;
   border:none;
   cursor:pointer;
-  margin-top:12px;
+  margin-top:16px;
   transition:opacity .2s;
 }
 .login-box .btn:hover{opacity:.85}
 .login-box .btn:active{opacity:.7}
 .login-box .error{
-  color:#999;
+  color:#888;
   font-size:12px;
   text-align:center;
   margin-top:16px;
   min-height:18px;
 }
 
-.brand-foot{
+/* ── Footer ── */
+.foot{
   margin-top:56px;
   text-align:center;
-}
-.brand-foot .tag{
   font-size:10px;
-  letter-spacing:2px;
-  color:#555;
+  letter-spacing:3px;
+  color:#444;
   text-transform:uppercase;
 }
-.brand-foot .tag span{color:#C8F230}
+.foot span{color:#C8F230}
 
-@media(max-width:380px){
-  .headline-title{font-size:38px}
+@media(max-width:400px){
+  .headline-slogan{font-size:24px}
+  .headline-cn{font-size:28px}
+  .headline-en{font-size:16px}
   .login-box{padding:28px 22px 26px}
 }
 </style>
 </head>
 <body>
 
-<div class="login-number">//00</div>
+<div class="tag">ARISE CLUB</div>
 
 <div class="headline">
-  <div class="headline-title"><span class="en-line">Where Strength Meets <span class="accent">Science</span></span><span class="cn-line">ARISE CLUB 发生俱乐部</span></div>
+  <div class="headline-slogan">Where Strength Meets Science</div>
+  <div class="headline-cn">发生俱乐部</div>
+  <div class="headline-en">Arise Club</div>
 </div>
 
 <div class="login-box">
@@ -137,9 +154,7 @@ body{
   <div class="error" id="errorBox"></div>
 </div>
 
-<div class="brand-foot">
-  <div class="tag">ARISE <span>CLUB</span> &middot; Where Strength Meets Science</div>
-</div>
+<div class="foot">ARISE <span>CLUB</span> &middot; Where Strength Meets Science</div>
 
 <script>
 var CODES={'VC2026A':{id:'vc001'},'VC2026B':{id:'vc002'},'VC2026C':{id:'vc003'},'COACH':{id:'coach',isCoach:true}};

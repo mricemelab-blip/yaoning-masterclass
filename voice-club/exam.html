@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3HFIT M1 专业理论与应用</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0A0A0A; --surface: #141414; --card: #1A1A1A; --border: #2A2A2A;
+  --text: #F0F0F0; --muted: #888; --accent: #C8F230; --accent2: #E8A838;
+  --danger: #FF4444; --radius: 2px;
+}
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6; min-height: 100vh;
+}
+a { color: var(--accent); text-decoration: none; }
+/* HEADER */
+.top-bar {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.brand { font-size: 18px; font-weight: 900; letter-spacing: 2px; }
+.brand span { color: var(--accent); }
+.exam-label {
+  font-size: 13px; color: var(--muted); letter-spacing: 1px;
+  border: 1px solid var(--border); padding: 4px 12px; border-radius: var(--radius);
+}
+.exam-info {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 16px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; align-items: end;
+}
+.info-field label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; letter-spacing: 1px; text-transform: uppercase; }
+.info-field input, .info-field select {
+  width: 100%; background: var(--card); border: 1px solid var(--border); color: var(--text);
+  padding: 8px 12px; font-size: 14px; border-radius: var(--radius);
+  font-family: inherit; outline: none; transition: border-color 0.2s;
+}
+.info-field input:focus, .info-field select:focus { border-color: var(--accent); }
+/* TIMER */
+.timer-bar {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.timer-display {
+  font-size: 36px; font-weight: 900; letter-spacing: 4px; color: var(--accent);
+  font-variant-numeric: tabular-nums; transition: color 0.3s;
+}
+.timer-display.warning { color: var(--danger); animation: pulse 1s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+.timer-meta { font-size: 12px; color: var(--muted); }
+.autosave-indicator { font-size: 11px; color: var(--muted); }
+.autosave-indicator.saving { color: var(--accent); }
+/* TAB NAV */
+.tab-nav {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 0 24px; display: flex; gap: 0; overflow-x: auto;
+}
+.tab-btn {
+  background: none; border: none; color: var(--muted); font-family: inherit;
+  font-size: 13px; padding: 14px 20px; cursor: pointer; white-space: nowrap;
+  border-bottom: 2px solid transparent; transition: all 0.2s;
+  font-weight: 700; letter-spacing: 0.5px;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-btn .badge {
+  display: inline-block; background: var(--border); color: var(--muted);
+  font-size: 10px; padding: 1px 6px; border-radius: 8px; margin-left: 6px;
+}
+.tab-btn.active .badge { background: var(--accent); color: var(--bg); }
+/* ANSWER CARD */
+.answer-card-bar {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 12px 24px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.answer-card-bar .label { font-size: 11px; color: var(--muted); margin-right: 8px; letter-spacing: 1px; }
+.q-dot {
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; border: 1px solid var(--border); border-radius: var(--radius);
+  cursor: pointer; transition: all 0.15s; background: var(--card); color: var(--muted);
+}
+.q-dot:hover { border-color: var(--accent); color: var(--text); }
+.q-dot.current { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 6px rgba(200,242,48,0.2); }
+.q-dot.answered { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+/* MAIN CONTENT */
+.main-content { max-width: 900px; margin: 0 auto; padding: 24px; }
+.section-panel { display: none; }
+.section-panel.active { display: block; }
+/* QUESTION */
+.question-block {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 24px; margin-bottom: 20px;
+}
+.q-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.q-number {
+  font-size: 13px; font-weight: 900; color: var(--accent);
+  border: 1px solid var(--accent); padding: 2px 10px; border-radius: var(--radius);
+  white-space: nowrap;
+}
+.q-points { font-size: 11px; color: var(--muted); }
+.q-text { font-size: 15px; line-height: 1.8; margin-bottom: 20px; white-space: pre-line; }
+/* MCQ OPTIONS */
+.options-grid { display: flex; flex-direction: column; gap: 8px; }
+.option-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 14px 16px; cursor: pointer; transition: all 0.15s;
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.option-card:hover { border-color: var(--accent); }
+.option-card.selected { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.option-card.selected .opt-label { background: var(--bg); color: var(--accent); }
+.opt-label {
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 900; border: 1px solid var(--border); border-radius: var(--radius);
+  flex-shrink: 0; transition: all 0.15s;
+}
+.option-card.selected .opt-label { border-color: var(--bg); }
+.opt-text { font-size: 14px; line-height: 1.6; padding-top: 2px; }
+/* TEXTAREA */
+.q-textarea {
+  width: 100%; background: var(--surface); border: 1px solid var(--border); color: var(--text);
+  font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.8;
+  padding: 16px; border-radius: var(--radius); resize: vertical; outline: none;
+  transition: border-color 0.2s;
+}
+.q-textarea:focus { border-color: var(--accent); }
+.q-textarea::placeholder { color: #555; }
+/* SUBMIT */
+.submit-section {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 32px 24px; margin-top: 32px; text-align: center;
+}
+.submit-btn {
+  background: var(--accent); color: var(--bg); font-family: inherit;
+  font-size: 16px; font-weight: 900; letter-spacing: 2px;
+  padding: 14px 48px; border: none; border-radius: var(--radius); cursor: pointer;
+  transition: all 0.2s;
+}
+.submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.submit-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+.submit-warning { font-size: 12px; color: var(--muted); margin-top: 16px; line-height: 1.6; }
+.submit-result {
+  display: none; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px; margin-top: 20px; text-align: left;
+}
+.submit-result h3 { color: var(--accent); margin-bottom: 12px; font-size: 16px; }
+.submit-result .stat { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+.submit-result .stat:last-child { border-bottom: none; }
+.submit-result .stat .val { color: var(--accent); font-weight: 700; }
+/* MODAL */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+  z-index: 1000; align-items: center; justify-content: center;
+}
+.modal-overlay.show { display: flex; }
+.modal-box {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 32px; max-width: 480px; width: 90%; text-align: center;
+}
+.modal-box h3 { margin-bottom: 16px; font-size: 18px; }
+.modal-box p { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+.modal-actions { display: flex; gap: 12px; justify-content: center; }
+.modal-actions button {
+  padding: 10px 24px; border: none; border-radius: var(--radius);
+  font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity 0.2s;
+}
+.btn-cancel { background: var(--surface); color: var(--text); border: 1px solid var(--border) !important; }
+.btn-confirm { background: var(--accent); color: var(--bg); }
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .top-bar { padding: 12px 16px; }
+  .exam-info { padding: 12px 16px; grid-template-columns: 1fr 1fr; }
+  .timer-bar { padding: 10px 16px; }
+  .timer-display { font-size: 28px; }
+  .tab-nav { padding: 0 12px; }
+  .tab-btn { padding: 10px 12px; font-size: 12px; }
+  .main-content { padding: 16px; }
+  .question-block { padding: 16px; }
+  .answer-card-bar { padding: 10px 16px; }
+}
+@media (max-width: 480px) {
+  .exam-info { grid-template-columns: 1fr; }
+  .timer-display { font-size: 24px; }
+  .brand { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="brand"><span>3HFIT</span> 教培考核</div>
+  <div class="exam-label">//01 M1 专业理论</div>
+</div>
+
+<!-- EXAM INFO -->
+<div class="exam-info">
+  <div class="info-field">
+    <label>学员姓名</label>
+    <input type="text" id="studentName" placeholder="输入姓名">
+  </div>
+  <div class="info-field">
+    <label>学员编号</label>
+    <input type="text" id="studentId" placeholder="输入编号">
+  </div>
+  <div class="info-field">
+    <label>考核阶段</label>
+    <select id="examStage">
+      <option value="">请选择</option>
+      <option value="入组">入组</option>
+      <option value="30天">30天</option>
+      <option value="60天">60天</option>
+      <option value="90天">90天</option>
+    </select>
+  </div>
+  <div class="info-field">
+    <label>考场</label>
+    <input type="text" id="examRoom" placeholder="输入考场">
+  </div>
+</div>
+
+<!-- TIMER -->
+<div class="timer-bar">
+  <div>
+    <div class="timer-display" id="timerDisplay">90:00</div>
+    <div class="timer-meta">剩余时间（共90分钟）</div>
+  </div>
+  <div class="autosave-indicator" id="autosaveIndicator">自动存档：就绪</div>
+</div>
+
+<!-- TAB NAV -->
+<div class="tab-nav">
+  <button class="tab-btn active" data-tab="mcq">M1选择题（1-15）<span class="badge" id="badgeMcq">0/15</span></button>
+  <button class="tab-btn" data-tab="short">M1简答（16-18）<span class="badge" id="badgeShort">0/3</span></button>
+  <button class="tab-btn" data-tab="case">M1案例（19-20）<span class="badge" id="badgeCase">0/2</span></button>
+</div>
+
+<!-- ANSWER CARD -->
+<div class="answer-card-bar">
+  <span class="label">答题卡</span>
+  <div id="answerDots"></div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+  <!-- MCQ SECTION -->
+  <div class="section-panel active" id="panelMcq">
+
+    <div class="question-block" data-q="1">
+      <div class="q-header"><span class="q-number">Q01</span><span class="q-points">2分</span></div>
+      <div class="q-text">训练目标是提高指定动作的最大力量。下列哪项最符合专项性原则？</div>
+      <div class="options-grid">
+        <div class="option-card" data-q="1" data-v="A"><span class="opt-label">A</span><span class="opt-text">只增加与目标无关的活动总时长</span></div>
+        <div class="option-card" data-q="1" data-v="B"><span class="opt-label">B</span><span class="opt-text">围绕目标动作及相关能力安排练习并评估迁移</span></div>
+        <div class="option-card" data-q="1" data-v="C"><span class="opt-label">C</span><span class="opt-text">只用肌肉酸痛程度衡量进步</span></div>
+        <div class="option-card" data-q="1" data-v="D"><span class="opt-label">D</span><span class="opt-text">所有动作使用完全相同的练习方案</span></div>
+      </div>
+    </div>
+
+    <div class="question-block" data-q="2">
+      <div class="q-header"><span class="q-number">Q02</span><span class="q-points">2分</span></div>
+      <div class="q-text">学员某一训练周没有增加重量，但动作控制改善，同重量完成次数提高。最恰当的判断是？</div>
+      <div class="options-grid">
+        <div class="option-card" data-q="2" data-v="A"><span class="opt-label">A</span><span class="opt-text">没有加重量就没有任何进步</span></div>
+        <div class="option-card" data-q="2" data-v="B"><span class="opt-label">B</span><span class="opt-text">必须下一次把重量翻倍</span></div>
+        <div class="option-card" data-q="2" data-v="C"><span class="opt-label">C</span><span class="opt-text">应结合次数、动作质量和努力程度判断进展</span></div>
+        <div class="option-card" data-q="2" data-v="D"><span class="opt-label">D</span><span class="opt-text">说明以后不需要调整刺激</span></div>
+      </div>
+    </div>
+
+    <div class="question-block" data-q="3">
+      <div class="q-header"><span class="q-number">Q03</span><span class="q-points">2分</span></div>
+      <div class="q-text">关于恢复与适应，下列哪项最合理？</div>
+      <div class="options-grid">
+        <div class="option-card" data-q="3" data-v="A"><span class="opt-label">A</span><span class="opt-text">训练刺激应与个体恢复情况共同考虑</span></div>
+        <div class="option-card" data-q="3" data-v="B"><span class="opt-label">B</span><span class="opt-text">越疲劳，长期收益必然越大</span></div>
+        <div class="option-card" data-q="3" data-v="C"><span class="opt-label">C</span><span class="opt-text">睡眠与训练安排完全无关</span></div>
+        <div class="option-card" data-q="3" data-v="D"><span class="opt-label">D</span><span class="opt-text">只要动机足够，持续表现下降无需处理</span></div>
+      </div>
+    </div>
+
+    <div class="question-block" data-q="4">
+      <div class="q-header"><span class="q-number">Q04</span><span class="q-points">2分</span></div>
+      <div class="q-text">两名学员完成相同计划后进步不同，首先应怎样解释？</div>
+      <div class="options-grid">
+        <div class="option-card" data-q="4" data-v="A"><span class="opt-label">A</span><span class="opt-text">成绩较差者一定不努力</span></div>
+        <div class="option-card" data-q="4" data-v="B"><span class="opt-label">B</span><span class="opt-text">计划一定对其中一人完全无效</span></div>
+        <div class="option-card" data-q="4" data-v="C"><span class="opt-label">C</span><span class="opt-text">两人存在固定的高低潜质差异</span></div>
+        <div class="option-card" data-q="4" data-v="D"><span class="opt-label">D</span><span class="opt-text">应核查起点、执行、恢复及测量等因素</span></div>
+      </div>
+    </div>
+
+    <div class="question-block" data-q="5">
+      <div class="q-header"><span class="q-number">Q05</span><span class="q-points">2分</span></div>
+      <div class="q-text">关于肌肉力量与肌肉体积，下列哪项准确？</div>
+      <div class="options-grid">
+        <div class="option-card" data-q="5" data-v="A"><span class="opt-label">A</span><span class="opt-text">两者是完全相同的测量指标</span></div>
+        <div class="option-card" data-q="5" data-v="B"><span class="opt-label">B</span><span class="opt-text">两者相关，但测试技术与神经适应等也影响力量表现</span></div>
+        <div class="option-card" data-q="5" data-v="C"><span class="opt-label">C</span><span class="opt-text">力量增加必然意味着肌肉体积同比例增加</span></div>
+        <div class="option-card" data-q="5" data-v="D"><span class="opt-label">D</span><span class="opt-text">肌肉体积不变则任何动作成绩都不能改善</span></div>
+      </div>
+    </div>
+
+    <div class="question-block" data-q="6">
+      <div class="q-header"><span class="q-number">Q06</span><span class="q-points">2分</span></div>
+      <div class="q-text">"3组×8次×40 kg"的外部负荷量，按组数×次数×重量计算为？</div>
+      <div class="options-grid">
+        <div class="option-card" data-q="6" data-v="A"><span class="opt-label">A</span><span class="opt-text">960 kg</span></div>
+        <div class="option-card" data-q="6" data-v="B"><span class="opt-label">B</span><span class="opt-text">320 kg</span></div>
+        <div class="option-card" data-q="6" data-v="C"><span class="opt-label">C</span><span class="opt-text">120 kg</span></div>
+        <div class="option-card" data-q="6" data-v="D"><span class="opt-label">D</span><span class="opt-text">51 kg</span></div>
+      </div>
+    </div>
+
+    <div class="question-block" data-q="7">
+      <div class="q-header"><span class="q-number">Q07</span><span class="q-points">2分</span></div>
+      <div class="q-text">本卷将RIR定义为"在维持既定技术标准下，估计还能完成的次数"。RIR为2表示？</div>
+      <div class="options-grid">
+        <div class="option-card" data-q="7" data-v="A"><span class="opt-label">A</span><span class="opt-text">本组总共只能做2次</span></div>
+        <div class="option-card" data-q="7" data-v="B"><span class="opt-label">B</span><span class="opt-text">已完成2组</span></div>
+        <div class="option-card" data-q="7" data-v="C"><span class="opt-label">C</span><span class="opt-text">估计还可完成2次符合标准的重复</span></div>
+        <div class="option-card" data-q="7" data-v="D"><span class="opt-label">D</span><span class="opt-text">必须休息2分钟</span></div>
+      </div>
+    </div>
+
+    <div class="question-block" data-q="8">
+      <div class="q-header"><span class="q-number">Q08</span><span class="q-points">2分</span></div>
+      <div class="q-text">观察新手动作时，哪种记录最便于后续复查？</div>
+      <div class="options-grid">
+        <div class="option-card" data-q="8" data-v="A"><span class="opt-label">A</span><span class="opt-text">动作看起来不专业</span></div>
+        <div class="option-card" data-q="8" data-v="B"><span class="opt-label">B</span><span class="opt-text">身体条件较差</span></div>
+        <div class="option-card" data-q="8" data-v="C"><span class="opt-label">C</span><span class="opt-text">没有运动天赋</span></div>
+        <div class="option-card" data-q="8" data-v="D"><span class="opt-label">D</span><span class="opt-text">在同一观察角度下，第7次起节奏明显加快且失去既定控制</span></div>
+      </div>
+    </div>
+
+    <div class="question-block" data-q="9">
+      <div class="q-header"><span class="q-number">Q09</span><span class="q-points">2分</span></div>
+      <div class="q-text">给出一个动作提示后，下一步最合理的是？</div>
+      <div class="options-grid">
+        <div class="option-card" data-q="9" data-v="A"><span class="opt-label">A</span><span class="opt-text">立即连续增加多个新提示</span></div>
+        <div class="option-card" data-q="9" data-v="B"><span class="opt-label">B</span><span class="opt-text">在适当条件下重新观察，确认提示是否改善目标表现</span></div>
+        <div class="option-card" data-q="9" data-v="C"><span class="opt-label">C</span><span class="opt-text">只要学员说听懂就不再观察</span></div>
+        <div class="option-card" data-q="9" data-v="D"><span class="opt-label">D</span><span class="opt-text">所有人都必须达到同一个外观姿势</span></div>
+      </div>
+    </div>
+
+    <div class="question-block" data-q="10">
+      <div class="q-header"><span class="q-number">Q10</span><span class="q-points">2分</span></div>
+      <div class="q-text">某食物含蛋白质10 g、可利用碳水化合物20 g、脂肪5 g。按4、4、9 kcal/g估算，能量为？</div>
+      <div class="options-grid">
+        <div class="option-card" data-q="10" data-v="A"><span class="opt-label">A</span><span class="opt-text">105 kcal</span></div>
+        <div class="option-card" data-q="10" data-v="B"><span class="opt-label">B</span><span class="opt-text">145 kcal</span></div>
+        <div class="option-card" data-q="10" data-v="C"><span class="opt-label">C</span><span class="opt-text">165 kcal</span></div>
+        <div class="option-card" data-q="10" data-v="D"><span class="opt-label">D</span><span class="opt-text">245 kcal</span></div>
+      </div>
+    </div>
+
+    <div class="question-block" data-q="11">
+      <div class="q-header"><span class="q-number">Q11</span><span class="q-points">2分</span></div>
+      <div class="q-text">以下哪项属于合理的基础营养沟通？</div>
+      <div class="options-grid">
+        <div class="option-card" data-q="11" data-v="A"><span class="opt-label">A</span><span class="opt-text">结合整体饮食、目标和执行条件讨论营养摄入</span></div>
+        <div class="option-card" data-q="11" data-v="B"><span class="opt-label">B</span><span class="opt-text">只看单一食物就能判断全天营养是否合理</span></div>
+        <div class="option-card" data-q="11" data-v="C"><span class="opt-label">C</span><span class="opt-text">补充剂一定优于普通食物</span></div>
+        <div class="option-card" data-q="11" data-v="D"><span class="opt-label">D</span><span class="opt-text">蛋白质不会提供能量</span></div>
+      </div>
+    </div>
+
+    <div class="question-block" data-q="12">
+      <div class="q-header"><span class="q-number">Q12</span><span class="q-points">2分</span></div>
+      <div class="q-text">一份包装标示每份含蛋白质12 g，每包装含2.5份，吃完整包获得多少蛋白质？</div>
+      <div class="options-grid">
+        <div class="option-card" data-q="12" data-v="A"><span class="opt-label">A</span><span class="opt-text">4.8 g</span></div>
+        <div class="option-card" data-q="12" data-v="B"><span class="opt-label">B</span><span class="opt-text">12 g</span></div>
+        <div class="option-card" data-q="12" data-v="C"><span class="opt-label">C</span><span class="opt-text">24 g</span></div>
+        <div class="option-card" data-q="12" data-v="D"><span class="opt-label">D</span><span class="opt-text">30 g</span></div>
+      </div>
+    </div>
+
+    <div class="question-block" data-q="13">
+      <div class="q-header"><span class="q-number">Q13</span><span class="q-points">2分</span></div>
+      <div class="q-text">20名会员自行选择使用产品，平均成绩随后提高。仅据此可得出的结论是？</div>
+      <div class="options-grid">
+        <div class="option-card" data-q="13" data-v="A"><span class="opt-label">A</span><span class="opt-text">产品已被证明造成提高</span></div>
+        <div class="option-card" data-q="13" data-v="B"><span class="opt-label">B</span><span class="opt-text">观察到使用后成绩提高，但因果仍需核查</span></div>
+        <div class="option-card" data-q="13" data-v="C"><span class="opt-label">C</span><span class="opt-text">任何其他因素都可排除</span></div>
+        <div class="option-card" data-q="13" data-v="D"><span class="opt-label">D</span><span class="opt-text">适用于所有学员且效果相同</span></div>
+      </div>
+    </div>
+
+    <div class="question-block" data-q="14">
+      <div class="q-header"><span class="q-number">Q14</span><span class="q-points">2分</span></div>
+      <div class="q-text">一项研究未发现两方案的组间差异具有统计学显著性。最合理的解释是？</div>
+      <div class="options-grid">
+        <div class="option-card" data-q="14" data-v="A"><span class="opt-label">A</span><span class="opt-text">不能仅凭这一结果断言两方案完全等效</span></div>
+        <div class="option-card" data-q="14" data-v="B"><span class="opt-label">B</span><span class="opt-text">已证明每个人两方案结果完全相同</span></div>
+        <div class="option-card" data-q="14" data-v="C"><span class="opt-label">C</span><span class="opt-text">所有差异都没有实际意义</span></div>
+        <div class="option-card" data-q="14" data-v="D"><span class="opt-label">D</span><span class="opt-text">说明两个方案均无效</span></div>
+      </div>
+    </div>
+
+    <div class="question-block" data-q="15">
+      <div class="q-header"><span class="q-number">Q15</span><span class="q-points">2分</span></div>
+      <div class="q-text">学员要求见习讲师依据其疾病诊断直接制定治疗性饮食。最适当的做法是？</div>
+      <div class="options-grid">
+        <div class="option-card" data-q="15" data-v="A"><span class="opt-label">A</span><span class="opt-text">套用网络方案即可</span></div>
+        <div class="option-card" data-q="15" data-v="B"><span class="opt-label">B</span><span class="opt-text">只要签免责书即可独立处理</span></div>
+        <div class="option-card" data-q="15" data-v="C"><span class="opt-label">C</span><span class="opt-text">说明职责边界并转介具有相应资质的专业人员</span></div>
+        <div class="option-card" data-q="15" data-v="D"><span class="opt-label">D</span><span class="opt-text">为了避免失去信任，先承诺能治好</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SHORT ANSWER SECTION -->
+  <div class="section-panel" id="panelShort">
+
+    <div class="question-block" data-q="16">
+      <div class="q-header"><span class="q-number">Q16</span><span class="q-points">10分</span></div>
+      <div class="q-text">向新学员解释力量训练中的适应与进步。（10分）
+
+某学员说："两周没有增加哑铃重量，就证明没有进步；只要每次练到非常疲惫，效果一定更好。"请完成以下任务：
+
+① 解释为什么重量不是唯一的进步指标，并给出两种可记录指标。（4分）
+② 解释训练刺激、疲劳和恢复之间的关系。（3分）
+③ 给出一种本周可执行的观察与调整办法，说明什么时候暂不增加要求。（3分）</div>
+      <textarea class="q-textarea" data-q="16" rows="10" placeholder="在此作答..."></textarea>
+    </div>
+
+    <div class="question-block" data-q="17">
+      <div class="q-header"><span class="q-number">Q17</span><span class="q-points">10分</span></div>
+      <div class="q-text">把动作观察变成可验证的带教过程。（10分）
+
+健康新手进行徒手坐站练习，前5次平稳，从第6次开始起身节奏突然加快，并在结束时失去原定控制。本人未报告疼痛。请写出：
+
+① 两项需要进一步确认的信息。（2分）
+② 一句中性的观察反馈，避免用"懒""没天赋"等标签。（2分）
+③ 一项优先调整及理由。（3分）
+④ 如何复查调整效果，以及什么情况下停止本次练习。（3分）</div>
+      <textarea class="q-textarea" data-q="17" rows="10" placeholder="在此作答..."></textarea>
+    </div>
+
+    <div class="question-block" data-q="18">
+      <div class="q-header"><span class="q-number">Q18</span><span class="q-points">10分</span></div>
+      <div class="q-text">解读一天的营养记录。（10分）
+
+记录显示蛋白质90 g、可利用碳水化合物250 g、脂肪60 g。按蛋白质和碳水化合物各4 kcal/g、脂肪9 kcal/g估算；本题不计其他供能成分。
+
+① 分别计算三种营养素的供能及总能量。（4分）
+② 计算蛋白质供能占总能量的百分比，保留1位小数。（2分）
+③ 是否仅凭这一天的数据就能判定营养充分且适合本人？写出两项仍需了解的信息及用途。（4分）</div>
+      <textarea class="q-textarea" data-q="18" rows="10" placeholder="在此作答..."></textarea>
+    </div>
+
+  </div>
+
+  <!-- CASE STUDY SECTION -->
+  <div class="section-panel" id="panelCase">
+
+    <div class="question-block" data-q="19">
+      <div class="q-header"><span class="q-number">Q19</span><span class="q-points">20分</span></div>
+      <div class="q-text">为新手安排可执行的训练与复查。（20分）
+
+陈同学为健康成年人，无训练经验，希望提高日常力量。经公司的训练前流程确认可参加常规练习，目前没有不适。每周可训练2次，每次45分钟，器材有稳固座椅、轻哑铃和弹力带。试练时，轻负荷动作前段可控，后段会出现节奏加快和控制下降。
+
+① 还需确认哪三项与计划直接相关的信息？（3分）
+② 写出首周两次训练安排，至少列出3类动作或动作模式，并写明组次、负荷或努力程度、休息及如何适配45分钟。（8分）
+③ 给出两项逐次记录指标，并写出满足何种条件才进阶、何种情况应减量或维持。（5分）
+④ 针对控制下降给出一个可复查调整；并说明出现新发疼痛或异常不适时的处置原则。（4分）</div>
+      <textarea class="q-textarea" data-q="19" rows="14" placeholder="在此作答..."></textarea>
+    </div>
+
+    <div class="question-block" data-q="20">
+      <div class="q-header"><span class="q-number">Q20</span><span class="q-points">20分</span></div>
+      <div class="q-text">营养计算与宣传主张的判断。（20分）
+
+某"增肌饮"每份含蛋白质20 g、可利用碳水化合物25 g、脂肪4 g。一位健康成人会员打算每天饮用2份，认为"这不算能量"；销售人员又说："一位会员喝了两周，卧推成绩提高，因此已经证明人人喝了都会增肌。"现无其他研究资料。
+
+① 按4、4、9 kcal/g计算每份及2份的能量。（4分）
+② 为讨论是否需要该产品，列出3项需要核查的信息，并说明其中一项会怎样影响建议。（5分）
+③ 指出销售推论的3个独立问题。（6分）
+④ 写一段面向会员的回应：回应诉求、说明证据和自身职责边界、给出下一步；若会员补充告知正在接受疾病相关饮食管理，你如何处理？（5分）</div>
+      <textarea class="q-textarea" data-q="20" rows="14" placeholder="在此作答..."></textarea>
+    </div>
+
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-section">
+    <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">交 卷</button>
+    <div class="submit-warning">交卷前请确认所有题目已作答。选择题自动评分仅供参考，最终成绩以考官评阅为准。<br>交卷后将自动生成答题记录文件供下载。</div>
+    <div class="submit-result" id="submitResult"></div>
+  </div>
+
+</div>
+
+<!-- CONFIRM MODAL -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal-box">
+    <h3>确认交卷</h3>
+    <p id="modalMsg">确认提交答卷？提交后不可修改。</p>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">返回检查</button>
+      <button class="btn-confirm" onclick="confirmSubmit()">确认交卷</button>
+    </div>
+  </div>
+</div>
+
+<!-- AUTO SUBMIT MODAL -->
+<div class="modal-overlay" id="autoSubmitModal">
+  <div class="modal-box">
+    <h3>考试时间已到</h3>
+    <p>90分钟考试时间已到，系统已自动提交当前作答内容。</p>
+    <div class="modal-actions">
+      <button class="btn-confirm" onclick="closeAutoModal()">确认</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // === CONFIG ===
+  var TOTAL_TIME = 90 * 60;
+  var AUTOSAVE_INTERVAL = 30000;
+  var STORAGE_KEY = '3hfIT_M1_exam';
+
+  var MCQ_ANSWERS = {
+    1:'B',2:'C',3:'A',4:'D',5:'B',6:'A',7:'C',8:'D',9:'B',
+    10:'C',11:'A',12:'D',13:'B',14:'A',15:'C'
+  };
+
+  // === STATE ===
+  var answers = {};
+  var remainingTime = TOTAL_TIME;
+  var timerInterval = null;
+  var submitted = false;
+
+  // === INIT ===
+  function init() {
+    loadState();
+    renderAnswerDots();
+    bindEvents();
+    startTimer();
+    startAutosave();
+    updateBadges();
+  }
+
+  // === LOCALSTORAGE ===
+  function saveState() {
+    if (submitted) return;
+    var state = {
+      answers: answers,
+      remainingTime: remainingTime,
+      studentName: document.getElementById('studentName').value,
+      studentId: document.getElementById('studentId').value,
+      examStage: document.getElementById('examStage').value,
+      examRoom: document.getElementById('examRoom').value,
+      savedAt: Date.now()
+    };
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      flashAutosave();
+    } catch(e) {}
+  }
+
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var state = JSON.parse(raw);
+      if (state.answers) answers = state.answers;
+      if (typeof state.remainingTime === 'number') remainingTime = state.remainingTime;
+      if (state.studentName) document.getElementById('studentName').value = state.studentName;
+      if (state.studentId) document.getElementById('studentId').value = state.studentId;
+      if (state.examStage) document.getElementById('examStage').value = state.examStage;
+      if (state.examRoom) document.getElementById('examRoom').value = state.examRoom;
+      restoreUI();
+    } catch(e) {}
+  }
+
+  function clearState() {
+    try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+  }
+
+  function restoreUI() {
+    for (var q in answers) {
+      var val = answers[q];
+      if (typeof val === 'string' && val.length <= 2) {
+        var opt = document.querySelector('.option-card[data-q="'+q+'"][data-v="'+val+'"]');
+        if (opt) opt.classList.add('selected');
+      } else if (typeof val === 'string') {
+        var ta = document.querySelector('.q-textarea[data-q="'+q+'"]');
+        if (ta) ta.value = val;
+      }
+    }
+    updateAnswerDots();
+  }
+
+  function flashAutosave() {
+    var el = document.getElementById('autosaveIndicator');
+    el.textContent = '自动存档：已保存';
+    el.classList.add('saving');
+    setTimeout(function() {
+      el.textContent = '自动存档：就绪';
+      el.classList.remove('saving');
+    }, 2000);
+  }
+
+  // === TIMER ===
+  function startTimer() {
+    renderTimer();
+    timerInterval = setInterval(function() {
+      if (submitted) { clearInterval(timerInterval); return; }
+      remainingTime--;
+      renderTimer();
+      if (remainingTime <= 0) {
+        clearInterval(timerInterval);
+        autoSubmit();
+      }
+    }, 1000);
+  }
+
+  function renderTimer() {
+    var m = Math.floor(Math.max(0, remainingTime) / 60);
+    var s = Math.max(0, remainingTime) % 60;
+    var display = document.getElementById('timerDisplay');
+    display.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    if (remainingTime <= 600 && remainingTime > 0) {
+      display.classList.add('warning');
+    } else {
+      display.classList.remove('warning');
+    }
+  }
+
+  function autoSubmit() {
+    submitted = true;
+    saveState();
+    var result = generateResult();
+    downloadJSON(result);
+    document.getElementById('autoSubmitModal').classList.add('show');
+    showResult(result);
+  }
+
+  // === EVENTS ===
+  function bindEvents() {
+    document.querySelectorAll('.option-card').forEach(function(card) {
+      card.addEventListener('click', function() {
+        if (submitted) return;
+        var q = this.getAttribute('data-q');
+        var v = this.getAttribute('data-v');
+        document.querySelectorAll('.option-card[data-q="'+q+'"]').forEach(function(c) { c.classList.remove('selected'); });
+        this.classList.add('selected');
+        answers[q] = v;
+        updateAnswerDots();
+        updateBadges();
+      });
+    });
+
+    document.querySelectorAll('.q-textarea').forEach(function(ta) {
+      ta.addEventListener('input', function() {
+        if (submitted) return;
+        answers[this.getAttribute('data-q')] = this.value;
+        updateAnswerDots();
+        updateBadges();
+      });
+    });
+
+    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var tab = this.getAttribute('data-tab');
+        document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+        this.classList.add('active');
+        document.querySelectorAll('.section-panel').forEach(function(p) { p.classList.remove('active'); });
+        var panelMap = { mcq: 'panelMcq', short: 'panelShort', case: 'panelCase' };
+        document.getElementById(panelMap[tab]).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    document.querySelectorAll('.info-field input, .info-field select').forEach(function(el) {
+      el.addEventListener('change', saveState);
+    });
+  }
+
+  // === ANSWER DOTS ===
+  function renderAnswerDots() {
+    var container = document.getElementById('answerDots');
+    var html = '';
+    for (var i = 1; i <= 20; i++) {
+      html += '<div class="q-dot" data-dot="'+i+'" onclick="scrollToQ('+i+')">' + (i < 10 ? '0' : '') + i + '</div>';
+    }
+    container.innerHTML = html;
+    updateAnswerDots();
+  }
+
+  function updateAnswerDots() {
+    for (var i = 1; i <= 20; i++) {
+      var dot = document.querySelector('.q-dot[data-dot="'+i+'"]');
+      if (!dot) continue;
+      dot.classList.remove('answered', 'current');
+      var a = answers[String(i)];
+      if (a !== undefined && a !== null && a !== '') {
+        if (typeof a === 'string' && a.trim().length > 0) {
+          dot.classList.add('answered');
+        }
+      }
+    }
+  }
+
+  function updateBadges() {
+    var mcqCount = 0, shortCount = 0, caseCount = 0;
+    for (var i = 1; i <= 15; i++) {
+      var a = answers[String(i)];
+      if (a && typeof a === 'string' && a.trim().length > 0) mcqCount++;
+    }
+    for (var i = 16; i <= 18; i++) {
+      var a = answers[String(i)];
+      if (a && typeof a === 'string' && a.trim().length > 0) shortCount++;
+    }
+    for (var i = 19; i <= 20; i++) {
+      var a = answers[String(i)];
+      if (a && typeof a === 'string' && a.trim().length > 0) caseCount++;
+    }
+    document.getElementById('badgeMcq').textContent = mcqCount + '/15';
+    document.getElementById('badgeShort').textContent = shortCount + '/3';
+    document.getElementById('badgeCase').textContent = caseCount + '/2';
+  }
+
+  // === SCROLL TO QUESTION ===
+  window.scrollToQ = function(q) {
+    var tab = q <= 15 ? 'mcq' : (q <= 18 ? 'short' : 'case');
+    var panelMap = { mcq: 'panelMcq', short: 'panelShort', case: 'panelCase' };
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelector('.tab-btn[data-tab="'+tab+'"]').classList.add('active');
+    document.querySelectorAll('.section-panel').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById(panelMap[tab]).classList.add('active');
+    setTimeout(function() {
+      var block = document.querySelector('.question-block[data-q="'+q+'"]');
+      if (block) block.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+  };
+
+  // === AUTOSAVE ===
+  function startAutosave() {
+    setInterval(function() { saveState(); }, AUTOSAVE_INTERVAL);
+  }
+
+  // === SUBMIT ===
+  window.handleSubmit = function() {
+    if (submitted) return;
+    var totalAnswered = 0;
+    var unanswered = [];
+    for (var i = 1; i <= 20; i++) {
+      var a = answers[String(i)];
+      if (a && typeof a === 'string' && a.trim().length > 0) {
+        totalAnswered++;
+      } else {
+        unanswered.push(i);
+      }
+    }
+    var msg = '';
+    if (unanswered.length > 0) {
+      msg = '尚有 ' + unanswered.length + ' 题未作答（Q' + unanswered.join('、Q') + '）。确定交卷？';
+    } else {
+      msg = '全部题目已作答。确认提交答卷？提交后不可修改。';
+    }
+    document.getElementById('modalMsg').textContent = msg;
+    document.getElementById('confirmModal').classList.add('show');
+  };
+
+  window.closeModal = function() {
+    document.getElementById('confirmModal').classList.remove('show');
+  };
+
+  window.confirmSubmit = function() {
+    document.getElementById('confirmModal').classList.remove('show');
+    submitted = true;
+    clearInterval(timerInterval);
+    var result = generateResult();
+    downloadJSON(result);
+    showResult(result);
+    clearState();
+  };
+
+  window.closeAutoModal = function() {
+    document.getElementById('autoSubmitModal').classList.remove('show');
+  };
+
+  // === GENERATE RESULT ===
+  function generateResult() {
+    var mcqScore = 0;
+    var mcqDetails = {};
+    for (var i = 1; i <= 15; i++) {
+      var studentAns = answers[String(i)] || '';
+      var correct = MCQ_ANSWERS[i];
+      var isCorrect = (studentAns === correct);
+      if (isCorrect) mcqScore += 2;
+      mcqDetails['Q' + (i < 10 ? '0' : '') + i] = {
+        student_answer: studentAns || '未作答',
+        correct_answer: correct,
+        is_correct: isCorrect
+      };
+    }
+
+    var shortAnswers = {};
+    for (var i = 16; i <= 18; i++) {
+      shortAnswers['Q' + i] = answers[String(i)] || '未作答';
+    }
+    var caseAnswers = {};
+    for (var i = 19; i <= 20; i++) {
+      caseAnswers['Q' + i] = answers[String(i)] || '未作答';
+    }
+
+    var answeredCount = 0;
+    for (var i = 1; i <= 20; i++) {
+      var a = answers[String(i)];
+      if (a && typeof a === 'string' && a.trim().length > 0) answeredCount++;
+    }
+
+    var result = {
+      exam: '3HFIT_M1_专业理论与应用',
+      version: '1.0',
+      metadata: {
+        student_name: document.getElementById('studentName').value || '未填写',
+        student_id: document.getElementById('studentId').value || '未填写',
+        exam_stage: document.getElementById('examStage').value || '未选择',
+        exam_room: document.getElementById('examRoom').value || '未填写',
+        submit_time: new Date().toISOString(),
+        time_remaining_seconds: Math.max(0, remainingTime),
+        auto_submitted: remainingTime <= 0
+      },
+      summary: {
+        total_questions: 20,
+        answered_questions: answeredCount,
+        mcq_auto_score: mcqScore,
+        mcq_max_score: 30,
+        score_note: '选择题自动评分仅供参考，最终成绩以考官评阅为准'
+      },
+      mcq_auto_scoring: mcqDetails,
+      answers: {
+        multiple_choice: {},
+        short_answer: shortAnswers,
+        case_study: caseAnswers
+      }
+    };
+    for (var i = 1; i <= 15; i++) {
+      result.answers.multiple_choice['Q' + (i < 10 ? '0' : '') + i] = answers[String(i)] || '未作答';
+    }
+    return result;
+  }
+
+  // === DOWNLOAD JSON ===
+  function downloadJSON(result) {
+    var blob = new Blob([JSON.stringify(result, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    var ts = Date.now();
+    var sid = (document.getElementById('studentId').value || 'unknown').replace(/[^a-zA-Z0-9_-]/g, '');
+    a.href = url;
+    a.download = '3HFIT_M1_' + sid + '_' + ts + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  // === SHOW RESULT ===
+  function showResult(result) {
+    var el = document.getElementById('submitResult');
+    var html = '<h3>交卷完成</h3>';
+    html += '<div class="stat"><span>已答题数</span><span class="val">' + result.summary.answered_questions + ' / ' + result.summary.total_questions + '</span></div>';
+    html += '<div class="stat"><span>选择题自动评分</span><span class="val">' + result.summary.mcq_auto_score + ' / ' + result.summary.mcq_max_score + '</span></div>';
+    html += '<div class="stat"><span>剩余时间</span><span class="val">' + formatTime(result.metadata.time_remaining_seconds) + '</span></div>';
+    html += '<div class="stat"><span>提交时间</span><span class="val">' + new Date(result.metadata.submit_time).toLocaleString('zh-CN') + '</span></div>';
+    if (result.metadata.auto_submitted) {
+      html += '<div class="stat"><span style="color:var(--danger)">考试状态</span><span class="val" style="color:var(--danger)">超时自动提交</span></div>';
+    }
+    html += '<p style="margin-top:16px;font-size:12px;color:var(--muted);line-height:1.6">选择题评分仅供参考，简答题与案例题需考官评阅。答题记录文件已下载。</p>';
+    el.innerHTML = html;
+    el.style.display = 'block';
+    document.getElementById('submitBtn').disabled = true;
+    document.getElementById('submitBtn').textContent = '已交卷';
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function formatTime(sec) {
+    var m = Math.floor(Math.max(0, sec) / 60);
+    var s = Math.max(0, sec) % 60;
+    return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  // === START ===
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>

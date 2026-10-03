@@ -785,6 +785,14 @@ a { color: var(--accent); text-decoration: none; }
     clearInterval(timerInterval);
     var result = generateResult();
     downloadJSON(result);
+    // Save to shared localStorage for examiner grading page
+    try {
+      var key = '3hfit_m1_submissions';
+      var subs = [];
+      try { subs = JSON.parse(localStorage.getItem(key) || '[]'); } catch(e) { subs = []; }
+      subs.push(result);
+      localStorage.setItem(key, JSON.stringify(subs));
+    } catch(e) {}
     showResult(result);
     clearState();
   };
@@ -882,7 +890,7 @@ a { color: var(--accent); text-decoration: none; }
     if (result.metadata.auto_submitted) {
       html += '<div class="stat"><span style="color:var(--danger)">考试状态</span><span class="val" style="color:var(--danger)">超时自动提交</span></div>';
     }
-    html += '<p style="margin-top:16px;font-size:12px;color:var(--muted);line-height:1.6">选择题评分仅供参考，简答题与案例题需考官评阅。答题记录文件已下载。</p>';
+    html += '<p style="margin-top:16px;font-size:12px;color:var(--muted);line-height:1.6">选择题评分仅供参考，简答题与案例题需考官评阅。答题记录已保存，考官可直接读取。<br>答题记录文件也已同时下载到本地。</p>';
     el.innerHTML = html;
     el.style.display = 'block';
     document.getElementById('submitBtn').disabled = true;

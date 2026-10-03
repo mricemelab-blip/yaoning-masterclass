@@ -247,6 +247,7 @@ body {
   <!-- IMPORT SECTION -->
   <div class="import-section">
     <h3>导入考生答卷</h3>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">同一浏览器下学员交卷后自动加载。也可手动导入 JSON 文件。</p>
     <div class="file-input-wrapper">
       <span class="file-input-label">选择 JSON 文件</span>
       <input type="file" class="file-input" id="fileInput" accept=".json">
@@ -374,6 +375,7 @@ body {
       sessionStorage.setItem('grader_auth', '1');
       document.getElementById('passwordOverlay').style.display = 'none';
       document.getElementById('mainInterface').style.display = 'block';
+      autoLoadSubmissions();
     } else {
       var box = document.getElementById('passwordBox');
       box.classList.add('shake');
@@ -388,7 +390,60 @@ body {
   if (sessionStorage.getItem('grader_auth') === '1') {
     document.getElementById('passwordOverlay').style.display = 'none';
     document.getElementById('mainInterface').style.display = 'block';
+    autoLoadSubmissions();
   }
+
+  // === AUTO LOAD FROM LOCALSTORAGE ===
+  function autoLoadSubmissions() {
+    try {
+      var key = '3hfit_m1_submissions';
+      var raw = localStorage.getItem(key);
+      if (!raw) return;
+      var subs = JSON.parse(raw);
+      if (!Array.isArray(subs) || subs.length === 0) return;
+
+      // If multiple submissions, show a selector
+      if (subs.length === 1) {
+        examData = subs[0];
+        renderExamData();
+        loadPreviousGrading();
+      } else {
+        // Show submission list for examiner to pick
+        var listHtml = '<div style="margin-top:16px;">';
+        listHtml += '<h4 style="color:var(--accent);margin-bottom:12px;">检测到 ' + subs.length + ' 份答卷，请选择：</h4>';
+        subs.forEach(function(sub, idx) {
+          var name = (sub.metadata && sub.metadata.student_name) || '未知';
+          var sid = (sub.metadata && sub.metadata.student_id) || '未知';
+          var time = (sub.metadata && sub.metadata.submit_time) ? new Date(sub.metadata.submit_time).toLocaleString('zh-CN') : '未知';
+          listHtml += '<div style="padding:12px;margin-bottom:8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;" onclick="loadSubmission(' + idx + ')">';
+          listHtml += '<strong>' + name + '</strong>（' + sid + '）<br><span style="font-size:12px;color:var(--muted);">提交于 ' + time + '</span>';
+          listHtml += '</div>';
+        });
+        listHtml += '</div>';
+        document.getElementById('studentInfoCard').innerHTML = listHtml;
+        document.getElementById('studentInfoCard').classList.add('show');
+        // Store subs for selection
+        window._pendingSubs = subs;
+      }
+    } catch(e) {}
+  }
+
+  window.loadSubmission = function(idx) {
+    if (window._pendingSubs && window._pendingSubs[idx]) {
+      examData = window._pendingSubs[idx];
+      // Restore original card HTML
+      document.getElementById('studentInfoCard').innerHTML = '<div class="student-info-grid">' +
+        '<div class="info-item"><label>姓名</label><div class="value" id="infoName">-</div></div>' +
+        '<div class="info-item"><label>编号</label><div class="value" id="infoId">-</div></div>' +
+        '<div class="info-item"><label>阶段</label><div class="value" id="infoStage">-</div></div>' +
+        '<div class="info-item"><label>考场</label><div class="value" id="infoRoom">-</div></div>' +
+        '<div class="info-item"><label>提交时间</label><div class="value" id="infoTime">-</div></div>' +
+        '<div class="info-item"><label>答题用时</label><div class="value" id="infoDuration">-</div></div>' +
+        '</div>';
+      renderExamData();
+      loadPreviousGrading();
+    }
+  };
 
   // Password enter key
   document.getElementById('passwordInput').addEventListener('keypress', function(e) {

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3HFIT 考官评分系统 — M1 模块</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0A0A0A; --surface: #141414; --card: #1A1A1A; --border: #2A2A2A;
+  --text: #E8E8E8; --muted: #888; --accent: #C8F230; --danger: #FF4444;
+  --success: #4ADE80; --warning: #F59E0B; --radius: 2px;
+}
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6; min-height: 100vh;
+}
+/* PASSWORD GATE */
+.password-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+  z-index: 9999; display: flex; align-items: center; justify-content: center;
+}
+.password-box {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 48px; max-width: 400px; width: 90%; text-align: center;
+}
+.password-box h2 { color: var(--accent); margin-bottom: 24px; font-size: 20px; }
+.password-input {
+  width: 100%; background: var(--surface); border: 1px solid var(--border); color: var(--text);
+  padding: 12px 16px; font-size: 16px; border-radius: var(--radius); margin-bottom: 16px;
+  font-family: inherit; outline: none;
+}
+.password-input:focus { border-color: var(--accent); }
+.password-btn {
+  width: 100%; background: var(--accent); color: var(--bg); border: none;
+  padding: 12px; font-size: 14px; font-weight: 900; letter-spacing: 2px;
+  border-radius: var(--radius); cursor: pointer; font-family: inherit;
+}
+.password-btn:hover { opacity: 0.9; }
+.password-error { color: var(--danger); font-size: 13px; margin-top: 12px; display: none; }
+.password-box.shake { animation: shake 0.4s; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+/* HEADER */
+.top-bar {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 16px 24px; display: flex; align-items: center; justify-content: space-between;
+}
+.brand { font-size: 18px; font-weight: 900; letter-spacing: 2px; }
+.brand span { color: var(--accent); }
+/* MAIN */
+.main-container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+/* IMPORT SECTION */
+.import-section {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 24px; margin-bottom: 24px;
+}
+.import-section h3 { color: var(--accent); margin-bottom: 16px; font-size: 16px; }
+.file-input-wrapper {
+  position: relative; display: inline-block;
+}
+.file-input-label {
+  display: inline-block; background: var(--accent); color: var(--bg);
+  padding: 10px 24px; font-size: 14px; font-weight: 700; border-radius: var(--radius);
+  cursor: pointer; transition: opacity 0.2s;
+}
+.file-input-label:hover { opacity: 0.9; }
+.file-input {
+  position: absolute; left: 0; top: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer;
+}
+/* STUDENT INFO CARD */
+.student-info-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 20px; margin-top: 20px; display: none;
+}
+.student-info-card.show { display: block; }
+.student-info-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;
+}
+.info-item label {
+  display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.info-item .value { font-size: 15px; color: var(--text); font-weight: 700; }
+/* SECTION */
+.grading-section {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 24px; margin-bottom: 24px; display: none;
+}
+.grading-section.show { display: block; }
+.section-header {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;
+  padding-bottom: 16px; border-bottom: 1px solid var(--border);
+}
+.section-title { font-size: 18px; color: var(--accent); font-weight: 900; }
+.section-score {
+  background: var(--accent); color: var(--bg); padding: 6px 16px;
+  border-radius: var(--radius); font-weight: 900; font-size: 14px;
+}
+/* QUESTION BLOCK */
+.question-block {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 20px; margin-bottom: 16px;
+}
+.question-block:last-child { margin-bottom: 0; }
+.q-header {
+  display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px;
+}
+.q-number {
+  font-size: 13px; font-weight: 900; color: var(--accent);
+  border: 1px solid var(--accent); padding: 2px 10px; border-radius: var(--radius);
+}
+.q-points { font-size: 11px; color: var(--muted); }
+.q-result {
+  margin-left: auto; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: var(--radius);
+}
+.q-result.correct { background: var(--success); color: var(--bg); }
+.q-result.wrong { background: var(--danger); color: #fff; }
+.q-text { font-size: 14px; line-height: 1.8; margin-bottom: 16px; }
+.answer-display {
+  background: var(--card); border-left: 3px solid var(--border); padding: 12px 16px;
+  font-size: 14px; line-height: 1.8; margin-bottom: 12px; white-space: pre-line;
+}
+.answer-display.correct { border-left-color: var(--success); }
+.answer-display.wrong { border-left-color: var(--danger); }
+.correct-answer { font-size: 13px; color: var(--success); margin-top: 8px; }
+/* RUBRIC COLLAPSIBLE */
+.rubric-toggle {
+  background: none; border: 1px solid var(--border); color: var(--muted);
+  padding: 6px 12px; font-size: 12px; border-radius: var(--radius); cursor: pointer;
+  font-family: inherit; margin-bottom: 12px; transition: all 0.2s;
+}
+.rubric-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.rubric-content {
+  display: none; background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px; margin-bottom: 16px;
+  font-size: 13px; line-height: 1.8;
+}
+.rubric-content.show { display: block; }
+.rubric-content h4 { color: var(--accent); margin-bottom: 8px; font-size: 14px; }
+/* SCORING INPUT */
+.scoring-row {
+  display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap;
+}
+.score-input-group { flex: 0 0 120px; }
+.score-input-group label {
+  display: block; font-size: 11px; color: var(--muted); margin-bottom: 6px;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.score-input {
+  width: 100%; background: var(--surface); border: 1px solid var(--border); color: var(--text);
+  padding: 8px 12px; font-size: 16px; font-weight: 700; border-radius: var(--radius);
+  font-family: inherit; outline: none; text-align: center;
+}
+.score-input:focus { border-color: var(--accent); }
+.comment-group { flex: 1; min-width: 200px; }
+.comment-group label {
+  display: block; font-size: 11px; color: var(--muted); margin-bottom: 6px;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.comment-textarea {
+  width: 100%; background: var(--surface); border: 1px solid var(--border); color: var(--text);
+  padding: 8px 12px; font-size: 13px; line-height: 1.6; border-radius: var(--radius);
+  font-family: inherit; outline: none; resize: vertical; min-height: 60px;
+}
+.comment-textarea:focus { border-color: var(--accent); }
+/* SUMMARY SECTION */
+.summary-section {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 32px; margin-top: 32px; display: none;
+}
+.summary-section.show { display: block; }
+.summary-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
+  margin-bottom: 24px;
+}
+.summary-item {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 20px; text-align: center;
+}
+.summary-item label {
+  display: block; font-size: 11px; color: var(--muted); margin-bottom: 8px;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.summary-item .value {
+  font-size: 32px; font-weight: 900; color: var(--accent);
+}
+.summary-item .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.recommendation-box {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 20px; margin-top: 20px;
+}
+.recommendation-box h4 { color: var(--accent); margin-bottom: 12px; font-size: 14px; }
+.recommendation-text { font-size: 15px; line-height: 1.8; }
+.action-buttons {
+  display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap;
+}
+.action-btn {
+  background: var(--accent); color: var(--bg); border: none;
+  padding: 12px 24px; font-size: 14px; font-weight: 700; border-radius: var(--radius);
+  cursor: pointer; font-family: inherit; transition: opacity 0.2s;
+}
+.action-btn:hover { opacity: 0.9; }
+.action-btn.secondary {
+  background: var(--surface); color: var(--text); border: 1px solid var(--border);
+}
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .main-container { padding: 16px; }
+  .scoring-row { flex-direction: column; }
+  .score-input-group { flex: 1 1 100%; }
+}
+/* PRINT STYLES */
+@media print {
+  body { background: #fff; color: #000; }
+  .password-overlay, .import-section, .action-buttons { display: none !important; }
+  .grading-section, .summary-section { border: 1px solid #ccc; page-break-inside: avoid; }
+  .rubric-content { display: block !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div class="password-overlay" id="passwordOverlay">
+  <div class="password-box" id="passwordBox">
+    <h2>考官身份验证</h2>
+    <input type="password" class="password-input" id="passwordInput" placeholder="输入考官密码" autocomplete="off">
+    <button class="password-btn" onclick="checkPassword()">进 入</button>
+    <div class="password-error" id="passwordError">密码错误，请重试</div>
+  </div>
+</div>
+
+<!-- MAIN INTERFACE -->
+<div id="mainInterface" style="display:none;">
+
+<div class="top-bar">
+  <div class="brand"><span>3HFIT</span> 考官评分系统 — M1 模块</div>
+</div>
+
+<div class="main-container">
+
+  <!-- IMPORT SECTION -->
+  <div class="import-section">
+    <h3>导入考生答卷</h3>
+    <div class="file-input-wrapper">
+      <span class="file-input-label">选择 JSON 文件</span>
+      <input type="file" class="file-input" id="fileInput" accept=".json">
+    </div>
+    
+    <div class="student-info-card" id="studentInfoCard">
+      <div class="student-info-grid">
+        <div class="info-item"><label>姓名</label><div class="value" id="infoName">-</div></div>
+        <div class="info-item"><label>编号</label><div class="value" id="infoId">-</div></div>
+        <div class="info-item"><label>阶段</label><div class="value" id="infoStage">-</div></div>
+        <div class="info-item"><label>考场</label><div class="value" id="infoRoom">-</div></div>
+        <div class="info-item"><label>提交时间</label><div class="value" id="infoTime">-</div></div>
+        <div class="info-item"><label>答题用时</label><div class="value" id="infoDuration">-</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MCQ SECTION -->
+  <div class="grading-section" id="mcqSection">
+    <div class="section-header">
+      <div class="section-title">选择题（Q01-Q15）自动评分</div>
+      <div class="section-score" id="mcqScore">0 / 30</div>
+    </div>
+    <div id="mcqQuestions"></div>
+  </div>
+
+  <!-- SHORT ANSWER SECTION -->
+  <div class="grading-section" id="shortSection">
+    <div class="section-header">
+      <div class="section-title">简答题（Q16-Q18）</div>
+      <div class="section-score" id="shortScore">0 / 30</div>
+    </div>
+    <div id="shortQuestions"></div>
+  </div>
+
+  <!-- CASE STUDY SECTION -->
+  <div class="grading-section" id="caseSection">
+    <div class="section-header">
+      <div class="section-title">案例题（Q19-Q20）</div>
+      <div class="section-score" id="caseScore">0 / 40</div>
+    </div>
+    <div id="caseQuestions"></div>
+  </div>
+
+  <!-- SUMMARY SECTION -->
+  <div class="summary-section" id="summarySection">
+    <h3 style="color:var(--accent);margin-bottom:24px;font-size:18px;">评分汇总</h3>
+    <div class="summary-grid">
+      <div class="summary-item">
+        <label>总分</label>
+        <div class="value" id="totalScore">0</div>
+        <div class="sub">/ 100</div>
+      </div>
+      <div class="summary-item">
+        <label>M1 加权得分</label>
+        <div class="value" id="weightedScore">0</div>
+        <div class="sub">× 25%</div>
+      </div>
+      <div class="summary-item">
+        <label>通过状态</label>
+        <div class="value" id="passStatus" style="font-size:20px;">待评定</div>
+      </div>
+    </div>
+    <div class="recommendation-box">
+      <h4>考官建议</h4>
+      <div class="recommendation-text" id="recommendationText">请先完成评分</div>
+    </div>
+    <div class="action-buttons">
+      <button class="action-btn" onclick="exportReport()">导出评分报告 (JSON)</button>
+      <button class="action-btn secondary" onclick="window.print()">打印评分表</button>
+      <button class="action-btn secondary" onclick="saveGrading()">保存评分 (Ctrl+S)</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  var CORRECT_ANSWERS = {
+    1:'B',2:'C',3:'A',4:'D',5:'B',6:'A',7:'C',8:'D',9:'B',
+    10:'C',11:'A',12:'D',13:'B',14:'A',15:'C'
+  };
+
+  var QUESTIONS = {
+    1: "训练目标是提高指定动作的最大力量。下列哪项最符合专项性原则？",
+    2: "学员某一训练周没有增加重量，但动作控制改善，同重量完成次数提高。最恰当的判断是？",
+    3: "关于恢复与适应，下列哪项最合理？",
+    4: "两名学员完成相同计划后进步不同，首先应怎样解释？",
+    5: "关于肌肉力量与肌肉体积，下列哪项准确？",
+    6: '"3组×8次×40 kg"的外部负荷量，按组数×次数×重量计算为？',
+    7: '本卷将RIR定义为"在维持既定技术标准下，估计还能完成的次数"。RIR为2表示？',
+    8: "观察新手动作时，哪种记录最便于后续复查？",
+    9: "给出一个动作提示后，下一步最合理的是？",
+    10: "某食物含蛋白质10 g、可利用碳水化合物20 g、脂肪5 g。按4、4、9 kcal/g估算，能量为？",
+    11: "以下哪项属于合理的基础营养沟通？",
+    12: "一份包装标示每份含蛋白质12 g，每包装含2.5份，吃完整包获得多少蛋白质？",
+    13: "20名会员自行选择使用产品，平均成绩随后提高。仅据此可得出的结论是？",
+    14: "一项研究未发现两方案的组间差异具有统计学显著性。最合理的解释是？",
+    15: "学员要求见习讲师依据其疾病诊断直接制定治疗性饮食。最适当的做法是？",
+    16: "向新学员解释力量训练中的适应与进步。（10分）\n\n某学员说："两周没有增加哑铃重量，就证明没有进步；只要每次练到非常疲惫，效果一定更好。"请完成以下任务：\n\n① 解释为什么重量不是唯一的进步指标，并给出两种可记录指标。（4分）\n② 解释训练刺激、疲劳和恢复之间的关系。（3分）\n③ 给出一种本周可执行的观察与调整办法，说明什么时候暂不增加要求。（3分）",
+    17: "把动作观察变成可验证的带教过程。（10分）\n\n健康新手进行徒手坐站练习，前5次平稳，从第6次开始起身节奏突然加快，并在结束时失去原定控制。本人未报告疼痛。请写出：\n\n① 两项需要进一步确认的信息。（2分）\n② 一句中性的观察反馈，避免用"懒""没天赋"等标签。（2分）\n③ 一项优先调整及理由。（3分）\n④ 如何复查调整效果，以及什么情况下停止本次练习。（3分）",
+    18: "解读一天的营养记录。（10分）\n\n记录显示蛋白质90 g、可利用碳水化合物250 g、脂肪60 g。按蛋白质和碳水化合物各4 kcal/g、脂肪9 kcal/g估算；本题不计其他供能成分。\n\n① 分别计算三种营养素的供能及总能量。（4分）\n② 计算蛋白质供能占总能量的百分比，保留1位小数。（2分）\n③ 是否仅凭这一天的数据就能判定营养充分且适合本人？写出两项仍需了解的信息及用途。（4分）",
+    19: "为新手安排可执行的训练与复查。（20分）\n\n陈同学为健康成年人，无训练经验，希望提高日常力量。经公司的训练前流程确认可参加常规练习，目前没有不适。每周可训练2次，每次45分钟，器材有稳固座椅、轻哑铃和弹力带。试练时，轻负荷动作前段可控，后段会出现节奏加快和控制下降。\n\n① 还需确认哪三项与计划直接相关的信息？（3分）\n② 写出首周两次训练安排，至少列出3类动作或动作模式，并写明组次、负荷或努力程度、休息及如何适配45分钟。（8分）\n③ 给出两项逐次记录指标，并写出满足何种条件才进阶、何种情况应减量或维持。（5分）\n④ 针对控制下降给出一个可复查调整；并说明出现新发疼痛或异常不适时的处置原则。（4分）",
+    20: "营养计算与宣传主张的判断。（20分）\n\n某"增肌饮"每份含蛋白质20 g、可利用碳水化合物25 g、脂肪4 g。一位健康成人会员打算每天饮用2份，认为"这不算能量"；销售人员又说："一位会员喝了两周，卧推成绩提高，因此已经证明人人喝了都会增肌。"现无其他研究资料。\n\n① 按4、4、9 kcal/g计算每份及2份的能量。（4分）\n② 为讨论是否需要该产品，列出3项需要核查的信息，并说明其中一项会怎样影响建议。（5分）\n③ 指出销售推论的3个独立问题。（6分）\n④ 写一段面向会员的回应：回应诉求、说明证据和自身职责边界、给出下一步；若会员补充告知正在接受疾病相关饮食管理，你如何处理？（5分）"
+  };
+
+  var RUBRICS = {
+    16: "Q16 评分细则（满分10分）\n\n① 进步指标（4分）\n• 说明重量不是唯一指标（2分）\n• 两种可重复记录指标各1分（2分）\n  示例：同负荷次数、相同条件下的控制或RIR变化\n  注意：单说"感觉不错"不足\n\n② 刺激与恢复（3分）\n• 训练刺激引发适应但受恢复影响（1分）\n• 疲劳不是效果的同义词（1分）\n• 持续高疲劳可能影响表现和后续训练安排（1分）\n\n③ 执行办法（3分）\n• 给出可执行记录或复查方法（1分）\n• 根据表现决定维持或进阶（1分）\n• 控制下降、恢复不足等情况下暂不加要求（1分）\n\n参考示例：保持动作与负荷可比，记录次数、控制和估计剩余次数；表现稳定且恢复允许时再小幅进阶。连续表现下降时先核查训练、睡眠与执行，必要时降低要求。该示例不是唯一方案。",
+    17: "Q17 评分细则（满分10分）\n\n① 补充信息（2分）\n• 两项各1分\n  示例：本人感受及疲劳、是否理解节奏要求、座椅高度/目标次数、过去练习经验\n  注意：重复同一问题只计1项\n\n② 中性反馈（2分）\n• 描述具体次数与节奏/控制变化（1分）\n• 不以人格解释（1分）\n\n③ 优先调整（3分）\n• 具体可执行调整（1分）\n• 对准观察问题（1分）\n• 说明合理机制或目的（1分）\n  示例：减少单组次数并保证休息，优于泛说"加强核心"\n\n④ 复查和停止（3分）\n• 在可比条件复查（1分）\n• 检查目标控制及学员反馈（1分）\n• 疼痛、异常不适、环境风险或失控时停止并评估（1分）\n\n合理替代：调整节奏、降低动作要求或改变座椅高度均可，但须说明选择原因并复查。不得仅因使用与考官不同的提示语扣分。",
+    18: "Q18 评分细则（满分10分）\n\n① 计算供能（4分）\n• 蛋白质：90×4＝360 kcal（1分）\n• 碳水：250×4＝1000 kcal（1分）\n• 脂肪：60×9＝540 kcal（1分）\n• 合计：1900 kcal（1分）\n\n② 蛋白质供能占比（2分）\n• 公式：360÷1900×100%（1分）\n• 结果：18.9%（1分）\n\n③ 判断与补充信息（4分）\n• 不能仅凭一天判定（前提）\n• 两项信息及用途各2分\n  示例：\n  - 多日饮食及份量 → 判断代表性\n  - 目标、体重及活动 → 解释需求\n  - 食物构成 → 了解纤维及微量营养素\n  - 相关健康管理情况 → 判断职责边界",
+    19: "Q19 评分细则（满分20分）\n\n① 确认信息（3分）\n• 3项各1分\n  示例：可持续排期/偏好、动作基础与当天状态、具体目标与生活需求\n  注意：重复已给"每周2次"不计新增信息\n\n② 首周安排（8分）\n• 两次训练可执行且留恢复间隔（1分）\n• ≥3类相关动作模式（3分，每类1分）\n• 写明组次（1分）\n• 负荷/努力程度和控制要求（1分）\n• 休息（1分）\n• 热身/练习/收尾可容纳45分钟（1分）\n\n③ 监控进阶（5分）\n• 两项可比记录各1分（2分）\n• 进阶条件具体且含质量/恢复（2分）\n• 给出维持或减量条件（1分）\n\n④ 调整及边界（4分）\n• 针对控制下降给一项可复查调整（1分）\n• 新发疼痛/异常不适先停止相关练习（1分）\n• 不擅自诊断或硬扛（1分）\n• 按情况联系适当专业支持并记录后续（1分）\n\n注意：仅写"每次加重10%""全部做到力竭"而无质量与恢复条件，不能获得相应进阶/努力程度分。",
+    20: "Q20 评分细则（满分20分）\n\n① 能量计算（4分）\n• 每份：20×4＋25×4＋4×9＝216 kcal（公式1分，结果1分）\n• 2份：432 kcal（方法1分，结果1分）\n\n② 核查信息（5分）\n• 3项各1分：总饮食/是否替代其他食物、使用目标与训练、标签份量和成分、预算偏好/可执行性等\n• 解释其中一项如何影响建议（2分）\n\n③ 推理问题（6分）\n• 单个先后变化不能排除其他原因（2分）\n• 单一个案不能推出人人有效（2分）\n• 卧推成绩不等于肌肉体积（2分）\n  注意：不同但有效的独立论证可给分\n\n④ 回应与边界（5分）\n• 回应诉求（1分）\n• 说明证据不足且不保证效果（1分）\n• 说明一般营养教育边界（1分）\n• 给出核对整体摄入或寻求相应专业评估的下一步（1分）\n• 有疾病相关饮食管理时不擅改方案并转介/与负责的专业人员协同（1分）\n\n参考回应："你希望提高训练效果，我们先看整体饮食和训练记录。两份饮品约432 kcal，需纳入摄入评估。这个个案不能证明人人能增肌，也不能仅凭卧推变化判断增肌。若你正在接受疾病相关饮食管理，应先由负责的专业人员确认适用性，我不擅自改变该方案。""
+  };
+
+  var examData = null;
+  var gradingData = {};
+
+  // === PASSWORD CHECK ===
+  window.checkPassword = function() {
+    var pwd = document.getElementById('passwordInput').value;
+    if (pwd === '3HFIT2026') {
+      sessionStorage.setItem('grader_auth', '1');
+      document.getElementById('passwordOverlay').style.display = 'none';
+      document.getElementById('mainInterface').style.display = 'block';
+    } else {
+      var box = document.getElementById('passwordBox');
+      box.classList.add('shake');
+      document.getElementById('passwordError').style.display = 'block';
+      setTimeout(function() {
+        box.classList.remove('shake');
+      }, 400);
+    }
+  };
+
+  // Check session on load
+  if (sessionStorage.getItem('grader_auth') === '1') {
+    document.getElementById('passwordOverlay').style.display = 'none';
+    document.getElementById('mainInterface').style.display = 'block';
+  }
+
+  // Password enter key
+  document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') checkPassword();
+  });
+
+  // === FILE IMPORT ===
+  document.getElementById('fileInput').addEventListener('change', function(e) {
+    var file = e.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev) {
+      try {
+        examData = JSON.parse(ev.target.result);
+        renderExamData();
+        loadPreviousGrading();
+      } catch(err) {
+        alert('JSON 解析失败：' + err.message);
+      }
+    };
+    reader.readAsText(file);
+  });
+
+  function renderExamData() {
+    if (!examData) return;
+    
+    // Student info
+    document.getElementById('infoName').textContent = examData.metadata.student_name || '-';
+    document.getElementById('infoId').textContent = examData.metadata.student_id || '-';
+    document.getElementById('infoStage').textContent = examData.metadata.exam_stage || '-';
+    document.getElementById('infoRoom').textContent = examData.metadata.exam_room || '-';
+    var submitTime = examData.metadata.submit_time ? new Date(examData.metadata.submit_time).toLocaleString('zh-CN') : '-';
+    document.getElementById('infoTime').textContent = submitTime;
+    
+    // Duration
+    var totalTime = 90 * 60;
+    var remaining = examData.metadata.time_remaining_seconds || 0;
+    var used = totalTime - remaining;
+    var mins = Math.floor(used / 60);
+    var secs = used % 60;
+    document.getElementById('infoDuration').textContent = mins + '分' + (secs < 10 ? '0' : '') + secs + '秒';
+    
+    document.getElementById('studentInfoCard').classList.add('show');
+    
+    // Render MCQ
+    renderMCQ();
+    
+    // Render Short Answer
+    renderShortAnswer();
+    
+    // Render Case Study
+    renderCaseStudy();
+    
+    // Show sections
+    document.getElementById('mcqSection').classList.add('show');
+    document.getElementById('shortSection').classList.add('show');
+    document.getElementById('caseSection').classList.add('show');
+    document.getElementById('summarySection').classList.add('show');
+    
+    updateScores();
+  }
+
+  function renderMCQ() {
+    var container = document.getElementById('mcqQuestions');
+    var html = '';
+    
+    for (var i = 1; i <= 15; i++) {
+      var qKey = 'Q' + (i < 10 ? '0' : '') + i;
+      var studentAns = examData.answers.multiple_choice[qKey] || '未作答';
+      var correctAns = CORRECT_ANSWERS[i];
+      var isCorrect = studentAns === correctAns;
+      
+      html += '<div class="question-block">';
+      html += '<div class="q-header">';
+      html += '<span class="q-number">Q' + (i < 10 ? '0' : '') + i + '</span>';
+      html += '<span class="q-points">2分</span>';
+      html += '<span class="q-result ' + (isCorrect ? 'correct' : 'wrong') + '">' + (isCorrect ? '✓' : '✗') + '</span>';
+      html += '</div>';
+      html += '<div class="q-text">' + QUESTIONS[i] + '</div>';
+      html += '<div class="answer-display ' + (isCorrect ? 'correct' : 'wrong') + '">';
+      html += '<strong>学生答案：</strong>' + studentAns;
+      if (!isCorrect) {
+        html += '<div class="correct-answer"><strong>正确答案：</strong>' + correctAns + '</div>';
+      }
+      html += '</div>';
+      html += '</div>';
+    }
+    
+    container.innerHTML = html;
+  }
+
+  function renderShortAnswer() {
+    var container = document.getElementById('shortQuestions');
+    var html = '';
+    
+    for (var i = 16; i <= 18; i++) {
+      var qKey = 'Q' + i;
+      var studentAns = examData.answers.short_answer[qKey] || '未作答';
+      
+      html += '<div class="question-block">';
+      html += '<div class="q-header">';
+      html += '<span class="q-number">Q' + i + '</span>';
+      html += '<span class="q-points">10分</span>';
+      html += '</div>';
+      html += '<div class="q-text">' + QUESTIONS[i] + '</div>';
+      html += '<div class="answer-display">' + escapeHtml(studentAns) + '</div>';
+      html += '<button class="rubric-toggle" onclick="toggleRubric(' + i + ')">显示评分标准</button>';
+      html += '<div class="rubric-content" id="rubric' + i + '"><h4>评分参考</h4><pre style="white-space:pre-wrap;font-family:inherit;">' + RUBRICS[i] + '</pre></div>';
+      html += '<div class="scoring-row">';
+      html += '<div class="score-input-group"><label>得分 (0-10)</label><input type="number" class="score-input" id="score' + i + '" min="0" max="10" step="0.5" onchange="updateScores()"></div>';
+      html += '<div class="comment-group"><label>评语</label><textarea class="comment-textarea" id="comment' + i + '" placeholder="输入评语..."></textarea></div>';
+      html += '</div>';
+      html += '</div>';
+    }
+    
+    container.innerHTML = html;
+  }
+
+  function renderCaseStudy() {
+    var container = document.getElementById('caseQuestions');
+    var html = '';
+    
+    for (var i = 19; i <= 20; i++) {
+      var qKey = 'Q' + i;
+      var studentAns = examData.answers.case_study[qKey] || '未作答';
+      
+      html += '<div class="question-block">';
+      html += '<div class="q-header">';
+      html += '<span class="q-number">Q' + i + '</span>';
+      html += '<span class="q-points">20分</span>';
+      html += '</div>';
+      html += '<div class="q-text">' + QUESTIONS[i] + '</div>';
+      html += '<div class="answer-display">' + escapeHtml(studentAns) + '</div>';
+      html += '<button class="rubric-toggle" onclick="toggleRubric(' + i + ')">显示评分标准</button>';
+      html += '<div class="rubric-content" id="rubric' + i + '"><h4>评分参考</h4><pre style="white-space:pre-wrap;font-family:inherit;">' + RUBRICS[i] + '</pre></div>';
+      html += '<div class="scoring-row">';
+      html += '<div class="score-input-group"><label>得分 (0-20)</label><input type="number" class="score-input" id="score' + i + '" min="0" max="20" step="0.5" onchange="updateScores()"></div>';
+      html += '<div class="comment-group"><label>评语</label><textarea class="comment-textarea" id="comment' + i + '" placeholder="输入评语..."></textarea></div>';
+      html += '</div>';
+      html += '</div>';
+    }
+    
+    container.innerHTML = html;
+  }
+
+  window.toggleRubric = function(q) {
+    var el = document.getElementById('rubric' + q);
+    el.classList.toggle('show');
+  };
+
+  function updateScores() {
+    if (!examData) return;
+    
+    // MCQ score
+    var mcqScore = 0;
+    for (var i = 1; i <= 15; i++) {
+      var qKey = 'Q' + (i < 10 ? '0' : '') + i;
+      var studentAns = examData.answers.multiple_choice[qKey] || '';
+      if (studentAns === CORRECT_ANSWERS[i]) mcqScore += 2;
+    }
+    document.getElementById('mcqScore').textContent = mcqScore + ' / 30';
+    
+    // Short answer score
+    var shortScore = 0;
+    for (var i = 16; i <= 18; i++) {
+      var score = parseFloat(document.getElementById('score' + i).value) || 0;
+      shortScore += score;
+    }
+    document.getElementById('shortScore').textContent = shortScore + ' / 30';
+    
+    // Case score
+    var caseScore = 0;
+    for (var i = 19; i <= 20; i++) {
+      var score = parseFloat(document.getElementById('score' + i).value) || 0;
+      caseScore += score;
+    }
+    document.getElementById('caseScore').textContent = caseScore + ' / 40';
+    
+    // Total
+    var total = mcqScore + shortScore + caseScore;
+    document.getElementById('totalScore').textContent = total;
+    
+    // Weighted
+    var weighted = (total * 0.25).toFixed(2);
+    document.getElementById('weightedScore').textContent = weighted;
+    
+    // Pass status
+    var passStatus = '';
+    if (total >= 80) passStatus = '优秀';
+    else if (total >= 60) passStatus = '通过';
+    else passStatus = '未通过';
+    document.getElementById('passStatus').textContent = passStatus;
+    
+    // Recommendation
+    var rec = '';
+    if (total >= 80) rec = '建议通过，可直接进入M2-M6实操阶段';
+    else if (total >= 60) rec = '建议有条件通过，需针对薄弱环节补训后复评';
+    else rec = '建议暂缓，需系统补训后重新参加M1考核';
+    document.getElementById('recommendationText').textContent = rec;
+  }
+
+  function escapeHtml(text) {
+    var div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // === SAVE/LOAD GRADING ===
+  window.saveGrading = function() {
+    if (!examData) return;
+    
+    var studentId = examData.metadata.student_id || 'unknown';
+    var data = {
+      studentId: studentId,
+      scores: {},
+      comments: {},
+      savedAt: new Date().toISOString()
+    };
+    
+    for (var i = 16; i <= 18; i++) {
+      data.scores['q' + i] = parseFloat(document.getElementById('score' + i).value) || 0;
+      data.comments['q' + i] = document.getElementById('comment' + i).value;
+    }
+    for (var i = 19; i <= 20; i++) {
+      data.scores['q' + i] = parseFloat(document.getElementById('score' + i).value) || 0;
+      data.comments['q' + i] = document.getElementById('comment' + i).value;
+    }
+    
+    localStorage.setItem('grading_' + studentId, JSON.stringify(data));
+    alert('评分已保存');
+  };
+
+  function loadPreviousGrading() {
+    if (!examData) return;
+    
+    var studentId = examData.metadata.student_id || 'unknown';
+    var saved = localStorage.getItem('grading_' + studentId);
+    if (!saved) return;
+    
+    try {
+      var data = JSON.parse(saved);
+      for (var i = 16; i <= 18; i++) {
+        if (data.scores['q' + i] !== undefined) {
+          document.getElementById('score' + i).value = data.scores['q' + i];
+        }
+        if (data.comments['q' + i]) {
+          document.getElementById('comment' + i).value = data.comments['q' + i];
+        }
+      }
+      for (var i = 19; i <= 20; i++) {
+        if (data.scores['q' + i] !== undefined) {
+          document.getElementById('score' + i).value = data.scores['q' + i];
+        }
+        if (data.comments['q' + i]) {
+          document.getElementById('comment' + i).value = data.comments['q' + i];
+        }
+      }
+      updateScores();
+    } catch(e) {}
+  }
+
+  // === EXPORT REPORT ===
+  window.exportReport = function() {
+    if (!examData) return;
+    
+    var mcqScore = 0;
+    var mcqDetail = [];
+    for (var i = 1; i <= 15; i++) {
+      var qKey = 'Q' + (i < 10 ? '0' : '') + i;
+      var studentAns = examData.answers.multiple_choice[qKey] || '';
+      var correctAns = CORRECT_ANSWERS[i];
+      var isCorrect = studentAns === correctAns;
+      if (isCorrect) mcqScore += 2;
+      mcqDetail.push({
+        q: i,
+        student: studentAns || '未作答',
+        correct: correctAns,
+        result: isCorrect ? 'correct' : 'wrong'
+      });
+    }
+    
+    var shortAnswer = {};
+    for (var i = 16; i <= 18; i++) {
+      shortAnswer['q' + i] = {
+        score: parseFloat(document.getElementById('score' + i).value) || 0,
+        comment: document.getElementById('comment' + i).value
+      };
+    }
+    
+    var caseStudy = {};
+    for (var i = 19; i <= 20; i++) {
+      caseStudy['q' + i] = {
+        score: parseFloat(document.getElementById('score' + i).value) || 0,
+        comment: document.getElementById('comment' + i).value
+      };
+    }
+    
+    var total = mcqScore;
+    for (var i = 16; i <= 18; i++) total += shortAnswer['q' + i].score;
+    for (var i = 19; i <= 20; i++) total += caseStudy['q' + i].score;
+    
+    var weighted = (total * 0.25).toFixed(2);
+    
+    var rec = '';
+    if (total >= 80) rec = '建议通过，可直接进入M2-M6实操阶段';
+    else if (total >= 60) rec = '建议有条件通过，需针对薄弱环节补训后复评';
+    else rec = '建议暂缓，需系统补训后重新参加M1考核';
+    
+    var report = {
+      grading_meta: {
+        grader_name: '考官',
+        graded_at: new Date().toISOString(),
+        exam_version: '3HFIT_M1_A_v1.0'
+      },
+      student: examData.metadata,
+      scores: {
+        mcq: {
+          auto: mcqScore,
+          detail: mcqDetail
+        },
+        short_answer: shortAnswer,
+        case_study: caseStudy
+      },
+      total: total,
+      weighted_m1: parseFloat(weighted),
+      recommendation: rec
+    };
+    
+    var blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = '3HFIT_M1_Grading_' + (examData.metadata.student_id || 'unknown') + '_' + Date.now() + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  // === KEYBOARD SHORTCUTS ===
+  document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.key === 's') {
+      e.preventDefault();
+      saveGrading();
+    }
+    if (e.ctrlKey && e.key === 'Enter') {
+      e.preventDefault();
+      exportReport();
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>

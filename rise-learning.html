@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rise Learning</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0F0F12;--card:#18181D;--card-hover:#1E1E24;
+  --gold:#C4A26E;--gold-dim:#9A7E54;--gold-glow:rgba(196,162,110,.12);
+  --text:#E8E6E1;--text-secondary:#8A8A8F;--text-muted:#555;
+  --green:#4ADE80;--green-bg:rgba(74,222,128,.1);
+  --border:rgba(255,255,255,.06);--radius:14px;--radius-sm:10px;
+  --font:"PingFang SC","Noto Sans SC","Helvetica Neue",Arial,sans-serif;
+}
+html{font-size:16px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* ===== LOGIN PAGE ===== */
+.login-page{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#0A0A0A;padding:20px}
+.login-card{width:100%;max-width:380px;padding:40px 32px;text-align:center;animation:fadeUp .5s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.login-logo{width:100%;aspect-ratio:16/9;background:#1A1A1F;border:1px dashed #333;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:#555;font-size:14px;margin-bottom:32px;letter-spacing:2px;transition:border-color .3s}
+.login-logo:hover{border-color:#555}
+.login-title{font-size:22px;font-weight:600;color:var(--text);margin-bottom:6px;letter-spacing:1px}
+.login-sub{font-size:13px;color:var(--text-secondary);margin-bottom:32px}
+.input-group{margin-bottom:16px;text-align:left}
+.input-group label{display:block;font-size:12px;color:var(--text-secondary);margin-bottom:6px;letter-spacing:.5px}
+.input-group input{width:100%;padding:12px 16px;background:#141418;border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;font-family:var(--font);outline:none;transition:border-color .25s,box-shadow .25s}
+.input-group input:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-glow)}
+.input-group input::placeholder{color:#444}
+.login-btn{width:100%;padding:14px;background:var(--gold);color:#0A0A0A;border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:600;font-family:var(--font);cursor:pointer;margin-top:8px;transition:all .25s;letter-spacing:1px}
+.login-btn:hover{background:#D4B27E;transform:translateY(-1px);box-shadow:0 4px 20px rgba(196,162,110,.25)}
+.login-btn:active{transform:translateY(0)}
+.login-error{color:#EF4444;font-size:13px;margin-top:12px;min-height:20px}
+
+/* ===== DASHBOARD ===== */
+.dashboard{display:none;max-width:860px;margin:0 auto;padding:24px 20px 60px}
+.dash-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px}
+.dash-welcome{font-size:13px;color:var(--text-secondary);margin-bottom:2px}
+.dash-name{font-size:26px;font-weight:700;color:var(--text);letter-spacing:.5px}
+.dash-date{font-size:13px;color:var(--text-muted);margin-top:2px}
+.dash-streak{display:flex;align-items:center;gap:8px;background:var(--card);padding:10px 18px;border-radius:var(--radius-sm);border:1px solid var(--border)}
+.streak-num{font-size:28px;font-weight:700;color:var(--gold);line-height:1}
+.streak-label{font-size:11px;color:var(--text-secondary);line-height:1.3}
+.logout-btn{background:none;border:none;color:var(--text-muted);font-size:12px;cursor:pointer;font-family:var(--font);padding:4px 0;transition:color .2s}
+.logout-btn:hover{color:var(--text)}
+
+/* Cards */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:16px;transition:border-color .3s,background .3s}
+.card:hover{border-color:rgba(255,255,255,.1);background:var(--card-hover)}
+.card-tag{display:inline-block;font-size:11px;color:var(--gold);background:var(--gold-glow);padding:3px 10px;border-radius:20px;margin-bottom:14px;letter-spacing:1px;font-weight:500}
+.card-title{font-size:20px;font-weight:600;margin-bottom:12px;line-height:1.4}
+.card-chapter{font-size:12px;color:var(--text-muted);margin-bottom:16px}
+.card-body{font-size:15px;color:var(--text-secondary);line-height:1.8}
+.card-source{margin-top:16px;font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:12px}
+.evidence-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;letter-spacing:.5px}
+.evidence-A{background:rgba(74,222,128,.12);color:#4ADE80}
+.evidence-B{background:rgba(251,191,36,.12);color:#FBBF24}
+.evidence-C{background:rgba(148,163,184,.12);color:#94A3B8}
+
+/* Task card */
+.task-type{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;margin-bottom:14px;font-weight:500;letter-spacing:1px}
+.task-type-行动{background:rgba(59,130,246,.12);color:#60A5FA}
+.task-type-思考{background:rgba(168,85,247,.12);color:#A855F7}
+.task-type-反思{background:rgba(251,146,60,.12);color:#FB923C}
+
+/* Check-in button */
+.checkin-wrap{text-align:center;margin:24px 0}
+.checkin-btn{padding:16px 48px;border:none;border-radius:var(--radius-sm);font-size:16px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .3s;letter-spacing:1px}
+.checkin-btn.pending{background:var(--gold);color:#0A0A0A}
+.checkin-btn.pending:hover{background:#D4B27E;transform:translateY(-2px);box-shadow:0 6px 24px rgba(196,162,110,.3)}
+.checkin-btn.done{background:var(--green-bg);color:var(--green);cursor:default;border:1px solid rgba(74,222,128,.2)}
+.checkin-time{font-size:12px;color:var(--text-muted);margin-top:8px}
+
+/* Progress panel */
+.progress-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.progress-item{background:#141418;border-radius:var(--radius-sm);padding:16px;text-align:center;border:1px solid var(--border)}
+.progress-num{font-size:32px;font-weight:700;color:var(--gold);line-height:1.2}
+.progress-label{font-size:11px;color:var(--text-secondary);margin-top:4px}
+.progress-bar-wrap{background:#141418;border-radius:var(--radius-sm);padding:16px;border:1px solid var(--border)}
+.progress-bar-label{font-size:12px;color:var(--text-secondary);margin-bottom:8px;display:flex;justify-content:space-between}
+.progress-bar-track{height:6px;background:#222;border-radius:3px;overflow:hidden}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));border-radius:3px;transition:width .6s ease}
+
+/* History */
+.history-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:12px}
+.history-list{display:flex;flex-direction:column;gap:8px}
+.history-item{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#141418;border-radius:var(--radius-sm);border:1px solid var(--border);transition:background .2s}
+.history-item:hover{background:#1A1A1F}
+.history-date{font-size:13px;color:var(--text-secondary);min-width:90px}
+.history-quote{font-size:13px;color:var(--text);flex:1;margin:0 16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.history-status{font-size:12px;padding:3px 10px;border-radius:12px;white-space:nowrap}
+.history-status.done{background:var(--green-bg);color:var(--green)}
+.history-status.missed{background:rgba(239,68,68,.1);color:#EF4444}
+
+/* Responsive */
+@media(max-width:600px){
+  .dash-header{flex-direction:column;gap:12px}
+  .dash-streak{align-self:flex-start}
+  .progress-grid{grid-template-columns:1fr}
+  .card{padding:20px}
+  .history-quote{display:none}
+  .login-card{padding:32px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== LOGIN ===== -->
+<div class="login-page" id="loginPage">
+  <div class="login-card">
+    <div class="login-logo">背景图</div>
+    <div class="login-title">Rise Learning</div>
+    <div class="login-sub">每日学习 · 持续精进</div>
+    <div class="input-group">
+      <label>姓名</label>
+      <input type="text" id="nameInput" placeholder="输入你的姓名">
+    </div>
+    <div class="input-group">
+      <label>邀请码</label>
+      <input type="password" id="codeInput" placeholder="输入邀请码">
+    </div>
+    <button class="login-btn" onclick="handleLogin()">进入</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div class="dashboard" id="dashboard">
+  <div class="dash-header">
+    <div>
+      <div class="dash-welcome" id="greetingText"></div>
+      <div class="dash-name" id="nameDisplay"></div>
+      <div class="dash-date" id="dateDisplay"></div>
+      <button class="logout-btn" onclick="handleLogout()" style="margin-top:8px">退出</button>
+    </div>
+    <div class="dash-streak">
+      <div class="streak-num" id="streakNum">0</div>
+      <div class="streak-label">连续<br>打卡</div>
+    </div>
+  </div>
+
+  <!-- Quote Card -->
+  <div class="card" id="quoteCard">
+    <div class="card-tag">今日书摘</div>
+    <div class="card-title" id="quoteTitle"></div>
+    <div class="card-chapter" id="quoteChapter"></div>
+    <div class="card-body" id="quoteBody"></div>
+    <div class="card-source">
+      <span class="evidence-tag" id="quoteEvidence"></span>
+      <span id="quoteSource"></span>
+    </div>
+  </div>
+
+  <!-- Task Card -->
+  <div class="card" id="taskCard">
+    <div class="card-tag">今日实践</div>
+    <div id="taskType" class="task-type"></div>
+    <div class="card-body" id="taskBody"></div>
+  </div>
+
+  <!-- Check-in -->
+  <div class="checkin-wrap">
+    <button class="checkin-btn pending" id="checkinBtn" onclick="handleCheckin()">完成打卡</button>
+    <div class="checkin-time" id="checkinTime"></div>
+  </div>
+
+  <!-- Progress -->
+  <div class="card">
+    <div class="card-tag">学习进度</div>
+    <div class="progress-grid">
+      <div class="progress-item">
+        <div class="progress-num" id="weekDays">0</div>
+        <div class="progress-label">本周 / 7天</div>
+      </div>
+      <div class="progress-item">
+        <div class="progress-num" id="monthDays">0</div>
+        <div class="progress-label">本月完成</div>
+      </div>
+      <div class="progress-item">
+        <div class="progress-num" id="totalDays">0</div>
+        <div class="progress-label">总计完成</div>
+      </div>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-label">
+        <span>本周进度</span>
+        <span id="weekPct">0%</span>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="weekBar" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- History -->
+  <div class="card">
+    <div class="card-tag">学习历史</div>
+    <div class="history-list" id="historyList"></div>
+  </div>
+</div>
+
+<script>
+// ===== DATA =====
+const QUOTES = [
+  { id:1, title:"把家里的食盐换成低钠盐", text:"用钾盐替代普通食盐，可以在几乎不改变饮食结构的情况下降低脑卒中14%、心血管事件13%、总死亡率12%。每袋只贵几元。", evidence:"A", source:"第1节第5条", chapter:"不要早死" },
+  { id:2, title:"每年做一次低剂量螺旋CT（LDCT）", text:"55-80岁、有吸烟史的人群，年度LDCT筛查可将肺癌死亡率降低20%。费用约300-500元，辐射量仅为常规CT的1/6。", evidence:"A", source:"第1节第12条", chapter:"不要早死" },
+  { id:3, title:"替人担保前先想清楚愿不愿意替他还", text:"担保人就是要替他还钱的人。写了一般保证，债权人必须先起诉借款人并执行不到钱才能找你；写了连带责任保证，债权人可以直接找你要。", evidence:"B", source:"第8节第18条", chapter:"别把自己搭进去" },
+  { id:4, title:"家里备一个灭火器", text:"初期火灾用灭火器扑灭的成功率极高，几十元的投入可能挽救整套房和生命。放在厨房门口，不要用干粉以外的类型。", evidence:"B", source:"第13节第3条", chapter:"紧急情况" },
+  { id:5, title:"戒烟是最划算的健康投资", text:"戒烟后20分钟心率下降，1年后冠心病风险降50%，10年后肺癌风险降至吸烟者的一半。任何年龄戒烟都有收益。", evidence:"A", source:"第2节第1条", chapter:"不要慢慢死" },
+  { id:6, title:"把钱分成三笔", text:"生活费（3-6个月开销）、保命钱（不动）、增值钱（长期投资）。不要把所有钱放在同一个地方，更不要放在同一个资产类别里。", evidence:"B", source:"第5节第2条", chapter:"不要浪费钱" },
+  { id:7, title:"签字前把纸从头到尾看完", text:"签了就算数，按手印和签名一样算数。看不懂的当场问，拍照留底。「没看清」「以为是别的」在法庭上基本站不住。", evidence:"B", source:"第8节第17条", chapter:"别把自己搭进去" },
+  { id:8, title:"学一个能产生复利的技能", text:"编程、写作、设计、公开演讲——这些技能的回报会随时间指数增长。与其花时间在一次性收益的活动上，不如投资在可积累的技能和作品上。", evidence:"B", source:"第23节第1条", chapter:"学什么技能划算" },
+  { id:9, title:"每周至少150分钟中等强度有氧运动", text:"符合这一条的人，全因死亡率降低约20-30%。不需要去健身房，快走也算。分5天、每次30分钟即可。", evidence:"A", source:"第2节第3条", chapter:"不要慢慢死" },
+  { id:10, title:"给家里老人做一次跌倒风险评估", text:"65岁以上老人，每年至少做一次跌倒风险评估。简单干预（清理地面障碍物、卫生间防滑垫、夜间小夜灯）可显著降低跌倒风险。", evidence:"B", source:"第17节第4条", chapter:"家里有老人" },
+  { id:11, title:"别为了外形把身体搞坏", text:"极端节食、过量有氧、滥用补剂——这些追求「好身材」的方式反而在损害健康。肌肉量、骨密度、心肺功能才是真正的外形基础。", evidence:"B", source:"第28节第1条", chapter:"别为了外形把身体搞坏" },
+  { id:12, title:"遭遇重大打击后，先活过今天", text:"丧亲、离异、重病之后，不要急于「走出来」。允许自己有情绪，但要保持基本的生活结构：吃饭、睡觉、出门、和人说话。", evidence:"C", source:"第29节第2条", chapter:"遭遇重大打击之后" }
+];
+
+const TASKS = [
+  { type:"行动", text:"检查家里的食盐是否为低钠盐，如果不是，今天去买一包替换。" },
+  { type:"思考", text:"回想最近一次你做重大决策的场景。用「花掉什么、换回什么」的框架重新分析，你当时的判断是否合理？" },
+  { type:"行动", text:"检查家中是否有灭火器，确认位置和有效期。如果没有，加入购物车。" },
+  { type:"反思", text:"你今天的时间花在了哪里？列出前三项耗时活动，评估它们的性价比（投入时间 vs 长期回报）。" },
+  { type:"行动", text:"给家里一位65岁以上的长辈打电话，询问最近是否有头晕、跌倒或行动不便的情况。" },
+  { type:"思考", text:"如果你现在必须签一份合同（任何类型），你会重点关注哪三个条款？为什么？" },
+  { type:"行动", text:"今天走至少8000步，或做30分钟中等强度运动（快走、骑车、游泳均可）。记录你的感受。" },
+  { type:"反思", text:"你的钱现在放在哪里？是否符合「生活费、保命钱、增值钱」三笔分的框架？如果不符合，写下调整计划。" },
+  { type:"思考", text:"列出你最想学的三项技能。哪些具有复利效应？哪些是一次性收益？优先级怎么排？" },
+  { type:"行动", text:"清理家中一个可能造成跌倒风险的区域（如浴室地面、走廊杂物、夜间照明）。拍照记录前后对比。" },
+  { type:"反思", text:"如果今天是你的最后一天，你对目前的生活方式有什么遗憾？这个遗憾指向什么需要改变的优先事项？" },
+  { type:"行动", text:"今天完全不碰烟酒。记录24小时内身体和心理的变化。" }
+];
+
+const VALID_CODES = ["RISE2026","GUEST001","GUEST002"];
+
+// ===== UTILS =====
+function todayStr(){ return new Date().toISOString().slice(0,10); }
+function getDayIndex(){ const d=new Date(); return Math.floor((d-new Date(d.getFullYear(),0,0))/86400000); }
+function getQuote(){ return QUOTES[getDayIndex() % QUOTES.length]; }
+function getTask(){ return TASKS[getDayIndex() % TASKS.length]; }
+function getUser(){ try{ return JSON.parse(localStorage.getItem("rl_user")); }catch(e){ return null; } }
+function getCompleted(){ try{ return JSON.parse(localStorage.getItem("rl_completed"))||{}; }catch(e){ return {}; } }
+function saveCompleted(data){ localStorage.setItem("rl_completed",JSON.stringify(data)); }
+function calcStreak(){
+  const c=getCompleted(); let streak=0; let d=new Date();
+  while(true){
+    const key=d.toISOString().slice(0,10);
+    if(c[key]){ streak++; d.setDate(d.getDate()-1); } else break;
+  }
+  return streak;
+}
+
+// ===== GREETING =====
+function getGreeting(){
+  const h=new Date().getHours();
+  if(h<6) return "夜深了";
+  if(h<11) return "早上好";
+  if(h<14) return "中午好";
+  if(h<18) return "下午好";
+  return "晚上好";
+}
+
+// ===== LOGIN =====
+function handleLogin(){
+  const name=document.getElementById("nameInput").value.trim();
+  const code=document.getElementById("codeInput").value.trim();
+  const err=document.getElementById("loginError");
+  if(!name){ err.textContent="请输入姓名"; return; }
+  if(!code){ err.textContent="请输入邀请码"; return; }
+  if(!VALID_CODES.includes(code)){ err.textContent="邀请码无效"; return; }
+  err.textContent="";
+  const user={ name, code, loginDate:todayStr() };
+  localStorage.setItem("rl_user",JSON.stringify(user));
+  showDashboard();
+}
+
+function handleLogout(){
+  localStorage.removeItem("rl_user");
+  document.getElementById("dashboard").style.display="none";
+  document.getElementById("loginPage").style.display="flex";
+  document.getElementById("nameInput").value="";
+  document.getElementById("codeInput").value="";
+  document.getElementById("loginError").textContent="";
+}
+
+// ===== DASHBOARD =====
+function showDashboard(){
+  const user=getUser();
+  if(!user) return;
+  document.getElementById("loginPage").style.display="none";
+  document.getElementById("dashboard").style.display="block";
+
+  // Header
+  document.getElementById("greetingText").textContent=getGreeting()+"，";
+  document.getElementById("nameDisplay").textContent=user.name;
+  const now=new Date();
+  const weekDays=["日","一","二","三","四","五","六"];
+  document.getElementById("dateDisplay").textContent=
+    now.getFullYear()+"年"+(now.getMonth()+1)+"月"+now.getDate()+"日 星期"+weekDays[now.getDay()];
+
+  // Quote
+  const q=getQuote();
+  document.getElementById("quoteTitle").textContent=q.title;
+  document.getElementById("quoteChapter").textContent=q.chapter;
+  document.getElementById("quoteBody").textContent=q.text;
+  const evTag=document.getElementById("quoteEvidence");
+  evTag.textContent="证据等级 "+q.evidence;
+  evTag.className="evidence-tag evidence-"+q.evidence;
+  document.getElementById("quoteSource").textContent=q.source;
+
+  // Task
+  const t=getTask();
+  const taskTypeEl=document.getElementById("taskType");
+  taskTypeEl.textContent=t.type+"题";
+  taskTypeEl.className="task-type task-type-"+t.type;
+  document.getElementById("taskBody").textContent=t.text;
+
+  // Check-in state
+  updateCheckinState();
+
+  // Progress
+  updateProgress();
+
+  // History
+  updateHistory();
+
+  // Streak
+  document.getElementById("streakNum").textContent=calcStreak();
+}
+
+function updateCheckinState(){
+  const c=getCompleted(); const today=todayStr();
+  const btn=document.getElementById("checkinBtn");
+  const timeEl=document.getElementById("checkinTime");
+  if(c[today]){
+    btn.className="checkin-btn done";
+    btn.textContent="已完成 ✓";
+    timeEl.textContent="完成于 "+c[today].time;
+  } else {
+    btn.className="checkin-btn pending";
+    btn.textContent="完成打卡";
+    timeEl.textContent="";
+  }
+}
+
+function handleCheckin(){
+  const c=getCompleted(); const today=todayStr();
+  if(c[today]) return;
+  const q=getQuote(); const t=getTask();
+  const now=new Date();
+  const time=String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
+  c[today]={ quote:q.title, task:t.text, time:time };
+  saveCompleted(c);
+  updateCheckinState();
+  updateProgress();
+  updateHistory();
+  document.getElementById("streakNum").textContent=calcStreak();
+}
+
+function updateProgress(){
+  const c=getCompleted(); const keys=Object.keys(c);
+  const now=new Date();
+  const today=todayStr();
+
+  // Week: Mon-Sun of current week
+  const dayOfWeek=now.getDay()||7;
+  const monday=new Date(now); monday.setDate(now.getDate()-dayOfWeek+1);
+  let weekCount=0;
+  for(let i=0;i<7;i++){
+    const d=new Date(monday); d.setDate(monday.getDate()+i);
+    const key=d.toISOString().slice(0,10);
+    if(key>today) break;
+    if(c[key]) weekCount++;
+  }
+
+  // Month
+  const monthStr=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0");
+  const monthCount=keys.filter(k=>k.startsWith(monthStr)&&k<=today).length;
+
+  // Total
+  const totalCount=keys.filter(k=>k<=today).length;
+
+  document.getElementById("weekDays").textContent=weekCount;
+  document.getElementById("monthDays").textContent=monthCount;
+  document.getElementById("totalDays").textContent=totalCount;
+
+  const pct=Math.round(weekCount/7*100);
+  document.getElementById("weekPct").textContent=pct+"%";
+  document.getElementById("weekBar").style.width=pct+"%";
+}
+
+function updateHistory(){
+  const c=getCompleted();
+  const list=document.getElementById("historyList");
+  list.innerHTML="";
+  const now=new Date();
+  for(let i=0;i<7;i++){
+    const d=new Date(now); d.setDate(now.getDate()-i);
+    const key=d.toISOString().slice(0,10);
+    const weekDays=["日","一","二","三","四","五","六"];
+    const dateLabel=(d.getMonth()+1)+"/"+d.getDate()+" 周"+weekDays[d.getDay()];
+    const done=!!c[key];
+    const quoteText=done?c[key].quote:"—";
+    const item=document.createElement("div");
+    item.className="history-item";
+    item.innerHTML=`
+      <span class="history-date">${dateLabel}</span>
+      <span class="history-quote">${quoteText}</span>
+      <span class="history-status ${done?"done":"missed"}">${done?"已完成":"未完成"}</span>
+    `;
+    list.appendChild(item);
+  }
+}
+
+// ===== INIT =====
+(function(){
+  if(getUser()) showDashboard();
+})();
+</script>
+</body>
+</html>

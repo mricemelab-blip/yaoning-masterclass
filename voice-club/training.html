@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>发生俱乐部 · 训练计划</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#F5F3EF;--text:#1C1C1E;--gold:#C4A26E;--blue:#4A90D9;--orange:#E67E22;--red:#D64045;--card:#FFFFFF;--border:#E8E5E0;--subtle:#9A9A9A;--phase1:#4A90D9;--phase2:#E67E22;--phase3:#D64045}
+html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.app{max-width:500px;margin:0 auto;min-height:100vh;position:relative;padding-bottom:70px}
+.view{display:none;padding:16px;animation:fadeIn .25s ease}
+.view.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+h1{font-size:22px;font-weight:700;letter-spacing:-.5px}
+h2{font-size:18px;font-weight:600;margin-bottom:12px}
+h3{font-size:16px;font-weight:600;margin-bottom:8px}
+.card{background:var(--card);border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.card-title{font-size:15px;font-weight:600;margin-bottom:8px;color:var(--text)}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;color:#fff}
+.badge-blue{background:var(--blue)}
+.badge-orange{background:var(--orange)}
+.badge-red{background:var(--red)}
+.badge-gold{background:var(--gold)}
+.badge-gray{background:#8E8E93}
+.btn{display:block;width:100%;padding:14px;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;text-align:center;transition:all .2s}
+.btn-primary{background:var(--gold);color:#fff}
+.btn-primary:active{opacity:.85;transform:scale(.98)}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text)}
+.btn-outline:active{background:var(--border)}
+.btn-danger{background:#FF3B30;color:#fff}
+.btn-sm{padding:8px 16px;font-size:13px;width:auto;display:inline-block;border-radius:8px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);display:flex;justify-content:center;z-index:100;padding:6px 0;padding-bottom:max(6px,env(safe-area-inset-bottom))}
+.bottom-nav-inner{display:flex;max-width:500px;width:100%;justify-content:space-around}
+.nav-item{display:flex;flex-direction:column;align-items:center;padding:4px 8px;font-size:10px;color:var(--subtle);cursor:pointer;transition:color .2s;border:none;background:none;-webkit-appearance:none}
+.nav-item.active{color:var(--gold)}
+.nav-item .nav-icon{font-size:20px;margin-bottom:2px}
+.tabs{display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:2px 0}
+.tab{padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;white-space:nowrap;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--subtle);transition:all .2s;flex-shrink:0}
+.tab.active{color:#fff;border-color:transparent}
+.tab.active[data-phase="1"]{background:var(--blue)}
+.tab.active[data-phase="2"]{background:var(--orange)}
+.tab.active[data-phase="3"]{background:var(--red)}
+.week-scroll{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:4px 0 10px;margin-bottom:12px}
+.week-tab{width:44px;height:44px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--subtle);transition:all .2s;flex-shrink:0;position:relative}
+.week-tab.active{color:#fff;border-color:transparent}
+.week-tab.active[data-phase="1"]{background:var(--blue)}
+.week-tab.active[data-phase="2"]{background:var(--orange)}
+.week-tab.active[data-phase="3"]{background:var(--red)}
+.week-tab .deload-mark{font-size:9px;position:absolute;bottom:2px}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.stat-item{background:var(--card);border-radius:12px;padding:12px 8px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.stat-num{font-size:22px;font-weight:700;color:var(--gold)}
+.stat-label{font-size:11px;color:var(--subtle);margin-top:2px}
+.phase-card{cursor:pointer;transition:all .2s}
+.phase-card:active{transform:scale(.98)}
+.phase-card .phase-header{display:flex;align-items:center;justify-content:space-between}
+.phase-card .phase-detail{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.phase-card.open .phase-detail{max-height:600px}
+.phase-card .detail-inner{padding-top:12px;font-size:13px;color:#555;line-height:1.7}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:6px}
+.form-input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;background:#fff;color:var(--text);outline:none;transition:border-color .2s}
+.form-input:focus{border-color:var(--gold)}
+.rating-group{display:flex;gap:8px}
+.rating-btn{width:40px;height:40px;border-radius:10px;border:1.5px solid var(--border);background:#fff;font-size:15px;font-weight:600;cursor:pointer;color:var(--subtle);transition:all .2s}
+.rating-btn.selected{background:var(--gold);color:#fff;border-color:var(--gold)}
+.progress-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;border-radius:3px;transition:width .4s ease}
+.progress-fill.blue{background:var(--blue)}
+.progress-fill.orange{background:var(--orange)}
+.progress-fill.red{background:var(--red)}
+.progress-fill.gold{background:var(--gold)}
+.day-card{background:var(--card);border-radius:14px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.04);overflow:hidden;transition:all .2s}
+.day-header{padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.day-header-left{display:flex;align-items:center;gap:10px}
+.day-id{font-size:12px;font-weight:700;color:var(--subtle)}
+.day-focus{font-weight:600;font-size:14px}
+.day-check{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:all .2s;flex-shrink:0}
+.day-check.done{background:var(--gold);border-color:var(--gold);color:#fff}
+.day-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.day-card.open .day-body{max-height:3000px}
+.day-body-inner{padding:0 16px 16px}
+.exercise-item{padding:10px 0;border-bottom:1px solid var(--border)}
+.exercise-item:last-child{border-bottom:none}
+.exercise-name{font-weight:600;font-size:14px;margin-bottom:4px}
+.exercise-params{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px}
+.exercise-params span{font-size:11px;padding:2px 8px;border-radius:6px;background:#F0EEEA;color:#666}
+.exercise-cues{max-height:0;overflow:hidden;transition:max-height .25s ease}
+.exercise-cues.open{max-height:300px}
+.cues-toggle{font-size:12px;color:var(--gold);cursor:pointer;font-weight:600;margin-top:2px}
+.cues-list{padding-top:6px;font-size:12px;color:#666;line-height:1.7}
+.cues-list li{margin-bottom:2px}
+.exercise-check{display:flex;align-items:center;gap:8px;margin-top:4px}
+.exercise-check input{width:18px;height:18px;accent-color:var(--gold)}
+.exercise-check label{font-size:12px;color:#888}
+.record-item{padding:12px 0;border-bottom:1px solid var(--border)}
+.record-item:last-child{border-bottom:none}
+.record-date{font-size:13px;font-weight:600}
+.record-row{display:flex;justify-content:space-between;font-size:12px;color:#888;margin-top:4px}
+.log-item{padding:12px 0;border-bottom:1px solid var(--border)}
+.log-item:last-child{border-bottom:none}
+.log-header{display:flex;justify-content:space-between;align-items:center}
+.log-id{font-weight:700;font-size:14px}
+.log-meta{font-size:12px;color:#888}
+.log-status{font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px}
+.log-status.complete{background:#E8F5E9;color:#2E7D32}
+.log-status.partial{background:#FFF3E0;color:#E65100}
+.log-detail{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.log-detail.open{max-height:500px}
+.log-detail-inner{padding-top:8px;font-size:12px;color:#666}
+.coach-banner{background:linear-gradient(135deg,#1C1C1E,#2C2C2E);color:#fff;padding:16px;border-radius:14px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.coach-banner h2{color:#fff;margin:0;font-size:16px}
+.coach-badge{background:var(--gold);color:#fff;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.svg-chart{width:100%;overflow-x:auto}
+.svg-chart svg{display:block;margin:0 auto}
+.guide-card{background:linear-gradient(135deg,#FAFAF8,#F5F3EF);border:1.5px solid var(--gold);border-radius:14px;padding:16px;margin-bottom:14px;position:relative}
+.guide-close{position:absolute;top:12px;right:14px;font-size:18px;cursor:pointer;color:var(--subtle);background:none;border:none}
+.preview-card{background:var(--card);border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.04);border-left:3px solid var(--gold)}
+.preview-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+.preview-label{color:#888}
+.preview-value{font-weight:600}
+.arrow-up{color:#34C759}
+.arrow-down{color:#FF9500}
+.arrow-same{color:var(--subtle)}
+.method-tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:700;letter-spacing:.3px}
+.method-submax{background:#E3F2FD;color:#1565C0}
+.method-max{background:#FCE4EC;color:#C62828}
+.method-tempo{background:#F3E5F5;color:#7B1FA2}
+.method-de{background:#FFF8E1;color:#F57F17}
+.method-volume{background:#E8F5E9;color:#2E7D32}
+.method-eccentric{background:#FBE9E7;color:#BF360C}
+.method-iso{background:#E0F7FA;color:#00838F}
+.method-accommodating{background:#FFF3E0;color:#E65100}
+.method-rest-pause{background:#EDE7F6;color:#4527A0}
+.method-superset{background:#F1F8E9;color:#558B2F}
+.method-core{background:#ECEFF1;color:#37474F}
+.method-rep{background:#E8F5E9;color:#2E7D32}
+.method-grip{background:#EFEBE9;color:#4E342E}
+.intro-subtitle{font-size:13px;color:var(--subtle);margin-top:4px;margin-bottom:16px}
+.section-desc{font-size:13px;color:#666;margin-bottom:12px;line-height:1.7}
+.complete-btn{margin-top:12px}
+.body-record-list{margin-top:16px}
+.stat-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+.stat-card-lg{background:var(--card);border-radius:14px;padding:16px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.stat-card-lg .stat-num{font-size:28px}
+.stat-card-lg .stat-label{font-size:12px}
+.phase-progress{margin-bottom:10px}
+.phase-progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.phase-progress-name{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px}
+.phase-progress-count{font-size:12px;color:#888}
+.phase-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.empty-state{text-align:center;padding:40px 20px;color:var(--subtle);font-size:14px}
+.data-btns{display:flex;gap:8px;margin-top:16px}
+.data-btns .btn{flex:1}
+.student-card{background:var(--card);border-radius:12px;padding:14px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.student-name{font-weight:600;font-size:15px;margin-bottom:6px}
+.student-info{font-size:12px;color:#888;line-height:1.8}
+textarea.form-input{min-height:60px;resize:vertical}
+.week-summary{font-size:12px;color:#888;margin-top:4px}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+<!-- Views rendered by JS -->
+</div>
+<nav class="bottom-nav">
+<div class="bottom-nav-inner">
+<button class="nav-item active" data-view="plan-intro"><span class="nav-icon">📋</span>计划</button>
+<button class="nav-item" data-view="training"><span class="nav-icon">🏋️</span>训练</button>
+<button class="nav-item" data-view="body"><span class="nav-icon">🫀</span>身体</button>
+<button class="nav-item" data-view="log"><span class="nav-icon">📝</span>日志</button>
+<button class="nav-item" data-view="progress"><span class="nav-icon">📊</span>进度</button>
+</div>
+</nav>
+<script>
+// ===== TRAINING DATA =====
+const TRAINING_DATA = {
+1:{phase:1,name:'第 1 周',subtitle:'基线建立',type:'NORMAL',weekPreview:{volumeChange:'baseline',intensityChange:'baseline',note:'建立动作模式基线，所有组数和强度按处方执行，不盲目加重。'},days:[
+{id:'W1D1',weekday:'周一',focus:'Lower A',method:'SUBMAX VOLUME',exercises:[
+{name:'杠铃后蹲 Back Squat',sets:'4×6',load:'70% 1RM',rest:'120s',method:'Submax Volume',cues:['站距略宽于肩，脚尖外展15-30°','杠位：高杠斜方肌上束/低杠后三角肌','下蹲至少平行，腰背中立不龟背','膝盖追踪脚尖方向，不内扣']},
+{name:'罗马尼亚硬拉 RDL',sets:'3×8',load:'65% 1RM',rest:'90s',method:'Tempo 3-1-1-0',cues:['3秒离心，底部停顿1秒','启动时先推髋（铰链），非弯腰','杠铃沿大腿下滑，始终贴近身体','下放至腘绳肌强拉伸感即停','全程背部平坦，顶部收缩臀肌锁定']},
+{name:'腿举 Leg Press',sets:'3×10',load:'65% 1RM',rest:'90s',method:'Submax Volume',cues:['双脚与髋同宽踩实踏板','下放至膝盖约90°，不弹震','推起时膝不完全锁定','腰背紧贴靠垫，不弓背']},
+{name:'保加利亚分腿蹲 Bulgarian Split Squat',sets:'2×10/侧',load:'自重+哑铃',rest:'60s',method:'Tempo',cues:['慢速离心3秒','后脚脚背置于凳上，前脚距凳约2步','躯干微前倾，重心在前脚全脚掌','下蹲至前侧大腿平行']},
+{name:'坐姿腿弯举 Seated Leg Curl',sets:'3×12',load:'RPE 7',rest:'60s',method:'Volume',cues:['膝盖对准器械轴心','挡板固定在小腿下端','向心快收，离心控制3秒回放']},
+{name:'站立提踵 Standing Calf Raise',sets:'3×15',load:'RPE 7',rest:'45s',method:'Volume',cues:['前脚掌踩在踏板边缘，充分拉伸跟腱','顶部停留1-2秒','离心缓慢下放至最大拉伸位']},
+{name:'平板支撑 ↔ 哥本哈根平板支撑交替',sets:'4轮',load:'自重',rest:'轮间30s',method:'Isometric Core',cues:['平板：肘肩垂直，骨盆后倾不塌腰','哥本哈根：侧撑，上方腿内收抬起','每轮含4段×30s，左右交替','均匀呼吸不憋气']},
+{name:'北欧艇 Nordic Boat',sets:'3×5',load:'自重',rest:'120s',method:'Eccentric Overload',cues:['跪姿，搭档固定脚踝','离心缓慢前倾3-5s控制','全程保持髋部伸展不折髋','初学者用手推地回起始位']},
+{name:'悬垂举腿 Hanging Leg Raise',sets:'3×12',load:'自重',rest:'45s',method:'Core',cues:['肩胛骨下沉稳定悬挂','先骨盆后倾再抬腿','控制离心下放2-3s']}
+]},
+{id:'W1D2',weekday:'周二',focus:'Upper A',method:'SUBMAX VOLUME',exercises:[
+{name:'杠铃卧推 Bench Press',sets:'4×6',load:'70% 1RM',rest:'120s',method:'Submax Volume',cues:['肩胛骨收紧下沉塞进后口袋','握距略宽于肩，前臂底部垂直','下放至胸骨下端，肘与躯干45-75°','触胸停顿消弹后推起']},
+{name:'负重引体向上 Weighted Pull-up',sets:'4×6-8',load:'自重+配重',rest:'90s',method:'Tempo',cues:['控制离心2秒','全握悬挂，肩胛骨先下沉再拉','拉至下巴过杠，胸部迎向横杠','不借力摆动']},
+{name:'杠铃推举 OHP',sets:'3×8',load:'60% 1RM',rest:'90s',method:'Tempo 3-1-1-0',cues:['3秒离心','站距与髋同宽','推起时头微微后让杠铃垂直上升','顶部锁定，不过度挺腰']},
+{name:'哑铃划船 DB Row',sets:'3×10/侧',load:'RPE 7',rest:'60s',method:'Volume',cues:['一手一膝支撑平凳，躯干前倾45°','启动先肩胛骨后缩','肘贴躯干向天花板拉','顶部停1s挤压背阔肌']},
+{name:'绳索斜向侧平举 Cable Leaning Lateral Raise',sets:'3组',load:'RPE 7',rest:'45s',method:'Rest-Pause',cues:['力竭→休息10s→再做3次→重复','身体向绳索反方向倾斜约30°','三角肌中束主导，不耸肩']},
+{name:'绳索过顶三头伸展 Overhead Cable Triceps Extension',sets:'3×12',load:'RPE 7',rest:'45s',method:'Volume',cues:['背对绳索，双手过头','肘部固定，向前伸展至完全伸直','控制离心回放']},
+{name:'上斜坐姿哑铃弯举 Incline Seated DB Curl',sets:'3×10',load:'RPE 7',rest:'45s',method:'Volume',cues:['上斜凳45-60°，背部贴紧','手臂自然下垂，充分拉伸肱二头肌长头','向心屈肘至完全收缩，肘不前移']},
+{name:'A1.绳索交叉反向飞鸟 + A2.俯卧撑',sets:'2+1组',load:'轻/自重',rest:'90s',method:'Superset',cues:['A1: 绳索高位交叉拉向两侧','A2: 俯卧撑至力竭','A1→A2无休息']}
+]},
+{id:'W1D3',weekday:'周四',focus:'Lower B',method:'TEMPO + ECCENTRIC',exercises:[
+{name:'传统硬拉 Conventional Deadlift',sets:'3×5',load:'75% 1RM',rest:'180s',method:'Submax Volume',cues:['站距与髋同宽，杠铃在脚掌正中','启动：先推腿，再起髋','杠铃始终贴近身体向上滑','顶部髋膝完全锁定']},
+{name:'前蹲 Front Squat',sets:'3×6',load:'65% 1RM',rest:'120s',method:'Tempo 3-0-1-0',cues:['3秒离心','杠铃置于前三角肌，肘高抬','躯干保持接近直立','下蹲至大腿平行或更深']},
+{name:'北欧艇 Nordic Boat',sets:'3×5',load:'自重',rest:'120s',method:'Eccentric Overload',cues:['跪姿，搭档固定脚踝','离心缓慢前倾3-5s控制','全程保持髋部伸展不折髋']},
+{name:'臀推 Hip Thrust',sets:'3×10',load:'RPE 7',rest:'90s',method:'Volume',cues:['上背部靠凳缘','双脚与髋同宽，脚尖微外展','顶部胫骨垂直，骨盆轻微后倾','收缩臀肌1-2s后控制下放']},
+{name:'腿伸展 Leg Extension',sets:'3×12',load:'RPE 7',rest:'60s',method:'Isometric',cues:['顶部等长收缩3秒','膝盖对准器械轴心','离心控制3s下放']},
+{name:'站立提踵 Standing Calf Raise',sets:'3×15',load:'RPE 7',rest:'45s',method:'Volume',cues:['前脚掌踩在踏板边缘','顶部停留1-2秒','离心缓慢下放']},
+{name:'悬垂举腿 Hanging Leg Raise',sets:'3×12',load:'自重',rest:'45s',method:'Core',cues:['肩胛骨下沉稳定悬挂','先骨盆后倾再抬腿','控制离心下放2-3s']}
+]},
+{id:'W1D4',weekday:'周五',focus:'Upper B',method:'TEMPO + ISO',exercises:[
+{name:'上斜哑铃卧推 Incline DB Press',sets:'3×8',load:'RPE 7',rest:'90s',method:'Tempo 3-1-1-0',cues:['凳面角度30-45°','哑铃起始于胸两侧','推至顶部哑铃接近但不碰','控制离心下放至上臂平行地面']},
+{name:'杠铃划船 Pendlay Row',sets:'4×6',load:'70% 1RM',rest:'90s',method:'Submax Volume',cues:['躯干前倾接近平行地面','每杠从地面拉起','肩胛骨后缩启动，肘贴体侧拉','不借腰部摆动']},
+{name:'哑铃推举 DB Shoulder Press',sets:'3×10',load:'RPE 7',rest:'90s',method:'Volume',cues:['坐于有靠背的凳子','哑铃起始于耳侧高度','推至顶部微内收','离心控制下放']},
+{name:'绳索交叉反向飞鸟 Cable Crossover Reverse Fly',sets:'3×15',load:'轻重量',rest:'45s',method:'Volume',cues:['绳索从高位交叉拉向身体两侧下方','肩胛骨后缩，后束发力','控制离心回放']},
+{name:'B1.锤式弯举 + B2.仰卧哑铃碎颅者',sets:'3×12+12',load:'RPE 7',rest:'90s',method:'Superset',cues:['B1: 中立握，肘贴体侧','B2: 肘固定不动，屈肘下放至额头两侧','B1→B2无休息']},
+{name:'农夫行走 Farmer\'s Walk',sets:'3×40m',load:'RPE 7-8',rest:'90s',method:'Grip/Core',cues:['女生约¾体重，男生约⅘体重','躯干刚性，肩胛骨下沉后缩','步幅稳定，步频均匀']}
+]}
+]},
+2:{phase:1,name:'第 2 周',subtitle:'渐进超负荷',type:'NORMAL',weekPreview:{volumeChange:'maintain',intensityChange:'increase',note:'主要复合动作强度提升2.5%，辅助项RPE提升至8。注意保持动作质量。'},days:[
+{id:'W2D1',weekday:'周一',focus:'Lower A',method:'SUBMAX VOLUME',exercises:[
+{name:'杠铃后蹲 Back Squat',sets:'4×6',load:'72.5% 1RM',rest:'120s',method:'Submax Volume',cues:['站距略宽于肩，脚尖外展15-30°','杠位：高杠斜方肌上束/低杠后三角肌','下蹲至少平行，腰背中立不龟背','膝盖追踪脚尖方向，不内扣']},
+{name:'罗马尼亚硬拉 RDL',sets:'3×8',load:'67.5% 1RM',rest:'90s',method:'Tempo 3-1-1-0',cues:['3秒离心，底部停顿1秒','启动时先推髋（铰链），非弯腰','杠铃沿大腿下滑，始终贴近身体','全程背部平坦，顶部收缩臀肌锁定']},
+{name:'腿举 Leg Press',sets:'3×10',load:'67.5% 1RM',rest:'90s',method:'Submax Volume',cues:['双脚与髋同宽踩实踏板','下放至膝盖约90°，不弹震','推起时膝不完全锁定','腰背紧贴靠垫']},
+{name:'保加利亚分腿蹲 Bulgarian Split Squat',sets:'3×10/侧',load:'自重+哑铃',rest:'60s',method:'Tempo',cues:['慢速离心3秒','后脚脚背置于凳上，前脚距凳约2步','躯干微前倾，重心在前脚全脚掌','下蹲至前侧大腿平行']},
+{name:'坐姿腿弯举 Seated Leg Curl',sets:'3×12',load:'RPE 8',rest:'60s',method:'Volume',cues:['膝盖对准器械轴心','挡板固定在小腿下端','向心快收，离心控制3秒回放']},
+{name:'站立提踵 Standing Calf Raise',sets:'3×15',load:'RPE 8',rest:'45s',method:'Volume',cues:['前脚掌踩在踏板边缘，充分拉伸跟腱','顶部停留1-2秒','离心缓慢下放至最大拉伸位']},
+{name:'平板支撑 ↔ 哥本哈根平板支撑交替',sets:'4轮',load:'自重',rest:'轮间30s',method:'Isometric Core',cues:['平板：肘肩垂直，骨盆后倾不塌腰','哥本哈根：侧撑，上方腿内收抬起','每轮含4段×30s，左右交替','均匀呼吸不憋气']},
+{name:'北欧艇 Nordic Boat',sets:'3×5',load:'自重',rest:'120s',method:'Eccentric Overload',cues:['跪姿，搭档固定脚踝','离心缓慢前倾3-5s控制','全程保持髋部伸展不折髋','初学者用手推地回起始位']},
+{name:'悬垂举腿 Hanging Leg Raise',sets:'3×12',load:'自重',rest:'45s',method:'Core',cues:['肩胛骨下沉稳定悬挂','先骨盆后倾再抬腿','控制离心下放2-3s']}
+]},
+{id:'W2D2',weekday:'周二',focus:'Upper A',method:'SUBMAX VOLUME',exercises:[
+{name:'杠铃卧推 Bench Press',sets:'4×6',load:'72.5% 1RM',rest:'120s',method:'Submax Volume',cues:['肩胛骨收紧下沉塞进后口袋','握距略宽于肩，前臂底部垂直','下放至胸骨下端，肘与躯干45-75°','触胸停顿消弹后推起']},
+{name:'负重引体向上 Weighted Pull-up',sets:'4×7',load:'自重+配重',rest:'90s',method:'Tempo',cues:['控制离心2秒','全握悬挂，肩胛骨先下沉再拉','拉至下巴过杠，胸部迎向横杠','不借力摆动']},
+{name:'杠铃推举 OHP',sets:'3×8',load:'62.5% 1RM',rest:'90s',method:'Tempo 3-1-1-0',cues:['3秒离心','站距与髋同宽','推起时头微微后让杠铃垂直上升','顶部锁定，不过度挺腰']},
+{name:'哑铃划船 DB Row',sets:'3×10/侧',load:'RPE 8',rest:'60s',method:'Volume',cues:['一手一膝支撑平凳，躯干前倾45°','启动先肩胛骨后缩','肘贴躯干向天花板拉','顶部停1s挤压背阔肌']},
+{name:'绳索斜向侧平举 Cable Leaning Lateral Raise',sets:'3组',load:'RPE 8',rest:'45s',method:'Rest-Pause',cues:['力竭→休息10s→再做3次→重复','身体向绳索反方向倾斜约30°','三角肌中束主导，不耸肩']},
+{name:'绳索过顶三头伸展 Overhead Cable Triceps Extension',sets:'3×12',load:'RPE 8',rest:'45s',method:'Volume',cues:['背对绳索，双手过头','肘部固定，向前伸展至完全伸直','控制离心回放']},
+{name:'上斜坐姿哑铃弯举 Incline Seated DB Curl',sets:'3×10',load:'RPE 8',rest:'45s',method:'Volume',cues:['上斜凳45-60°，背部贴紧','手臂自然下垂，充分拉伸肱二头肌长头','向心屈肘至完全收缩，肘不前移']},
+{name:'A1.绳索交叉反向飞鸟 + A2.俯卧撑',sets:'2+1组',load:'轻/自重',rest:'90s',method:'Superset',cues:['A1: 绳索高位交叉拉向两侧','A2: 俯卧撑至力竭','A1→A2无休息']}
+]},
+{id:'W2D3',weekday:'周四',focus:'Lower B',method:'TEMPO + ECCENTRIC',exercises:[
+{name:'传统硬拉 Conventional Deadlift',sets:'3×5',load:'77.5% 1RM',rest:'180s',method:'Submax Volume',cues:['站距与髋同宽，杠铃在脚掌正中','启动：先推腿，再起髋','杠铃始终贴近身体向上滑','顶部髋膝完全锁定']},
+{name:'前蹲 Front Squat',sets:'3×6',load:'67.5% 1RM',rest:'120s',method:'Tempo 3-0-1-0',cues:['3秒离心','杠铃置于前三角肌，肘高抬','躯干保持接近直立','下蹲至大腿平行或更深']},
+{name:'北欧艇 Nordic Boat',sets:'3×5',load:'自重',rest:'120s',method:'Eccentric Overload',cues:['跪姿，搭档固定脚踝','离心缓慢前倾3-5s控制','全程保持髋部伸展不折髋']},
+{name:'臀推 Hip Thrust',sets:'3×10',load:'RPE 8',rest:'90s',method:'Volume',cues:['上背部靠凳缘','双脚与髋同宽，脚尖微外展','顶部胫骨垂直，骨盆轻微后倾','收缩臀肌1-2s后控制下放']},
+{name:'腿伸展 Leg Extension',sets:'3×12',load:'RPE 8',rest:'60s',method:'Isometric',cues:['顶部等长收缩3秒','膝盖对准器械轴心','离心控制3s下放']},
+{name:'站立提踵 Standing Calf Raise',sets:'3×15',load:'RPE 8',rest:'45s',method:'Volume',cues:['前脚掌踩在踏板边缘','顶部停留1-2秒','离心缓慢下放']},
+{name:'悬垂举腿 Hanging Leg Raise',sets:'3×14',load:'自重',rest:'45s',method:'Core',cues:['肩胛骨下沉稳定悬挂','先骨盆后倾再抬腿','控制离心下放2-3s']}
+]},
+{id:'W2D4',weekday:'周五',focus:'Upper B',method:'TEMPO + ISO',exercises:[
+{name:'上斜哑铃卧推 Incline DB Press',sets:'3×8',load:'RPE 8',rest:'90s',method:'Tempo 3-1-1-0',cues:['凳面角度30-45°','哑铃起始于胸两侧','推至顶部哑铃接近但不碰','控制离心下放至上臂平行地面']},
+{name:'杠铃划船 Pendlay Row',sets:'4×6',load:'72.5% 1RM',rest:'90s',method:'Submax Volume',cues:['躯干前倾接近平行地面','每杠从地面拉起','肩胛骨后缩启动，肘贴体侧拉','不借腰部摆动']},
+{name:'哑铃推举 DB Shoulder Press',sets:'3×10',load:'RPE 8',rest:'90s',method:'Volume',cues:['坐于有靠背的凳子','哑铃起始于耳侧高度','推至顶部微内收','离心控制下放']},
+{name:'绳索交叉反向飞鸟 Cable Crossover Reverse Fly',sets:'3×15',load:'轻重量',rest:'45s',method:'Volume',cues:['绳索从高位交叉拉向身体两侧下方','肩胛骨后缩，后束发力','控制离心回放']},
+{name:'B1.锤式弯举 + B2.仰卧哑铃碎颅者',sets:'3×12+12',load:'RPE 8',rest:'90s',method:'Superset',cues:['B1: 中立握，肘贴体侧','B2: 肘固定不动，屈肘下放至额头两侧','B1→B2无休息']},
+{name:'农夫行走 Farmer\'s Walk',sets:'3×40m',load:'RPE 7-8',rest:'90s',method:'Grip/Core',cues:['女生约¾体重，男生约⅘体重','躯干刚性，肩胛骨下沉后缩','步幅稳定，步频均匀']}
+]}
+]},
+3:{phase:1,name:'第 3 周',subtitle:'容量巅峰',type:'NORMAL',weekPreview:{volumeChange:'increase',intensityChange:'increase',note:'本阶段容量巅峰周。组数和强度均达最高，注意恢复和营养。'},days:[
+{id:'W3D1',weekday:'周一',focus:'Lower A',method:'SUBMAX VOLUME',exercises:[
+{name:'杠铃后蹲 Back Squat',sets:'5×6',load:'75% 1RM',rest:'120s',method:'Submax Volume',cues:['站距略宽于肩，脚尖外展15-30°','杠位：高杠斜方肌上束/低杠后三角肌','下蹲至少平行，腰背中立不龟背','膝盖追踪脚尖方向，不内扣']},
+{name:'罗马尼亚硬拉 RDL',sets:'4×8',load:'70% 1RM',rest:'90s',method:'Tempo 3-1-1-0',cues:['3秒离心，底部停顿1秒','启动时先推髋（铰链），非弯腰','杠铃沿大腿下滑，始终贴近身体','全程背部平坦']},
+{name:'腿举 Leg Press',sets:'3×10',load:'70% 1RM',rest:'90s',method:'Submax Volume',cues:['双脚与髋同宽踩实踏板','下放至膝盖约90°','推起时膝不完全锁定']},
+{name:'保加利亚分腿蹲 Bulgarian Split Squat',sets:'3×10/侧',load:'自重+哑铃',rest:'60s',method:'Tempo',cues:['慢速离心3秒','躯干微前倾，重心在前脚全脚掌','下蹲至前侧大腿平行']},
+{name:'坐姿腿弯举 Seated Leg Curl',sets:'3×12',load:'RPE 8.5',rest:'60s',method:'Volume',cues:['膝盖对准器械轴心','向心快收，离心控制3秒回放']},
+{name:'站立提踵 Standing Calf Raise',sets:'3×15',load:'RPE 8.5',rest:'45s',method:'Volume',cues:['前脚掌踩在踏板边缘','顶部停留1-2秒']},
+{name:'平板支撑 ↔ 哥本哈根平板支撑交替',sets:'4轮',load:'自重',rest:'轮间30s',method:'Isometric Core',cues:['平板：肘肩垂直，骨盆后倾不塌腰','哥本哈根：侧撑，上方腿内收抬起']},
+{name:'北欧艇 Nordic Boat',sets:'3×6',load:'自重',rest:'120s',method:'Eccentric Overload',cues:['跪姿，搭档固定脚踝','离心缓慢前倾3-5s控制','全程保持髋部伸展不折髋']},
+{name:'悬垂举腿 Hanging Leg Raise',sets:'3×15',load:'自重',rest:'45s',method:'Core',cues:['肩胛骨下沉稳定悬挂','先骨盆后倾再抬腿','控制离心下放2-3s']}
+]},
+{id:'W3D2',weekday:'周二',focus:'Upper A',method:'SUBMAX VOLUME',exercises:[
+{name:'杠铃卧推 Bench Press',sets:'5×6',load:'75% 1RM',rest:'120s',method:'Submax Volume',cues:['肩胛骨收紧下沉塞进后口袋','握距略宽于肩，前臂底部垂直','下放至胸骨下端','触胸停顿消弹后推起']},
+{name:'负重引体向上 Weighted Pull-up',sets:'4×7',load:'自重+配重',rest:'90s',method:'Tempo',cues:['控制离心2秒','全握悬挂，肩胛骨先下沉再拉','拉至下巴过杠']},
+{name:'杠铃推举 OHP',sets:'3×8',load:'65% 1RM',rest:'90s',method:'Tempo 3-1-1-0',cues:['3秒离心','站距与髋同宽','推起时头微微后让杠铃垂直上升']},
+{name:'哑铃划船 DB Row',sets:'3×10/侧',load:'RPE 8.5',rest:'60s',method:'Volume',cues:['一手一膝支撑平凳，躯干前倾45°','启动先肩胛骨后缩','肘贴躯干向天花板拉']},
+{name:'绳索斜向侧平举 Cable Leaning Lateral Raise',sets:'3组',load:'RPE 8.5',rest:'45s',method:'Rest-Pause',cues:['力竭→休息10s→再做3次→重复','三角肌中束主导，不耸肩']},
+{name:'绳索过顶三头伸展 Overhead Cable Triceps Extension',sets:'3×12',load:'RPE 8.5',rest:'45s',method:'Volume',cues:['背对绳索，双手过头','肘部固定，向前伸展至完全伸直']},
+{name:'上斜坐姿哑铃弯举 Incline Seated DB Curl',sets:'3×10',load:'RPE 8.5',rest:'45s',method:'Volume',cues:['上斜凳45-60°，背部贴紧','向心屈肘至完全收缩，肘不前移']},
+{name:'A1.绳索交叉反向飞鸟 + A2.俯卧撑',sets:'2+1组',load:'轻/自重',rest:'90s',method:'Superset',cues:['A1: 绳索高位交叉拉向两侧','A2: 俯卧撑至力竭','A1→A2无休息']}
+]},
+{id:'W3D3',weekday:'周四',focus:'Lower B',method:'TEMPO + ECCENTRIC',exercises:[
+{name:'传统硬拉 Conventional Deadlift',sets:'4×5',load:'80% 1RM',rest:'180s',method:'Submax Volume',cues:['站距与髋同宽，杠铃在脚掌正中','启动：先推腿，再起髋','杠铃始终贴近身体向上滑']},
+{name:'前蹲 Front Squat',sets:'3×6',load:'70% 1RM',rest:'120s',method:'Tempo 3-0-1-0',cues:['3秒离心','杠铃置于前三角肌，肘高抬','下蹲至大腿平行或更深']},
+{name:'北欧艇 Nordic Boat',sets:'3×6',load:'自重',rest:'120s',method:'Eccentric Overload',cues:['跪姿，搭档固定脚踝','离心缓慢前倾3-5s控制']},
+{name:'臀推 Hip Thrust',sets:'3×10',load:'RPE 8.5',rest:'90s',method:'Volume',cues:['上背部靠凳缘','顶部胫骨垂直，骨盆轻微后倾']},
+{name:'腿伸展 Leg Extension',sets:'3×12',load:'RPE 8.5',rest:'60s',method:'Isometric',cues:['顶部等长收缩3秒','膝盖对准器械轴心']},
+{name:'站立提踵 Standing Calf Raise',sets:'3×15',load:'RPE 8.5',rest:'45s',method:'Volume',cues:['前脚掌踩在踏板边缘','离心缓慢下放']},
+{name:'悬垂举腿 Hanging Leg Raise',sets:'3×15',load:'自重',rest:'45s',method:'Core',cues:['肩胛骨下沉稳定悬挂','先骨盆后倾再抬腿']}
+]},
+{id:'W3D4',weekday:'周五',focus:'Upper B',method:'TEMPO + ISO',exercises:[
+{name:'上斜哑铃卧推 Incline DB Press',sets:'3×8',load:'RPE 8.5',rest:'90s',method:'Tempo 3-1-1-0',cues:['凳面角度30-45°','控制离心下放至上臂平行地面']},
+{name:'杠铃划船 Pendlay Row',sets:'4×7',load:'75% 1RM',rest:'90s',method:'Submax Volume',cues:['躯干前倾接近平行地面','每杠从地面拉起','肩胛骨后缩启动，肘贴体侧拉']},
+{name:'哑铃推举 DB Shoulder Press',sets:'3×10',load:'RPE 8.5',rest:'90s',method:'Volume',cues:['坐于有靠背的凳子','哑铃起始于耳侧高度','推至顶部微内收']},
+{name:'绳索交叉反向飞鸟 Cable Crossover Reverse Fly',sets:'3×15',load:'轻重量',rest:'45s',method:'Volume',cues:['绳索从高位交叉拉向身体两侧下方','肩胛骨后缩，后束发力']},
+{name:'B1.锤式弯举 + B2.仰卧哑铃碎颅者',sets:'3×12+12',load:'RPE 8.5',rest:'90s',method:'Superset',cues:['B1: 中立握，肘贴体侧','B2: 肘固定不动，屈肘下放至额头两侧','B1→B2无休息']},
+{name:'农夫行走 Farmer\'s Walk',sets:'4×40m',load:'RPE 7-8',rest:'90s',method:'Grip/Core',cues:['躯干刚性，肩胛骨下沉后缩','步幅稳定，步频均匀']}
+]}
+]},
+4:{phase:1,name:'第 4 周',subtitle:'减载恢复',type:'DELOAD',weekPreview:{volumeChange:'decrease',intensityChange:'decrease',note:'减载周。降低容量和强度促进恢复，为强化期做准备。不要因感觉轻松而加量。'},days:[
+{id:'W4D1',weekday:'周一',focus:'Lower A',method:'DELOAD',exercises:[
+{name:'杠铃后蹲 Back Squat',sets:'3×6',load:'55% 1RM',rest:'120s',method:'Deload',cues:['站距略宽于肩，脚尖外展15-30°','下蹲至少平行，腰背中立','膝盖追踪脚尖方向，不内扣']},
+{name:'罗马尼亚硬拉 RDL',sets:'2×8',load:'55% 1RM',rest:'90s',method:'Deload',cues:['启动时先推髋（铰链）','杠铃沿大腿下滑，始终贴近身体']},
+{name:'腿举 Leg Press',sets:'2×10',load:'55% 1RM',rest:'90s',method:'Deload',cues:['双脚与髋同宽踩实踏板','下放至膝盖约90°']},
+{name:'保加利亚分腿蹲 Bulgarian Split Squat',sets:'2×8/侧',load:'自重',rest:'60s',method:'Deload',cues:['慢速离心3秒','下蹲至前侧大腿平行']},
+{name:'坐姿腿弯举 Seated Leg Curl',sets:'2×12',load:'RPE 6',rest:'60s',method:'Deload',cues:['膝盖对准器械轴心','离心控制3秒回放']},
+{name:'站立提踵 Standing Calf Raise',sets:'2×15',load:'RPE 6',rest:'45s',method:'Deload',cues:['前脚掌踩在踏板边缘','离心缓慢下放']},
+{name:'平板支撑 ↔ 哥本哈根平板支撑交替',sets:'3轮',load:'自重',rest:'轮间30s',method:'Isometric Core',cues:['平板：肘肩垂直，骨盆后倾不塌腰','哥本哈根：侧撑，上方腿内收抬起']},
+{name:'北欧艇 Nordic Boat',sets:'2×5',load:'自重',rest:'120s',method:'Eccentric Overload',cues:['跪姿，搭档固定脚踝','离心缓慢前倾3-5s控制']},
+{name:'悬垂举腿 Hanging Leg Raise',sets:'2×12',load:'自重',rest:'45s',method:'Core',cues:['肩胛骨下沉稳定悬挂','先骨盆后倾再抬腿']}
+]},
+{id:'W4D2',weekday:'周二',focus:'Upper A',method:'DELOAD',exercises:[
+{name:'杠铃卧推 Bench Press',sets:'3×6',load:'55% 1RM',rest:'120s',method:'Deload',cues:['肩胛骨收紧下沉','下放至胸骨下端','触胸停顿消弹后推起']},
+{name:'负重引体向上 Weighted Pull-up',sets:'3×6',load:'自重',rest:'90s',method:'Deload',cues:['控制离心2秒','全握悬挂，肩胛骨先下沉再拉']},
+{name:'杠铃推举 OHP',sets:'2×8',load:'50% 1RM',rest:'90s',method:'Deload',cues:['3秒离心','站距与髋同宽']},
+{name:'哑铃划船 DB Row',sets:'2×10/侧',load:'RPE 6',rest:'60s',method:'Deload',cues:['躯干前倾45°','肘贴躯干向天花板拉']},
+{name:'绳索斜向侧平举 Cable Leaning Lateral Raise',sets:'2组',load:'RPE 6',rest:'45s',method:'Deload',cues:['三角肌中束主导，不耸肩']},
+{name:'绳索过顶三头伸展 Overhead Cable Triceps Extension',sets:'2×12',load:'RPE 6',rest:'45s',method:'Deload',cues:['背对绳索，双手过头','控制离心回放']},
+{name:'上斜坐姿哑铃弯举 Incline Seated DB Curl',sets:'2×10',load:'RPE 6',rest:'45s',method:'Deload',cues:['上斜凳45-60°，背部贴紧','向心屈肘至完全收缩']},
+{name:'A1.绳索交叉反向飞鸟 + A2.俯卧撑',sets:'1+1组',load:'轻/自重',rest:'90s',method:'Superset',cues:['A1: 绳索高位交叉拉向两侧','A2: 俯卧撑至力竭','A1→A2无休息']}
+]},
+{id:'W4D3',weekday:'周四',focus:'Lower B',method:'DELOAD',exercises:[
+{name:'传统硬拉 Conventional Deadlift',sets:'2×5',load:'55% 1RM',rest:'180s',method:'Deload',cues:['站距与髋同宽，杠铃在脚掌正中','启动：先推腿，再起髋']},
+{name:'前蹲 Front Squat',sets:'2×6',load:'55% 1RM',rest:'120s',method:'Deload',cues:['杠铃置于前三角肌，肘高抬','躯干保持接近直立']},
+{name:'北欧艇 Nordic Boat',sets:'2×5',load:'自重',rest:'120s',method:'Eccentric Overload',cues:['跪姿，搭档固定脚踝','离心缓慢前倾3-5s控制']},
+{name:'臀推 Hip Thrust',sets:'2×10',load:'RPE 6',rest:'90s',method:'Deload',cues:['上背部靠凳缘','收缩臀肌1-2s后控制下放']},
+{name:'腿伸展 Leg Extension',sets:'2×12',load:'RPE 6',rest:'60s',method:'Isometric',cues:['顶部等长收缩3秒','膝盖对准器械轴心']},
+{name:'站立提踵 Standing Calf Raise',sets:'2×15',load:'RPE 6',rest:'45s',method:'Deload',cues:['前脚掌踩在踏板边缘','离心缓慢下放']},
+{name:'悬垂举腿 Hanging Leg Raise',sets:'2×12',load:'自重',rest:'45s',method:'Core',cues:['肩胛骨下沉稳定悬挂','先骨盆后倾再抬腿']}
+]},
+{id:'W4D4',weekday:'周五',focus:'Upper B',method:'DELOAD',exercises:[
+{name:'上斜哑铃卧推 Incline DB Press',sets:'2×8',load:'RPE 6',rest:'90s',method:'Deload',cues:['凳面角度30-45°','控制离心下放']},
+{name:'杠铃划船 Pendlay Row',sets:'3×6',load:'55% 1RM',rest:'90s',method:'Deload',cues:['躯干前倾接近平行地面','每杠从地面拉起','肩胛骨后缩启动']},
+{name:'哑铃推举 DB Shoulder Press',sets:'2×10',load:'RPE 6',rest:'90s',method:'Deload',cues:['坐于有靠背的凳子','离心控制下放']},
+{name:'绳索交叉反向飞鸟 Cable Crossover Reverse Fly',sets:'2×15',load:'轻重量',rest:'45s',method:'Deload',cues:['肩胛骨后缩，后束发力']},
+{name:'B1.锤式弯举 + B2.仰卧哑铃碎颅者',sets:'2×12+12',load:'RPE 6',rest:'90s',method:'Superset',cues:['B1: 中立握，肘贴体侧','B2: 肘固定不动','B1→B2无休息']},
+{name:'农夫行走 Farmer\'s Walk',sets:'2×40m',load:'RPE 6',rest:'90s',method:'Grip/Core',cues:['躯干刚性，肩胛骨下沉后缩','步幅稳定，步频均匀']}
+]}
+]},
+5:{phase:2,name:'第 5 周',subtitle:'强度提升启动',type:'NORMAL',weekPreview:{volumeChange:'decrease',intensityChange:'increase',note:'进入强化期。训练模式切换：Lower A/Upper A改为大强度低次数，Lower B/Upper B引入Dynamic Effort方法。组间休息延长。'},days:[
+{id:'W5D1',weekday:'周一',focus:'Lower A',method:'MAX EFFORT',exercises:[
+{name:'杠铃后蹲 Back Squat',sets:'5×3',load:'85% 1RM',rest:'180s',method:'Max Effort',cues:['站距略宽于肩，脚尖外展15-30°','杠位：高杠斜方肌上束/低杠后三角肌','下蹲至少平行，腰背中立不龟背','膝盖追踪脚尖方向，不内扣']},
+{name:'罗马尼亚硬拉 RDL',sets:'3×8',load:'70% 1RM',rest:'90s',method:'Repetition',cues:['启动时先推髋（铰链），非弯腰','杠铃沿大腿下滑，始终贴近身体','全程背部平坦']},
+{name:'腿举 Leg Press',sets:'3×10',load:'RPE 8',rest:'90s',method:'Repetition',cues:['双脚与髋同宽踩实踏板','下放至膝盖约90°','推起时膝不完全锁定']},
+{name:'腿弯举 Leg Curl',sets:'3×12',load:'RPE 8',rest:'60s',method:'Repetition',cues:['膝盖对准器械轴心','离心控制回放']},
+{name:'提踵 Calf Raise',sets:'4×12',load:'RPE 8',rest:'45s',method:'Repetition',cues:['前脚掌踩在踏板边缘','顶部停留1-2秒']},
+{name:'平板支撑 Plank',sets:'3×40s',load:'自重',rest:'45s',method:'Isometric',cues:['肘肩垂直，骨盆后倾不塌腰','均匀呼吸不憋气']}
+]},
+{id:'W5D2',weekday:'周二',focus:'Upper A',method:'MAX EFFORT',exercises:[
+{name:'杠铃卧推 Bench Press',sets:'5×3',load:'85% 1RM',rest:'180s',method:'Max Effort',cues:['肩胛骨收紧下沉塞进后口袋','握距略宽于肩，前臂底部垂直','下放至胸骨下端，肘与躯干45-75°','触胸停顿消弹后推起']},
+{name:'负重引体向上 Weighted Pull-up',sets:'4×5',load:'80% 1RM',rest:'120s',method:'Max Effort',cues:['全握悬挂，肩胛骨先下沉再拉','拉至下巴过杠，胸部迎向横杠']},
+{name:'哑铃划船 DB Row',sets:'3×8',load:'RPE 8',rest:'90s',method:'Repetition',cues:['一手一膝支撑平凳，躯干前倾45°','肘贴躯干向天花板拉']},
+{name:'哑铃推举 DB Shoulder Press',sets:'3×8',load:'RPE 8',rest:'90s',method:'Repetition',cues:['坐于有靠背的凳子','推至顶部微内收','离心控制下放']},
+{name:'侧平举+弯举超级组 Lateral Raise + Curl SS',sets:'3×12+12',load:'RPE 8',rest:'60s',method:'Superset',cues:['侧平举：三角肌中束主导，不耸肩','弯举：向心屈肘至完全收缩','两个动作无休息']},
+{name:'窄距俯卧撑 Close-Grip Push-up',sets:'3×10',load:'RPE 8',rest:'60s',method:'Eccentric',cues:['离心3-4秒缓慢下放','双手间距与肩同宽','肘贴躯干']},
+{name:'绳索交叉后束飞鸟 Cable Crossover Rear Delt Fly',sets:'2×15/侧',load:'轻阻力',rest:'30s',method:'Repetition',cues:['肩胛骨后缩，后束发力','控制离心回放']}
+]},
+{id:'W5D3',weekday:'周四',focus:'Lower B',method:'DYNAMIC EFFORT',exercises:[
+{name:'箱式深蹲 Box Squat',sets:'8×3',load:'55% 1RM',rest:'60s',method:'Dynamic Effort',cues:['最大速度向心','箱高：髋折痕略低于膝盖','坐下控制1-2s','站起时最大速度爆发','严格60s休息，速度下降即减重5-10%']},
+{name:'传统硬拉 Conventional Deadlift',sets:'4×4',load:'80% 1RM',rest:'180s',method:'Max Effort',cues:['站距与髋同宽，杠铃在脚掌正中','启动：先推腿，再起髋','杠铃始终贴近身体向上滑']},
+{name:'北欧艇 Nordic Boat',sets:'3×5',load:'自重',rest:'120s',method:'Eccentric Overload',cues:['跪姿，搭档固定脚踝','离心缓慢前倾3-5s控制','全程保持髋部伸展不折髋']},
+{name:'臀推 Hip Thrust',sets:'3×8',load:'RPE 8',rest:'90s',method:'Repetition',cues:['上背部靠凳缘','顶部胫骨垂直，骨盆轻微后倾']},
+{name:'腿伸展+等长收缩 Leg Extension + Iso',sets:'3×10+3s',load:'RPE 8',rest:'60s',method:'Isometric',cues:['身体后仰约45°，增加股四头肌上部刺激','顶部等长收缩3秒','膝盖对准器械轴心']},
+{name:'悬垂举腿 Hanging Leg Raise',sets:'3×12',load:'自重',rest:'45s',method:'Core',cues:['肩胛骨下沉稳定悬挂','先骨盆后倾再抬腿']}
+]},
+{id:'W5D4',weekday:'周五',focus:'Upper B',method:'DYNAMIC + BANDS',exercises:[
+{name:'弹力带卧推 Band Bench Press',sets:'8×3',load:'50%+弹力带',rest:'60s',method:'Accommodating',cues:['全程加速爆发锁定','弹力带绕杠铃两端固定于底部','底部张力最小顶部最大','推起速度尽可能快','离心控制']},
+{name:'胸托杠铃划船 Chest-Supported Barbell Row',sets:'4×5',load:'80% 1RM',rest:'120s',method:'Max Effort',cues:['胸部固定在斜凳约30-45°','杠铃从悬挂位拉至上腹部','肩骨后缩，肘部贴近躯干','不借腰部代偿']},
+{name:'杠铃推举 OHP',sets:'4×5',load:'75% 1RM',rest:'120s',method:'Max Effort',cues:['站距与髋同宽','推起时头微微后让杠铃垂直上升','顶部锁定']},
+{name:'反向仰面绳索下拉 Reverse Incline Cable Pulldown',sets:'3×15',load:'轻重量',rest:'45s',method:'Isometric',cues:['泡沫轴支撑变体','背对高位滑轮','身体仰面约45°','宽距正握，下拉至胸前','强调后束发力']},
+{name:'弯举+臂屈伸超级组 Curl + Extension SS',sets:'3×10+10',load:'RPE 8',rest:'60s',method:'Superset',cues:['弯举：肘贴体侧，向心旋后','臂屈伸：肘固定不动','两个动作无休息']},
+{name:'农夫行走 Farmer\'s Walk',sets:'3×40m',load:'重哑铃',rest:'90s',method:'Grip',cues:['躯干刚性，肩胛骨下沉后缩','步幅稳定，步频均匀']}
+]}
+]},
+6:{phase:2,name:'第 6 周',subtitle:'强度峰值推进',type:'NORMAL',weekPreview:{volumeChange:'maintain',intensityChange:'increase',note:'强度继续爬升。主项达87.5% 1RM。DE日增加1组箱式深蹲。注意热身充分。'},days:[
+{id:'W6D1',weekday:'周一',focus:'Lower A',method:'MAX EFFORT',exercises:[
+{name:'杠铃后蹲 Back Squat',sets:'5×3',load:'87.5% 1RM',rest:'180s',method:'Max Effort',cues:['站距略宽于肩，脚尖外展15-30°','下蹲至少平行，腰背中立不龟背','膝盖追踪脚尖方向，不内扣']},
+{name:'罗马尼亚硬拉 RDL',sets:'3×8',load:'72.5% 1RM',rest:'90s',method:'Repetition',cues:['启动时先推髋（铰链）','全程背部平坦']},
+{name:'腿举 Leg Press',sets:'3×10',load:'RPE 8-8.5',rest:'90s',method:'Repetition',cues:['下放至膝盖约90°']},
+{name:'腿弯举 Leg Curl',sets:'3×12',load:'RPE 8-8.5',rest:'60s',method:'Repetition',cues:['膝盖对准器械轴心']},
+{name:'提踵 Calf Raise',sets:'4×12',load:'RPE 8-8.5',rest:'45s',method:'Repetition',cues:['顶部停留1-2秒']},
+{name:'Ab Wheel Rollout',sets:'3×10',load:'自重',rest:'45s',method:'Isometric',cues:['从跪姿开始','腹部收紧，背部微拱','推出时控制不塌腰']}
+]},
+{id:'W6D2',weekday:'周二',focus:'Upper A',method:'MAX EFFORT',exercises:[
+{name:'杠铃卧推 Bench Press',sets:'5×3',load:'87.5% 1RM',rest:'180s',method:'Max Effort',cues:['肩胛骨收紧下沉','握距略宽于肩','触胸停顿消弹后推起']},
+{name:'负重引体向上 Weighted Pull-up',sets:'4×5',load:'85% 1RM',rest:'120s',method:'Max Effort',cues:['全握悬挂，肩胛骨先下沉再拉','拉至下巴过杠']},
+{name:'哑铃划船 DB Row',sets:'3×8',load:'RPE 8-8.5',rest:'90s',method:'Repetition',cues:['躯干前倾45°','肘贴躯干向天花板拉']},
+{name:'哑铃推举 DB Shoulder Press',sets:'3×8',load:'RPE 8-8.5',rest:'90s',method:'Repetition',cues:['推至顶部微内收']},
+{name:'侧平举+弯举超级组 Lateral Raise + Curl SS',sets:'3×12+12',load:'RPE 8-8.5',rest:'60s',method:'Superset',cues:['两个动作无休息']},
+{name:'窄距俯卧撑 Close-Grip Push-up',sets:'3×10',load:'RPE 8-8.5',rest:'60s',method:'Eccentric',cues:['离心3-4秒缓慢下放']},
+{name:'绳索交叉后束飞鸟 Cable Crossover Rear Delt Fly',sets:'2×15/侧',load:'轻阻力',rest:'30s',method:'Repetition',cues:['肩胛骨后缩，后束发力']}
+]},
+{id:'W6D3',weekday:'周四',focus:'Lower B',method:'DYNAMIC EFFORT',exercises:[
+{name:'箱式深蹲 Box Squat',sets:'9×3',load:'60% 1RM',rest:'60s',method:'Dynamic Effort',cues:['最大速度向心','箱高：髋折痕略低于膝盖','坐下控制1-2s','严格60s休息']},
+{name:'传统硬拉 Conventional Deadlift',sets:'4×4',load:'82.5% 1RM',rest:'180s',method:'Max Effort',cues:['站距与髋同宽','启动：先推腿，再起髋']},
+{name:'北欧艇 Nordic Boat',sets:'3×5',load:'自重',rest:'120s',method:'Eccentric Overload',cues:['跪姿，搭档固定脚踝','离心缓慢前倾3-5s控制']},
+{name:'臀推 Hip Thrust',sets:'3×8',load:'RPE 8-8.5',rest:'90s',method:'Repetition',cues:['上背部靠凳缘','顶部胫骨垂直']},
+{name:'腿伸展+等长收缩 Leg Extension + Iso',sets:'3×10+3s',load:'RPE 8-8.5',rest:'60s',method:'Isometric',cues:['身体后仰约45°','顶部等长收缩3秒']},
+{name:'悬垂举腿 Hanging Leg Raise',sets:'3×12',load:'自重',rest:'45s',method:'Core',cues:['肩胛骨下沉稳定悬挂','先骨盆后倾再抬腿']}
+]},
+{id:'W6D4',weekday:'周五',focus:'Upper B',method:'DYNAMIC + BANDS',exercises:[
+{name:'弹力带卧推 Band Bench Press',sets:'9×3',load:'50%+弹力带',rest:'60s',method:'Accommodating',cues:['全程加速爆发锁定','弹力带绕杠铃两端固定于底部','推起速度尽可能快']},
+{name:'胸托杠铃划船 Chest-Supported Barbell Row',sets:'4×5',load:'82.5% 1RM',rest:'120s',method:'Max Effort',cues:['胸部固定在斜凳约30-45°','杠铃从悬挂位拉至上腹部']},
+{name:'杠铃推举 OHP',sets:'4×5',load:'77.5% 1RM',rest:'120s',method:'Max Effort',cues:['站距与髋同宽','顶部锁定']},
+{name:'反向仰面绳索下拉 Reverse Incline Cable Pulldown',sets:'3×15',load:'轻重量',rest:'45s',method:'Isometric',cues:['背对高位滑轮，身体仰面约45°','宽距正握，下拉至胸前']},
+{name:'弯举+臂屈伸超级组 Curl + Extension SS',sets:'3×10+10',load:'RPE 8-8.5',rest:'60s',method:'Superset',cues:['两个动作无休息']},
+{name:'农夫行走 Farmer\'s Walk',sets:'3×40m',load:'重哑铃',rest:'90s',method:'Grip',cues:['躯干刚性，肩胛骨下沉后缩','步幅稳定']}
+]}
+]},
+7:{phase:2,name:'第 7 周',subtitle:'阶段强度峰值',type:'NORMAL',weekPreview:{volumeChange:'decrease',intensityChange:'increase',note:'强化期巅峰。引入铁链变阻力训练。主项达90% 1RM。注意：这周最累，恢复优先。'},days:[
+{id:'W7D1',weekday:'周一',focus:'Lower A',method:'MAX EFFORT + CHAINS',exercises:[
+{name:'杠铃后蹲（铁链）Squat w/ Chains',sets:'5×3',load:'90% 1RM',rest:'240s',method:'Max Effort',cues:['后3组加铁链','链条两端挂杠铃','底部链条着地减轻负荷','顶部链条完全离地增加负荷','变阻力训练模拟力量曲线']},
+{name:'罗马尼亚硬拉 RDL',sets:'3×6',load:'75% 1RM',rest:'90s',method:'Repetition',cues:['启动时先推髋（铰链）','全程背部平坦']},
+{name:'腿举 Leg Press',sets:'3×8',load:'RPE 8',rest:'90s',method:'Repetition',cues:['下放至膝盖约90°','推起时膝不完全锁定']},
+{name:'腿弯举 Leg Curl',sets:'3×10',load:'RPE 7.5',rest:'60s',method:'Repetition',cues:['膝盖对准器械轴心','离心控制回放']},
+{name:'提踵 Calf Raise',sets:'3×12',load:'RPE 7.5',rest:'45s',method:'Repetition',cues:['前脚掌踩在踏板边缘','顶部停留1-2秒']},
+{name:'平板支撑 Plank',sets:'3×40s',load:'自重',rest:'45s',method:'Isometric',cues:['肘肩垂直，骨盆后倾不塌腰']}
+]},
+{id:'W7D2',weekday:'周二',focus:'Upper A',method:'MAX EFFORT + CHAINS',exercises:[
+{name:'杠铃卧推（铁链）Bench w/ Chains',sets:'5×3',load:'90% 1RM',rest:'240s',method:'Max Effort',cues:['后3组加铁链','底部链条部分着地','推起时链条逐渐离地增阻','锁定时刻承受最大负荷']},
+{name:'负重引体向上 Weighted Pull-up',sets:'4×4',load:'87.5% 1RM',rest:'120s',method:'Max Effort',cues:['全握悬挂，肩胛骨先下沉再拉','拉至下巴过杠']},
+{name:'哑铃划船 DB Row',sets:'3×8',load:'RPE 7.5',rest:'90s',method:'Repetition',cues:['躯干前倾45°','肘贴躯干向天花板拉']},
+{name:'哑铃推举 DB Shoulder Press',sets:'3×6',load:'RPE 7.5',rest:'90s',method:'Repetition',cues:['推至顶部微内收']},
+{name:'侧平举 Lateral Raise',sets:'2×12',load:'RPE 7.5',rest:'45s',method:'Volume',cues:['三角肌中束主导，不耸肩']},
+{name:'窄距俯卧撑 Close-Grip Push-up',sets:'3×10',load:'RPE 7.5',rest:'60s',method:'Eccentric',cues:['离心3-4秒缓慢下放']},
+{name:'绳索交叉后束飞鸟 Cable Crossover Rear Delt Fly',sets:'2×15/侧',load:'轻阻力',rest:'30s',method:'Repetition',cues:['肩胛骨后缩，后束发力']}
+]},
+{id:'W7D3',weekday:'周四',focus:'Lower B',method:'DYNAMIC EFFORT',exercises:[
+{name:'箱式深蹲 Box Squat',sets:'10×2',load:'60% 1RM',rest:'60s',method:'Dynamic Effort',cues:['最大速度向心，追求速度','箱高：髋折痕略低于膝盖','坐下控制1-2s','严格60s休息']},
+{name:'传统硬拉 Conventional Deadlift',sets:'3×3',load:'87.5% 1RM',rest:'180s',method:'Max Effort',cues:['站距与髋同宽','启动：先推腿，再起髋']},
+{name:'北欧艇 Nordic Boat',sets:'2×5',load:'自重',rest:'120s',method:'Eccentric Overload',cues:['跪姿，搭档固定脚踝','离心缓慢前倾3-5s控制']},
+{name:'臀推 Hip Thrust',sets:'3×8',load:'RPE 7.5',rest:'90s',method:'Repetition',cues:['上背部靠凳缘','顶部胫骨垂直']},
+{name:'悬垂举腿 Hanging Leg Raise',sets:'3×12',load:'自重',rest:'45s',method:'Core',cues:['肩胛骨下沉稳定悬挂','先骨盆后倾再抬腿']}
+]},
+{id:'W7D4',weekday:'周五',focus:'Upper B',method:'DYNAMIC + BANDS',exercises:[
+{name:'弹力带卧推 Band Bench Press',sets:'10×2',load:'50%+弹力带',rest:'60s',method:'Accommodating',cues:['全程加速爆发锁定，追求速度','弹力带绕杠铃两端固定于底部','离心控制']},
+{name:'胸托杠铃划船 Chest-Supported Barbell Row',sets:'3×4',load:'87.5% 1RM',rest:'120s',method:'Max Effort',cues:['胸部固定在斜凳约30-45°','杠铃从悬挂位拉至上腹部']},
+{name:'杠铃推举 OHP',sets:'3×4',load:'80% 1RM',rest:'120s',method:'Max Effort',cues:['站距与髋同宽','顶部锁定']},
+{name:'反向仰面绳索下拉 Reverse Incline Cable Pulldown',sets:'2×15',load:'轻重量',rest:'45s',method:'Isometric',cues:['背对高位滑轮，身体仰面约45°','宽距正握，下拉至胸前']},
+{name:'弯举 DB Curl',sets:'2×10',load:'RPE 7.5',rest:'45s',method:'Repetition',cues:['肘贴体侧','向心旋后（小指上翻），离心控制','顶部充分收缩1s']},
+{name:'农夫行走 Farmer\'s Walk',sets:'3×40m',load:'重哑铃',rest:'90s',method:'Grip',cues:['躯干刚性，肩胛骨下沉后缩','步幅稳定，步频均匀']}
+]}
+]},
+8:{phase:2,name:'第 8 周',subtitle:'减载恢复',type:'DELOAD',weekPreview:{volumeChange:'decrease',intensityChange:'decrease',note:'强化期减载周。降低容量让身体恢复，为最后的实现期做准备。'},days:[
+{id:'W8D1',weekday:'周一',focus:'Lower A',method:'DELOAD',exercises:[
+{name:'杠铃后蹲 Back Squat',sets:'3×3',load:'80% 1RM',rest:'180s',method:'Max Effort',cues:['站距略宽于肩，脚尖外展15-30°','下蹲至少平行，腰背中立不龟背','膝盖追踪脚尖方向，不内扣']},
+{name:'罗马尼亚硬拉 RDL',sets:'2×8',load:'60% 1RM',rest:'90s',method:'Repetition',cues:['启动时先推髋（铰链）','全程背部平坦']},
+{name:'腿举 Leg Press',sets:'2×10',load:'RPE 6',rest:'90s',method:'Volume',cues:['下放至膝盖约90°','推起时膝不完全锁定']},
+{name:'腿弯举 Leg Curl',sets:'2×12',load:'RPE 6',rest:'60s',method:'Volume',cues:['膝盖对准器械轴心']},
+{name:'提踵 Calf Raise',sets:'2×15',load:'RPE 6',rest:'45s',method:'Volume',cues:['前脚掌踩在踏板边缘','顶部停留1-2秒']}
+]},
+{id:'W8D2',weekday:'周二',focus:'Upper A',method:'DELOAD',exercises:[
+{name:'杠铃卧推 Bench Press',sets:'3×3',load:'80% 1RM',rest:'180s',method:'Max Effort',cues:['肩胛骨收紧下沉','握距略宽于肩','触胸停顿消弹后推起']},
+{name:'引体向上 Pull-up',sets:'3×5',load:'自重',rest:'90s',method:'Volume',cues:['全握悬挂，肩胛骨先下沉再拉','不借力摆动']},
+{name:'哑铃划船 DB Row',sets:'2×8',load:'RPE 6',rest:'90s',method:'Volume',cues:['躯干前倾45°','肘贴躯干向天花板拉']},
+{name:'哑铃推举 DB Shoulder Press',sets:'2×8',load:'RPE 6',rest:'90s',method:'Volume',cues:['推至顶部微内收']},
+{name:'侧平举+弯举超级组 Lateral Raise + Curl SS',sets:'2×12+12',load:'RPE 6',rest:'60s',method:'Superset',cues:['两个动作无休息']}
+]},
+{id:'W8D3',weekday:'周四',focus:'Lower B',method:'DELOAD',exercises:[
+{name:'传统硬拉 Conventional Deadlift',sets:'2×3',load:'75% 1RM',rest:'180s',method:'Max Effort',cues:['站距与髋同宽','启动：先推腿，再起髋']},
+{name:'臀推 Hip Thrust',sets:'2×8',load:'RPE 6',rest:'90s',method:'Volume',cues:['上背部靠凳缘','顶部胫骨垂直']},
+{name:'腿伸展 Leg Extension',sets:'2×10',load:'RPE 6',rest:'60s',method:'Volume',cues:['膝盖对准器械轴心']},
+{name:'悬垂举腿 Hanging Leg Raise',sets:'2×12',load:'自重',rest:'45s',method:'Core',cues:['肩胛骨下沉稳定悬挂','先骨盆后倾再抬腿']}
+]},
+{id:'W8D4',weekday:'周五',focus:'Upper B',method:'DELOAD',exercises:[
+{name:'胸托杠铃划船 Chest-Supported Barbell Row',sets:'2×5',load:'70% 1RM',rest:'120s',method:'Volume',cues:['胸部固定在斜凳约30-45°','杠铃从悬挂位拉至上腹部']},
+{name:'杠铃推举 OHP',sets:'2×5',load:'65% 1RM',rest:'120s',method:'Volume',cues:['站距与髋同宽','顶部锁定']},
+{name:'弯举 DB Curl',sets:'2×10',load:'RPE 6',rest:'45s',method:'Volume',cues:['肘贴体侧，向心旋后']},
+{name:'农夫行走 Farmer\'s Walk',sets:'2×40m',load:'RPE 6',rest:'90s',method:'Grip',cues:['躯干刚性，肩胛骨下沉后缩']}
+]}
+]},
+9:{phase:3,name:'第 9 周',subtitle:'峰值过渡',type:'NORMAL',weekPreview:{volumeChange:'decrease',intensityChange:'increase',note:'进入实现期。训练量进一步降低，强度向测试水平过渡。'},days:[
+{id:'W9D1',weekday:'周一',focus:'Lower A',method:'MAX EFFORT',exercises:[
+{name:'杠铃后蹲 Back Squat',sets:'4×3',load:'90% 1RM',rest:'180s',method:'Max Effort',cues:['站距略宽于肩，脚尖外展15-30°','下蹲至少平行，腰背中立','膝盖追踪脚尖方向']},
+{name:'罗马尼亚硬拉 RDL',sets:'2×6',load:'70% 1RM',rest:'90s',method:'Repetition',cues:['启动时先推髋（铰链）','全程背部平坦']},
+{name:'腿举 Leg Press',sets:'2×8',load:'RPE 7',rest:'90s',method:'Volume',cues:['下放至膝盖约90°']},
+{name:'腿弯举 Leg Curl',sets:'2×10',load:'RPE 7',rest:'60s',method:'Volume',cues:['膝盖对准器械轴心']},
+{name:'提踵 Calf Raise',sets:'3×12',load:'RPE 7',rest:'45s',method:'Volume',cues:['顶部停留1-2秒']},
+{name:'Ab Wheel Rollout',sets:'2×8',load:'自重',rest:'45s',method:'Isometric',cues:['从跪姿开始','腹部收紧，背部微拱']}
+]},
+{id:'W9D2',weekday:'周二',focus:'Upper A',method:'MAX EFFORT',exercises:[
+{name:'杠铃卧推 Bench Press',sets:'4×3',load:'90% 1RM',rest:'180s',method:'Max Effort',cues:['肩胛骨收紧下沉','触胸停顿消弹后推起']},
+{name:'负重引体向上 Weighted Pull-up',sets:'3×4',load:'85% 1RM',rest:'120s',method:'Max Effort',cues:['全握悬挂，肩胛骨先下沉再拉']},
+{name:'哑铃划船 DB Row',sets:'2×8',load:'RPE 7',rest:'90s',method:'Volume',cues:['躯干前倾45°','肘贴躯干向天花板拉']},
+{name:'哑铃推举 DB Shoulder Press',sets:'2×6',load:'RPE 7',rest:'90s',method:'Volume',cues:['推至顶部微内收']},
+{name:'侧平举 Lateral Raise',sets:'2×12',load:'RPE 7',rest:'45s',method:'Volume',cues:['三角肌中束主导']},
+{name:'窄距俯卧撑 Close-Grip Push-up',sets:'2×10',load:'RPE 7',rest:'60s',method:'Eccentric',cues:['离心3-4秒']}
+]},
+{id:'W9D3',weekday:'周四',focus:'Lower B',method:'DYNAMIC EFFORT',exercises:[
+{name:'箱式深蹲 Box Squat',sets:'6×2',load:'50% 1RM',rest:'60s',method:'Dynamic Effort',cues:['最大速度向心','箱高：髋折痕略低于膝盖']},
+{name:'传统硬拉 Conventional Deadlift',sets:'2×3',load:'85% 1RM',rest:'180s',method:'Max Effort',cues:['站距与髋同宽','启动：先推腿，再起髋']},
+{name:'北欧艇 Nordic Boat',sets:'2×5',load:'自重',rest:'120s',method:'Eccentric Overload',cues:['离心缓慢前倾3-5s控制']},
+{name:'臀推 Hip Thrust',sets:'2×8',load:'RPE 7',rest:'90s',method:'Volume',cues:['顶部胫骨垂直']},
+{name:'悬垂举腿 Hanging Leg Raise',sets:'2×12',load:'自重',rest:'45s',method:'Core',cues:['肩胛骨下沉稳定悬挂','先骨盆后倾再抬腿']}
+]},
+{id:'W9D4',weekday:'周五',focus:'Upper B',method:'DYNAMIC + BANDS',exercises:[
+{name:'弹力带卧推 Band Bench Press',sets:'6×2',load:'50%+弹力带',rest:'60s',method:'Accommodating',cues:['全程加速爆发锁定','推起速度尽可能快']},
+{name:'胸托杠铃划船 Chest-Supported Barbell Row',sets:'2×4',load:'85% 1RM',rest:'120s',method:'Max Effort',cues:['胸部固定在斜凳约30-45°']},
+{name:'杠铃推举 OHP',sets:'2×4',load:'75% 1RM',rest:'120s',method:'Max Effort',cues:['顶部锁定']},
+{name:'弯举 DB Curl',sets:'2×10',load:'RPE 7',rest:'45s',method:'Volume',cues:['肘贴体侧，向心旋后']},
+{name:'农夫行走 Farmer\'s Walk',sets:'2×40m',load:'重哑铃',rest:'90s',method:'Grip',cues:['躯干刚性，步幅稳定']}
+]}
+]},
+10:{phase:3,name:'第 10 周',subtitle:'表现启动',type:'NORMAL',weekPreview:{volumeChange:'decrease',intensityChange:'increase',note:'开始向运动表现转化。注意速度和爆发力质量。'},days:[]},
+11:{phase:3,name:'第 11 周',subtitle:'巅峰表现',type:'NORMAL',weekPreview:{volumeChange:'decrease',intensityChange:'increase',note:'巅峰表现周。保持高强度，严格控制容量。'},days:[]},
+12:{phase:3,name:'第 12 周',subtitle:'测试与评估',type:'TEST',weekPreview:{volumeChange:'decrease',intensityChange:'peak',note:'测试周。检验12周训练成果，记录新1RM。'},days:[]}
+};
+
+// ===== STORAGE =====
+const S={
+  get(k,d){try{const v=localStorage.getItem('arise_'+k);return v?JSON.parse(v):d}catch(e){return d}},
+  set(k,v){localStorage.setItem('arise_'+k,JSON.stringify(v))},
+  del(k){localStorage.removeItem('arise_'+k)}
+};
+
+// ===== STATE =====
+let currentView='plan-intro';
+let currentWeek=1;
+let currentPhaseTab=1;
+let openDayId=null;
+let phaseGuideClosed={};
+
+function getCompleted(){return S.get('completed',{})}
+function setCompleted(d){S.set('completed',d)}
+function getBodyRecords(){return S.get('bodyRecords',[])}
+function setBodyRecords(r){S.set('bodyRecords',r)}
+
+// ===== RENDER =====
+function renderApp(){
+  const app=document.getElementById('app');
+  const isCoach=new URLSearchParams(location.search).get('mode')==='coach';
+  let html='';
+  html+=renderPlanIntro();
+  html+=renderTraining();
+  html+=renderBody();
+  html+=renderLog();
+  html+=renderProgress();
+  if(isCoach) html+=renderCoach();
+  app.innerHTML=html;
+  bindEvents();
+  switchView(currentView);
+}
+
+function switchView(view){
+  currentView=view;
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  const el=document.getElementById('view-'+view);
+  if(el) el.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>{
+    n.classList.toggle('active',n.dataset.view===view);
+  });
+  // Show/hide bottom nav for coach
+  document.querySelector('.bottom-nav').style.display=view==='coach'?'none':'';
+  // Re-render dynamic views
+  if(view==='log') renderLogView();
+  if(view==='progress') renderProgressView();
+  if(view==='training') renderTrainingView();
+}
+
+// ===== VIEW 1: PLAN INTRO =====
+function renderPlanIntro(){
+  return `<div class="view active" id="view-plan-intro">
+    <h1 style="text-align:center;margin-bottom:4px" id="app-title">发生俱乐部</h1>
+    <p style="text-align:center;font-size:14px;font-weight:600;color:var(--gold);margin-bottom:4px">2026 力量与表现训练计划</p>
+    <p class="intro-subtitle" style="text-align:center">12周线性周期化方案 · 3阶段递进 · 4天/周 Upper/Lower分化</p>
+    <div class="stat-grid">
+      <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">训练周</div></div>
+      <div class="stat-item"><div class="stat-num">48</div><div class="stat-label">训练日</div></div>
+      <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">天/周</div></div>
+      <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">周期阶段</div></div>
+    </div>
+    <h2 style="margin-top:20px">12周周期化概览</h2>
+    <p class="section-desc">三阶段递进：积累 → 强化 → 实现，训练量逐步降低、强度逐步升高，实现超量恢复与表现峰值</p>
+    <div class="card" style="padding:12px;overflow-x:auto">
+      <svg viewBox="0 0 340 180" style="width:100%;min-width:300px">
+        <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${'#4A90D9'}" stop-opacity=".08"/><stop offset="1" stop-color="${'#4A90D9'}" stop-opacity=".03"/></linearGradient><linearGradient id="g2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${'#E67E22'}" stop-opacity=".08"/><stop offset="1" stop-color="${'#E67E22'}" stop-opacity=".03"/></linearGradient><linearGradient id="g3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${'#D64045'}" stop-opacity=".08"/><stop offset="1" stop-color="${'#D64045'}" stop-opacity=".03"/></linearGradient></defs>
+        <rect x="30" y="20" width="100" height="130" fill="url(#g1)" rx="4"/>
+        <rect x="130" y="20" width="100" height="130" fill="url(#g2)" rx="4"/>
+        <rect x="230" y="20" width="100" height="130" fill="url(#g3)" rx="4"/>
+        <text x="80" y="16" fill="#4A90D9" font-size="9" text-anchor="middle" font-weight="600">积累期</text>
+        <text x="180" y="16" fill="#E67E22" font-size="9" text-anchor="middle" font-weight="600">强化期</text>
+        <text x="280" y="16" fill="#D64045" font-size="9" text-anchor="middle" font-weight="600">实现期</text>
+        ${[1,2,3,4,5,6,7,8,9,10,11,12].map(w=>`<text x="${30+(w-1)*27+13}" y="165" fill="#9A9A9A" font-size="8" text-anchor="middle">W${w}</text>`).join('')}
+        <polyline points="43,35 70,50 97,70 124,95 151,100 178,110 205,120 232,130 243,135 270,140 297,145 324,150" fill="none" stroke="#4A90D9" stroke-width="2" stroke-linecap="round"/>
+        <text x="345" y="38" fill="#4A90D9" font-size="8" font-weight="600" text-anchor="end">量</text>
+        <polyline points="43,150 70,140 97,125 124,105 151,100 178,90 205,75 232,60 243,55 270,45 297,38 324,30" fill="none" stroke="#D64045" stroke-width="2" stroke-linecap="round"/>
+        <text x="345" y="33" fill="#D64045" font-size="8" font-weight="600" text-anchor="end">强度</text>
+        <circle cx="124" cy="95" r="3" fill="#4A90D9"/>
+        <text x="124" y="88" fill="#4A90D9" font-size="7" text-anchor="middle">↓减载</text>
+        <circle cx="232" cy="130" r="3" fill="#E67E22"/>
+        <text x="232" y="123" fill="#E67E22" font-size="7" text-anchor="middle">↓减载</text>
+        <text x="324" y="24" fill="#D64045" font-size="10" text-anchor="middle">★</text>
+        <line x1="30" y1="155" x2="330" y2="155" stroke="#E8E5E0" stroke-width="1"/>
+      </svg>
+    </div>
+    <h2 style="margin-top:16px">阶段详情</h2>
+    <div class="card phase-card" data-phase-card="1">
+      <div class="phase-header"><div><span class="badge badge-blue">阶段一</span><span style="margin-left:8px;font-weight:600">积累期（第1-4周）</span></div><span style="color:#9A9A9A;font-size:18px">▾</span></div>
+      <div class="phase-detail"><div class="detail-inner">
+        <p><strong>主导方法：</strong>次最大容量训练 + 节奏训练 + 等长训练 + 离心超负荷</p>
+        <p><strong>目标：</strong>建立肌肥大基础、提升工作能力、强化关节稳定性和组织韧性</p>
+        <p><strong>容量：</strong>高（每周16-20组/肌群）</p>
+        <p><strong>强度：</strong>中等（65-75% 1RM）</p>
+        <p style="margin-top:8px"><strong>周度递进：</strong></p>
+        <p>W1 基线建立 → W2 渐进超负荷 → W3 容量巅峰 → W4 减载恢复</p>
+      </div></div>
+    </div>
+    <div class="card phase-card" data-phase-card="2">
+      <div class="phase-header"><div><span class="badge badge-orange">阶段二</span><span style="margin-left:8px;font-weight:600">强化期（第5-8周）</span></div><span style="color:#9A9A9A;font-size:18px">▾</span></div>
+      <div class="phase-detail"><div class="detail-inner">
+        <p><strong>主导方法：</strong>最大努力法 + 动态努力法 + 弹力带/铁链变阻力训练</p>
+        <p><strong>目标：</strong>提升绝对力量、引入DE方法发展发力速率（RFD）、优化力-速度曲线高力端</p>
+        <p><strong>容量：</strong>中等（每周12-16组/肌群）</p>
+        <p><strong>强度：</strong>高（75-90% 1RM）</p>
+        <p style="margin-top:8px"><strong>周度递进：</strong></p>
+        <p>W5 强度提升启动 → W6 强度峰值推进 → W7 阶段强度峰值 → W8 减载恢复</p>
+      </div></div>
+    </div>
+    <div class="card phase-card" data-phase-card="3">
+      <div class="phase-header"><div><span class="badge badge-red">阶段三</span><span style="margin-left:8px;font-weight:600">实现期（第9-12周）</span></div><span style="color:#9A9A9A;font-size:18px">▾</span></div>
+      <div class="phase-detail"><div class="detail-inner">
+        <p><strong>主导方法：</strong>最大力量测试 + 速度力量转化 + 表现峰值训练</p>
+        <p><strong>目标：</strong>将积累的肌肉量和力量转化为运动表现峰值</p>
+        <p><strong>容量：</strong>低（每周8-12组/肌群）</p>
+        <p><strong>强度：</strong>极高（85-100% 1RM）</p>
+        <p style="margin-top:8px"><strong>周度递进：</strong></p>
+        <p>W9 峰值过渡 → W10 表现启动 → W11 巅峰表现 → W12 测试与评估</p>
+      </div></div>
+    </div>
+    <div class="card">
+      <h3>Dynamic Effort 方法</h3>
+      <p style="font-size:13px;color:#555;line-height:1.7">Dynamic Effort（DE）方法由 Westside Barbell 体系发展而来，核心是在次最大负荷（通常40-60% 1RM）下以最大加速度完成向心阶段。通过强制要求每组以最快速度执行，发展发力速率（Rate of Force Development, RFD）。严格组间休息（通常60s），当速度出现明显下降时停止该组或减重5-10%。常用变式包括箱式深蹲、弹力带卧推等，利用变阻力（accommodating resistance）进一步优化力量曲线。</p>
+    </div>
+    <div class="card">
+      <h3>训练进阶原则</h3>
+      <ul style="font-size:13px;color:#555;line-height:1.8;padding-left:18px">
+        <li><strong>渐进超负荷</strong>：主项每周强度递增2.5%，容量在阶段内递增</li>
+        <li><strong>变阻力训练</strong>：铁链和弹力带模拟力量曲线，底部减载顶部超载</li>
+        <li><strong>周期化减载</strong>：每4周设置减载周，降低容量和强度促进超量恢复</li>
+        <li><strong>方法轮换</strong>：不同阶段使用不同训练方法（Submax → Max Effort → Dynamic Effort）</li>
+        <li><strong>量-强度反比</strong>：随周期推进，训练量递减、强度递增</li>
+      </ul>
+    </div>
+    <button class="btn btn-primary" onclick="switchView('training')" style="margin-top:8px">开始训练</button>
+  </div>`;
+}
+
+// ===== VIEW 2: TRAINING =====
+function renderTraining(){
+  return `<div class="view" id="view-training">
+    <h1 style="margin-bottom:12px">训练计划</h1>
+    <div id="training-content"></div>
+  </div>`;
+}
+
+function renderTrainingView(){
+  const c=document.getElementById('training-content');
+  if(!c) return;
+  const w=TRAINING_DATA[currentWeek];
+  if(!w){c.innerHTML='<div class="empty-state">暂无数据</div>';return;}
+  const phaseColors={1:'var(--blue)',2:'var(--orange)',3:'var(--red)'};
+  const phaseNames={1:'积累期',2:'强化期',3:'实现期'};
+  const phaseColor=phaseColors[w.phase];
+  let html='';
+  // Phase tabs
+  html+='<div class="tabs">';
+  [1,2,3].forEach(p=>{
+    const range=p===1?'W1-4':p===2?'W5-8':'W9-12';
+    html+=`<div class="tab${currentPhaseTab===p?' active':''}" data-phase="${p}" data-ptab>${phaseNames[p]} ${range}</div>`;
+  });
+  html+='</div>';
+  // Phase guide
+  if(!phaseGuideClosed[w.phase]){
+    const phaseInfo={
+      1:{goal:'建立肌肥大基础、提升工作能力、强化关节稳定性和组织韧性',sets:'16-20组/肌群',intensity:'65-75% 1RM',methods:'次最大容量训练、节奏训练、等长训练、离心超负荷'},
+      2:{goal:'提升绝对力量、发展RFD、优化力-速度曲线',sets:'12-16组/肌群',intensity:'75-90% 1RM',methods:'最大努力法、动态努力法、变阻力训练'},
+      3:{goal:'将肌肉量和力量转化为运动表现峰值',sets:'8-12组/肌群',intensity:'85-100% 1RM',methods:'最大力量测试、速度力量转化、表现峰值训练'}
+    };
+    const pi=phaseInfo[w.phase];
+    html+=`<div class="guide-card" id="phase-guide">
+      <button class="guide-close" onclick="closePhaseGuide()">×</button>
+      <h3 style="color:${phaseColor};margin-bottom:8px">${phaseNames[w.phase]} · 阶段目标</h3>
+      <p style="font-size:13px;color:#555;margin-bottom:8px">${pi.goal}</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px">
+        <div><span style="color:#999">每周组数</span><br><strong>${pi.sets}</strong></div>
+        <div><span style="color:#999">强度范围</span><br><strong>${pi.intensity}</strong></div>
+      </div>
+      <p style="font-size:12px;color:#888;margin-top:8px"><strong>主导方法：</strong>${pi.methods}</p>
+    </div>`;
+  }
+  // Week selector
+  html+='<div class="week-scroll">';
+  for(let i=1;i<=12;i++){
+    const wd=TRAINING_DATA[i];
+    const isActive=i===currentWeek;
+    const deloadMark=wd&&wd.type==='DELOAD'?'↓':wd&&wd.type==='TEST'?'★':'';
+    html+=`<div class="week-tab${isActive?' active':''}" data-phase="${wd?wd.phase:1}" data-week="${i}">W${i}${deloadMark?`<span class="deload-mark">${deloadMark}</span>`:''}</div>`;
+  }
+  html+='</div>';
+  // Week preview
+  const wp=w.weekPreview;
+  const changeLabels={baseline:'基线',increase:'↑ 增加',decrease:'↓ 减少',maintain:'→ 持平',peak:'★ 峰值'};
+  const changeClass={baseline:'arrow-same',increase:'arrow-up',decrease:'arrow-down',maintain:'arrow-same',peak:'arrow-up'};
+  html+=`<div class="preview-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <h3 style="margin:0">${w.name} · ${w.subtitle}</h3>
+      ${w.type==='DELOAD'?'<span class="badge badge-gold">减载</span>':w.type==='TEST'?'<span class="badge badge-red">测试</span>':''}
+    </div>
+    <div class="preview-row"><span class="preview-label">训练量</span><span class="preview-value ${changeClass[wp.volumeChange]}">${changeLabels[wp.volumeChange]}</span></div>
+    <div class="preview-row"><span class="preview-label">训练强度</span><span class="preview-value ${changeClass[wp.intensityChange]}">${changeLabels[wp.intensityChange]}</span></div>
+    <p style="font-size:12px;color:#888;margin-top:6px">${wp.note}</p>
+  </div>`;
+  // Day cards
+  if(w.days&&w.days.length){
+    w.days.forEach(day=>{
+      const completed=getCompleted();
+      const isDone=completed[day.id];
+      const isOpen=openDayId===day.id;
+      const methodClass=getMethodClass(day.method);
+      html+=`<div class="day-card${isOpen?' open':''}" data-day="${day.id}">
+        <div class="day-header" onclick="toggleDay('${day.id}')">
+          <div class="day-header-left">
+            <span class="day-id">${day.id}</span>
+            <span class="day-focus">${day.weekday} · ${day.focus}</span>
+            <span class="method-tag ${methodClass}" style="font-size:9px">${day.method}</span>
+          </div>
+          <div class="day-check${isDone?' done':''}" onclick="event.stopPropagation();toggleDayComplete('${day.id}')">${isDone?'✓':''}</div>
+        </div>
+        <div class="day-body"><div class="day-body-inner">
+          ${day.exercises.map((ex,ei)=>{
+            const exKey=day.id+'_ex_'+ei;
+            const exDone=completed[exKey];
+            const exMethodClass=getMethodClass(ex.method);
+            return `<div class="exercise-item">
+              <div class="exercise-name">${ex.name}</div>
+              <div class="exercise-params">
+                <span>${ex.sets}</span><span>${ex.load}</span><span>休${ex.rest}</span>
+                <span class="method-tag ${exMethodClass}">${ex.method}</span>
+              </div>
+              ${ex.cues&&ex.cues.length?`<div class="cues-toggle" onclick="toggleCues(this)">▸ 动作要领</div>
+              <div class="exercise-cues"><ul class="cues-list">${ex.cues.map(c=>'<li>'+c+'</li>').join('')}</ul></div>`:''}
+              <div class="exercise-check">
+                <input type="checkbox" id="ex_${exKey}" ${exDone?'checked':''} onchange="toggleExercise('${exKey}')">
+                <label for="ex_${exKey}">完成此动作</label>
+              </div>
+            </div>`;
+          }).join('')}
+          <button class="btn btn-primary btn-sm complete-btn" onclick="toggleDayComplete('${day.id}')">${isDone?'取消完成':'标记今日完成'}</button>
+        </div></div>
+      </div>`;
+    });
+  } else {
+    html+='<div class="empty-state">该周训练数据待填充</div>';
+  }
+  c.innerHTML=html;
+  bindTrainingEvents();
+}
+
+function getMethodClass(m){
+  if(!m) return 'method-volume';
+  const ml=m.toLowerCase();
+  if(ml.includes('submax')) return 'method-submax';
+  if(ml.includes('max effort')||ml.includes('max_effort')) return 'method-max';
+  if(ml.includes('tempo')) return 'method-tempo';
+  if(ml.includes('dynamic')) return 'method-de';
+  if(ml.includes('accommodating')||ml.includes('band')||ml.includes('chain')) return 'method-accommodating';
+  if(ml.includes('eccentric')) return 'method-eccentric';
+  if(ml.includes('isometric')) return 'method-iso';
+  if(ml.includes('rest-pause')) return 'method-rest-pause';
+  if(ml.includes('superset')) return 'method-superset';
+  if(ml.includes('core')) return 'method-core';
+  if(ml.includes('grip')) return 'method-grip';
+  if(ml.includes('deload')) return 'method-volume';
+  return 'method-rep';
+}
+
+function bindTrainingEvents(){
+  document.querySelectorAll('[data-ptab]').forEach(t=>{
+    t.addEventListener('click',()=>{
+      currentPhaseTab=parseInt(t.dataset.phase);
+      const weekMap={1:1,2:5,3:9};
+      currentWeek=weekMap[currentPhaseTab];
+      openDayId=null;
+      renderTrainingView();
+    });
+  });
+  document.querySelectorAll('[data-week]').forEach(t=>{
+    t.addEventListener('click',()=>{
+      const wk=parseInt(t.dataset.week);
+      currentWeek=wk;
+      const wd=TRAINING_DATA[wk];
+      if(wd) currentPhaseTab=wd.phase;
+      openDayId=null;
+      renderTrainingView();
+    });
+  });
+}
+
+function toggleDay(id){
+  openDayId=openDayId===id?null:id;
+  renderTrainingView();
+}
+function toggleCues(el){
+  const cues=el.nextElementSibling;
+  cues.classList.toggle('open');
+  el.textContent=cues.classList.contains('open')?'▾ 动作要领':'▸ 动作要领';
+}
+function toggleDayComplete(dayId){
+  const completed=getCompleted();
+  if(completed[dayId]){
+    delete completed[dayId];
+    // Remove exercise completions
+    Object.keys(completed).forEach(k=>{if(k.startsWith(dayId+'_ex_')) delete completed[k]});
+  } else {
+    completed[dayId]={date:new Date().toISOString(),complete:true};
+    // Mark all exercises complete
+    const w=Object.values(TRAINING_DATA).find(w=>w.days.some(d=>d.id===dayId));
+    if(w){
+      const day=w.days.find(d=>d.id===dayId);
+      if(day) day.exercises.forEach((_,i)=>completed[dayId+'_ex_'+i]=true);
+    }
+  }
+  setCompleted(completed);
+  renderTrainingView();
+}
+function toggleExercise(key){
+  const completed=getCompleted();
+  completed[key]=!completed[key];
+  setCompleted(completed);
+}
+function closePhaseGuide(){
+  phaseGuideClosed[TRAINING_DATA[currentWeek].phase]=true;
+  renderTrainingView();
+}
+
+// ===== VIEW 3: BODY =====
+function renderBody(){
+  return `<div class="view" id="view-body">
+    <h1 style="margin-bottom:16px">身体状态记录</h1>
+    <div id="body-form"></div>
+    <h2 style="margin-top:20px">最近记录</h2>
+    <div id="body-records"></div>
+  </div>`;
+}
+
+function renderBodyView(){
+  const today=new Date().toISOString().slice(0,10);
+  const f=document.getElementById('body-form');
+  if(f){
+    f.innerHTML=`<div class="card">
+      <div class="form-group"><label class="form-label">日期</label><input type="date" class="form-input" id="bf-date" value="${today}"></div>
+      <div class="form-group"><label class="form-label">晨起体重 (kg)</label><input type="number" step="0.1" class="form-input" id="bf-weight" placeholder="如 72.5"></div>
+      <div class="form-group"><label class="form-label">体脂率 (%)</label><input type="number" step="0.1" class="form-input" id="bf-bf" placeholder="如 15.0"></div>
+      <div class="form-group"><label class="form-label">腰围 (cm)</label><input type="number" step="0.1" class="form-input" id="bf-waist" placeholder="如 80.0"></div>
+      <div class="form-group"><label class="form-label">睡眠时长 (h)</label><input type="number" step="0.5" class="form-input" id="bf-sleep" placeholder="如 7.5"></div>
+      <div class="form-group"><label class="form-label">睡眠质量 (1-5)</label>
+        <div class="rating-group" id="bf-sleepq">${[1,2,3,4,5].map(n=>`<button class="rating-btn" data-rating="sleepq" data-val="${n}">${n}</button>`).join('')}</div>
+      </div>
+      <div class="form-group"><label class="form-label">压力水平 (1-5)</label>
+        <div class="rating-group" id="bf-stress">${[1,2,3,4,5].map(n=>`<button class="rating-btn" data-rating="stress" data-val="${n}">${n}</button>`).join('')}</div>
+      </div>
+      <div class="form-group"><label class="form-label">疲劳度 (1-5)</label>
+        <div class="rating-group" id="bf-fatigue">${[1,2,3,4,5].map(n=>`<button class="rating-btn" data-rating="fatigue" data-val="${n}">${n}</button>`).join('')}</div>
+      </div>
+      <div class="form-group"><label class="form-label">备注</label><textarea class="form-input" id="bf-note" rows="2" placeholder="可选"></textarea></div>
+      <button class="btn btn-primary" onclick="saveBodyRecord()">保存记录</button>
+    </div>`;
+    // Rating button events
+    f.querySelectorAll('.rating-btn').forEach(btn=>{
+      btn.addEventListener('click',function(){
+        this.parentElement.querySelectorAll('.rating-btn').forEach(b=>b.classList.remove('selected'));
+        this.classList.add('selected');
+      });
+    });
+  }
+  renderBodyRecords();
+}
+
+function saveBodyRecord(){
+  const getVal=id=>{const el=document.getElementById(id);return el?el.value:''};
+  const getRating=name=>{const sel=document.querySelector(`.rating-btn.selected[data-rating="${name}"]`);return sel?sel.dataset.val:''};
+  const record={
+    date:getVal('bf-date'),
+    weight:getVal('bf-weight'),
+    bf:getVal('bf-bf'),
+    waist:getVal('bf-waist'),
+    sleep:getVal('bf-sleep'),
+    sleepQuality:getRating('sleepq'),
+    stress:getRating('stress'),
+    fatigue:getRating('fatigue'),
+    note:getVal('bf-note'),
+    savedAt:new Date().toISOString()
+  };
+  if(!record.date){alert('请选择日期');return;}
+  const records=getBodyRecords();
+  records.unshift(record);
+  if(records.length>50) records.length=50;
+  setBodyRecords(records);
+  renderBodyRecords();
+  // Reset form
+  ['bf-weight','bf-bf','bf-waist','bf-sleep','bf-note'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.querySelectorAll('#body-form .rating-btn').forEach(b=>b.classList.remove('selected'));
+}
+
+function renderBodyRecords(){
+  const c=document.getElementById('body-records');
+  if(!c) return;
+  const records=getBodyRecords();
+  if(!records.length){c.innerHTML='<div class="empty-state">暂无记录</div>';return;}
+  const list=records.slice(0,10);
+  c.innerHTML='<div class="card">'+list.map(r=>{
+    const stars=s=>s?'⭐'.repeat(parseInt(s)):'—';
+    return `<div class="record-item">
+      <div class="record-date">${r.date}</div>
+      <div class="record-row">
+        <span>${r.weight?r.weight+' kg':'—'}</span>
+        <span>${r.bf?r.bf+'%':''}</span>
+        <span>${r.waist?r.waist+' cm':''}</span>
+      </div>
+      <div class="record-row">
+        <span>睡眠 ${r.sleep||'—'}h</span>
+        <span>质量 ${stars(r.sleepQuality)}</span>
+        <span>压力 ${stars(r.stress)}</span>
+        <span>疲劳 ${stars(r.fatigue)}</span>
+      </div>
+      ${r.note?`<p style="font-size:12px;color:#888;margin-top:4px">${r.note}</p>`:''}
+    </div>`;
+  }).join('')+'</div>';
+}
+
+// ===== VIEW 4: LOG =====
+function renderLog(){
+  return `<div class="view" id="view-log">
+    <h1 style="margin-bottom:4px">训练日志</h1>
+    <p style="font-size:13px;color:#888;margin-bottom:16px" id="log-subtitle"></p>
+    <div id="log-content"></div>
+  </div>`;
+}
+
+function renderLogView(){
+  const completed=getCompleted();
+  const dayEntries=Object.entries(completed).filter(([k,v])=>k.match(/^W\d+D\d+$/)&&v.complete);
+  const sub=document.getElementById('log-subtitle');
+  if(sub) sub.textContent=`共 ${dayEntries.length} 次训练`;
+  const c=document.getElementById('log-content');
+  if(!c) return;
+  if(!dayEntries.length){c.innerHTML='<div class="empty-state">暂无训练记录</div>';return;}
+  // Sort by date desc
+  dayEntries.sort((a,b)=>(b[1].date||'').localeCompare(a[1].date||''));
+  c.innerHTML='<div class="card">'+dayEntries.map(([dayId,data])=>{
+    const wData=findDayData(dayId);
+    if(!wData) return '';
+    const totalEx=wData.day.exercises.length;
+    let doneEx=0;
+    wData.day.exercises.forEach((_,i)=>{if(completed[dayId+'_ex_'+i]) doneEx++});
+    const status=doneEx>=totalEx?'complete':'partial';
+    const statusText=doneEx>=totalEx?'✓ 完成':`部分完成 ${doneEx}/${totalEx}`;
+    return `<div class="log-item" data-log="${dayId}">
+      <div class="log-header" onclick="toggleLogDetail('${dayId}')">
+        <div><span class="log-id">${dayId}</span> <span style="font-size:12px;color:#888">${wData.day.weekday} · ${wData.day.focus}</span></div>
+        <span class="log-status ${status}">${statusText}</span>
+      </div>
+      <div class="log-meta">${data.date?new Date(data.date).toLocaleDateString('zh-CN'):''} ${wData.day.method}</div>
+      <div class="log-detail" id="log-detail-${dayId}"><div class="log-detail-inner">
+        ${wData.day.exercises.map((ex,i)=>{
+          const done=completed[dayId+'_ex_'+i];
+          return `<div style="padding:3px 0;${done?'':'color:#ccc'}">${done?'✓':'○'} ${ex.name} — ${ex.sets} @ ${ex.load}</div>`;
+        }).join('')}
+      </div></div>
+    </div>`;
+  }).join('')+'</div>';
+}
+
+function findDayData(dayId){
+  for(const wk of Object.values(TRAINING_DATA)){
+    for(const day of wk.days){
+      if(day.id===dayId) return {week:wk,day:day};
+    }
+  }
+  return null;
+}
+
+function toggleLogDetail(dayId){
+  const el=document.getElementById('log-detail-'+dayId);
+  if(el) el.classList.toggle('open');
+}
+
+// ===== VIEW 5: PROGRESS =====
+function renderProgress(){
+  return `<div class="view" id="view-progress">
+    <h1 style="margin-bottom:16px">训练进度总览</h1>
+    <div id="progress-content"></div>
+  </div>`;
+}
+
+function renderProgressView(){
+  const c=document.getElementById('progress-content');
+  if(!c) return;
+  const completed=getCompleted();
+  const dayEntries=Object.entries(completed).filter(([k,v])=>k.match(/^W\d+D\d+$/)&&v.complete);
+  const totalDays=48;
+  const doneCount=dayEntries.length;
+  const pct=Math.round(doneCount/totalDays*100);
+  // Current week
+  let currentW=1;
+  for(let w=1;w<=12;w++){
+    const wd=TRAINING_DATA[w];
+    if(wd&&wd.days.some(d=>completed[d.id])) currentW=w;
+  }
+  // Consecutive weeks
+  let consecWeeks=0;
+  for(let w=1;w<=12;w++){
+    const wd=TRAINING_DATA[w];
+    if(wd&&wd.days.some(d=>completed[d.id])) consecWeeks++;
+    else break;
+  }
+  // This month
+  const now=new Date();
+  const thisMonth=now.toISOString().slice(0,7);
+  const monthCount=dayEntries.filter(([k,v])=>v.date&&v.date.startsWith(thisMonth)).length;
+  // Phase progress
+  const phaseData=[
+    {name:'积累期',color:'blue',weeks:[1,2,3,4]},
+    {name:'强化期',color:'orange',weeks:[5,6,7,8]},
+    {name:'实现期',color:'red',weeks:[9,10,11,12]}
+  ];
+  let html=`<div class="stat-grid-2">
+    <div class="stat-card-lg"><div class="stat-num">${doneCount}<span style="font-size:14px;color:#999">/${totalDays}</span></div><div class="stat-label">已完成训练日</div></div>
+    <div class="stat-card-lg"><div class="stat-num" style="color:var(--gold)">${pct}%</div><div class="stat-label">完成率</div><div class="progress-bar" style="margin-top:6px"><div class="progress-fill gold" style="width:${pct}%"></div></div></div>
+    <div class="stat-card-lg"><div class="stat-num">${consecWeeks}</div><div class="stat-label">连续训练周</div></div>
+    <div class="stat-card-lg"><div class="stat-num">${monthCount}</div><div class="stat-label">本月训练天数</div></div>
+  </div>`;
+  // Phase progress bars
+  html+='<div class="card">';
+  phaseData.forEach(pd=>{
+    let phaseDone=0;
+    pd.weeks.forEach(w=>{
+      const wd=TRAINING_DATA[w];
+      if(wd) wd.days.forEach(d=>{if(completed[d.id]) phaseDone++});
+    });
+    const phasePct=Math.round(phaseDone/16*100);
+    html+=`<div class="phase-progress">
+      <div class="phase-progress-header">
+        <span class="phase-progress-name"><span class="phase-dot" style="background:var(--${pd.color})"></span>${pd.name}</span>
+        <span class="phase-progress-count">${phaseDone}/16</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill ${pd.color}" style="width:${phasePct}%"></div></div>
+    </div>`;
+  });
+  html+='</div>';
+  // Body data trend
+  const bodyRecs=getBodyRecords();
+  if(bodyRecs.length>=2){
+    html+='<div class="card"><h3>体重趋势</h3><div style="display:flex;justify-content:space-between;font-size:13px">';
+    bodyRecs.slice(0,5).reverse().forEach(r=>{
+      html+=`<div style="text-align:center"><div>${r.weight||'—'}</div><div style="font-size:10px;color:#999">${r.date?r.date.slice(5):''}</div></div>`;
+    });
+    html+='</div>';
+    const first=bodyRecs[bodyRecs.length-1].weight;
+    const last=bodyRecs[0].weight;
+    if(first&&last){
+      const diff=(parseFloat(last)-parseFloat(first)).toFixed(1);
+      html+=`<p style="font-size:12px;color:#888;margin-top:8px">变化：${diff>0?'+':''}${diff} kg</p>`;
+    }
+    html+='</div>';
+  }
+  // Current week detail
+  const cwData=TRAINING_DATA[currentW];
+  if(cwData&&cwData.days.length){
+    html+=`<div class="card"><h3>第${currentW}周进度</h3>`;
+    cwData.days.forEach(d=>{
+      const done=!!completed[d.id];
+      html+=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <span style="font-size:13px">${d.id} ${d.focus}</span>
+        <div style="flex:1;margin:0 12px"><div class="progress-bar"><div class="progress-fill gold" style="width:${done?100:0}%"></div></div></div>
+        <span style="font-size:12px;color:${done?'var(--gold)':'#ccc'}">${done?'✓':'—'}</span>
+      </div>`;
+    });
+    html+='</div>';
+  }
+  // Data buttons
+  html+=`<div class="data-btns">
+    <button class="btn btn-outline btn-sm" onclick="exportData()">导出我的数据</button>
+    <button class="btn btn-danger btn-sm" onclick="clearAllData()">清除所有数据</button>
+  </div>`;
+  c.innerHTML=html;
+}
+
+function exportData(){
+  const data={
+    completed:getCompleted(),
+    bodyRecords:getBodyRecords(),
+    exportDate:new Date().toISOString()
+  };
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='arise_training_'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();URL.revokeObjectURL(url);
+}
+
+function clearAllData(){
+  if(confirm('确定清除所有训练数据？此操作不可撤销。')){
+    S.del('completed');
+    S.del('bodyRecords');
+    openDayId=null;
+    renderApp();
+  }
+}
+
+// ===== COACH VIEW =====
+function renderCoach(){
+  return `<div class="view" id="view-coach">
+    <div class="coach-banner">
+      <span class="coach-badge">COACH</span>
+      <h2>教练后台</h2>
+    </div>
+    <div class="card">
+      <h3>导入学生数据</h3>
+      <p style="font-size:12px;color:#888;margin-bottom:8px">选择学生导出的 JSON 文件</p>
+      <input type="file" accept=".json" id="coach-import" style="font-size:13px">
+      <button class="btn btn-outline btn-sm" style="margin-top:8px" onclick="coachImport()">导入</button>
+    </div>
+    <h2 style="margin-top:16px">学生列表</h2>
+    <div id="coach-students"></div>
+  </div>`;
+}
+
+function coachImport(){
+  const input=document.getElementById('coach-import');
+  if(!input.files.length){alert('请选择文件');return;}
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      const data=JSON.parse(e.target.result);
+      const students=S.get('coach_students',[]);
+      data.studentName=data.studentName||'学生'+(students.length+1);
+      students.push(data);
+      S.set('coach_students',students);
+      renderCoachStudents();
+      alert('导入成功');
+    }catch(err){alert('文件格式错误')}
+  };
+  reader.readAsText(input.files[0]);
+}
+
+function renderCoachStudents(){
+  const c=document.getElementById('coach-students');
+  if(!c) return;
+  const students=S.get('coach_students',[]);
+  if(!students.length){c.innerHTML='<div class="empty-state">暂无学生数据</div>';return;}
+  c.innerHTML=students.map((s,i)=>{
+    const doneCount=Object.keys(s.completed||{}).filter(k=>k.match(/^W\d+D\d+$/)).length;
+    const latestBody=(s.bodyRecords||[])[0];
+    return `<div class="student-card">
+      <div class="student-name">${s.studentName||'学生'+(i+1)}</div>
+      <div class="student-info">
+        已完成训练日：${doneCount}/48<br>
+        完成率：${Math.round(doneCount/48*100)}%<br>
+        ${latestBody?`最近体重：${latestBody.weight||'—'} kg (${latestBody.date||''})`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ===== EVENT BINDING =====
+function bindEvents(){
+  document.querySelectorAll('.nav-item').forEach(n=>{
+    n.addEventListener('click',()=>{
+      const view=n.dataset.view;
+      switchView(view);
+    });
+  });
+  // Phase cards toggle
+  document.querySelectorAll('[data-phase-card]').forEach(card=>{
+    card.addEventListener('click',()=>card.classList.toggle('open'));
+  });
+  // Title long press for coach
+  let pressTimer=null;
+  const title=document.getElementById('app-title');
+  if(title){
+    title.addEventListener('mousedown',()=>{pressTimer=setTimeout(()=>{
+      if(!document.getElementById('view-coach')){
+        const app=document.getElementById('app');
+        app.innerHTML+=renderCoach();
+        bindEvents();
+      }
+      switchView('coach');
+    },2000)});
+    title.addEventListener('mouseup',()=>clearTimeout(pressTimer));
+    title.addEventListener('touchstart',()=>{pressTimer=setTimeout(()=>{
+      if(!document.getElementById('view-coach')){
+        const app=document.getElementById('app');
+        app.innerHTML+=renderCoach();
+        bindEvents();
+      }
+      switchView('coach');
+    },2000)});
+    title.addEventListener('touchend',()=>clearTimeout(pressTimer));
+  }
+  // Body view
+  renderBodyView();
+  // Coach
+  renderCoachStudents();
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded',()=>{
+  const isCoach=new URLSearchParams(location.search).get('mode')==='coach';
+  if(isCoach){
+    currentView='plan-intro';
+  }
+  renderApp();
+});
+</script>
+</body>
+</html>

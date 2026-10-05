@@ -11,6 +11,7 @@
   --border:#2A2A32;--border-hover:#3A3A44;
   --text:#E8E6E1;--text-secondary:#8A8A92;--text-muted:#5C5C66;
   --accent:#C4A26E;--accent-dim:#A0854F;
+  --green:#4CAF50;--green-bg:rgba(76,175,80,0.12);
   --radius:12px;--transition:0.3s cubic-bezier(0.4,0,0.2,1);
 }
 html{font-size:16px;scroll-behavior:smooth}
@@ -21,53 +22,86 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-.header{
-  text-align:center;padding:4rem 2rem 3rem;
-  border-bottom:1px solid var(--border);
-  background:linear-gradient(180deg,#141418 0%,var(--bg) 100%);
+/* ========== LOGIN ========== */
+#login-screen{
+  position:fixed;inset:0;z-index:1000;
+  background:#0A0A0A;display:flex;align-items:center;justify-content:center;
 }
-.header h1{
-  font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;
-  letter-spacing:0.08em;color:var(--text);margin-bottom:0.6rem;
+.login-card{
+  width:360px;padding:2.5rem 2rem;text-align:center;
+  border:1px solid var(--border);border-radius:var(--radius);
+  background:var(--surface);
 }
-.header h1 span{color:var(--accent);font-weight:400}
-.header .subtitle{
-  font-size:clamp(0.85rem,1.8vw,1.05rem);color:var(--text-secondary);
-  letter-spacing:0.15em;font-weight:300;
+.login-bg-placeholder{
+  width:100%;height:160px;border-radius:8px;margin-bottom:1.5rem;
+  background:#1a1a22;display:flex;align-items:center;justify-content:center;
+  color:var(--text-muted);font-size:0.8rem;letter-spacing:0.1em;
+  border:1px dashed var(--border);
 }
-.header .divider{
-  width:48px;height:1px;background:var(--accent);
-  margin:1.4rem auto 0;opacity:0.6;
+.login-title{font-size:1.3rem;font-weight:400;margin-bottom:0.4rem;color:var(--text)}
+.login-subtitle{font-size:0.8rem;color:var(--text-muted);margin-bottom:1.8rem;letter-spacing:0.08em}
+.login-input{
+  width:100%;padding:0.75rem 1rem;margin-bottom:0.8rem;
+  background:var(--bg);border:1px solid var(--border);border-radius:8px;
+  color:var(--text);font-size:0.9rem;outline:none;
+  transition:border-color var(--transition);
+}
+.login-input:focus{border-color:var(--accent)}
+.login-input::placeholder{color:var(--text-muted)}
+.login-btn{
+  width:100%;padding:0.8rem;margin-top:0.4rem;
+  background:var(--accent);color:#0A0A0A;border:none;border-radius:8px;
+  font-size:0.95rem;font-weight:500;cursor:pointer;letter-spacing:0.06em;
+  transition:opacity var(--transition);
+}
+.login-btn:hover{opacity:0.9}
+.login-error{color:#D64045;font-size:0.78rem;margin-top:0.6rem;min-height:1.2em}
+
+/* ========== DASHBOARD ========== */
+#dashboard{display:none}
+
+/* Top Nav */
+.top-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.5rem;border-bottom:1px solid var(--border);
+  background:var(--surface);position:sticky;top:0;z-index:100;
+}
+.nav-brand{font-size:1rem;font-weight:400;letter-spacing:0.06em}
+.nav-brand span{color:var(--accent)}
+.nav-links{display:flex;gap:1.2rem}
+.nav-link{
+  font-size:0.82rem;color:var(--text-secondary);text-decoration:none;
+  cursor:pointer;transition:color var(--transition);letter-spacing:0.04em;
+}
+.nav-link:hover,.nav-link.active{color:var(--accent)}
+.nav-logout{font-size:0.78rem;color:var(--text-muted);cursor:pointer;margin-left:0.5rem}
+.nav-logout:hover{color:var(--text-secondary)}
+
+.container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 3rem}
+
+/* Welcome */
+.welcome{margin-bottom:2rem}
+.welcome h2{font-size:1.4rem;font-weight:300;margin-bottom:0.2rem}
+.welcome h2 span{color:var(--accent);font-weight:400}
+.welcome .date-line{font-size:0.82rem;color:var(--text-muted);letter-spacing:0.06em}
+.welcome .streak{
+  display:inline-flex;align-items:center;gap:0.3rem;
+  margin-left:1rem;font-size:0.82rem;color:var(--accent);
 }
 
-.container{max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem 3rem}
-
-.section{margin-bottom:3rem}
+/* Section */
+.section{margin-bottom:2.5rem}
 .section-header{
-  display:flex;align-items:center;gap:0.7rem;
-  margin-bottom:1.6rem;padding-bottom:0.8rem;
+  display:flex;align-items:center;gap:0.6rem;
+  margin-bottom:1.2rem;padding-bottom:0.7rem;
   border-bottom:1px solid var(--border);
 }
-.section-icon{
-  width:28px;height:28px;display:flex;align-items:center;justify-content:center;
-  color:var(--accent);flex-shrink:0;
-}
-.section-icon svg{width:20px;height:20px}
-.section-title{
-  font-size:1.15rem;font-weight:500;letter-spacing:0.06em;color:var(--text);
-}
-.section-title-en{
-  font-size:0.75rem;color:var(--text-muted);letter-spacing:0.12em;
-  text-transform:uppercase;margin-left:0.5rem;font-weight:300;
-}
+.section-icon{color:var(--accent);width:22px;height:22px;display:flex;align-items:center}
+.section-icon svg{width:18px;height:18px}
+.section-title{font-size:1rem;font-weight:500;letter-spacing:0.05em}
+.section-title-en{font-size:0.7rem;color:var(--text-muted);margin-left:0.4rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:300}
 
-.category{margin-bottom:1.4rem}
-.category-label{
-  font-size:0.78rem;color:var(--accent-dim);letter-spacing:0.14em;
-  text-transform:uppercase;font-weight:500;margin-bottom:0.8rem;
-  padding-left:0.2rem;
-}
-
+/* Cards */
 .card-grid{display:grid;gap:1rem}
 .card-grid.cols-3{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
 .card-grid.cols-2{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
@@ -87,282 +121,434 @@ body{
 }
 .card:hover{
   background:var(--surface-hover);border-color:var(--border-hover);
-  transform:translateY(-2px);
-  box-shadow:0 8px 24px rgba(0,0,0,0.3);
+  transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.3);
 }
 .card:hover::before{opacity:1}
-.card-title{
-  font-size:0.95rem;font-weight:500;color:var(--text);
-  margin-bottom:0.5rem;line-height:1.4;
-}
-.card-desc{
-  font-size:0.82rem;color:var(--text-secondary);line-height:1.55;
-}
-.card-meta{
-  display:flex;align-items:center;gap:0.4rem;
-  margin-top:0.8rem;font-size:0.72rem;color:var(--text-muted);
-}
+.card.clickable{cursor:pointer}
+.card-title{font-size:0.95rem;font-weight:500;color:var(--text);margin-bottom:0.4rem;line-height:1.4}
+.card-desc{font-size:0.82rem;color:var(--text-secondary);line-height:1.55}
+.card-meta{display:flex;align-items:center;gap:0.4rem;margin-top:0.7rem;font-size:0.72rem;color:var(--text-muted)}
 .card-meta svg{width:12px;height:12px;opacity:0.5}
 
-.badge{
-  display:inline-block;font-size:0.68rem;padding:0.15rem 0.55rem;
-  border-radius:20px;letter-spacing:0.04em;font-weight:500;
-  margin-top:0.6rem;
-}
-.badge.tier1{background:rgba(196,162,110,0.12);color:var(--accent);border:1px solid rgba(196,162,110,0.2)}
+/* Learning Cards */
+.quote-card{border-left:3px solid var(--accent)}
+.quote-card .card-chapter{font-size:0.7rem;color:var(--accent-dim);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem}
+.quote-card .card-text{font-size:0.9rem;color:var(--text);line-height:1.7;margin:0.6rem 0;font-style:italic}
+.quote-card .card-source{font-size:0.75rem;color:var(--text-muted)}
+
+.badge{display:inline-block;font-size:0.68rem;padding:0.15rem 0.55rem;border-radius:20px;letter-spacing:0.04em;font-weight:500;margin-top:0.5rem}
+.badge.tier-a{background:rgba(196,162,110,0.15);color:var(--accent);border:1px solid rgba(196,162,110,0.25)}
+.badge.tier-b{background:rgba(74,144,217,0.12);color:#4A90D9;border:1px solid rgba(74,144,217,0.2)}
+.badge.tier-c{background:rgba(92,92,102,0.15);color:var(--text-muted);border:1px solid rgba(92,92,102,0.2)}
+.badge.task-action{background:rgba(76,175,80,0.12);color:var(--green);border:1px solid rgba(76,175,80,0.2)}
+.badge.task-think{background:rgba(74,144,217,0.12);color:#4A90D9;border:1px solid rgba(74,144,217,0.2)}
+.badge.task-reflect{background:rgba(196,162,110,0.12);color:var(--accent);border:1px solid rgba(196,162,110,0.2)}
 .badge.pending{background:rgba(92,92,102,0.15);color:var(--text-muted);border:1px solid rgba(92,92,102,0.2)}
 
-.card.placeholder{
-  border-style:dashed;opacity:0.6;cursor:default;
+/* Check-in Button */
+.checkin-btn{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  padding:0.6rem 1.4rem;border-radius:8px;border:1px solid var(--accent);
+  background:transparent;color:var(--accent);font-size:0.85rem;
+  cursor:pointer;transition:all var(--transition);margin-top:0.8rem;
 }
-.card.placeholder:hover{
-  transform:none;box-shadow:none;background:var(--surface);border-color:var(--border);
-}
-.card.placeholder::before{display:none}
+.checkin-btn:hover{background:var(--accent);color:#0A0A0A}
+.checkin-btn.done{background:var(--green);color:#fff;border-color:var(--green);cursor:default}
+.checkin-btn.done:hover{background:var(--green)}
 
-.footer{
-  text-align:center;padding:2.5rem 1.5rem;
-  border-top:1px solid var(--border);
-  color:var(--text-muted);font-size:0.75rem;letter-spacing:0.06em;
+/* Progress */
+.progress-row{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
+.progress-stat{
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  padding:0.8rem 1.2rem;text-align:center;min-width:80px;
 }
-.footer span{color:var(--accent-dim)}
+.progress-stat .num{font-size:1.4rem;font-weight:500;color:var(--accent)}
+.progress-stat .label{font-size:0.7rem;color:var(--text-muted);margin-top:0.2rem}
+.progress-bar{
+  width:100%;height:4px;background:var(--border);border-radius:2px;margin-top:0.6rem;overflow:hidden;
+}
+.progress-bar-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 0.6s ease}
 
+/* History */
+.history-list{margin-top:0.8rem}
+.history-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.6rem 0;border-bottom:1px solid var(--border);font-size:0.82rem;
+}
+.history-item:last-child{border-bottom:none}
+.history-date{color:var(--text-secondary);min-width:90px}
+.history-title{color:var(--text);flex:1;margin:0 0.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.history-status{font-size:0.75rem}
+.history-status.done{color:var(--green)}
+.history-status.missed{color:var(--text-muted)}
+
+/* Category label */
+.category-label{font-size:0.75rem;color:var(--accent-dim);letter-spacing:0.12em;text-transform:uppercase;font-weight:500;margin-bottom:0.7rem;padding-left:0.2rem}
+.category{margin-bottom:1.2rem}
+
+/* Responsive */
 @media(max-width:640px){
-  .header{padding:2.5rem 1.2rem 2rem}
-  .container{padding:1.5rem 1rem 2rem}
+  .top-nav{flex-direction:column;gap:0.6rem;padding:0.8rem 1rem}
+  .nav-links{flex-wrap:wrap;justify-content:center}
+  .container{padding:1.2rem 1rem 2rem}
   .card-grid.cols-3,.card-grid.cols-2{grid-template-columns:1fr}
-  .card{padding:1.2rem 1.3rem}
+  .card{padding:1.1rem 1.2rem}
+  .login-card{width:90%;padding:2rem 1.5rem}
+  .progress-row{gap:0.8rem}
+  .welcome h2{font-size:1.2rem}
 }
 @media(min-width:641px) and (max-width:960px){
   .card-grid.cols-3{grid-template-columns:repeat(2,1fr)}
 }
+
+/* Page views */
+.page-view{display:none}
+.page-view.active{display:block}
 </style>
 </head>
 <body>
 
-<header class="header">
-  <h1>Rise<span>的</span>奇妙人生</h1>
-  <p class="subtitle">Arise · 循证力量训练 · 教学与文献</p>
-  <div class="divider"></div>
-</header>
+<!-- ===== LOGIN SCREEN ===== -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-bg-placeholder" id="login-bg">背景图</div>
+    <div class="login-title">Rise<span style="color:var(--accent)">的</span>奇妙人生</div>
+    <div class="login-subtitle">Arise · 循证力量训练 · 教学与文献</div>
+    <input class="login-input" id="login-name" type="text" placeholder="姓名" autocomplete="off">
+    <input class="login-input" id="login-code" type="password" placeholder="邀请码">
+    <button class="login-btn" id="login-btn" onclick="doLogin()">进入</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
 
-<main class="container">
+<!-- ===== DASHBOARD ===== -->
+<div id="dashboard">
 
-  <!-- ====== SECTION 1: TEACHING ====== -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+  <!-- Top Nav -->
+  <nav class="top-nav">
+    <div class="nav-brand">Rise<span>的</span>奇妙人生</div>
+    <div class="nav-links">
+      <span class="nav-link active" onclick="showPage('learning')">今日学习</span>
+      <span class="nav-link" onclick="showPage('teaching')">教学资源</span>
+      <span class="nav-link" onclick="showPage('literature')">文献解读</span>
+      <span class="nav-link" onclick="showPage('training')">训练计划</span>
+      <span class="nav-logout" onclick="doLogout()">退出</span>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- ========== PAGE: LEARNING (default) ========== -->
+    <div class="page-view active" id="page-learning">
+
+      <div class="welcome" id="welcome-area">
+        <h2 id="greeting"></h2>
+        <div class="date-line">
+          <span id="date-display"></span>
+          <span class="streak" id="streak-display"></span>
+        </div>
       </div>
-      <span class="section-title">教学<span class="section-title-en">Teaching</span></span>
+
+      <!-- Today's Quote -->
+      <section class="section">
+        <div class="section-header">
+          <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+          <span class="section-title">今日书摘<span class="section-title-en">Daily Quote</span></span>
+        </div>
+        <div class="card-grid cols-1">
+          <div class="card quote-card" id="quote-card">
+            <div class="card-chapter" id="quote-chapter"></div>
+            <div class="card-title" id="quote-title"></div>
+            <div class="card-text" id="quote-text"></div>
+            <div class="card-source" id="quote-source"></div>
+            <span class="badge" id="quote-evidence"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Today's Task -->
+      <section class="section">
+        <div class="section-header">
+          <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          <span class="section-title">今日实践<span class="section-title-en">Daily Task</span></span>
+        </div>
+        <div class="card-grid cols-1">
+          <div class="card" id="task-card">
+            <div class="card-title" id="task-title"></div>
+            <div class="card-desc" id="task-text"></div>
+            <span class="badge" id="task-type"></span>
+            <div>
+              <button class="checkin-btn" id="checkin-btn" onclick="doCheckin()">完成打卡</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Progress -->
+      <section class="section">
+        <div class="section-header">
+          <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <span class="section-title">学习进度<span class="section-title-en">Progress</span></span>
+        </div>
+        <div class="progress-row" id="progress-stats"></div>
+        <div class="progress-bar"><div class="progress-bar-fill" id="week-bar"></div></div>
+      </section>
+
+      <!-- History -->
+      <section class="section">
+        <div class="section-header">
+          <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <span class="section-title">最近7天<span class="section-title-en">History</span></span>
+        </div>
+        <div class="history-list" id="history-list"></div>
+      </section>
     </div>
 
-    <!-- 营养学 -->
-    <div class="category">
-      <div class="category-label">营养学 · Nutrition</div>
-      <div class="card-grid cols-3">
-        <a class="card" href="https://www.coze.cn/s/AS2dpp4eHVA/" target="_blank" rel="noopener">
-          <div class="card-title">SNC 2026 运动营养学教材</div>
-          <div class="card-desc">3部分·8册·38章完整合订本，3HFIT运动健身营养咨询师培训教材（2026版）</div>
-          <div class="card-meta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            coze.cn
-          </div>
-        </a>
-        <a class="card" href="https://jiwubang-access.pages.dev/" target="_blank" rel="noopener">
-          <div class="card-title">加伍磅·三天营养课</div>
-          <div class="card-desc">14本在线教材（M1-M14），需邀请码登录</div>
-          <div class="card-meta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            Cloudflare · 需邀请码
-          </div>
-        </a>
+    <!-- ========== PAGE: TEACHING ========== -->
+    <div class="page-view" id="page-teaching">
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+          <span class="section-title">教学资源<span class="section-title-en">Teaching</span></span>
+        </div>
+
+        <div class="category"><div class="category-label">营养学 · Nutrition</div>
+        <div class="card-grid cols-3">
+          <a class="card" href="https://www.coze.cn/s/AS2dpp4eHVA/" target="_blank" rel="noopener"><div class="card-title">SNC 2026 运动营养学教材</div><div class="card-desc">3部分·8册·38章完整合订本</div><div class="card-meta">coze.cn</div></a>
+          <a class="card" href="https://jiwubang-access.pages.dev/" target="_blank" rel="noopener"><div class="card-title">加伍磅·三天营养课</div><div class="card-desc">14本在线教材（M1-M14），需邀请码登录</div><div class="card-meta">Cloudflare · 需邀请码</div></a>
+        </div></div>
+
+        <div class="category"><div class="category-label">训练学 · Exercise Science</div>
+        <div class="card-grid cols-3">
+          <a class="card" href="https://mricemelab-blip.github.io/ebst/" target="_blank" rel="noopener"><div class="card-title">EBST 循证力量训练教材</div><div class="card-desc">循证运动科学与力量训练在线教材，含AI助教</div><div class="card-meta">GitHub Pages</div></a>
+          <a class="card" href="https://mricemelab-blip.github.io/acepresso/" target="_blank" rel="noopener"><div class="card-title">ACEpresso 运动营养精读课</div><div class="card-desc">ACE认证运动营养精读课程，六次体验课</div><div class="card-meta">GitHub Pages</div></a>
+        </div></div>
+
+        <div class="category"><div class="category-label">教培 / 涌现 · Studio & Emergence</div>
+        <div class="card-grid cols-3">
+          <a class="card" href="https://qd97yxpj7f.page.coze.site" target="_blank" rel="noopener"><div class="card-title">发生俱乐部·力量与表现训练</div><div class="card-desc">2026年力量与表现12周周期化训练计划完整版</div><div class="card-meta">Coze Site</div></a>
+          <a class="card" href="https://mricemelab-blip.github.io/yaoning-masterclass/voice-club/training.html" target="_blank" rel="noopener"><div class="card-title">姚宁大师课·训练App</div><div class="card-desc">交互式训练追踪应用，支持每日打卡与身体数据记录</div><div class="card-meta">GitHub Pages</div></a>
+          <a class="card" href="https://mricemelab-blip.github.io/sbst/" target="_blank" rel="noopener"><div class="card-title">EBST AI 助教</div><div class="card-desc">14章内容 + DeepSeek API 问答接口</div><div class="card-meta">GitHub Pages · AI 问答</div></a>
+          <a class="card" href="https://mricemelab-blip.github.io/evidence-literature-db/lesson4-submit.html" target="_blank" rel="noopener"><div class="card-title">涌现 Lesson 4/5 作业提交</div><div class="card-desc">学生内嵌 token 直连 GitHub API 提交作业</div><div class="card-meta">GitHub Pages</div></a>
+          <a class="card" href="https://snc2026-access.pages.dev/" target="_blank" rel="noopener"><div class="card-title">SNC 2026 门禁系统</div><div class="card-desc">教材 + 学员手册 + 工具包 + SOP，全部门禁内</div><div class="card-meta">Cloudflare · 需登录</div></a>
+          <a class="card" href="https://mricemelab-blip.github.io/evidence-literature-db/rijiangong.html" target="_blank" rel="noopener"><div class="card-title">日修一功·身体地图</div><div class="card-desc">日修一功学员身体地图，肌骨分诊导航工具</div><div class="card-meta">GitHub Pages</div></a>
+          <a class="card" href="https://mricemelab-blip.github.io/evidence-literature-db/bodymap.html" target="_blank" rel="noopener"><div class="card-title">身体地图 v4</div><div class="card-desc">解剖学标本风格SVG人体，6维度疼痛评估系统</div><div class="card-meta">GitHub Pages</div></a>
+          <a class="card" href="https://mricemelab-blip.github.io/evidence-literature-db/healthmap.html" target="_blank" rel="noopener"><div class="card-title">身体大健康地图 v2</div><div class="card-desc">叙事化身体扫描旅程，STarT/PROMIS/MSQ/DII多维评估</div><div class="card-meta">GitHub Pages</div></a>
+        </div></div>
       </div>
     </div>
 
-    <!-- 训练学 -->
-    <div class="category">
-      <div class="category-label">训练学 · Exercise Science</div>
-      <div class="card-grid cols-3">
-        <a class="card" href="https://mricemelab-blip.github.io/ebst/" target="_blank" rel="noopener">
-          <div class="card-title">EBST 循证力量训练教材</div>
-          <div class="card-desc">循证运动科学与力量训练在线教材，含AI助教</div>
-          <div class="card-meta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            GitHub Pages
-          </div>
-        </a>
-        <a class="card" href="https://mricemelab-blip.github.io/acepresso/" target="_blank" rel="noopener">
-          <div class="card-title">ACEpresso 运动营养精读课</div>
-          <div class="card-desc">ACE认证运动营养精读课程，六次体验课</div>
-          <div class="card-meta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            GitHub Pages
-          </div>
-        </a>
+    <!-- ========== PAGE: LITERATURE ========== -->
+    <div class="page-view" id="page-literature">
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+          <span class="section-title">文献解读<span class="section-title-en">Literature Review</span></span>
+        </div>
+
+        <div class="category"><div class="category-label">文献库 · Database</div>
+        <div class="card-grid cols-2">
+          <a class="card" href="https://mricemelab-blip.github.io/evidence-literature-db/" target="_blank" rel="noopener"><div class="card-title">循证文献库网站</div><div class="card-desc">233篇文献全部上线，93篇Tier 1完整叙事解读，支持全文搜索和分类筛选</div><span class="badge tier-a">233 篇 · 93 Tier 1</span></a>
+        </div></div>
+
+        <div class="category"><div class="category-label">书籍解读 · Book Review</div>
+        <div class="card-grid cols-2">
+          <a class="card" href="https://eternity4719.github.io/HowToLiveBetter" target="_blank" rel="noopener"><div class="card-title">《高性价比人生指南》</div><div class="card-desc">657条循证人生决策建议，证据分级A/B/C</div><span class="badge tier-a">657 条决策</span></a>
+        </div></div>
       </div>
     </div>
 
-    <!-- 教培/涌现 -->
-    <div class="category">
-      <div class="category-label">教培 / 涌现 · Studio & Emergence</div>
-      <div class="card-grid cols-3">
-        <a class="card" href="https://qd97yxpj7f.page.coze.site" target="_blank" rel="noopener">
-          <div class="card-title">发生俱乐部·力量与表现训练</div>
-          <div class="card-desc">2026年力量与表现12周周期化训练计划完整版</div>
-          <div class="card-meta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Coze Site
-          </div>
-        </a>
-        <a class="card" href="https://mricemelab-blip.github.io/yaoning-masterclass/voice-club/training.html" target="_blank" rel="noopener">
-          <div class="card-title">姚宁大师课·训练App</div>
-          <div class="card-desc">交互式训练追踪应用，支持每日打卡与身体数据记录</div>
-          <div class="card-meta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            GitHub Pages
-          </div>
-        </a>
-        <a class="card" href="https://mricemelab-blip.github.io/sbst/" target="_blank" rel="noopener">
-          <div class="card-title">EBST AI 助教</div>
-          <div class="card-desc">14章内容 + DeepSeek API 问答接口，学生点按钮直接提问</div>
-          <div class="card-meta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            GitHub Pages · AI 问答
-          </div>
-        </a>
-        <a class="card" href="https://mricemelab-blip.github.io/evidence-literature-db/lesson4-submit.html" target="_blank" rel="noopener">
-          <div class="card-title">涌现 Lesson 4/5 作业提交</div>
-          <div class="card-desc">学生内嵌 token 直连 GitHub API 提交作业，无需跳转</div>
-          <div class="card-meta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            GitHub Pages
-          </div>
-        </a>
-        <a class="card" href="https://snc2026-access.pages.dev/" target="_blank" rel="noopener">
-          <div class="card-title">SNC 2026 门禁系统</div>
-          <div class="card-desc">教材 + 学员手册 + 工具包 + SOP + 教练实践补丁，全部门禁内</div>
-          <div class="card-meta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            Cloudflare · 需登录
-          </div>
-        </a>
-        <a class="card" href="https://mricemelab-blip.github.io/evidence-literature-db/rijiangong.html" target="_blank" rel="noopener">
-          <div class="card-title">日修一功·身体地图</div>
-          <div class="card-desc">日修一功学员身体地图，肌骨分诊导航工具</div>
-          <div class="card-meta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            GitHub Pages
-          </div>
-        </a>
-        <a class="card" href="https://mricemelab-blip.github.io/evidence-literature-db/bodymap.html" target="_blank" rel="noopener">
-          <div class="card-title">身体地图 v4</div>
-          <div class="card-desc">解剖学标本风格SVG人体，6维度疼痛评估系统</div>
-          <div class="card-meta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            GitHub Pages
-          </div>
-        </a>
-        <a class="card" href="https://mricemelab-blip.github.io/evidence-literature-db/healthmap.html" target="_blank" rel="noopener">
-          <div class="card-title">身体大健康地图 v2</div>
-          <div class="card-desc">叙事化身体扫描旅程，STarT/PROMIS/MSQ/DII多维评估</div>
-          <div class="card-meta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            GitHub Pages
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====== SECTION 2: LITERATURE ====== -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-      </div>
-      <span class="section-title">文献解读<span class="section-title-en">Literature Review</span></span>
-    </div>
-
-    <!-- 每日解读 -->
-    <div class="category">
-      <div class="category-label">每日解读 · Daily Digest</div>
-      <div class="card-grid cols-1">
-        <div class="card placeholder">
-          <div class="card-title">每日文献解读</div>
-          <div class="card-desc">每天由 Arise 自动搜索、筛选、解读最高证据等级文献，推送到此</div>
-          <span class="badge pending">待建设</span>
+    <!-- ========== PAGE: TRAINING ========== -->
+    <div class="page-view" id="page-training">
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6.5 6.5L17.5 17.5"/><rect x="7" y="4" width="3" height="3" rx="0.5"/><rect x="14" y="17" width="3" height="3" rx="0.5"/><line x1="9.5" y1="6.5" x2="14.5" y2="17.5" stroke-width="2"/></svg></div>
+          <span class="section-title">训练计划<span class="section-title-en">Training Plan</span></span>
+        </div>
+        <div class="card-grid cols-2">
+          <a class="card" href="https://mricemelab-blip.github.io/yaoning-masterclass/voice-club/training.html" target="_blank" rel="noopener"><div class="card-title">发生俱乐部交互式训练App</div><div class="card-desc">每日训练展开查看动作详情与要领，支持逐项勾选、身体数据记录、进度总览、教练后台</div><div class="card-meta">GitHub Pages · 交互式应用</div></a>
+          <div class="card" style="opacity:0.6;cursor:default"><div class="card-title">12 周训练追踪总表</div><div class="card-desc">Rise 力量与壶铃 12 周训练计划总表（Excel），待上传网页版</div><div class="card-meta">Excel · 待转换</div></div>
         </div>
       </div>
     </div>
 
-    <!-- 文献库 -->
-    <div class="category">
-      <div class="category-label">文献库 · Literature Database</div>
-      <div class="card-grid cols-2">
-        <a class="card" href="https://mricemelab-blip.github.io/evidence-literature-db/" target="_blank" rel="noopener">
-          <div class="card-title">循证文献库网站</div>
-          <div class="card-desc">233篇文献全部上线，93篇Tier 1完整叙事解读，支持全文搜索和分类筛选</div>
-          <span class="badge tier1">233 篇 · 93 Tier 1</span>
-        </a>
-      </div>
-    </div>
+  </div>
 
-    <!-- 书籍解读 -->
-    <div class="category">
-      <div class="category-label">书籍解读 · Book Review</div>
-      <div class="card-grid cols-2">
-        <a class="card" href="https://eternity4719.github.io/HowToLiveBetter" target="_blank" rel="noopener">
-          <div class="card-title">《高性价比人生指南》</div>
-          <div class="card-desc">657条循证人生决策建议，证据分级A/B/C，只引原始文献和官方文件</div>
-          <span class="badge tier1">657 条决策</span>
-        </a>
-        <a class="card" href="https://mricemelab-blip.github.io/yaoning-masterclass/rise-learning.html" target="_blank" rel="noopener">
-          <div class="card-title">每日学习打卡</div>
-          <div class="card-desc">每日书摘 + 实践反思任务，按日期轮换推送，可打卡记录学习进度与连续天数</div>
-          <div class="card-meta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            GitHub Pages · 交互式应用
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
+  <footer style="text-align:center;padding:2rem 1.5rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:0.75rem;letter-spacing:0.06em">
+    <span style="color:var(--accent-dim)">Arise</span> · 循证力量训练与教学文献系统 · 2026
+  </footer>
+</div>
 
-  <!-- ====== SECTION 3: TRAINING ====== -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5L17.5 17.5"/><path d="M7 2l-1.5 1.5"/><path d="M18.5 17l1.5 1.5"/><path d="M2 7l1.5-1.5"/><path d="M17 18.5l1.5 1.5"/><rect x="7" y="4" width="3" height="3" rx="0.5"/><rect x="14" y="17" width="3" height="3" rx="0.5"/><rect x="4" y="7" width="3" height="3" rx="0.5"/><rect x="17" y="14" width="3" height="3" rx="0.5"/><line x1="9.5" y1="6.5" x2="14.5" y2="17.5" stroke-width="2"/></svg>
-      </div>
-      <span class="section-title">训练计划<span class="section-title-en">Training Plan</span></span>
-    </div>
+<script>
+// ===== DATA =====
+const VALID_CODES = ['RISE2026','GUEST001','GUEST002'];
 
-    <div class="card-grid cols-2">
-      <a class="card" href="https://mricemelab-blip.github.io/yaoning-masterclass/voice-club/training.html" target="_blank" rel="noopener">
-        <div class="card-title">发生俱乐部交互式训练App</div>
-        <div class="card-desc">每日训练展开查看动作详情与要领，支持逐项勾选、身体数据记录、进度总览、教练后台</div>
-        <div class="card-meta">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          GitHub Pages · 交互式应用
-        </div>
-      </a>
-      <div class="card placeholder">
-        <div class="card-title">12 周训练追踪总表</div>
-        <div class="card-desc">Rise 力量与壶铃 12 周训练计划总表（Excel），含壶铃 StrongFirst + 莫逆力量双计划合并追踪</div>
-        <div class="card-meta">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
-          Excel · 待上传网页版
-        </div>
-      </div>
-    </div>
-  </section>
+const QUOTES = [
+  {title:'把家里的食盐换成低钠盐',text:'用钾盐替代普通食盐，可以在几乎不改变饮食结构的情况下降低脑卒中14%、心血管事件13%、总死亡率12%。每袋只贵几元。',evidence:'A',source:'第1节第5条',chapter:'不要早死'},
+  {title:'每年做一次低剂量螺旋CT（LDCT）',text:'55-80岁、有吸烟史的人群，年度LDCT筛查可将肺癌死亡率降低20%。费用约300-500元，辐射量仅为常规CT的1/6。',evidence:'A',source:'第1节第12条',chapter:'不要早死'},
+  {title:'替人担保前先想清楚愿不愿意替他还',text:'担保人就是要替他还钱的人。写了一般保证，债权人必须先起诉借款人并执行不到钱才能找你；写了连带责任保证，债权人可以直接找你要。',evidence:'B',source:'第8节第18条',chapter:'别把自己搭进去'},
+  {title:'家里备一个灭火器',text:'初期火灾用灭火器扑灭的成功率极高，几十元的投入可能挽救整套房和生命。放在厨房门口，不要用干粉以外的类型。',evidence:'B',source:'第13节第3条',chapter:'紧急情况'},
+  {title:'戒烟是最划算的健康投资',text:'戒烟后20分钟心率下降，1年后冠心病风险降50%，10年后肺癌风险降至吸烟者的一半。任何年龄戒烟都有收益。',evidence:'A',source:'第2节第1条',chapter:'不要慢慢死'},
+  {title:'把钱分成三笔',text:'生活费（3-6个月开销）、保命钱（不动）、增值钱（长期投资）。不要把所有钱放在同一个地方，更不要放在同一个资产类别里。',evidence:'B',source:'第5节第2条',chapter:'不要浪费钱'},
+  {title:'签字前把纸从头到尾看完',text:'签了就算数，按手印和签名一样算数。看不懂的当场问，拍照留底。「没看清」「以为是别的」在法庭上基本站不住。',evidence:'B',source:'第8节第17条',chapter:'别把自己搭进去'},
+  {title:'学一个能产生复利的技能',text:'编程、写作、设计、公开演讲——这些技能的回报会随时间指数增长。与其花时间在一次性收益的活动上，不如投资在可积累的技能和作品上。',evidence:'B',source:'第23节第1条',chapter:'学什么技能划算'},
+  {title:'每周至少150分钟中等强度有氧运动',text:'符合这一条的人，全因死亡率降低约20-30%。不需要去健身房，快走也算。分5天、每次30分钟即可。',evidence:'A',source:'第2节第3条',chapter:'不要慢慢死'},
+  {title:'给家里老人做一次跌倒风险评估',text:'65岁以上老人，每年至少做一次跌倒风险评估。简单干预（清理地面障碍物、卫生间防滑垫、夜间小夜灯）可显著降低跌倒风险。',evidence:'B',source:'第17节第4条',chapter:'家里有老人'},
+  {title:'别为了外形把身体搞坏',text:'极端节食、过量有氧、滥用补剂——这些追求「好身材」的方式反而在损害健康。肌肉量、骨密度、心肺功能才是真正的外形基础。',evidence:'B',source:'第28节第1条',chapter:'别为了外形把身体搞坏'},
+  {title:'遭遇重大打击后，先活过今天',text:'丧亲、离异、重病之后，不要急于「走出来」。允许自己有情绪，但要保持基本的生活结构：吃饭、睡觉、出门、和人说话。',evidence:'C',source:'第29节第2条',chapter:'遭遇重大打击之后'}
+];
 
-</main>
+const TASKS = [
+  {type:'行动',text:'检查家里的食盐是否为低钠盐，如果不是，今天去买一包替换。'},
+  {type:'思考',text:'回想最近一次你做重大决策的场景。用「花掉什么、换回什么」的框架重新分析，你当时的判断是否合理？'},
+  {type:'行动',text:'检查家中是否有灭火器，确认位置和有效期。如果没有，加入购物车。'},
+  {type:'反思',text:'你今天的时间花在了哪里？列出前三项耗时活动，评估它们的性价比（投入时间 vs 长期回报）。'},
+  {type:'行动',text:'给家里一位65岁以上的长辈打电话，询问最近是否有头晕、跌倒或行动不便的情况。'},
+  {type:'思考',text:'如果你现在必须签一份合同（任何类型），你会重点关注哪三个条款？为什么？'},
+  {type:'行动',text:'今天走至少8000步，或做30分钟中等强度运动（快走、骑车、游泳均可）。记录你的感受。'},
+  {type:'反思',text:'你的钱现在放在哪里？是否符合「生活费、保命钱、增值钱」三笔分的框架？如果不符合，写下调整计划。'},
+  {type:'思考',text:'列出你最想学的三项技能。哪些具有复利效应？哪些是一次性收益？优先级怎么排？'},
+  {type:'行动',text:'清理家中一个可能造成跌倒风险的区域（如浴室地面、走廊杂物、夜间照明）。拍照记录前后对比。'},
+  {type:'反思',text:'如果今天是你的最后一天，你对目前的生活方式有什么遗憾？这个遗憾指向什么需要改变的优先事项？'},
+  {type:'行动',text:'今天完全不碰烟酒。记录24小时内身体和心理的变化。'}
+];
 
-<footer class="footer">
-  <span>Arise</span> · 循证力量训练与教学文献系统 · 2026
-</footer>
+// ===== HELPERS =====
+function today(){return new Date().toISOString().slice(0,10)}
+function dayIndex(){const d=new Date();return Math.floor((d-new Date(d.getFullYear(),0,1))/864e5)}
+function greet(){const h=new Date().getHours();return h<6?'凌晨好':h<12?'早上好':h<14?'中午好':h<18?'下午好':'晚上好'}
+function fmtDate(s){const d=new Date(s+'T00:00:00');return `${d.getMonth()+1}月${d.getDate()}日`}
+function calcStreak(){
+  const c=JSON.parse(localStorage.getItem('rl_completed')||'{}');
+  let streak=0,d=new Date();
+  while(true){
+    const k=d.toISOString().slice(0,10);
+    if(c[k])streak++;else if(k!==today())break;else break;
+    d.setDate(d.getDate()-1);
+  }
+  return streak;
+}
 
+// ===== LOGIN =====
+function doLogin(){
+  const name=document.getElementById('login-name').value.trim();
+  const code=document.getElementById('login-code').value.trim();
+  const err=document.getElementById('login-error');
+  if(!name){err.textContent='请输入姓名';return}
+  if(!VALID_CODES.includes(code)){err.textContent='邀请码无效';return}
+  localStorage.setItem('rl_user',JSON.stringify({name,code,date:today()}));
+  enterDashboard(name);
+}
+function doLogout(){
+  localStorage.removeItem('rl_user');
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('dashboard').style.display='none';
+  document.getElementById('login-name').value='';
+  document.getElementById('login-code').value='';
+  document.getElementById('login-error').textContent='';
+}
+function enterDashboard(name){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('dashboard').style.display='block';
+  document.getElementById('greeting').innerHTML=`${greet()}，<span>${name}</span>`;
+  document.getElementById('date-display').textContent=new Date().toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
+  const streak=calcStreak();
+  document.getElementById('streak-display').innerHTML=`🔥 连续 ${streak} 天`;
+  loadDailyContent();
+  updateProgress();
+  renderHistory();
+}
+
+// ===== DAILY CONTENT =====
+function loadDailyContent(){
+  const idx=dayIndex();
+  const q=QUOTES[idx%QUOTES.length];
+  const t=TASKS[idx%TASKS.length];
+  document.getElementById('quote-chapter').textContent=q.chapter;
+  document.getElementById('quote-title').textContent=q.title;
+  document.getElementById('quote-text').textContent=q.text;
+  document.getElementById('quote-source').textContent=q.source;
+  const eb=document.getElementById('quote-evidence');
+  eb.textContent='证据等级 '+q.evidence;
+  eb.className='badge tier-'+q.evidence.toLowerCase();
+  document.getElementById('task-title').textContent='今日实践 · '+t.type+'题';
+  document.getElementById('task-text').textContent=t.text;
+  const tb=document.getElementById('task-type');
+  tb.textContent=t.type;
+  const typeMap={'行动':'task-action','思考':'task-think','反思':'task-reflect'};
+  tb.className='badge '+(typeMap[t.type]||'');
+  const c=JSON.parse(localStorage.getItem('rl_completed')||'{}');
+  const btn=document.getElementById('checkin-btn');
+  if(c[today()]){
+    btn.className='checkin-btn done';
+    btn.textContent='已完成 ✓ · '+c[today()].time;
+  }else{
+    btn.className='checkin-btn';
+    btn.textContent='完成打卡';
+  }
+}
+
+function doCheckin(){
+  const c=JSON.parse(localStorage.getItem('rl_completed')||'{}');
+  if(c[today()])return;
+  const idx=dayIndex();
+  c[today()]={quote:QUOTES[idx%QUOTES.length].title,task:TASKS[idx%TASKS.length].text,time:new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})};
+  localStorage.setItem('rl_completed',JSON.stringify(c));
+  loadDailyContent();
+  updateProgress();
+  renderHistory();
+}
+
+// ===== PROGRESS =====
+function updateProgress(){
+  const c=JSON.parse(localStorage.getItem('rl_completed')||'{}');
+  const now=new Date();
+  // Week
+  let weekDone=0;const weekStart=new Date(now);weekStart.setDate(now.getDate()-now.getDay()+1);
+  for(let i=0;i<7;i++){const d=new Date(weekStart);d.setDate(weekStart.getDate()+i);const k=d.toISOString().slice(0,10);if(c[k])weekDone++}
+  // Month
+  let monthDone=0;const prefix=now.toISOString().slice(0,7);
+  Object.keys(c).forEach(k=>{if(k.startsWith(prefix))monthDone++});
+  // Total
+  const total=Object.keys(c).length;
+  document.getElementById('progress-stats').innerHTML=`
+    <div class="progress-stat"><div class="num">${weekDone}</div><div class="label">本周</div></div>
+    <div class="progress-stat"><div class="num">${monthDone}</div><div class="label">本月</div></div>
+    <div class="progress-stat"><div class="num">${total}</div><div class="label">总计</div></div>`;
+  document.getElementById('week-bar').style.width=(weekDone/7*100)+'%';
+}
+
+// ===== HISTORY =====
+function renderHistory(){
+  const c=JSON.parse(localStorage.getItem('rl_completed')||'{}');
+  const html=[];
+  for(let i=6;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const k=d.toISOString().slice(0,10);
+    const done=!!c[k];
+    const title=done?c[k].quote:'—';
+    html.push(`<div class="history-item">
+      <span class="history-date">${fmtDate(k)}</span>
+      <span class="history-title">${title}</span>
+      <span class="history-status ${done?'done':'missed'}">${done?'✓ 已完成':'未完成'}</span>
+    </div>`);
+  }
+  document.getElementById('history-list').innerHTML=html.join('');
+}
+
+// ===== NAV =====
+function showPage(id){
+  document.querySelectorAll('.page-view').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// ===== INIT =====
+(function(){
+  const u=JSON.parse(localStorage.getItem('rl_user')||'null');
+  if(u&&u.date===today())enterDashboard(u.name);
+})();
+</script>
 </body>
 </html>

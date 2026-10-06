@@ -52,11 +52,28 @@ body{background:#E8E4DF;font-family:'Arial Black',Arial,sans-serif;color:#111;mi
 .modal-content{margin:0;padding:24px;min-height:100vh}
 .lit-card-num{float:none;margin-bottom:8px}
 }
+
+.featured-lit{max-width:1200px;margin:0 auto;padding:24px 32px;display:none}
+.featured-lit-card{background:#000;padding:32px 36px;border:1px solid #333}
+.featured-lit-label{font-size:11px;font-weight:700;letter-spacing:3px;color:#C8F230;margin-bottom:10px}
+.featured-lit-title{font-size:clamp(20px,3vw,28px);font-weight:900;color:#fff;line-height:1.3;margin-bottom:8px}
+.featured-lit-meta{font-size:13px;color:#888;font-style:italic;margin-bottom:14px}
+.featured-lit-finding{font-size:14px;color:#ccc;line-height:1.7;font-family:Georgia,serif;margin-bottom:20px}
+.featured-lit-link{display:inline-block;padding:10px 24px;background:#C8F230;color:#000;font-weight:700;font-size:13px;letter-spacing:1px;text-decoration:none}
 </style>
 </head>
 <body>
 <nav class="nav"><span class="nav-brand">ARISE CLUB</span><a href="app.html" class="nav-back">← 返回</a></nav>
 <div class="lit-header"><div class="number">//01</div><h1>文献解读</h1></div>
+<div class="featured-lit" id="featuredLit">
+<div class="featured-lit-card">
+<div class="featured-lit-label">TODAY'S PAPER</div>
+<div class="featured-lit-title" id="featuredLitTitle"></div>
+<div class="featured-lit-meta" id="featuredLitMeta"></div>
+<div class="featured-lit-finding" id="featuredLitFinding"></div>
+<a class="featured-lit-link" id="featuredLitLink" href="#">Read full analysis</a>
+</div>
+</div>
 <div class="lit-toolbar">
 <input type="text" class="lit-search" id="litSearch" placeholder="搜索文献标题、作者、期刊...">
 <div class="lit-filters" id="litFilters">
@@ -72,6 +89,23 @@ body{background:#E8E4DF;font-family:'Arial Black',Arial,sans-serif;color:#111;mi
 <div class="modal-content" id="modalContent"></div>
 </div>
 <script>
+/* Featured Literature - Daily Push */
+(function(){
+  var FEATURED={'2026-10-07':{title:'恢复手段效果排序：冷水浸泡微幅领先，其余手段与安慰剂无异',authors:'Jin X, et al.',journal:'Sports Medicine',year:'2026',finding:'47项RCT网络荟萃分析：9种恢复手段仅冷水浸泡(CWI)对主观恢复感有微弱显著改善(SMD=-0.30, d=0.21)，效应量远低于MCID阈值。恢复不是产品而是过程——睡眠、吃够、休息才是最优策略。',url:'jin-recovery-modalities-nma-2026.html'}};
+  var now=new Date();
+  var dateKey=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+  var f=FEATURED[dateKey];
+  if(f){
+    var el=document.getElementById('featuredLit');
+    if(el){el.style.display='block';
+    document.getElementById('featuredLitTitle').textContent=f.title;
+    document.getElementById('featuredLitMeta').textContent=f.authors+' \u00b7 '+f.journal+' \u00b7 '+f.year;
+    document.getElementById('featuredLitFinding').textContent=f.finding;
+    document.getElementById('featuredLitLink').href=f.url;
+    }
+  }
+})();
+
 
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function renderCard(item,idx){

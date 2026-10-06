@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jin et al. 2026 深度解读 — 耐力运动员物理恢复手段网络Meta分析</title>
+<style>
+:root{--bg:#F8F6F0;--card:#FFFDF8;--ink:#102A43;--text:#1D2733;--muted:#667085;--blue:#2978B5;--amber:#F59E0B;--red:#B0413E;--green:#2F7D5B;--grid:#E6E1D8;--border:#E0D9C9;--serif:Georgia,"Songti SC","Noto Serif CJK SC",serif;--sans:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--text);font-family:var(--serif);line-height:1.75;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* topband */
+.topband{background:var(--ink);color:#fff;padding:10px 24px;display:flex;justify-content:space-between;align-items:center;font-family:var(--sans);font-size:13px;flex-wrap:wrap;gap:6px}
+.topband .tag{color:var(--amber);font-weight:600;margin-right:8px}
+.topband .meta{opacity:.7;font-size:12px}
+
+/* hero */
+.hero{padding:48px 0 36px;border-bottom:1px solid var(--grid)}
+.kicker{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--amber);margin-bottom:12px}
+h1{font-family:var(--serif);font-size:clamp(24px,4vw,36px);line-height:1.3;color:var(--ink);margin-bottom:8px}
+h1 .sub{display:block;font-size:.6em;color:var(--muted);font-style:italic;margin-top:6px}
+.hero-meta{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.8;margin-top:16px}
+.hero-meta strong{color:var(--text)}
+.type-tag{display:inline-block;background:var(--ink);color:#fff;font-family:var(--mono);font-size:11px;padding:2px 10px;border-radius:3px;margin-left:8px;vertical-align:middle}
+
+/* verdict */
+.verdict{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:28px;background:var(--ink);border-radius:8px;overflow:hidden}
+.vcell{padding:20px 16px;border-left:3px solid var(--amber)}
+.vcell:first-child{border-left:none}
+.vlabel{font-family:var(--sans);font-size:12.5px;color:rgba(255,255,255,.5);margin-bottom:4px}
+.vval{font-family:var(--mono);font-size:clamp(22px,3vw,30px);color:#fff;font-weight:700}
+.vnote{font-family:var(--sans);font-size:12.5px;color:rgba(255,255,255,.4);margin-top:4px}
+.vval.neg{color:var(--green)}
+.vval.null{color:var(--red)}
+
+/* toc */
+.toc{position:sticky;top:0;z-index:100;background:rgba(248,246,240,.85);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1px solid var(--grid);padding:10px 0;overflow-x:auto;white-space:nowrap}
+.toc-inner{display:flex;gap:6px;padding:0 24px;max-width:860px;margin:0 auto}
+.toc a{font-family:var(--sans);font-size:12px;color:var(--muted);padding:4px 12px;border-radius:20px;border:1px solid var(--border);transition:all .2s;flex-shrink:0}
+.toc a:hover,.toc a.active{background:var(--ink);color:#fff;border-color:var(--ink);text-decoration:none}
+
+/* sections */
+section{padding:48px 0 32px;border-bottom:1px solid var(--grid)}
+.sec-no{font-family:var(--mono);font-size:13px;color:var(--amber);display:block;margin-bottom:6px}
+h2{font-family:var(--serif);font-size:clamp(20px,3vw,28px);color:var(--ink);margin-bottom:12px}
+.sec-lede{font-size:15px;color:var(--muted);margin-bottom:24px;max-width:680px}
+p{margin-bottom:16px}
+
+/* cards */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:20px 0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px}
+.card .card-title{font-family:var(--sans);font-size:14px;color:var(--ink);margin-bottom:8px;font-weight:700}
+.card p,.card li{font-size:14px;line-height:1.65}
+
+/* datastrip */
+.datastrip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:24px 0;background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.dcell{padding:18px 14px;border-top:3px solid var(--blue);text-align:center}
+.dcell .big{font-family:var(--mono);font-size:clamp(20px,2.5vw,28px);font-weight:700;color:var(--ink)}
+.dcell .unit{font-family:var(--sans);font-size:12px;color:var(--muted);margin-top:2px}
+.dcell .lbl{font-family:var(--sans);font-size:11px;color:var(--muted);margin-top:6px}
+.dcell:nth-child(2){border-top-color:var(--amber)}
+.dcell:nth-child(3){border-top-color:var(--green)}
+.dcell:nth-child(4){border-top-color:var(--red)}
+
+/* meta-table */
+.meta-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
+.meta-table th{text-align:left;padding:10px 14px;background:var(--ink);color:#fff;font-family:var(--sans);font-size:13px;font-weight:600}
+.meta-table td{padding:10px 14px;border-bottom:1px solid var(--grid);vertical-align:top}
+.meta-table tr:nth-child(even) td{background:rgba(0,0,0,.02)}
+
+/* table.data */
+.tbl-scroll{overflow-x:auto;margin:20px 0;border-radius:8px;border:1px solid var(--border)}
+table.data{width:100%;border-collapse:collapse;font-size:13px;font-family:var(--sans)}
+table.data th{background:var(--ink);color:#fff;padding:10px 12px;text-align:left;font-weight:600;white-space:nowrap}
+table.data td{padding:9px 12px;border-bottom:1px solid var(--grid);vertical-align:top}
+table.data tr:nth-child(even) td{background:rgba(0,0,0,.015)}
+
+/* tags */
+.tag{display:inline-block;font-family:var(--sans);font-size:11px;padding:2px 8px;border-radius:3px;font-weight:600}
+.tag.hi{background:#E8F5E9;color:var(--green)}
+.tag.mid{background:#FFF8E1;color:#A67C00}
+.tag.lo{background:#FFEBEE;color:var(--red)}
+.tag.neu{background:rgba(0,0,0,.06);color:var(--muted)}
+
+/* compare */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:24px 0;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.cc{padding:24px 20px;background:var(--card)}
+.cc.a{border-top:3px solid var(--green)}
+.cc.b{border-top:3px solid var(--red)}
+.cc h4{font-family:var(--sans);font-size:14px;margin-bottom:8px}
+.cc .big{font-family:var(--mono);font-size:24px;font-weight:700;color:var(--ink)}
+.cc p{font-size:13px;color:var(--muted);margin-top:6px}
+
+/* grade */
+.grade-bar{display:flex;height:12px;border-radius:6px;overflow:hidden;margin:16px 0}
+.grade-bar .seg{flex:1}
+.grade-bar .seg.active{background:var(--green)}
+.grade-bar .seg.inactive{background:var(--grid)}
+.grade-bar .seg.warn{background:var(--amber)}
+.grade-bar .seg.danger{background:var(--red)}
+.grade-legend{display:flex;gap:16px;font-family:var(--sans);font-size:12px;color:var(--muted);margin-bottom:16px;flex-wrap:wrap}
+.grade-legend span::before{content:'';display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:middle}
+.grade-legend .gl-green::before{background:var(--green)}
+.grade-legend .gl-amber::before{background:var(--amber)}
+.grade-legend .gl-red::before{background:var(--red)}
+.grade-legend .gl-gray::before{background:var(--grid)}
+
+/* mech */
+.mech{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+.m{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px}
+.m .midx{font-family:var(--mono);font-size:20px;color:var(--amber);font-weight:700;margin-bottom:6px}
+.m h4{font-family:var(--sans);font-size:14px;margin-bottom:8px}
+.m p{font-size:13px;line-height:1.65}
+.m .evi{font-family:var(--sans);font-size:11px;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--grid)}
+
+/* flow */
+.flow{display:flex;gap:8px;margin:24px 0;flex-wrap:wrap}
+.step{flex:1;min-width:140px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center}
+.step .sno{font-family:var(--mono);font-size:11px;color:var(--amber);margin-bottom:4px}
+.step h4{font-family:var(--sans);font-size:13px;margin-bottom:6px}
+.step p{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* note */
+.note{background:var(--card);border-left:4px solid var(--blue);padding:16px 20px;margin:16px 0;border-radius:0 8px 8px 0;font-size:14px}
+.note.warn{border-left-color:var(--amber)}
+.note.bound{border-left-color:var(--red)}
+
+/* quote */
+.quote{font-family:var(--serif);font-size:18px;color:var(--ink);border-left:4px solid var(--amber);padding:16px 24px;margin:24px 0;font-style:italic;line-height:1.6}
+
+/* verdict-final */
+.verdict-final{margin:20px 0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.vf-row{display:flex;padding:14px 20px;border-bottom:1px solid var(--grid);align-items:baseline;gap:12px}
+.vf-row:last-child{border-bottom:none}
+.vf-key{font-family:var(--sans);font-size:13px;color:var(--muted);min-width:140px;flex-shrink:0}
+.vf-val{font-family:var(--serif);font-size:15px;color:var(--ink)}
+
+/* misread / correct */
+.misread{background:#FFF5F5;border-left:4px solid var(--red);padding:16px 20px;margin:12px 0;border-radius:0 8px 8px 0}
+.correct{background:#F0FFF4;border-left:4px solid var(--green);padding:16px 20px;margin:12px 0;border-radius:0 8px 8px 0}
+.mr-title,.cr-title{font-family:var(--sans);font-size:13px;font-weight:700;margin-bottom:4px}
+.mr-title{color:var(--red)}
+.cr-title{color:var(--green)}
+.mr-body,.cr-body{font-size:14px;line-height:1.65}
+
+/* svg chart */
+figure.chart{margin:24px 0;text-align:center}
+figure.chart svg{max-width:100%;height:auto}
+figure.chart figcaption{font-family:var(--sans);font-size:12px;color:var(--muted);margin-top:8px}
+
+/* footer refs */
+footer{background:var(--ink);color:rgba(255,255,255,.7);padding:48px 0}
+footer h3{color:#fff;font-family:var(--serif);font-size:20px;margin-bottom:20px}
+footer ol{font-family:var(--sans);font-size:13px;line-height:1.8;padding-left:24px}
+footer ol li{margin-bottom:6px}
+footer a{color:var(--amber)}
+
+/* rv animation */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:translateY(0)}
+a:focus-visible,.toc a:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:3px}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* responsive */
+@media(max-width:900px){
+.verdict{grid-template-columns:1fr 1fr}
+.vcell{border-left:none;border-top:3px solid var(--amber)}
+.vcell:first-child{border-left:none}
+.datastrip{grid-template-columns:1fr 1fr}
+.dcell{border-top-width:2px}
+.grid2,.grid3,.mech,.compare{grid-template-columns:1fr}
+.flow{flex-direction:column}
+}
+@media(max-width:560px){
+.verdict{grid-template-columns:1fr}
+.datastrip{grid-template-columns:1fr}
+.wrap{padding:0 16px}
+.hero{padding:32px 0 24px}
+section{padding:32px 0 24px}
+}
+@media print{
+.toc{display:none}
+.rv{opacity:1;transform:none}
+.topband{background:#fff;color:#000;border-bottom:2px solid #000}
+footer{background:#fff;color:#000}
+footer a{color:#000}
+body{background:#fff;font-size:11pt}
+section{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAND -->
+<div class="topband">
+<div><span class="tag">文献深度解读</span>恢复科学 · 运动表现</div>
+<div class="meta">Frontiers in Sports and Active Living · Vol 8 · 2026 · DOI: 10.3389/fspor.2026.1876924</div>
+</div>
+
+<!-- HERO -->
+<div class="wrap">
+<div class="hero">
+<div class="kicker">Literature Deep Read · Recovery Science · Network Meta-Analysis</div>
+<h1>物理恢复手段在竞技耐力运动员中的效果：网络 Meta 分析揭示有限获益
+<span class="sub">Physical recovery modalities in competitive and elite endurance athletes: a systematic review and NMA finding limited evidence of benefit over passive recovery</span>
+</h1>
+<div class="hero-meta">
+<strong>作者：</strong>Yu Jin, Dandan Pan, Mengying Li, Dinghuang Zhu*, Jian Wen*<br>
+<strong>期刊：</strong><em>Frontiers in Sports and Active Living</em>, 2026; 8. IF ≈ 3.0 · CiteScore 3.9<span class="type-tag">系统综述 + NMA</span><br>
+<strong>DOI：</strong><a href="https://doi.org/10.3389/fspor.2026.1876924" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer">10.3389/fspor.2026.1876924</a> · <strong>PROSPERO：</strong>CRD420261368621
+</div>
+
+<div class="verdict">
+<div class="vcell">
+<div class="vlabel">纳入试验</div>
+<div class="vval">16</div>
+<div class="vnote">273 名参与者</div>
+</div>
+<div class="vcell">
+<div class="vlabel">vs 被动恢复比较</div>
+<div class="vval">47</div>
+<div class="vnote">8 项结局 × 多手段</div>
+</div>
+<div class="vcell">
+<div class="vlabel">中等确定性结论</div>
+<div class="vval null">1/47</div>
+<div class="vnote">压缩装备不影响表现</div>
+</div>
+<div class="vcell">
+<div class="vlabel">极低确定性</div>
+<div class="vval" style="color:var(--amber)">31/47</div>
+<div class="vnote">66% 比较无法推断</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- TOC -->
+<nav class="toc" aria-label="目录导航">
+<div class="toc-inner">
+<a href="#s1">01 研究问题</a>
+<a href="#s2">02 核心结果</a>
+<a href="#s3">03 证据评级</a>
+<a href="#s4">04 横向比较</a>
+<a href="#s5">05 综合判断</a>
+<a href="#s6">06 方法学审查</a>
+<a href="#s7">07 机制解读</a>
+<a href="#s8">08 实践桥梁</a>
+<a href="#s9">09 哲学审查</a>
+<a href="#s10">10 误读与总结</a>
+<a href="#refs">参考文献</a>
+</div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- SECTION 01 -->
+<section id="s1" class="rv">
+<span class="sec-no">SECTION 01</span>
+<h2>研究问题</h2>
+<p class="sec-lede">在竞技与精英耐力运动员中，各种物理恢复手段是否优于被动恢复？证据是否足以支持针对特定恢复手段的推荐？</p>
+
+<table class="meta-table">
+<caption>PICO 框架与研究设计</caption>
+<tr><th style="width:140px">维度</th><th>内容</th></tr>
+<tr><td><strong>P（人群）</strong></td><td>竞技/精英耐力运动员（VO₂max > 55 mL/kg/min 男性, > 50 女性; Tier 3-5）；涵盖跑步、自行车、越野滑雪、游泳、铁人三项</td></tr>
+<tr><td><strong>I（干预）</strong></td><td>冷水浸泡 (CWI)、全身冷冻疗法 (WBC)、积极恢复 (AR)、手法按摩、压缩装备 (CG)、神经肌肉电刺激 (NMES)、间歇性气压压缩 (IPC)、远红外 (FIR)</td></tr>
+<tr><td><strong>C（对照）</strong></td><td>被动恢复（静息）、安慰剂/假处理、积极手段间头对头比较</td></tr>
+<tr><td><strong>O（结局）</strong></td><td>主要：延迟性肌肉酸痛 (DOMS)、肌酸激酶 (CK)；次要：运动表现恢复、血乳酸 (BLA)、主观用力感 (RPE)、白介素-6 (IL-6)、柔韧性、CMJ/MVC</td></tr>
+<tr><td><strong>设计</strong></td><td>系统综述 + 随机效应网络 Meta 分析（频率学方法, netmeta R 包）</td></tr>
+<tr><td><strong>资助</strong></td><td>未报告外部资助</td></tr>
+</table>
+
+<div class="grid3">
+<div class="card">
+<p class="card-title">假说 A：存在有效手段</p>
+<p>至少一种物理恢复手段在特定结局上优于被动恢复，支持手段特异性推荐。</p>
+</div>
+<div class="card">
+<p class="card-title">假说 B：手段间等效</p>
+<p>各手段的效果差异不具临床意义，选择应基于成本、可及性与运动员偏好。</p>
+</div>
+<div class="card">
+<p class="card-title">假说 C：期望效应主导</p>
+<p>不可盲法设计使主观结局被期望效应污染，观察到的"效果"反映感知偏差而非生理效应。</p>
+</div>
+</div>
+
+<div class="note">
+<strong>能回答什么：</strong>在竞技耐力运动员中，各恢复手段 vs 被动恢复的相对效应大小及证据确定性。<br>
+<strong>不能回答什么：</strong>恢复手段在业余人群中的效果；不同剂量/时序的优化方案；恢复手段对长期训练适应性的影响；手段间真实优劣排序（网络过于稀疏）。
+</div>
+</section>
+
+<!-- SECTION 02 -->
+<section id="s2" class="rv">
+<span class="sec-no">SECTION 02</span>
+<h2>核心结果</h2>
+<p class="sec-lede">47 项 vs 被动恢复的比较中，仅 3 项置信区间排除零值，且无一项经得起审查。唯一的中等确定性发现是：压缩装备不提升运动表现。</p>
+
+<div class="datastrip">
+<div class="dcell">
+<div class="big">0</div>
+<div class="unit">项</div>
+<div class="lbl">稳健阳性发现</div>
+</div>
+<div class="dcell">
+<div class="big">64%</div>
+<div class="unit">节点</div>
+<div class="lbl">仅由单项试验支撑</div>
+</div>
+<div class="dcell">
+<div class="big">I²=0%</div>
+<div class="unit">表现网络</div>
+<div class="lbl">唯一无异质性网络</div>
+</div>
+<div class="dcell">
+<div class="big">SMD 0.04</div>
+<div class="unit">CG vs 被动</div>
+<div class="lbl">唯一中等确定性</div>
+</div>
+</div>
+
+<h3 style="font-family:var(--serif);font-size:18px;color:var(--ink);margin:28px 0 16px">各恢复手段 vs 被动恢复：运动表现（最充分支持的网络）</h3>
+
+<figure class="chart">
+<svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="运动表现网络各手段vs被动恢复的标准化均数差森林图">
+<title>运动表现 vs 被动恢复森林图</title>
+<desc>展示各恢复手段与被动恢复在运动表现上的SMD及95%CI，负值有利于干预</desc>
+<!-- zero line -->
+<line x1="350" y1="30" x2="350" y2="310" stroke="#E6E1D8" stroke-width="1" stroke-dasharray="4,3"/>
+<!-- axis labels -->
+<text x="150" y="330" font-family="ui-monospace,monospace" font-size="11" fill="#667085" text-anchor="middle">-2.0</text>
+<text x="250" y="330" font-family="ui-monospace,monospace" font-size="11" fill="#667085" text-anchor="middle">-1.0</text>
+<text x="350" y="330" font-family="ui-monospace,monospace" font-size="11" fill="#667085" text-anchor="middle">0</text>
+<text x="450" y="330" font-family="ui-monospace,monospace" font-size="11" fill="#667085" text-anchor="middle">+1.0</text>
+<text x="550" y="330" font-family="ui-monospace,monospace" font-size="11" fill="#667085" text-anchor="middle">+2.0</text>
+<!-- grid -->
+<line x1="150" y1="30" x2="150" y2="310" stroke="#E6E1D8" stroke-width=".5"/>
+<line x1="250" y1="30" x2="250" y2="310" stroke="#E6E1D8" stroke-width=".5"/>
+<line x1="450" y1="30" x2="450" y2="310" stroke="#E6E1D8" stroke-width=".5"/>
+<line x1="550" y1="30" x2="550" y2="310" stroke="#E6E1D8" stroke-width=".5"/>
+<!-- WBC -->
+<text x="12" y="58" font-family="-apple-system,sans-serif" font-size="12" fill="#1D2733">WBC</text>
+<line x1="190" y1="54" x2="410" y2="54" stroke="#2978B5" stroke-width="2"/>
+<circle cx="319" cy="54" r="5" fill="#2978B5"/>
+<text x="610" y="58" font-family="ui-monospace,monospace" font-size="10" fill="#667085">-0.71 [-1.62, 0.19]</text>
+<!-- CWI -->
+<text x="12" y="92" font-family="-apple-system,sans-serif" font-size="12" fill="#1D2733">CWI</text>
+<line x1="280" y1="88" x2="420" y2="88" stroke="#2978B5" stroke-width="2.5"/>
+<circle cx="343" cy="88" r="6" fill="#2978B5"/>
+<text x="610" y="92" font-family="ui-monospace,monospace" font-size="10" fill="#667085">-0.27 [-0.70, 0.16]</text>
+<!-- AR -->
+<text x="12" y="126" font-family="-apple-system,sans-serif" font-size="12" fill="#1D2733">AR</text>
+<line x1="310" y1="122" x2="390" y2="122" stroke="#2978B5" stroke-width="2.5"/>
+<circle cx="350" cy="126" r="6" fill="#2978B5"/>
+<text x="610" y="126" font-family="ui-monospace,monospace" font-size="10" fill="#667085">-0.01 [-0.39, 0.36]</text>
+<!-- CG -->
+<text x="12" y="160" font-family="-apple-system,sans-serif" font-size="12" fill="#1D2733">CG</text>
+<line x1="313" y1="156" x2="400" y2="156" stroke="#2978B5" stroke-width="2.5"/>
+<circle cx="354" cy="160" r="6" fill="#2F7D5B"/>
+<text x="610" y="160" font-family="ui-monospace,monospace" font-size="10" fill="#667085">+0.04 [-0.37, 0.45]</text>
+<!-- NMES -->
+<text x="12" y="194" font-family="-apple-system,sans-serif" font-size="12" fill="#1D2733">NMES</text>
+<line x1="310" y1="190" x2="390" y2="190" stroke="#2978B5" stroke-width="2.5"/>
+<circle cx="350" cy="194" r="6" fill="#2978B5"/>
+<text x="610" y="194" font-family="ui-monospace,monospace" font-size="10" fill="#667085">+0.00 [-0.40, 0.40]</text>
+<!-- IPC -->
+<text x="12" y="228" font-family="-apple-system,sans-serif" font-size="12" fill="#1D2733">IPC</text>
+<line x1="230" y1="224" x2="460" y2="224" stroke="#2978B5" stroke-width="1.5"/>
+<circle cx="370" cy="228" r="4" fill="#2978B5"/>
+<text x="610" y="228" font-family="ui-monospace,monospace" font-size="10" fill="#667085">+0.20 [-1.04, 1.44]</text>
+<!-- SM -->
+<text x="12" y="262" font-family="-apple-system,sans-serif" font-size="12" fill="#1D2733">按摩</text>
+<line x1="250" y1="258" x2="470" y2="258" stroke="#2978B5" stroke-width="1.5"/>
+<circle cx="380" cy="262" r="4" fill="#2978B5"/>
+<text x="610" y="262" font-family="ui-monospace,monospace" font-size="10" fill="#667085">+0.30 [-1.10, 1.70]</text>
+<!-- FIR -->
+<text x="12" y="296" font-family="-apple-system,sans-serif" font-size="12" fill="#1D2733">FIR</text>
+<line x1="220" y1="292" x2="490" y2="292" stroke="#2978B5" stroke-width="1.5"/>
+<circle cx="390" cy="296" r="4" fill="#2978B5"/>
+<text x="610" y="296" font-family="ui-monospace,monospace" font-size="10" fill="#667085">+0.40 [-1.30, 2.10]</text>
+<!-- annotation -->
+<text x="350" y="22" font-family="-apple-system,sans-serif" font-size="11" fill="#B0413E" text-anchor="middle">← 有利干预          有利被动恢复 →</text>
+</svg>
+<figcaption>图：各恢复手段 vs 被动恢复的运动表现 SMD（95% CI）。负值表示干预优于被动恢复。CWI 3 项试验；WBC 仅 1 项试验。I² = 0%，无显著异质性。</figcaption>
+</figure>
+
+<div class="tbl-scroll">
+<table class="data">
+<caption>各结局网络特征与效应判断</caption>
+<thead><tr><th>结局</th><th>试验数</th><th>节点数</th><th>单试验节点</th><th>I²</th><th>vs 被动恢复</th><th>判断</th></tr></thead>
+<tbody>
+<tr><td><strong>DOMS</strong></td><td>5</td><td>7</td><td>5/7</td><td style="color:var(--red);font-weight:700">90.2%</td><td>所有 CI 跨零，区间宽约 4 SMD</td><td><span class="tag lo">不可解读</span></td></tr>
+<tr><td><strong>CK</strong></td><td>4</td><td>7</td><td>5/7</td><td>df=0</td><td>FIR 排第三 (SMD -0.25)</td><td><span class="tag lo">极低</span></td></tr>
+<tr><td><strong>运动表现</strong></td><td>11</td><td>11</td><td>多项单试验</td><td style="color:var(--green);font-weight:700">0%</td><td>CG/AR/NMES 排除临床重要效应</td><td><span class="tag hi">信息性零结果</span></td></tr>
+<tr><td><strong>血乳酸</strong></td><td>5</td><td>7</td><td>3/7</td><td style="color:var(--amber);font-weight:700">74.5%</td><td>被动恢复排名高于AR</td><td><span class="tag lo">混杂</span></td></tr>
+<tr><td><strong>RPE</strong></td><td>5</td><td>5</td><td>多项单试验</td><td>0%</td><td>CWI 排第一但仅 1 项试验</td><td><span class="tag mid">不确定</span></td></tr>
+<tr><td><strong>IL-6</strong></td><td>2</td><td>3</td><td>2/3</td><td>df=0</td><td>无接近显著结果</td><td><span class="tag lo">极低</span></td></tr>
+<tr><td><strong>柔韧性</strong></td><td>2</td><td>5</td><td>4/5</td><td>df=0</td><td>假浸泡排第一</td><td><span class="tag lo">极低</span></td></tr>
+<tr><td><strong>CMJ/MVC</strong></td><td>6</td><td>10</td><td>8/10</td><td>51.1%</td><td>WBC/CG 排除零，但为混合指标人为假象</td><td><span class="tag lo">人为假象</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note warn">
+<strong>关键发现 — 假浸泡表现：</strong>Batista et al. (2024) 的等温浸泡（27°C）作为假处理，在柔韧性网络中排名第一，在运动表现中排名 11 个节点的第 3 位，在 CMJ 中超过两种按摩。这一模式与期望效应预测一致——在没有盲法可能的文献中，感官体验最显著的手段往往在主观结局上排名最高。
+</div>
+</section>
+
+<!-- SECTION 03 -->
+<section id="s3" class="rv">
+<span class="sec-no">SECTION 03</span>
+<h2>GRADE 证据确定性评级（CINeMA）</h2>
+<p class="sec-lede">47 项 vs 被动恢复比较中，31 项极低确定性，15 项低确定性，仅 1 项中等确定性。证据确定性的分布本身就是最重要的发现之一。</p>
+
+<div class="grade-bar">
+<div class="seg danger" style="flex:31" title="极低确定性 ×31"></div>
+<div class="seg warn" style="flex:15" title="低确定性 ×15"></div>
+<div class="seg active" style="flex:1" title="中等确定性 ×1"></div>
+</div>
+<div class="grade-legend">
+<span class="gl-red">极低 (31)</span>
+<span class="gl-amber">低 (15)</span>
+<span class="gl-green">中等 (1)</span>
+</div>
+
+<div class="grid2">
+<div class="card">
+<p class="card-title">降级原因分析</p>
+<p><strong>不精确性：</strong>32/47 比较被评为主要关切。节点样本极小，置信区间极宽（DOMS 网络区间跨约 4 SMD），无法区分大获益与大伤害。</p>
+<p><strong>异质性：</strong>DOMS I²=90.2%（τ=1.32），血乳酸 I²=74.5%。CK、IL-6、柔韧性网络自由度为 0，异质性无法估计。</p>
+<p><strong>不一致性：</strong>闭合环极少，节点分离检验均 P>0.05，但统计功效极低，不能视为一致性证据。</p>
+</div>
+<div class="card">
+<p class="card-title">唯一的中等确定性</p>
+<p><strong>压缩装备 vs 被动恢复 → 运动表现</strong></p>
+<p>SMD = 0.04, 95% CI −0.37 to 0.45</p>
+<p>内偏倚：无关切；间接性：无关切；不精确性：无关切；异质性：无关切；不一致性：无关切；报告偏倚：降级一次（疑似）。</p>
+<p style="color:var(--green);font-weight:600;margin-top:8px">→ 本综述最确定的结论：压缩装备不提升运动表现。CI 排除双侧临床重要效应。</p>
+</div>
+</div>
+
+<div class="note bound">
+<strong>信息性零结果 vs 非信息性零结果：</strong>对于运动表现，CG（CI −0.37~0.45）、AR（CI −0.39~0.36）和 NMES（CI −0.40~0.40）的置信区间完全落在预设的临床不重要范围内，且 I²=0%。这是"证据证明无临床重要效应"——信息性零结果。对于 DOMS（CI 跨约 4 SMD）或 CK（df=0），零结果完全不具备区分能力——非信息性零结果。
+</div>
+</section>
+
+<!-- SECTION 04 -->
+<section id="s4" class="rv">
+<span class="sec-no">SECTION 04</span>
+<h2>同级证据横向比较</h2>
+<p class="sec-lede">本综述的结论与此前综述的方向性分歧，主要源于人群限定、数据提取标准和证据确定性评级三个方法学差异。</p>
+
+<div class="compare">
+<div class="cc a">
+<p class="card-title">Jin et al. 2026（本综述）</p>
+<div class="big" style="color:var(--green)">0 种手段获益</div>
+<p>仅竞技/精英耐力人群；要求臂级数据；CINeMA 评级。<br>
+<strong>16 项试验，273 人，47 比较。</strong><br>
+结论：无任何手段超越被动恢复。最确定结论为压缩装备无效。</p>
+</div>
+<div class="cc b">
+<p class="card-title">Dupuy et al. 2018</p>
+<div class="big" style="color:var(--red)">6 种手段减 DOMS</div>
+<p>不限人群（运动员 + 久坐人群）；传统 Meta 分析；无证据确定性评级。<br>
+<strong>99 项研究。</strong><br>
+结论：按摩最有效（ES 0.92），CWI/压缩/积极恢复/对比水疗/冷冻均有效。</p>
+</div>
+</div>
+
+<div class="tbl-scroll" style="margin-top:20px">
+<table class="data">
+<caption>同级恢复手段系统综述横向比较</caption>
+<thead><tr><th>综述</th><th>年份</th><th>纳入</th><th>人群</th><th>证据评级</th><th>核心结论</th></tr></thead>
+<tbody>
+<tr><td><strong>Bleakley et al.</strong> Cochrane</td><td>2012</td><td>17 RCT, 366人</td><td>混合（不限精英）</td><td>低质量研究</td><td>CWI 减 DOMS（24-96h），但研究质量低，最优方案不明</td></tr>
+<tr><td><strong>Dupuy et al.</strong> Front Physiol</td><td>2018</td><td>99 研究</td><td>混合（运动员+非运动员）</td><td>未评级</td><td>按摩最有效（DOMS ES=0.92）；CWI/压缩/积极恢复均有效</td></tr>
+<tr><td><strong>Costello et al.</strong> Cochrane</td><td>2015</td><td>WBC 专项</td><td>混合</td><td>证据不足</td><td>WBC 减 DOMS 证据不足；无女性或精英运动员数据</td></tr>
+<tr><td><strong>Berjisian et al.</strong> Sports Med Open</td><td>2026</td><td>15 SRMA, 161研究, 3210人</td><td>混合</td><td>AMSTAR 2 低/极低；GRADE 低/极低</td><td>CWI 减酸痛至 96h；削弱力量增长和肌肥大；耐力适应不受影响</td></tr>
+<tr><td><strong>Jin et al.</strong> Front Sports Act Living</td><td>2026</td><td>16 RCT, 273人</td><td>仅竞技/精英耐力</td><td>CINeMA（31极低/15低/1中等）</td><td>无手段优于被动恢复；压缩装备确定无效于表现</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<strong>分歧的关键来源：</strong>Jin 2026 限定竞技耐力运动员（理论上恢复能力更强、干预窗口更窄）+ 要求臂级数据（排除仅报告中位数或缺失离散度的研究）+ 报告证据确定性（此前恢复综述均未做）。这些方法学选择使纳入试验更少、网络更稀疏、但结论更审慎。
+</div>
+</section>
+
+<!-- SECTION 05 -->
+<section id="s5" class="rv">
+<span class="sec-no">SECTION 05</span>
+<h2>综合证据判断</h2>
+<p class="sec-lede">基于证据确定性、效应量一致性与方法学审查的三级结论。</p>
+
+<div class="verdict-final">
+<div class="vf-row">
+<div class="vf-key" style="color:var(--green)"><strong>确定</strong></div>
+<div class="vf-val">压缩装备不提升竞技耐力运动员的运动表现（中等确定性，CI 排除双侧临床重要效应）。这是本综述唯一可指导实践的信息性零结果。</div>
+</div>
+<div class="vf-row">
+<div class="vf-key" style="color:var(--amber)"><strong>可能</strong></div>
+<div class="vf-val">期望效应在不可盲法的恢复文献中贡献了相当比例的观察效果。假浸泡在三个结局上排名高于多数主动手段，且方向与期望效应预测一致。</div>
+</div>
+<div class="vf-row">
+<div class="vf-key" style="color:var(--amber)"><strong>可能</strong></div>
+<div class="vf-val">针对特定恢复手段的推荐缺乏随机试验基础。16 项试验、273 人、64% 单试验节点——这一证据基础无法支撑手段特异性处方。</div>
+</div>
+<div class="vf-row">
+<div class="vf-key" style="color:var(--red)"><strong>不确定</strong></div>
+<div class="vf-val">CWI、WBC、按摩、积极恢复、NMES 在 DOMS/CK/IL-6 等结局上是否有效。网络过小、异质性过高、或混合不可比指标，均使结论不可靠。</div>
+</div>
+<div class="vf-row">
+<div class="vf-key" style="color:var(--red)"><strong>不确定</strong></div>
+<div class="vf-val">当本综述自身的精英纳入标准被执行时，8 个结局中 4 个完全无法形成可估计网络——"精英特异性"证据近乎空白。</div>
+</div>
+</div>
+</section>
+
+<!-- SECTION 06 -->
+<section id="s6" class="rv">
+<span class="sec-no">SECTION 06</span>
+<h2>方法学审查</h2>
+<p class="sec-lede">本综述在方法论上具有罕见的自我纠正透明度，但其核心局限反映的更多是证据基础本身的贫瘠而非综述者的失误。</p>
+
+<div class="grid2">
+<div class="card" style="border-top:3px solid var(--green)">
+<p class="card-title" style="color:var(--green)">优势</p>
+<p><strong>1. 前瞻性注册 + PRISMA-NMA 依从：</strong>PROSPERO 注册，方案偏离完整记录。</p>
+<p><strong>2. 罕见的自我纠正透明：</strong>在修订中承认 4 项试验编码错误和若干数据点问题，完整重新编码和重新运行分析，公开分析代码和臂级数据集。</p>
+<p><strong>3. CINeMA 证据确定性评级：</strong>恢复领域首篇完整报告证据确定性的综述。</p>
+<p><strong>4. 多项敏感性分析：</strong>6 个场景，包括限制 Tier 4-5、排除青少年、排除假节点、排除估计值等。</p>
+<p><strong>5. 对"不可解读"的坦率声明：</strong>明确标记 DOMS 网络、混合指标比较为不可解读，而非勉强给出结论。</p>
+</div>
+<div class="card" style="border-top:3px solid var(--red)">
+<p class="card-title" style="color:var(--red)">局限</p>
+<p><strong>1. 传递性假设脆弱：</strong>网络将不同运动类型（跑步/骑行/游泳）、不同恢复方案（温度/时长/压力各异）、不同时间点的测量混入同一节点。CWI 从 10°C/10min 到 15°C/15min 被视为同一干预。</p>
+<p><strong>2. 指标不可比性：</strong>血乳酸网络混合了"清除速率""峰值浓度"和"赛后浓度"三个不同构念；CMJ 网络混合了绝对跳高、变化值和最大自主收缩百分比。三个排除零值的 CI 均来自此类网络。</p>
+<p><strong>3. 网络稀疏性：</strong>55 个节点中 35 个仅由 1 项试验支撑，P-score 排名对单试验节点不稳定。</p>
+<p><strong>4. 不可盲法：</strong>16 项试验均无法盲法参与者。10/16 存在"偏离干预"风险关切。偏倚方向预期偏向干预。</p>
+<p><strong>5. 人群异质性：</strong>4 项为青少年研究（均龄 13.6-17.7 岁）；仅 7/16 报告 VO₂max，其中 1 项低于纳入标准。</p>
+</div>
+</div>
+
+<div class="note warn">
+<strong>网络 Meta 分析特有审查：</strong>不一致性检验（节点分离）均 P>0.05，但闭合环极少使检验功效极低。设计-治疗交互检验在 CK/IL-6/柔韧性网络不可估计。漏斗图视觉对称但仅 16 项试验使评估功效不足。传递性假设——即不同运动、不同剂量、不同人群可通过间接比较连接——在如此稀疏的网络中需要极其谨慎地解读。
+</div>
+</section>
+
+<!-- SECTION 07 -->
+<section id="s7" class="rv">
+<span class="sec-no">SECTION 07</span>
+<h2>机制解读</h2>
+<p class="sec-lede">各恢复手段的生理机制假说及支持证据等级。标注：A = 多源一致支持；B = 部分支持但存在矛盾；C = 主要基于理论推演。</p>
+
+<div class="mech">
+<div class="m">
+<div class="midx">01</div>
+<p class="card-title">冷水浸泡 (CWI)</p>
+<p>外周血管收缩 → 降低组织温度和代谢活性 → 减少运动后液体潴留 → 复温后冲洗效应清除代谢废物。去甲肾上腺素释放 200-300% 抑制 NF-κB 炎症通路。</p>
+<div class="evi">血管收缩/温度降低：<span class="tag hi">A</span> · 去甲肾上腺素抗炎：<span class="tag mid">B</span> · 减少 DOMS：<span class="tag mid">B</span>（混合人群支持，精英人群本综述未验证）</div>
+</div>
+<div class="m">
+<div class="midx">02</div>
+<p class="card-title">压缩装备 (CG)</p>
+<p>外部机械压力 → 减少肌肉振荡微损伤 → 限制肿胀空间 → 促进静脉回流和代谢废物转运。本综述以中等确定性确认其不提升运动表现。</p>
+<div class="evi">静脉回流促进：<span class="tag mid">B</span> · 减少肿胀空间：<span class="tag lo">C</span>（间接推演）· 不提升表现：<span class="tag hi">A</span>（中等确定性证据）</div>
+</div>
+<div class="m">
+<div class="midx">03</div>
+<p class="card-title">积极恢复 (AR)</p>
+<p>低强度运动维持肌肉泵活性 → 加速乳酸清除 → 增加局部血流促进代谢废物移除。传统认为 AR 优于被动恢复的乳酸清除。</p>
+<div class="evi">乳酸清除加速：<span class="tag mid">B</span>（但本综述中被动恢复排名高于 AR，P-score 0.62 vs 0.48）· 表现恢复：<span class="tag mid">B</span>（CI 排除临床重要效应）</div>
+</div>
+<div class="m">
+<div class="midx">04</div>
+<p class="card-title">手法按摩</p>
+<p>机械压力增加局部血流 → 可能减少微损伤后肿胀 → 激活机械感受器调节疼痛感知。Dupuy 2018 报告按摩为 DOMS 最有效手段（ES=0.92）。</p>
+<div class="evi">DOMS 减轻（混合人群）：<span class="tag hi">A</span> · 精英耐力人群：<span class="tag lo">C</span>（本综述中按摩未进入 DOMS 网络——无数值数据）</div>
+</div>
+<div class="m">
+<div class="midx">05</div>
+<p class="card-title">全身冷冻疗法 (WBC)</p>
+<p>极低温空气（−110°C ~ −140°C）暴露 2-4 min → 理论降温效果。但水的热导率约为空气的 25 倍，3 min 冷空气的深层组织冷却远不如 10 min 冷水浸泡。</p>
+<div class="evi">深层组织冷却：<span class="tag lo">C</span>（物理推演不支持等效于 CWI）· 表现恢复：Cochrane 2015 证据不足 · Wilson 2018 RCT 示 WBC 对肌功能恢复有害</div>
+</div>
+<div class="m">
+<div class="midx">06</div>
+<p class="card-title">神经肌肉电刺激 (NMES)</p>
+<p>电刺激诱发肌肉非自主收缩 → 模拟肌肉泵效应 → 理论上促进血流和代谢清除。本综述中 NMES 对表现的 CI 排除临床重要效应（SMD 0.00, CI −0.40~0.40）。</p>
+<div class="evi">肌肉泵模拟：<span class="tag lo">C</span>（理论推演）· 不提升表现：<span class="tag mid">B</span>（低确定性，但 CI 排除重要效应）</div>
+</div>
+</div>
+
+<div class="note bound">
+<strong>期望效应机制（C 级，但本综述核心警示）：</strong>物理恢复手段不可盲法 → 运动员始终知道接受了何种处理 → 最常报告的结局（酸痛、主观用力感）恰好是对期望最敏感的结局 → 感官体验最显著的手段（冷水浸泡、按摩）在主观结局上排名最高。假浸泡与主动手段表现一致的发现，使期望效应成为不可回避的竞争解释。
+</div>
+</section>
+
+<!-- SECTION 08 -->
+<section id="s8" class="rv">
+<span class="sec-no">SECTION 08</span>
+<h2>实践桥梁</h2>
+<p class="sec-lede">按证据强度分级的恢复处方建议。区分"证据支持的推荐"与"基于逻辑的推论"。</p>
+
+<div class="grid3">
+<div class="card" style="border-top:3px solid var(--green)">
+<p class="card-title" style="color:var(--green)">可确定推荐</p>
+<p><strong>不推荐压缩装备用于提升运动表现。</strong>中等确定性证据，CI 排除临床重要效应。购买决策应基于舒适度或心理偏好，而非效能预期。</p>
+<p style="margin-top:12px"><strong>睡眠、营养和训练负荷管理是恢复基础。</strong>任何物理恢复手段都是在此基础之上的增量，而非替代。这一结论得到所有恢复综述的一致支持。</p>
+</div>
+<div class="card" style="border-top:3px solid var(--amber)">
+<p class="card-title" style="color:var(--amber)">可考虑（证据不足但不禁止）</p>
+<p><strong>CWI：</strong>多日赛事期间策略性使用（赛后 10-15 min，10-15°C）以加速次日准备，但不作为每次训练后的常规操作。Berjisian 2026 伞状综述支持此策略性定位。</p>
+<p><strong>按摩：</strong>Dupuy 2018 在混合人群中报告最大 DOMS 减轻（ES=0.92），但精英耐力人群证据不足。可根据运动员偏好和资源可用性使用。</p>
+<p><strong>积极恢复：</strong>低强度（40-50% VO₂max，20-45 min）非负重模式，在感觉僵硬时使用。注意强度不超过 60% VO₂max，否则变为额外训练负荷。</p>
+</div>
+<div class="card" style="border-top:3px solid var(--red)">
+<p class="card-title" style="color:var(--red)">不能推出</p>
+<p><strong>无法推荐任何特定恢复手段优于其他手段。</strong>网络过于稀疏（64% 单试验节点），手段间比较的传递性假设无法满足。</p>
+<p><strong>无法为 DOMS/CK/IL-6 提供手段特异性处方。</strong>DOMS 网络 I²=90.2% 且移除 2/5 试验即完全翻转；CK 网络 df=0 无法估计异质性。</p>
+<p><strong>无法推荐 WBC 替代 CWI。</strong>仅 1 项试验支撑 WBC，且物理机制不支持等效冷却。</p>
+</div>
+</div>
+
+<div class="quote">
+"Recovery is not a product. Sleep. Eat enough. Take real rest days. The boring stuff has the evidence. The expensive stuff does not."
+</div>
+</section>
+
+<!-- SECTION 09 -->
+<section id="s9" class="rv">
+<span class="sec-no">SECTION 09</span>
+<h2>科学哲学审查</h2>
+<p class="sec-lede">五层分离：观察 → 推论 → 机制 → 因果 → 竞争解释。</p>
+
+<div class="flow">
+<div class="step">
+<div class="sno">LAYER 1</div>
+<p class="card-title">观察</p>
+<p>47 项比较中 46 项不显著。3 项排除零值均来自混合指标网络和单试验节点。I² 从 0% 到 90.2%。</p>
+</div>
+<div class="step">
+<div class="sno">LAYER 2</div>
+<p class="card-title">推论</p>
+<p>本综述推论：无手段优于被动恢复。但须区分"证据表明无效果"与"证据不足以检测效果"——前者仅适用于运动表现网络。</p>
+</div>
+<div class="step">
+<div class="sno">LAYER 3</div>
+<p class="card-title">机制</p>
+<p>各手段有独立生理机制假说，但在精英耐力运动员中（基础恢复能力强、干预窗口窄），这些机制是否产生临床可检测效应尚不确定。</p>
+</div>
+<div class="step">
+<div class="sno">LAYER 4</div>
+<p class="card-title">因果</p>
+<p>不可盲法 → 期望效应是系统性混淆因素。假浸泡表现与主动手段一致，使因果归因（手段 → 恢复）无法与（期望 → 感知改善）分离。</p>
+</div>
+<div class="step">
+<div class="sno">LAYER 5</div>
+<p class="card-title">竞争解释</p>
+<p>(A) 手段确实无生理效果；(B) 手段有生理效果但被不可盲法和期望效应淹没；(C) 手段有生理效果但精英人群恢复天花板效应使之无法检测。三种解释与现有数据完全一致。</p>
+</div>
+</div>
+
+<div class="note">
+<strong>期刊评估：</strong>Frontiers in Sports and Active Living（IF ≈ 3.0，CiteScore 3.9）为 Frontiers 系列期刊之一。Frontiers 系列曾因审稿质量问题受到学术界批评，但本综述的方法学质量——特别是自我纠正透明度和 CINeMA 评级——高于该领域平均水平。该期刊本身不构成可信度减损因素。
+</div>
+</section>
+
+<!-- SECTION 10 -->
+<section id="s10" class="rv">
+<span class="sec-no">SECTION 10</span>
+<h2>常见误读与总结</h2>
+<p class="sec-lede">基于本综述的敏感性分析和证据结构，预判最可能的误读方向。</p>
+
+<div class="misread">
+<div class="mr-title">误读 ①：「这篇综述证明所有恢复手段都没用」</div>
+<div class="mr-body">本综述证明的是：在当前证据基础上，无手段被证明优于被动恢复。"未被证明有效"与"被证明无效"是不同的认识论状态。对于运动表现，CG/AR/NMES 被中等/低确定性证据排除了临床重要效应；但对于 DOMS/CK/IL-6，证据完全不足以做任何方向的判断。</div>
+</div>
+<div class="correct">
+<div class="cr-title">正确理解</div>
+<div class="cr-body">对于运动表现：压缩装备、积极恢复和 NMES 不产生临床重要效果（信息性零结果）。对于其他结局：证据太薄弱，无法判断。两者必须区分报告。</div>
+</div>
+
+<div class="misread">
+<div class="mr-title">误读 ②：「冷水浸泡/按摩在混合人群中有证据，所以也适用于精英运动员」</div>
+<div class="mr-body">本综述的一个核心发现是：当限制为确认的 Tier 4-5 精英参与者时，8 个结局中 4 个完全无法形成可估计网络。精英运动员的基础恢复能力可能缩小干预窗口。从混合人群外推到精英人群需要独立验证，而非直接继承结论。</div>
+</div>
+<div class="correct">
+<div class="cr-title">正确理解</div>
+<div class="cr-body">Jin 2026 的发现不能直接否定 Dupuy 2018 或 Bleakley 2012 在混合人群中的结论。正确的推论是：混合人群的有效手段不能自动外推到精英人群，需要精英特异性的充分检验试验。</div>
+</div>
+
+<div class="misread">
+<div class="mr-title">误读 ③：「P-score 排名表明某种手段最好」</div>
+<div class="mr-body">P-score 仅表示在给定网络中排名最佳的概率，不携带任何关于手段是否有效的信息。当 64% 的节点仅由单项试验支撑时，排名完全由那一项试验的结果决定，没有任何稳定性。作者明确声明："rankings derived from single-trial nodes are unstable by construction"。</div>
+</div>
+<div class="correct">
+<div class="cr-title">正确理解</div>
+<div class="cr-body">P-score 排名在无足够复制的网络中是描述性统计量，不是证据。本综述中仅报告 P-score 伴随 SMD 和 CI，不将其作为推荐依据。</div>
+</div>
+
+<div class="misread">
+<div class="mr-title">误读 ④：「DOMS 敏感性分析中 4 种手段 SMD≈-2.7 说明它们确实有效」</div>
+<div class="mr-body">移除 2 项试验后出现的巨大效应量（SMD ≈ -2.5~-3.0）来自一项试验（Marquet 2015）的被动恢复臂异常：DOMS 评分 5.3, SD 仅 0.5，使该对比获得极高权重。这不是稳健发现，而是小样本异常值驱动的人为假象。两种版本的 DOMS 网络都不可信。</div>
+</div>
+<div class="correct">
+<div class="cr-title">正确理解</div>
+<div class="cr-body">DOMS 结论目前无法在任何方向上做出。首要任务是核实那些被标记为"估计而非提取"的数据点与原始文献的一致性。</div>
+</div>
+
+<div style="margin-top:32px;padding:24px;background:var(--card);border:1px solid var(--border);border-radius:8px">
+<p class="card-title" style="font-family:var(--sans);color:var(--ink);margin-bottom:12px">总结：本综述对恢复科学的核心贡献</p>
+<p style="font-size:14px">这篇综述的价值不在于"证明恢复手段无效"，而在于三点：<strong>第一</strong>，它是恢复领域首篇完整报告证据确定性的综述，揭示了 66% 比较为极低确定性这一事实本身；<strong>第二</strong>，它展示了证据基础远比试验数量暗示的更薄弱（64% 单试验节点）；<strong>第三</strong>，它提供了恢复领域最清晰的期望效应证据——假浸泡在多个结局上排名高于主动手段。对于从业者而言，最诚实的结论是：在获得充分检验的假对照试验之前，恢复手段的选择应基于运动员偏好、成本和便利性，而非效能宣称。</p>
+</div>
+</section>
+
+</div><!-- /wrap -->
+</main>
+
+<!-- REFERENCES -->
+<footer id="refs">
+<div class="wrap">
+<h3>参考文献</h3>
+<ol>
+<li>Jin Y, Pan D, Li M, Zhu D, Wen J. Physical recovery modalities in competitive and elite endurance athletes: a systematic review and network meta-analysis finding limited evidence of benefit over passive recovery. <em>Front Sports Act Living</em>. 2026;8. doi:<a href="https://doi.org/10.3389/fspor.2026.1876924" target="_blank" rel="noopener noreferrer">10.3389/fspor.2026.1876924</a></li>
+<li>Dupuy O, Douzi W, Theurot D, Bosquet L, Dugué B. An evidence-based approach for choosing post-exercise recovery techniques to reduce markers of muscle damage, soreness, fatigue, and inflammation. <em>Front Physiol</em>. 2018;9:403. doi:<a href="https://doi.org/10.3389/fphys.2018.00403" target="_blank" rel="noopener noreferrer">10.3389/fphys.2018.00403</a></li>
+<li>Bleakley C, McDonough S, Gardner E, et al. Cold-water immersion (cryotherapy) for preventing and treating muscle soreness after exercise. <em>Cochrane Database Syst Rev</em>. 2012;2:CD008262. doi:<a href="https://doi.org/10.1002/14651858.CD008262.pub2" target="_blank" rel="noopener noreferrer">10.1002/14651858.CD008262.pub2</a></li>
+<li>Costello JT, Baker PR, Minett GM, Bleakley C. Whole-body cryotherapy for exercising people. <em>Cochrane Database Syst Rev</em>. 2015. doi:<a href="https://doi.org/10.1002/14651858.CD010789.pub2" target="_blank" rel="noopener noreferrer">10.1002/14651858.CD010789.pub2</a></li>
+<li>Berjisian E, et al. Umbrella review of post-exercise cold-water immersion for performance recovery and adaptation. <em>Sports Med Open</em>. 2026. (PROSPERO: CRD420251103267)</li>
+<li>Hill J, Howatson G, van Someren K, Leeder J, Pedlar C. Compression garments and recovery from exercise-induced muscle damage: a meta-analysis. <em>Br J Sports Med</em>. 2014;48(18):1340-1346. doi:<a href="https://doi.org/10.1136/bjsports-2013-092456" target="_blank" rel="noopener noreferrer">10.1136/bjsports-2013-092456</a></li>
+<li>Wilson LJ, et al. Cold water immersion vs whole-body cryotherapy post-marathon. 2018. (WBC harmful vs CWI for muscle function)</li>
+<li>Abaïdia AE, et al. Cold water immersion vs whole body cryotherapy after eccentric exercise. <em>J Strength Cond Res</em>. 2017. (CWI superior for CMJ at 72h)</li>
+<li>Roberts LA, et al. Attenuated cellular adaptation after cold water immersion post resistance exercise. <em>J Physiol</em>. 2015;593(19):4437-4451.</li>
+<li>Marqués-Jiménez D, et al. Do compression garments enhance the active recovery process after exercise? <em>J Therm Biol</em>. 2016.</li>
+<li>Maia et al. Effects of lower-limb IPC on sports recovery. <em>Biol Sport</em>. 2024. (IPC reduces perceived soreness)</li>
+</ol>
+</div>
+</footer>
+
+<script>
+(function(){
+var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(function(el){obs.observe(el)});
+// TOC active
+var secs=document.querySelectorAll('section[id]');
+var links=document.querySelectorAll('.toc a');
+var tocObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.remove('active')});var a=document.querySelector('.toc a[href="#'+e.target.id+'"]');if(a)a.classList.add('active')}})},{rootMargin:'-80px 0px -70% 0px'});
+secs.forEach(function(s){tocObs.observe(s)});
+// Fragment link navigation
+document.querySelectorAll('.toc a[href^="#"]').forEach(function(a){
+a.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})});
+});
+})();
+</script>
+</body>
+</html>

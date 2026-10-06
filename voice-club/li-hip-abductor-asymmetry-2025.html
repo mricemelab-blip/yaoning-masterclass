@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>髋外展肌力不对称与足底筋膜炎 — Li et al. 2025 深度解读</title>
+<style>
+:root{--bg:#F8F6F0;--card:#FFFDF8;--ink:#102A43;--text:#1D2733;--muted:#667085;--blue:#2978B5;--amber:#F59E0B;--red:#B0413E;--green:#2F7D5B;--grid:#E6E1D8;--border:#E0D9C9;--serif:Georgia,"Songti SC","Noto Serif CJK SC",serif;--sans:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--serif);line-height:1.8;font-size:17px}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}a:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:2px}
+.topband{background:var(--ink);color:#fff;padding:12px 24px;display:flex;justify-content:space-between;align-items:center;font-family:var(--sans);font-size:13px}
+.topband .series{color:var(--amber);font-weight:700;letter-spacing:.5px}
+.topband .ref{color:rgba(255,255,255,.6);font-size:12px}
+.hero{max-width:920px;margin:0 auto;padding:56px 24px 40px}
+.kicker{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--amber);margin-bottom:12px}
+.hero h1{font-family:var(--serif);font-size:clamp(24px,4vw,36px);line-height:1.35;color:var(--ink);margin-bottom:8px}
+.hero h1 .sub{display:block;font-size:.6em;color:var(--muted);font-weight:400;margin-top:6px;font-style:italic}
+.hero-meta{font-family:var(--sans);font-size:13.5px;color:var(--muted);line-height:1.9;margin-top:16px}
+.hero-meta em{font-style:italic}
+.hero-meta .tag{display:inline-block;background:var(--ink);color:var(--amber);font-size:11px;padding:2px 8px;border-radius:3px;margin-left:6px;vertical-align:middle}
+.verdict{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:36px;background:var(--ink);border-radius:10px;overflow:hidden}
+.vcell{padding:20px 18px;border-left:3px solid var(--amber)}
+.vcell:first-child{border-left:none}
+.vlabel{font-family:var(--sans);font-size:12.5px;color:rgba(255,255,255,.5);margin-bottom:4px}
+.vval{font-family:var(--mono);font-size:clamp(22px,3vw,30px);color:#fff;font-weight:700}
+.vnote{font-family:var(--sans);font-size:12.5px;color:rgba(255,255,255,.4);margin-top:2px}
+.vval.neg{color:#66D9A0}
+.vval.null{color:#F87171}
+.toc{position:sticky;top:0;z-index:100;background:rgba(248,246,240,.85);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1px solid var(--grid);padding:10px 24px;overflow-x:auto;white-space:nowrap}
+.toc-inner{max-width:920px;margin:0 auto;display:flex;gap:6px}
+.toc a{font-family:var(--sans);font-size:12.5px;color:var(--muted);padding:4px 12px;border-radius:20px;border:1px solid var(--grid);transition:all .2s}
+.toc a:hover{color:var(--ink);border-color:var(--blue);text-decoration:none}
+main{max-width:920px;margin:0 auto;padding:0 24px 60px}
+section{padding:48px 0 24px}
+.sec-no{font-family:var(--mono);font-size:13px;color:var(--amber);letter-spacing:1px;margin-bottom:4px}
+section h2{font-family:var(--serif);font-size:clamp(20px,3vw,26px);color:var(--ink);margin-bottom:10px}
+.sec-lede{font-family:var(--sans);font-size:14.5px;color:var(--muted);line-height:1.7;margin-bottom:24px}
+p{margin-bottom:16px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px}
+.card h3,.card h4{font-family:var(--sans);font-size:14px;color:var(--ink);margin-bottom:8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.meta-table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px;margin:16px 0}
+.meta-table th{text-align:left;padding:10px 14px;background:var(--ink);color:#fff;font-weight:500}
+.meta-table td{padding:10px 14px;border-bottom:1px solid var(--grid)}
+.meta-table tr:nth-child(even) td{background:rgba(0,0,0,.02)}
+.datastrip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:24px 0}
+.dcell{padding:18px;text-align:center;border-top:3px solid var(--blue);background:var(--card);border-right:1px solid var(--border)}
+.dcell:last-child{border-right:none}
+.dcell .big{font-family:var(--mono);font-size:clamp(20px,3vw,28px);color:var(--ink);font-weight:700}
+.dcell .unit{font-family:var(--sans);font-size:12px;color:var(--muted);margin-top:2px}
+.dcell .desc{font-family:var(--sans);font-size:12px;color:var(--muted);margin-top:4px}
+.dcell.warn{border-top-color:var(--amber)}
+.dcell.danger{border-top-color:var(--red)}
+.dcell.ok{border-top-color:var(--green)}
+.tbl-scroll{overflow-x:auto;margin:16px 0}
+table.data{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:13.5px}
+table.data thead th{background:var(--ink);color:#fff;padding:10px 12px;text-align:left;font-weight:500;white-space:nowrap}
+table.data tbody td{padding:9px 12px;border-bottom:1px solid var(--grid)}
+table.data tbody tr:hover{background:rgba(41,120,181,.04)}
+figure.chart{margin:24px 0;text-align:center}
+figure.chart svg{max-width:100%;height:auto}
+figure.chart figcaption{font-family:var(--sans);font-size:12.5px;color:var(--muted);margin-top:8px}
+.grade-bar{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:16px 0;width:100%}
+.grade-bar .active{background:var(--green)}
+.grade-bar .inactive{background:var(--grid)}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:20px 0}
+.cc{border-radius:8px;padding:20px;background:var(--card);border:1px solid var(--border)}
+.cc.a{border-top:3px solid var(--green)}
+.cc.b{border-top:3px solid var(--red)}
+.cc .big{font-family:var(--mono);font-size:28px;color:var(--ink);font-weight:700}
+.cc .label{font-family:var(--sans);font-size:13px;color:var(--muted);margin-top:4px}
+.cc p{font-size:14px;margin-top:10px;color:var(--text)}
+.verdict-final{background:var(--ink);border-radius:10px;padding:28px;margin:24px 0}
+.vf-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08);font-family:var(--sans);font-size:14px}
+.vf-row:last-child{border-bottom:none}
+.vf-row .k{color:rgba(255,255,255,.6)}
+.vf-row .v{color:#fff;font-weight:600}
+.tag{display:inline-block;font-family:var(--sans);font-size:11px;padding:2px 8px;border-radius:3px;font-weight:600}
+.tag.hi{background:rgba(47,125,91,.15);color:var(--green)}
+.tag.mid{background:rgba(245,158,11,.15);color:var(--amber)}
+.tag.lo{background:rgba(176,65,62,.15);color:var(--red)}
+.tag.neu{background:rgba(102,112,133,.12);color:var(--muted)}
+.mech{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.m{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px}
+.m .midx{font-family:var(--mono);font-size:12px;color:var(--amber);margin-bottom:4px}
+.m h5{font-family:var(--sans);font-size:14px;color:var(--ink);margin-bottom:8px}
+.m p{font-size:13.5px;color:var(--text);margin-bottom:0}
+.m .evi{font-family:var(--sans);font-size:11.5px;color:var(--muted);margin-top:8px;border-top:1px solid var(--grid);padding-top:8px}
+.note{border-left:4px solid var(--blue);background:var(--card);padding:16px 20px;border-radius:0 8px 8px 0;margin:16px 0;font-size:14.5px}
+.note.warn{border-left-color:var(--amber)}
+.note.bound{border-left-color:var(--red)}
+.quote{border-left:4px solid var(--amber);padding:16px 20px;margin:20px 0;font-size:16px;font-style:italic;color:var(--ink);background:rgba(245,158,11,.04);border-radius:0 8px 8px 0}
+.misread{background:rgba(176,65,62,.06);border-left:4px solid var(--red);padding:16px 20px;border-radius:0 8px 8px 0;margin:12px 0}
+.mr-title{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--red);margin-bottom:4px}
+.mr-body{font-size:14px;color:var(--text)}
+.correct{background:rgba(47,125,91,.06);border-left:4px solid var(--green);padding:16px 20px;border-radius:0 8px 8px 0;margin:12px 0}
+.cr-title{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--green);margin-bottom:4px}
+.cr-body{font-size:14px;color:var(--text)}
+.flow{display:flex;gap:0;margin:20px 0;flex-wrap:wrap}
+.step{flex:1;min-width:140px;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:8px;text-align:center;position:relative}
+.step::after{content:"→";position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--amber);z-index:1}
+.step:last-child::after{display:none}
+.step .sno{font-family:var(--mono);font-size:11px;color:var(--amber)}
+.step .stitle{font-family:var(--sans);font-size:13px;font-weight:600;color:var(--ink);margin:4px 0}
+.step .sdesc{font-size:12px;color:var(--muted)}
+footer{background:var(--ink);color:rgba(255,255,255,.7);padding:40px 24px;margin-top:40px}
+footer .inner{max-width:920px;margin:0 auto}
+footer h3{font-family:var(--serif);color:#fff;font-size:18px;margin-bottom:16px}
+footer ol{font-family:var(--sans);font-size:13px;line-height:2;padding-left:20px}
+footer ol li a{color:rgba(255,255,255,.5)}
+footer ol li a:hover{color:var(--amber)}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:translateY(0)}
+@media(max-width:900px){
+.grid2,.grid3,.compare,.mech{grid-template-columns:1fr}
+.datastrip{grid-template-columns:1fr 1fr}
+.dcell{border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.verdict{grid-template-columns:1fr 1fr}
+.vcell{border-left:none;border-top:3px solid var(--amber)}
+.flow{flex-direction:column}
+.step::after{content:"↓";right:auto;left:50%;top:auto;bottom:-16px;transform:translateX(-50%)}
+}
+@media(max-width:560px){
+.datastrip{grid-template-columns:1fr}
+.verdict{grid-template-columns:1fr}
+body{font-size:15.5px}
+.hero{padding:36px 16px 28px}
+main{padding:0 16px 40px}
+}
+@media print{
+.toc{position:static}
+.rv{opacity:1;transform:none}
+body{font-size:12pt;background:#fff}
+.verdict,footer,.verdict-final{background:#fff;color:#000;border:1px solid #ccc}
+.vcell{border-left:2px solid #333}
+}
+@media(prefers-reduced-motion:reduce){
+.rv{opacity:1;transform:none;transition:none}
+html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="topband">
+<span class="series">文献深度解读 · 运动损伤预防</span>
+<span class="ref">BMC Sports Sci Med Rehabil · 2025;17:255 · PMID 40877885</span>
+</div>
+
+<header class="hero">
+<div class="kicker">Literature Deep Read · Running Injury Prevention</div>
+<h1>髋外展肌力双侧不对称能否预测足底筋膜炎？
+<span class="sub">Interlimb Asymmetries of Hip Abduction Strength Predicting Plantar Fasciitis in Male Amateur Marathon Runners</span>
+</h1>
+<div class="hero-meta">
+Daxin Li, Yangli Liu, Yangya Feng, Cheng Peng, Donghui Tang<br>
+<em>BMC Sports Science, Medicine and Rehabilitation</em> (2025) 17:255<br>
+DOI: <a href="https://doi.org/10.1186/s13102-025-01295-z" target="_blank" rel="noopener noreferrer">10.1186/s13102-025-01295-z</a> · PubMed: <a href="https://pubmed.ncbi.nlm.nih.gov/40877885/" target="_blank" rel="noopener noreferrer">40877885</a> · PMC: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12395752/" target="_blank" rel="noopener noreferrer">PMC12395752</a>
+<span class="tag mid">前瞻性队列研究</span>
+</div>
+
+<div class="verdict">
+<div class="vcell">
+<div class="vlabel">风险比 (OR)</div>
+<div class="vval">3.65</div>
+<div class="vnote">95%CI 1.19–11.15</div>
+</div>
+<div class="vcell">
+<div class="vlabel">AUC</div>
+<div class="vval">0.717</div>
+<div class="vnote">低度判别价值</div>
+</div>
+<div class="vcell">
+<div class="vlabel">最佳切值</div>
+<div class="vval">32.5%</div>
+<div class="vnote">敏感性 0.667</div>
+</div>
+<div class="vcell">
+<div class="vlabel">证据质量</div>
+<div class="vval null">很低</div>
+<div class="vnote">GRADE Very Low</div>
+</div>
+</div>
+</header>
+
+<nav class="toc" aria-label="目录导航">
+<div class="toc-inner">
+<a href="#s1">01 研究问题</a>
+<a href="#s2">02 核心结果</a>
+<a href="#s3">03 证据评级</a>
+<a href="#s4">04 横向比较</a>
+<a href="#s5">05 综合判断</a>
+<a href="#s6">06 方法学审查</a>
+<a href="#s7">07 机制解读</a>
+<a href="#s8">08 实践桥梁</a>
+<a href="#s9">09 哲学审查</a>
+<a href="#s10">10 误读与总结</a>
+</div>
+</nav>
+
+<main>
+
+<!-- SECTION 01 -->
+<section id="s1" class="rv">
+<div class="sec-no">SECTION 01</div>
+<h2>研究问题</h2>
+<div class="sec-lede">下肢等长收缩力量双侧不对称能否作为足底筋膜炎的前瞻性预测因子？这是首个针对跑者群体的 PF 前瞻性队列研究。</div>
+
+<table class="meta-table"><caption style="display:none">PICO框架与研究信息</caption>
+<thead><tr><th style="width:30%">PICO 要素</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td><strong>P</strong>（人群）</td><td>172 名男性业余马拉松跑者（年龄 20.85±2.28 岁，BMI 21.23±1.99），每周跑步≥10 km，1年内完成至少1次马拉松</td></tr>
+<tr><td><strong>I</strong>（暴露）</td><td>下肢等长收缩力量双侧不对称（MicroFET3 手持测力计，8 个肌群），以 (优势侧−非优势侧) / [(优势侧+非优势侧)/2] 计算</td></tr>
+<tr><td><strong>C</strong>（对照）</td><td>未发生 PF 的跑者（n=160）</td></tr>
+<tr><td><strong>O</strong>（结局）</td><td>3 个月内足底筋膜炎发生率（12/172 = 6.98%）</td></tr>
+<tr><td>设计</td><td>前瞻性纵向观察研究</td></tr>
+<tr><td>资助</td><td>国家自然科学基金（NSFC 71874017）</td></tr>
+</tbody>
+</table>
+
+<div class="grid3">
+<div class="card">
+<h3>假说 A：不对称→应力集中</h3>
+<p>肌力不对称导致重心偏移，优势侧反复承受超额负荷，触发过度使用损伤。</p>
+</div>
+<div class="card">
+<h3>假说 B：弱侧→代偿链</h3>
+<p>弱侧髋外展肌无法控制骨盆位置，引发膝内收力矩增大→地面反作用力异常→足底筋膜过载。</p>
+</div>
+<div class="card">
+<h3>假说 C：疲劳放大</h3>
+<p>长距离跑步中疲劳加剧既有不对称，形成正反馈环路，最终突破组织耐受阈值。</p>
+</div>
+</div>
+
+<div class="note">
+<strong>能回答什么：</strong>该研究可以检验髋外展肌力不对称是否是男性业余马拉松跑者 PF 的统计预测因子。<br>
+<strong>不能回答什么：</strong>无法确定因果关系；无法外推到女性跑者；无法区分不对称是原因还是早期代偿表现；无法说明矫正不对称是否能降低 PF 风险。
+</div>
+</section>
+
+<!-- SECTION 02 -->
+<section id="s2" class="rv">
+<div class="sec-no">SECTION 02</div>
+<h2>核心结果</h2>
+<div class="sec-lede">量化数据及其统计学与临床意义判断。</div>
+
+<div class="datastrip">
+<div class="dcell danger">
+<div class="big">3.646</div>
+<div class="unit">OR (95%CI)</div>
+<div class="desc">1.193–11.148, P=0.023</div>
+</div>
+<div class="dcell warn">
+<div class="big">0.717</div>
+<div class="unit">AUC (95%CI)</div>
+<div class="desc">0.544–0.889, P=0.012</div>
+</div>
+<div class="dcell">
+<div class="big">32.5%</div>
+<div class="unit">Cut-off</div>
+<div class="desc">敏感性 0.667 / 特异性 0.238</div>
+</div>
+<div class="dcell ok">
+<div class="big">10/12</div>
+<div class="unit">优势侧发生</div>
+<div class="desc">83.3% PF 发生在优势侧</div>
+</div>
+</div>
+
+<h3 style="font-size:18px;margin:24px 0 12px;font-family:var(--serif);color:var(--ink)">三层判断</h3>
+
+<div class="grid3">
+<div class="card" style="border-top:3px solid var(--green)">
+<h4 style="color:var(--green)">统计学显著</h3>
+<p style="font-size:14px">OR=3.646，P=0.023 < 0.05，95%CI 不含 1。髋外展不对称与 PF 存在统计学关联。但 CI 跨度极宽（1.19–11.15），估计精度很低。</p>
+</div>
+<div class="card" style="border-top:3px solid var(--amber)">
+<h4 style="color:var(--amber)">判别价值偏低</h3>
+<p style="font-size:14px">AUC=0.717 落入"低度判别价值"区间（0.5–0.7 之间偏上沿）。特异性仅 0.238，意味着 76.2% 的未受伤跑者被错误标记为"高风险"。作为筛查工具实用价值有限。</p>
+</div>
+<div class="card" style="border-top:3px solid var(--red)">
+<h4 style="color:var(--red)">临床效应不确定</h3>
+<p style="font-size:14px">仅 12 例事件，OR 置信区间上限达 11.15。阳性预测值受基线发病率制约：在 7% 发病率下，即使 OR 真实值为 3.6，PPV 仅约 22%。</p>
+</div>
+</div>
+
+<figure class="chart" role="img" aria-label="ROC曲线示意图">
+<svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+<title>ROC 曲线：髋外展不对称预测足底筋膜炎</title>
+<desc>AUC=0.717，cut-off 32.5% 处敏感性 0.667、特异性 0.238</desc>
+<rect x="60" y="20" width="280" height="250" fill="none" stroke="var(--grid)" stroke-width="1"/>
+<line x1="60" y1="270" x2="340" y2="20" stroke="var(--grid)" stroke-width="1" stroke-dasharray="4"/>
+<text x="200" y="310" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--muted)">1 − 特异性 (FPR)</text>
+<text x="20" y="145" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--muted)" transform="rotate(-90 20 145)">敏感性 (TPR)</text>
+<text x="60" y="285" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--muted)">0</text>
+<text x="340" y="285" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--muted)">1</text>
+<text x="50" y="275" text-anchor="end" font-family="var(--mono)" font-size="10" fill="var(--muted)">0</text>
+<text x="50" y="25" text-anchor="end" font-family="var(--mono)" font-size="10" fill="var(--muted)">1</text>
+<!-- ROC curve path -->
+<path d="M60,270 Q80,200 130,140 Q160,105 200,83 L252,67 L340,20" fill="none" stroke="var(--blue)" stroke-width="2.5"/>
+<!-- Cut-off point -->
+<circle cx="252" cy="67" r="5" fill="var(--amber)"/>
+<text x="260" y="60" font-family="var(--sans)" font-size="10" fill="var(--amber)">cut-off=32.5%</text>
+<text x="260" y="75" font-family="var(--mono)" font-size="9" fill="var(--muted)">Se=0.667, Sp=0.238</text>
+<!-- AUC label -->
+<text x="220" y="180" font-family="var(--mono)" font-size="13" fill="var(--blue)" font-weight="700">AUC = 0.717</text>
+<!-- Axis ticks -->
+<text x="130" y="285" text-anchor="middle" font-family="var(--mono)" font-size="9" fill="var(--muted)">0.25</text>
+<text x="200" y="285" text-anchor="middle" font-family="var(--mono)" font-size="9" fill="var(--muted)">0.5</text>
+<text x="270" y="285" text-anchor="middle" font-family="var(--mono)" font-size="9" fill="var(--muted)">0.75</text>
+<text x="50" y="207" text-anchor="end" font-family="var(--mono)" font-size="9" fill="var(--muted)">0.25</text>
+<text x="50" y="145" text-anchor="end" font-family="var(--mono)" font-size="9" fill="var(--muted)">0.5</text>
+<text x="50" y="83" text-anchor="end" font-family="var(--mono)" font-size="9" fill="var(--muted)">0.75</text>
+</svg>
+<figcaption>图1：髋外展等长收缩力量不对称预测足底筋膜炎的 ROC 曲线示意</figcaption>
+</figure>
+
+<div class="tbl-scroll">
+<table class="data"><caption style="display:none">受伤组与未伤组下肢等长收缩力量不对称比较</caption>
+<thead>
+<tr><th>指标</th><th>受伤组 (n=12)</th><th>未伤组 (n=160)</th><th>P</th><th>效应量</th></tr>
+</thead>
+<tbody>
+<tr><td>髋外展不对称</td><td>0.46±0.58</td><td>0.03±0.55</td><td><strong>0.010</strong></td><td>0.76</td></tr>
+<tr><td>膝屈曲不对称</td><td>−0.26±0.36</td><td>0.10±0.67</td><td><strong>0.006</strong></td><td>0.67</td></tr>
+<tr><td>髋内旋不对称</td><td>0.10±0.52</td><td>0.02±0.50</td><td>0.613</td><td>0.16</td></tr>
+<tr><td>髋外旋不对称</td><td>−0.01±0.28</td><td>0.07±0.48</td><td>0.580</td><td>0.20</td></tr>
+<tr><td>髋伸展不对称</td><td>0.41±0.54</td><td>0.08±0.72</td><td>0.122</td><td>0.52</td></tr>
+<tr><td>膝伸展不对称</td><td>0.25±0.47</td><td>0.25±0.90</td><td>0.996</td><td>0.00</td></tr>
+<tr><td>踝跖屈不对称</td><td>0.15±0.89</td><td>0.03±1.51</td><td>0.789</td><td>0.10</td></tr>
+<tr><td>踝背屈不对称</td><td>0.05±0.42</td><td>0.01±0.59</td><td>0.819</td><td>0.08</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- SECTION 03 -->
+<section id="s3" class="rv">
+<div class="sec-no">SECTION 03</div>
+<h2>GRADE 证据确定性</h2>
+<div class="sec-lede">五要素逐项评估。最终评级：很低（Very Low），意味着对该效应估计几乎没有信心。</div>
+
+<div class="grade-bar">
+<div class="active" style="width:20%"></div>
+<div class="inactive" style="width:80%"></div>
+</div>
+<p style="font-family:var(--sans);font-size:13px;color:var(--muted);margin-bottom:20px">初始为"低"（观察性研究起步），经五要素扣减后降至"很低"。■ = 通过 □ = 扣减</p>
+
+<div class="grid2">
+<div class="card">
+<h3>① 偏倚风险 <span class="tag lo">严重</span></h3>
+<p style="font-size:13.5px">无盲法评估暴露；PF 诊断依赖临床症状而非影像学确认；仅一人操作测力计（测试者内信度未知对不对称计算的影响）；未报告测量信度（ICC）在本样本中的验证。随访 3 个月中未报告训练负荷变化的量化监控。</p>
+</div>
+<div class="card">
+<h3>② 不一致性 <span class="tag lo">严重</span></h3>
+<p style="font-size:13.5px">该领域唯一一项针对跑者 PF 的前瞻性研究，无法进行一致性评估。Guan 2022 系统综述纳入 28 项前瞻性研究，发现下肢功能表现不对称与运动损伤的关联高度不一致。</p>
+</div>
+<div class="card">
+<h3>③ 间接性 <span class="tag mid">中等</span></h3>
+<p style="font-size:13.5px">仅纳入 18–30 岁男性业余跑者，结论不可外推至女性、青少年精英跑者或大众健身人群。等长收缩力量测试无法直接反映动态跑步中的力量表达。</p>
+</div>
+<div class="card">
+<h3>④ 不精确性 <span class="tag lo">严重</span></h3>
+<p style="font-size:13.5px">仅 12 例 PF 事件。OR 95%CI 为 1.19–11.15，跨越近 10 倍。optimal information size 远未达到。G*Power 先验功效分析基于 OR=3.47、power=0.95，需 61 例，但实际事件数仅 12 例。</p>
+</div>
+<div class="card" style="grid-column:1/-1">
+<h3>⑤ 发表偏倚 <span class="tag neu">无法评估</span></h3>
+<p style="font-size:13.5px">仅一项研究，无法绘制漏斗图或进行 Egger 检验。该领域存在较高的发表偏倚风险：阳性结果更易发表。</p>
+</div>
+</div>
+</section>
+
+<!-- SECTION 04 -->
+<section id="s4" class="rv">
+<div class="sec-no">SECTION 04</div>
+<h2>同级证据横向比较</h2>
+<div class="sec-lede">将 Li 2025 的发现置于更广泛的不对称—损伤研究证据谱系中进行审视。</div>
+
+<div class="compare">
+<div class="cc a">
+<div class="big" style="color:var(--green)">支持</div>
+<div class="label">Niemuth 2005 · Clin J Sport Med</div>
+<p>20 名受伤跑者 vs 20 名对照，受伤侧髋外展肌力显著低于对照侧 13.5%。横断面设计，无法确定时序关系。该研究被 Li 2025 引用为关键支撑文献。GRADE：低。</p>
+</div>
+<div class="cc b">
+<div class="big" style="color:var(--red)">矛盾</div>
+<div class="label">Malisoux 2024 · BMJ Open Sport Exerc Med</div>
+<p>836 名休闲跑者，仪器化跑台，6 个月随访。步态时空与动力学变量的对称性指数与跑步相关损伤风险<strong>无显著关联</strong>。更大腾空时间不对称反而与更低损伤风险相关（HR=0.80）。原文明确指出："对步态不对称作为损伤风险因素的追寻，更多源自流行信念而非科学证据。"</p>
+</div>
+</div>
+
+<div class="compare">
+<div class="cc a">
+<div class="big" style="color:var(--green)">部分支持</div>
+<div class="label">Guan 2022 · J Clin Med · 系统综述</div>
+<p>28 项前瞻性队列研究。下肢功能表现不对称与运动损伤的关联<strong>高度不一致</strong>。单腿跳测试不对称有较一致的预测价值（5/6 项研究阳性），但等长/等速力量不对称结果矛盾。结论：无法做出明确推荐。</p>
+</div>
+<div class="cc b">
+<div class="big" style="color:var(--red)">质疑</div>
+<div class="label">Mucha 2023 · JOSPT · 系统综述</div>
+<p>7 项前瞻性研究，GRADE 全部为"很低"。一项研究发现<strong>更强的</strong>髋外展肌力反而与跑步损伤相关（OR=5.35）。作者推测高 BMI 新手跑者为补偿较大外展力矩而发展出更强的等长肌力，提示横断面肌力测量的解释困境。</p>
+</div>
+</div>
+
+<div class="note warn">
+<strong>关键矛盾：</strong>Li 2025 认为"不对称→损伤"，而 Malisoux 2024 在 836 人前瞻性研究中直接否定"步态不对称→损伤"的假设。差异可能源于：(1) Li 测量的是等长肌力不对称而非步态力学不对称；(2) Malisoux 纳入了所有跑步相关损伤而非特化到 PF；(3) 样本量差异（172 vs 836）。
+</div>
+
+<div class="card" style="margin-top:20px">
+<h3>干预证据：髋外展强化能否改变步态？</h3>
+<p style="font-size:14px">Hall 2024 系统综述（5 项研究，144 名受试者）发现：3–10 周髋外展力量训练确实可提升髋外展肌力，但<strong>有限的证据</strong>表明这些力量增益能转化为跑步生物力学改变。仅少数研究报告了力量提升与膝外展、髋内收等生物力学变量改变之间的相关性。这意味着即使检测到不对称并加以矫正，也不能自动推论 PF 风险会降低。</p>
+</div>
+</section>
+
+<!-- SECTION 05 -->
+<section id="s5" class="rv">
+<div class="sec-no">SECTION 05</div>
+<h2>综合证据判断</h2>
+<div class="sec-lede">三级结论框架。</div>
+
+<div class="verdict-final">
+<div class="vf-row">
+<span class="k">一级结论（本研究发现）</span>
+<span class="v">髋外展等长收缩力量不对称 >32.5% 是男性业余马拉松跑者 PF 的统计学显著预测因子 <span class="tag mid">可能</span></span>
+</div>
+<div class="vf-row">
+<span class="k">二级结论（领域综合）</span>
+<span class="v">下肢不对称与跑步损伤的关联在整个证据体系中高度不一致，单一研究无法确立通用人论 <span class="tag lo">不确定</span></span>
+</div>
+<div class="vf-row">
+<span class="k">三级结论（因果推断）</span>
+<span class="v">现有证据不足以支持"不对称导致 PF"的因果判断；关联可能受混杂因素驱动 <span class="tag lo">不确定</span></span>
+</div>
+<div class="vf-row">
+<span class="k">实践含义</span>
+<span class="v">评估髋外展对称性作为多因素筛查的一部分具有合理性，但不应作为独立决策依据 <span class="tag mid">可考虑</span></span>
+</div>
+</div>
+</section>
+
+<!-- SECTION 06 -->
+<section id="s6" class="rv">
+<div class="sec-no">SECTION 06</div>
+<h2>方法学审查</h2>
+<div class="sec-lede">优势与局限的逐项审视。</div>
+
+<div class="grid2">
+<div class="card" style="border-top:3px solid var(--green)">
+<h4 style="color:var(--green)">优势</h3>
+<p style="font-size:13.5px"><strong>1. 前瞻性设计：</strong>在 PF 跑者研究中属首次，先测暴露后观察结局，时序关系优于横断面研究。</p>
+<p style="font-size:13.5px"><strong>2. 标准化测量：</strong>MicroFET3 测力计信度系数 0.95–0.99（文献报告）；单一测试者操作减少测试者间变异。</p>
+<p style="font-size:13.5px"><strong>3. 多肌群筛查：</strong>涵盖髋、膝、踝 8 个动作方向的等长力量，允许特异性定位。</p>
+<p style="font-size:13.5px"><strong>4. 统计控制：</strong>logistic 回归调整了多种混杂因素（力量训练习惯、其他 RRI、训练计划、足弓类型、身高体重 BMI）。</p>
+<p style="font-size:13.5px"><strong>5. 先验功效分析：</strong>使用 G*Power 进行了样本量估算。</p>
+</div>
+<div class="card" style="border-top:3px solid var(--red)">
+<h4 style="color:var(--red)">局限</h3>
+<p style="font-size:13.5px"><strong>1. 事件数极低：</strong>12 例 PF / 172 受试者。EPV（每变量事件数）远低于 logistic 回归推荐的 10 EPV，模型稳定性存疑。</p>
+<p style="font-size:13.5px"><strong>2. 性别限制：</strong>仅纳入男性 18–30 岁。女性跑者 PF 发病率可能更高（Taunton 2002），结论不可外推。</p>
+<p style="font-size:13.5px"><strong>3. 未纳入生物力学变量：</strong>步态分析、足底压力分布等直接力学指标未测量，无法验证所提出的机制链。</p>
+<p style="font-size:13.5px"><strong>4. 随访期短：</strong>3 个月仅覆盖有限训练周期，可能遗漏延迟发生的 PF。月跑量差异显著（受伤组 76 vs 未伤组 109 km，P=0.039）但模型中未纳入月跑量作为协变量。</p>
+<p style="font-size:13.5px"><strong>5. PF 诊断标准：</strong>依赖临床症状，无超声或 MRI 确认。诊断可能包含其他足跟痛病因。</p>
+<p style="font-size:13.5px"><strong>6. 不对称计算公式：</strong>使用 (D−ND)/[(D+ND)/2]，但未报告绝对力量值，无法判断不对称来源于优势侧过高还是非优势侧过低。</p>
+</div>
+</div>
+
+<div class="note bound">
+<strong>遗漏的关键协变量：</strong>月跑量在单因素分析中显著（P=0.039），受伤组月跑量（76.43±29.18 km）反而低于未伤组（108.73±53.04 km）。这一反直觉发现提示可能存在混杂：低跑量组可能包含训练经验较少的新手，新手本身 PF 风险更高。最终 logistic 回归模型中未纳入月跑量。
+</div>
+</section>
+
+<!-- SECTION 07 -->
+<section id="s7" class="rv">
+<div class="sec-no">SECTION 07</div>
+<h2>机制解读</h2>
+<div class="sec-lede">从组织力学到临床表现的因果链。A/B/C 标注证据等级。</div>
+
+<div class="mech">
+<div class="m">
+<div class="midx">机制 1</div>
+<h3>骨盆失稳 → 膝内收力矩</h3>
+<p>髋外展肌（主要是臀中肌）在单腿支撑期离心收缩控制对侧骨盆下降。肌力不足或双侧不对称时，弱侧无法有效维持骨盆水平位，导致对侧骨盆下降（Trendelenburg 征象），进而增大膝内收力矩。</p>
+<div class="evi">证据等级：<span class="tag hi">A</span> — Powers 2010 生物力学综述 + 多项 3D 运动分析研究支持。MTSS 研究中 8 周髋外展训练可显著减少骨盆下降角（P<0.05）。</div>
+</div>
+<div class="m">
+<div class="midx">机制 2</div>
+<h3>膝内收 → 地面反作用力异常</h3>
+<p>膝内收力矩增大改变下肢力线，使地面反作用力向量更偏向内侧，增加胫骨内旋应力。异常力线传导至足部，增加足底筋膜的内侧牵张负荷。</p>
+<div class="evi">证据等级：<span class="tag mid">B</span> — 生物力学模型推演合理，但缺乏直接测量地面反作用力传导至足底筋膜的人体在体研究。多为逆向动力学推算。</div>
+</div>
+<div class="m">
+<div class="midx">机制 3</div>
+<h3>垂直振荡增大 → PF 过载</h3>
+<p>不对称步态导致重心垂直位移增大。更高的垂直振荡意味着每次触地时更大的冲击载荷传递至足底筋膜。Johnson 2020 已证实冲击相关地面反作用力与 PF 显著相关。</p>
+<div class="evi">证据等级：<span class="tag mid">B</span> — Johnson 2020（AJS M）提供了地面反作用力与 PF 的关联证据，但未直接证明不对称→垂直振荡→PF 的完整链条。</div>
+</div>
+<div class="m">
+<div class="midx">机制 4</div>
+<h3>双侧负荷差异 → 过度使用</h3>
+<p>不对称导致重心偏向优势侧。长距离跑步中优势侧反复承受超额应力，双侧差异（bilateral deficit）机制进一步放大负荷不均。本研究中 10/12（83.3%）PF 发生在优势侧，与此机制一致。</p>
+<div class="evi">证据等级：<span class="tag lo">C</span> — 逻辑推演合理，但直接证据薄弱。优势侧 PF 占优也可用其他机制解释（如优势侧本身负荷更高是跑步的固有特征，与不对称无关）。</div>
+</div>
+</div>
+
+<div class="flow">
+<div class="step">
+<div class="sno">01</div>
+<div class="stitle">组织水平</div>
+<div class="sdesc">足底筋膜反复微损伤→胶原退变→附着点病</div>
+</div>
+<div class="step">
+<div class="sno">02</div>
+<div class="stitle">力学水平</div>
+<div class="sdesc">地面反作用力异常→足底筋膜张力增大</div>
+</div>
+<div class="step">
+<div class="sno">03</div>
+<div class="stitle">运动控制</div>
+<div class="sdesc">骨盆失稳→膝内收→异常力线传导</div>
+</div>
+<div class="step">
+<div class="sno">04</div>
+<div class="stitle">肌力表现</div>
+<div class="sdesc">髋外展肌力不对称→单腿支撑期控制差异</div>
+</div>
+</div>
+
+<div class="note warn">
+<strong>机制链的核心薄弱环节：</strong>从"等长肌力不对称"到"动态跑步中骨盆失稳"之间的转化缺乏直接证据。Hall 2024 系统综述明确指出：髋外展力量训练的增益"limited evidence"能转化为跑步生物力学改变。等长肌力测试与动态功能表现之间的对应关系远非完美。
+</div>
+</section>
+
+<!-- SECTION 08 -->
+<section id="s8" class="rv">
+<div class="sec-no">SECTION 08</div>
+<h2>实践桥梁</h2>
+<div class="sec-lede">从研究效应到实践建议的分级转化。</div>
+
+<h3 style="font-size:17px;margin:20px 0 12px;font-family:var(--serif);color:var(--ink)">效应修饰因子</h3>
+<div class="grid3">
+<div class="card">
+<h4>训练经验</h4>
+<p style="font-size:13.5px">新手跑者（<3 年）的 PF 风险显著高于经验跑者。不对称在新手中可能是更大的风险因子，因为组织适应性尚未建立。</p>
+</div>
+<div class="card">
+<h4>月跑量</h4>
+<p style="font-size:13.5px">本研究中受伤组月跑量反而更低（76 vs 109 km），可能反映训练经验差异。低跑量+高不对称的交互效应未被探讨。</p>
+</div>
+<div class="card">
+<h4>地面与鞋具</h4>
+<p style="font-size:13.5px">硬地面、旧鞋具、不合适的鞋型可能放大不对称的力学后果。Malisoux 2020 RCT 证实鞋垫缓冲特性显著影响损伤风险。</p>
+</div>
+</div>
+
+<h3 style="font-size:17px;margin:24px 0 12px;font-family:var(--serif);color:var(--ink)">三级实践建议</h3>
+
+<div class="grid3">
+<div class="card" style="border-top:3px solid var(--green)">
+<h4 style="color:var(--green)">可确定</h4>
+<p style="font-size:13.5px"><strong>髋外展力量评估纳入季前筛查。</strong>使用手持测力计评估双侧髋外展等长力量，计算不对称指数。成本低、操作简便、无创。作为多因素风险筛查的一个维度是合理的。</p>
+</div>
+<div class="card" style="border-top:3px solid var(--amber)">
+<h4 style="color:var(--amber)">可考虑</h4>
+<p style="font-size:13.5px"><strong>对不对称 >15% 的跑者加入单侧力量训练。</strong>侧卧髋外展、蚌式练习、仰卧桥式等动作安全且成本低。虽然 Hall 2024 认为力量增益难以转化为步态改变，但强化弱侧不太可能有害。</p>
+</div>
+<div class="card" style="border-top:3px solid var(--red)">
+<h4 style="color:var(--red)">不能推出</h4>
+<p style="font-size:13.5px"><strong>"矫正不对称到 <32.5% 即可预防 PF"。</strong>32.5% 是统计切值而非治疗靶标。不存在 RCT 证明将不对称降低到某阈值以下能减少 PF 发生。将 OR=3.65 解读为因果效应是生态学谬误。</p>
+</div>
+</div>
+</section>
+
+<!-- SECTION 09 -->
+<section id="s9" class="rv">
+<div class="sec-no">SECTION 09</div>
+<h2>科学哲学审查</h2>
+<div class="sec-lede">五层分离：从原始观察到因果宣称的逻辑阶梯。</div>
+
+<div class="flow">
+<div class="step">
+<div class="sno">L1</div>
+<div class="stitle">观察</div>
+<div class="sdesc">12 名 PF 跑者的髋外展不对称均值高于未伤组（P=0.010）</div>
+</div>
+<div class="step">
+<div class="sno">L2</div>
+<div class="stitle">统计关联</div>
+<div class="sdesc">调整混杂后 OR=3.65，独立达到统计显著性</div>
+</div>
+<div class="step">
+<div class="sno">L3</div>
+<div class="stitle">推论</div>
+<div class="sdesc">不对称"预测"PF 发生，切值 32.5%</div>
+</div>
+<div class="step">
+<div class="sno">L4</div>
+<div class="stitle">机制假说</div>
+<div class="sdesc">不对称→骨盆失稳→GRF 异常→PF</div>
+</div>
+<div class="step">
+<div class="sno">L5</div>
+<div class="stitle">因果/实践</div>
+<div class="sdesc">应筛查并矫正不对称以预防 PF</div>
+</div>
+</div>
+
+<div class="grid2" style="margin-top:20px">
+<div class="card">
+<h3>L1→L2 的跳跃</h3>
+<p style="font-size:13.5px">12 例事件的组间比较，效应量大（d=0.76）但极不稳定。P=0.010 在 8 个肌群比较中未进行多重比较校正（如 Bonferroni），存在 I 类错误膨胀风险。</p>
+</div>
+<div class="card">
+<h3>L2→L3 的跳跃</h3>
+<p style="font-size:13.5px">logistic 回归中"预测"是统计术语，不等于临床预测。AUC=0.717、特异性 0.238 的模型在实际筛查中会产生大量假阳性。"预测"一词在标题中的使用夸大了实际判别能力。</p>
+</div>
+<div class="card">
+<h3>L3→L4 的跳跃</h3>
+<p style="font-size:13.5px">研究未测量任何生物力学变量（骨盆角度、膝力矩、地面反作用力）。机制链完全基于文献推演，本研究的观察数据无法直接支持或反驳这些机制假说。</p>
+</div>
+<div class="card">
+<h3>L4→L5 的跳跃</h3>
+<p style="font-size:13.5px">即使接受机制假说，从"不对称与 PF 相关"到"矫正不对称可预防 PF"需要干预性 RCT 证据。Hall 2024 系统综述指出力量训练的生物力学转化证据有限。该跳跃缺乏支撑。</p>
+</div>
+</div>
+
+<div class="note">
+<strong>竞争解释：</strong>(1) 不对称可能是 PF 的早期代偿表现而非原因（反向因果）；(2) 第三个变量（如训练负荷分配不均、既往伤史）同时导致不对称和 PF；(3) 月跑量差异（76 vs 109 km）暗示的"训练不足→新手→不对称更明显"路径未被充分控制。
+</div>
+</section>
+
+<!-- SECTION 10 -->
+<section id="s10" class="rv">
+<div class="sec-no">SECTION 10</div>
+<h2>常见误读与总结</h2>
+<div class="sec-lede">对研究发现的精确表述与常见过度解读的对照。</div>
+
+<div class="misread">
+<div class="mr-title">误读 1："髋外展不对称是足底筋膜炎的原因"</div>
+<div class="mr-body">本研究为观察性设计，只能证明统计关联，不能证明因果关系。不对称可能是 PF 的早期代偿表现，也可能受第三变量驱动。</div>
+</div>
+<div class="correct">
+<div class="cr-title">正确理解</div>
+<div class="cr-body">髋外展等长收缩力量不对称是 PF 的一个统计学显著预测因子（OR=3.65），但因果方向未确定，且判别能力有限（AUC=0.717，特异性 0.238）。</div>
+</div>
+
+<div class="misread">
+<div class="mr-title">误读 2："不对称超过 32.5% 就应该紧急干预"</div>
+<div class="mr-body">32.5% 是 ROC 分析导出的统计切值，不是临床干预阈值。特异性仅 23.8%，意味着 76.2% 的跑者会被误判为"高风险"。</div>
+</div>
+<div class="correct">
+<div class="cr-title">正确理解</div>
+<div class="cr-body">32.5% 是统计分界点，用于描述样本中的区分能力。在临床实践中，它不应作为独立的干预决策标准，而应结合跑者整体风险画像综合判断。</div>
+</div>
+
+<div class="misread">
+<div class="mr-title">误读 3："83% PF 发生在优势侧，说明优势侧过劳是主因"</div>
+<div class="mr-body">优势侧承受更多负荷是跑步的固有特征，与是否存在显著不对称无关。12 例的绝对数太少，83.3% 的置信区间极宽。</div>
+</div>
+<div class="correct">
+<div class="cr-title">正确理解</div>
+<div class="cr-body">优势侧 PF 占优的观察与"过度使用"假说一致，但样本量过小，无法排除随机波动。需要更大样本验证该侧别分布模式。</div>
+</div>
+
+<div class="misread">
+<div class="mr-title">误读 4："强化髋外展就能预防足底筋膜炎"</div>
+<div class="mr-body">没有 RCT 证明矫正不对称可以降低 PF 风险。Hall 2024 系统综述发现力量训练的生物力学转化证据有限。</div>
+</div>
+<div class="correct">
+<div class="cr-title">正确理解</div>
+<div class="cr-body">髋外展力量训练是安全的、低成本的干预手段，可作为综合训练计划的组成部分。但目前缺乏直接证据证明"矫正不对称→降低 PF 风险"的因果链。</div>
+</div>
+
+<div class="quote">
+<strong>一句话总结：</strong>这项首个人群前瞻性研究提示髋外展肌力不对称与 PF 存在统计关联，但证据质量很低，关联的临床判别价值有限，因果方向未确定，与更大规模的前瞻性步态研究结论形成张力。将其作为 PF 预防的独立靶标为时尚早。
+</div>
+</section>
+
+</main>
+
+<footer id="refs">
+<div class="inner">
+<h3>参考文献</h3>
+<ol>
+<li>Li D, Liu Y, Feng Y, Peng C, Tang D. Interlimb asymmetries of lower limb isometric strength for predicting plantar fasciitis in male amateur marathon runners: a prospective cohort study. <em>BMC Sports Sci Med Rehabil</em>. 2025;17:255. <a href="https://doi.org/10.1186/s13102-025-01295-z" target="_blank" rel="noopener noreferrer">DOI: 10.1186/s13102-025-01295-z</a></li>
+<li>Malisoux L, Gette P, Delattre N, Urhausen A, Theisen D. Gait asymmetry in spatiotemporal and kinetic variables does not increase running-related injury risk in lower limbs: a secondary analysis of a randomised trial including 800+ recreational runners. <em>BMJ Open Sport Exerc Med</em>. 2024;10:e001787. <a href="https://doi.org/10.1136/bmjsem-2023-001787" target="_blank" rel="noopener noreferrer">DOI: 10.1136/bmjsem-2023-001787</a></li>
+<li>Guan Y, et al. Association between inter-limb asymmetries in lower-limb functional performance and sport injury: a systematic review of prospective cohort studies. <em>J Clin Med</em>. 2022;11(2):360. <a href="https://doi.org/10.3390/jcm11020360" target="_blank" rel="noopener noreferrer">DOI: 10.3390/jcm11020360</a></li>
+<li>Niemuth PE, Johnson RJ, Myers MJ, Thieman TJ. Hip muscle weakness and overuse injuries in recreational runners. <em>Clin J Sport Med</em>. 2005;15(1):14–21. <a href="https://doi.org/10.1097/00042752-200501000-00003" target="_blank" rel="noopener noreferrer">DOI: 10.1097/00042752-200501000-00003</a></li>
+<li>Powers CM. The influence of abnormal hip mechanics on knee injury: a biomechanical perspective. <em>J Orthop Sports Phys Ther</em>. 2010;40(2):42–51. <a href="https://doi.org/10.2519/jospt.2010.3337" target="_blank" rel="noopener noreferrer">DOI: 10.2519/jospt.2010.3337</a></li>
+<li>Johnson CD, Tenforde AS, Outerleys J, Reilly J, Davis IS. Impact-related ground reaction forces are more strongly associated with some running injuries than others. <em>Am J Sports Med</em>. 2020;48(12):3072–3080. <a href="https://doi.org/10.1177/0363546520953863" target="_blank" rel="noopener noreferrer">DOI: 10.1177/0363546520953863</a></li>
+<li>Hall G, Barry G, Hayes P. The role of hip abductor strengthening and the effects on running gait: a systematic review. <em>2024</em>. Northumbria University. DOI pending.</li>
+<li>Finnoff JT, et al. Running injuries: predictors based on muscle strength, flexibility, range of motion, and alignment. Cited in: Mucha A, et al. Do alterations in muscle strength, flexibility, range of motion, and alignment predict lower extremity injury in runners: a systematic review. <em>J Athl Train</em>. 2023 (Epub ahead of print). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6373037/" target="_blank" rel="noopener noreferrer">PMC6373037</a></li>
+<li>Taunton JE, Ryan MB, Clement DB, et al. A retrospective case-control analysis of 2002 running injuries. <em>Br J Sports Med</em>. 2002;36(2):95–101. <a href="https://doi.org/10.1136/bjsm.36.2.95" target="_blank" rel="noopener noreferrer">DOI: 10.1136/bjsm.36.2.95</a></li>
+<li>Heil J, Loffing F, Büsch D. The influence of exercise-induced fatigue on inter-limb asymmetries: a systematic review. <em>Sports Med Open</em>. 2020;6:39. <a href="https://doi.org/10.1186/s40798-020-00265-6" target="_blank" rel="noopener noreferrer">DOI: 10.1186/s40798-020-00265-6</a></li>
+</ol>
+</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(function(el){obs.observe(el)});document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})})});
+});
+</script>
+</body>
+</html>
